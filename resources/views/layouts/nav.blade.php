@@ -125,7 +125,7 @@
 </aside>
 
 
-<div class="p-4 sm:ml-[240px] bg-white relative sm:z-50 rounded-[20px] min-h-[100vh] ">
+<div class="p-4 sm:ml-[240px]  relative sm:z-50 rounded-l-[20px] h-[100vh] overflow-y-auto  bg-white">
     <nav>
         <div class="flex justify-end items-center gap-5">
 
