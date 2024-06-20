@@ -62,79 +62,7 @@
                     <span class="flex-1 ms-3 whitespace-nowrap"> @lang('lang.Customers')</span>
                 </a>
             </li>
-            <li>
-                <a href="../category"
-                    class="mt-3 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg width="20px" xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                        <path fill="#ffffff"
-                            d="M264.5 5.2c14.9-6.9 32.1-6.9 47 0l218.6 101c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 149.8C37.4 145.8 32 137.3 32 128s5.4-17.9 13.9-21.8L264.5 5.2zM476.9 209.6l53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 277.8C37.4 273.8 32 265.3 32 256s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0l152-70.2zm-152 198.2l152-70.2 53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 405.8C37.4 401.8 32 393.3 32 384s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0z" />
-                    </svg>
 
-
-                    <span class="flex-1 ms-3 whitespace-nowrap"> @lang('lang.Categories')</span>
-                </a>
-            </li>
-            <li>
-                <a href="../product"
-                    class="mt-3 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg width="20" height="22" viewBox="0 0 22 22" fill="none"
-                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <rect width="22" height="22" fill="url(#pattern0_30_3)" />
-                        <defs>
-                            <pattern id="pattern0_30_3" patternContentUnits="objectBoundingBox" width="1"
-                                height="1">
-                                <use xlink:href="#image0_30_3" transform="scale(0.0111111)" />
-                            </pattern>
-                            <image id="image0_30_3" width="90" height="90"
-                                xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFVUlEQVR4nO2dSYxVRRRAq7VFkEEwEBIMMtk4oLIgbjTsRBQNiQvjiMEh7owstNst0RATXYiYuDEKLoxzOhoTp4XogogxiC2KOC00JEDEkWbq7mMu1Cff5g31qOFXdddJekHe575bpy/161XVK5TyDHAz8AGwj/jYp3O7SaUMsIF02KBSRKqE9FitUgI4C/ia9NgDdKtUAO4oaMQwcNDiZ7Ag5qBlTMlpNHepFADOBr4taMAWy7i9BTF7LWO+nGxVS0UUJD8EXBKh6IuB48lVta7m7woS3+wgtnPROu6W5KoaWOOjmj2LXlRS1XeriKt5d0HCLzmK70W0jr25IPYPUVY1cE9JNS9OQHRZVa9RsQF876uafYvW8V8siL9bxQZwpCDRz4DXHf3sLIi/02H8TwviH1aJiE6dwyo2suhAZNGByKIDkUUHIosORBYdiCw6EFl0ILLoQGTRgciiA5FFByKLDkQWHYgsOhBZdCCy6EBk0YHIogORRQciizYE6AJmyI6jM/z7eRX8/7u2xGXX6AvrgF/b3ut4SDUkiz4J8DCwX7sUp+taFx4o2dNwr2pAFq3EwX0lLu+XiwMlF7/Jomm0gQbYVeJyQC4eKrk41GQ35XivaKBbOyviUJ2guVm0GcBFlb+wGtHXGN4nVzRcWyf6aMUHbsuizQBur/B4pE70I4b3yRUNj9qIfiaLNgPYWCf6WMUH3jK8T65oeLvC49G6it7eQPTvjD0ONGj/9jrRVRW9t8GNPmLs8X6D9u+tiHOsTrS8Kz3B8EarGHvcYNj2CSXvlRuLFhY0+K0+zthhfYN2L6iJdUJ00ft17Sw3vWFbZcupLgdIj/3SXZhWclubl9fEPa4qns9b3NnkpuMRig8aaCy6r9MNiR3gMReiN3W6IbEDPOdCdH9bwCvlz8CPwCfACjVOAK4HPgZ+Al4DlrRdEydVDJmI/lIHuwL4d9S1Ef3oaTQETBE9dNuo29rOny3Z4shEdNX4D70wMBt4o+Iz25rMXaeCtEm3rYxXtJuyxZMWwyaihedLTpZpR4ZzK9UYAVhpMET9SrvBlWgZa/9sElAG+nIcm0oUTh4lt97Qyy6D55BTokf3PWWYfk74EJilEgOYpXM3ZdjUnQT3xW+yvKMSAbga+MWTC6+i0f+s+k7bsRMZwIM108XRi27RD0xXkQFM1WNi35wQPXps7Is9wFUqEiQXnVMI/pEbvkM4BoG1EUheW3LWqS/6W8dGVq0O+OAFYFIHBE/S9w6JuF3U/gT0ReAEdsgvOaDkeTXrej6QU8wWjk5kYsk5nT75C7g1gOTV+hjjkLwKTK7ajN5rMNHkkpEmy0YNBUt7nmj4sGXLkPGQVk8Jht4+8JQH0U8HbsPBxvM9+rzOkMfHjwDXOZS8InAlD5z60juDZKfUTI+6ZqtD0VsD5i2Oprjo5/oC9dsjwAUOJM9oMOFjm++TTmcrgRuBPwIkv8xBrssC5CkuVrmxe3oDeire03DFUgd5LvWcozjocWO1ut9+02MjljjIUdY3ffEucL4bm+b9to9+8FIH+V2WRH/c4X67x0Feix3n9Ddwixtr8fTbCx3kJM8ArpCp1MtVRBPoVTvemzDPQT7zccN70S1Y6NXjTQ4aN9dBLjIbacuz0a7ma9mfWzZwjoM85ljmsC1ayS3kf+SxbORsBznI7iEb4t+qLF8clo2c6SCHmZY5xPHlZ/maQR3THc112DBfxQ5woWUjpzrIYVqnvydCbauy4TwHOUzudPflHZkHsGzkuQ5ykPVPG6ap2NFL+jZ0O8jhHMscJqrY0Sdk2dDlIAcZz9vgfAz9H1Zz9T9xDepGAAAAAElFTkSuQmCC" />
-                        </defs>
-                    </svg>
-
-
-                    <span class="flex-1 ms-3 whitespace-nowrap"> @lang('lang.Products')</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="../orders"
-                    class="mt-3 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg width="20" xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                        <path fill="#ffffff"
-                            d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
-                    </svg>
-
-
-                    <span class="flex-1 ms-3 whitespace-nowrap"> @lang('lang.Orders')</span>
-                </a>
-            </li>
-            <li>
-                <a href="../createOrder"
-                    class="mt-3 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                        <path fill="#ffffff"
-                            d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96zM252 160c0 11 9 20 20 20h44v44c0 11 9 20 20 20s20-9 20-20V180h44c11 0 20-9 20-20s-9-20-20-20H356V96c0-11-9-20-20-20s-20 9-20 20v44H272c-11 0-20 9-20 20z" />
-                    </svg>
-
-
-                    <span class="flex-1 ms-3 whitespace-nowrap"> @lang('lang.create_order')</span>
-                </a>
-            </li>
-            <li>
-                <a href="../report"
-                    class="mt-3 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg width="20px" height="20px" xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                        <path fill="#ffffff"
-                            d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM80 64h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H80c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H80c-8.8 0-16-7.2-16-16s7.2-16 16-16zm16 96H288c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V256c0-17.7 14.3-32 32-32zm0 32v64H288V256H96zM240 416h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H240c-8.8 0-16-7.2-16-16s7.2-16 16-16z" />
-                    </svg>
-
-
-                    <span class="flex-1 ms-3 whitespace-nowrap"> @lang('lang.Sale_Report')</span>
-                </a>
-            </li>
             <li>
                 <a href="../setting"
                     class="mt-3 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
