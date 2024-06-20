@@ -11,7 +11,7 @@
                 <div class="flex gap-1 justify-between items-center">
                     <div>
                         <p class="text-sm text-[#808191]">@lang('lang.Total_orders')</p>
-                        <h2 class="text-2xl font-semibold mt-1">{{ $totalOrders }}</h2>
+                        <h2 class="text-2xl font-semibold mt-1">1</h2>
                     </div>
                     <div>
                         <img width="60px" height="60px" src="{{ asset('images/icons/total_orders.svg') }}"
@@ -26,7 +26,7 @@
                 <div class="flex gap-1 justify-between items-center">
                     <div>
                         <p class="text-sm text-[#808191]">@lang('lang.Pending_orders')</p>
-                        <h2 class="text-2xl font-semibold mt-1">{{ $pendingOrders }}</h2>
+                        <h2 class="text-2xl font-semibold mt-1">2</h2>
                     </div>
                     <div>
                         <img width="52px" height=52px" src="{{ asset('images/icons/pending-orders.svg') }}"
@@ -41,7 +41,7 @@
                 <div class="flex gap-1 justify-between items-center">
                     <div>
                         <p class="text-sm text-[#808191]">@lang('lang.Total_product')</p>
-                        <h2 class="text-2xl font-semibold mt-1">{{ $totalProduct }}</h2>
+                        <h2 class="text-2xl font-semibold mt-1">10</h2>
                     </div>
                     <div>
                         <img width="60px" height="60px" src="{{ asset('images/icons/total-product.svg') }}"
@@ -56,7 +56,7 @@
                 <div class="flex gap-1 justify-between items-center">
                     <div>
                         <p class="text-sm text-[#808191]">@lang('lang.Total_customers')</p>
-                        <h2 class="text-2xl font-semibold mt-1">{{ $totalUser }}</h2>
+                        <h2 class="text-2xl font-semibold mt-1">100</h2>
                     </div>
                     <div>
                         <img width="50px" height="50px" src="{{ asset('images/icons/customers.svg') }}"
@@ -106,7 +106,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($products as $i => $product)
+                                {{-- @foreach ($products as $i => $product)
                                     <tr class="bg-white ">
                                         <td class="px-6 py-3 ">
                                             {{ $product->id }}
@@ -127,7 +127,7 @@
                                             </div>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @endforeach --}}
                             </tbody>
                         </table>
                     </div>
@@ -177,17 +177,17 @@
         CanvasJS.addColorSet("colors",
             [
 
-                "#EDBD58",
+                "#417dfc",
                 "#339B96",
-                "#027C56",
+                "#13242C",
 
             ]);
         var chart = new CanvasJS.Chart("earningChart", {
             animationEnabled: true,
             axisX: {
                 valueFormatString: "DDD",
-                minimum: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
-                maximum: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+                minimum: new Date(2017, 1, 5, 23),
+                maximum: new Date(2017, 1, 12, 1)
             },
             axisY: {
                 gridColor: "#00000016",
@@ -197,27 +197,79 @@
                 shared: true
             },
             data: [{
-
-                name: "Sent",
-                type: "area",
-                color: "#027C56",
-                fillOpacity: 100,
-                markerSize: 2,
-                dataPoints: [
-
-                    @foreach ($dailySalesData as $data)
+                    name: "Received",
+                    type: "area",
+                    fillOpacity: 100,
+                    color: "#417dfc",
+                    markerSize: 0,
+                    dataPoints: [{
+                            x: new Date(2017, 1, 6),
+                            y: 550
+                        },
                         {
-                            x: new Date({{ $data['date'] }}),
-                            y: {{ $data['total'] }}
-                        }, {
-                            x: new Date(2024, 4, 30),
+                            x: new Date(2017, 1, 7),
+                            y: 450
+                        },
+                        {
+                            x: new Date(2017, 1, 8),
+                            y: 500
+                        },
+                        {
+                            x: new Date(2017, 1, 9),
+                            y: 162
+                        },
+                        {
+                            x: new Date(2017, 1, 10),
                             y: 150
                         },
-                    @endforeach
+                        {
+                            x: new Date(2017, 1, 11),
+                            y: 400
+                        },
+                        {
+                            x: new Date(2017, 1, 12),
+                            y: 129
+                        }
+                    ]
+                },
+                {
 
-
-                ]
-            }]
+                    name: "Sent",
+                    type: "area",
+                    color: "#13242C",
+                    fillOpacity: 100,
+                    markerSize: 2,
+                    dataPoints: [{
+                            x: new Date(2017, 1, 6),
+                            y: 200
+                        },
+                        {
+                            x: new Date(2017, 1, 7),
+                            y: 150
+                        },
+                        {
+                            x: new Date(2017, 1, 8),
+                            y: 300
+                        },
+                        {
+                            x: new Date(2017, 1, 9),
+                            y: 550
+                        },
+                        {
+                            x: new Date(2017, 1, 10),
+                            y: 50
+                        },
+                        {
+                            x: new Date(2017, 1, 11),
+                            y: 80
+                        },
+                        {
+                            x: new Date(2017, 1, 12),
+                            y: 200
+                        }
+                    ]
+                }
+            ]
         });
 
         var chart2 = new CanvasJS.Chart("studentChart", {
@@ -233,14 +285,23 @@
             data: [{
                 type: "column",
                 yValueFormatString: "#,##0.0#\"\"",
-                dataPoints: [
-                    @foreach ($orderData as $data)
-                        {
-                            label: "{{ $data['month'] }}",
+                dataPoints: [{
+                        label: "Jan",
 
-                            y: {{ $data['order_count'] }}
-                        },
-                    @endforeach
+                        y: 78
+                    },
+                    {
+                        label: "Feb",
+                        y: 55
+                    },
+                    {
+                        label: "Mar",
+                        y: 80
+                    },
+                    {
+                        label: "Apr",
+                        y: 60
+                    },
 
 
                 ]
@@ -257,14 +318,14 @@
                 indexLabelFontColor: "transparent",
                 indexLabelPlacement: "inside",
                 dataPoints: [{
-                        y: {{ $pendingOrders }},
-                        color: "#edbd58",
-                        label: "Pending Orders"
+                        y: 67,
+                        color: "#417dfc",
+                        label: "Students"
                     },
                     {
-                        y: {{ $confirmedOrders }},
-                        color: "#027C56",
-                        label: "Complete Orders"
+                        y: 28,
+                        color: "#13242C",
+                        label: "Teachers"
                     },
 
                 ]
