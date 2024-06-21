@@ -41,6 +41,10 @@ Route::get('register', function () {
 
     return view("register");
 });
+Route::get('chat', function () {
+
+    return view("chat");
+});
 
 
 

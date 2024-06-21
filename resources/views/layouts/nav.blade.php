@@ -97,6 +97,21 @@
                     <span class="flex-1 ms-3 whitespace-nowrap">@lang('lang.Help')</span>
                 </a>
             </li>
+            <li>
+                <a href="../chat"
+                    class="mt-3 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 17h6l3 3v-3h2V9h-2M4 4h11v8H9l-3 3v-3H4V4Z" />
+                    </svg>
+
+
+
+                    <span class="flex-1 ms-3 whitespace-nowrap">@lang('lang.Chat')</span>
+                </a>
+            </li>
 
             <li class="absolute bottom-5">
                 <form action="../weblogout" method="post" class=" cursor-pointer" id="logoutform">

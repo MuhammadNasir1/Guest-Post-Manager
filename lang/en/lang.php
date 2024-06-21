@@ -2,6 +2,7 @@
 
 
 return [
+    "Chat" => "Chat",
     'Users' => 'Users',
     'logout' => 'logout',
     'Help' => 'Help',
