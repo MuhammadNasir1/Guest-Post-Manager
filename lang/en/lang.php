@@ -212,6 +212,7 @@ return [
     "Note" => "Note",
     "Postal_Code_Here" => "Postal Code Here",
     "Food_Service_By" => "FoodService By",
+    "Chats" => "Chats"
 
 
 
