@@ -5,12 +5,12 @@
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
         <div>
             <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
-                <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Customer_List')</h3>
+                <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Sites_List')</h3>
                 <div>
 
                     <button data-modal-target="addcustomermodal" data-modal-toggle="addcustomermodal"
                         class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
-                        @lang('lang.Add_Customer')</button>
+                        @lang('lang.Add_Site')</button>
                 </div>
             </div>
             <div class="overflow-x-auto">
@@ -219,7 +219,7 @@
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
                     <h3 class="text-xl font-semibold text-white ">
-                        @lang('lang.Add_Customer')
+                        @lang('lang.Add_Site')
                     </h3>
                     <button type="button"
                         class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
@@ -231,72 +231,94 @@
                         </svg>
                     </button>
                 </div>
+
                 <div class="grid md:grid-cols-3 gap-6 mx-6 my-6">
                     <div>
-                        <label class="text-[14px] font-normal" for="fullName">@lang('lang.Customer_Name')</label>
+                        <label class="text-[14px] font-normal" for="website_url">@lang('lang.Website_URL')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="name" id="fullName" placeholder=" @lang('lang.Name_Here')">
+                            name="website_url" id="website_url" placeholder=" @lang('lang.Website_URL')">
                     </div>
                     <div>
-                        <label class="text-[14px] font-normal" for="email">@lang('lang.Email')</label>
-                        <input type="email" required
+                        <label class="text-[14px] font-normal" for="traffic">@lang('lang.Traffic')</label>
+                        <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="email" id="email" placeholder=" @lang('lang.Email_Here')">
+                            name="traffic" id="traffic" placeholder=" @lang('lang.Traffic_Here')">
                     </div>
                     <div>
-                        <label class="text-[14px] font-normal" for="PhoneNO">@lang('lang.Customer_phone')</label>
-                        <input type="number"
+                        <label class="text-[14px] font-normal" for="semrush_traffic">@lang('lang.Semrush_Traffic')</label>
+                        <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="phone_no" id="PhoneNO" placeholder=" @lang('lang.Phone_Here')">
+                            name="semrush_traffic" id="semrush_traffic" placeholder=" @lang('lang.Semrush_Traffic')">
 
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-4 mx-6">
+                <div class="grid md:grid-cols-3 gap-6 mx-6 my-6">
                     <div>
-                        <label class="text-[14px] font-normal" for="TaxNo">@lang('lang.Tax_Number')</label>
+                        <label class="text-[14px] font-normal" for="ahrref_traffic">@lang('lang.Ahref_Traffic')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="tax_number" id="TaxNo" placeholder=" @lang('lang.Tax_Number_Here')">
-
+                            name="ahrref_traffic" id="ahrref_traffic" placeholder=" @lang('lang.Ahref_Traffic')">
                     </div>
                     <div>
-                        <label class="text-[14px] font-normal" for="clientType">@lang('lang.Type_Of_Client')</label>
-                        <input type="text"
+                        <label class="text-[14px] font-normal" for="traffic_major_from">@lang('lang.Traffic_Major_From')</label>
+                        <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="client_type" id="clientType" placeholder=" @lang('lang.Type_Here')">
-
+                            name="traffic_major_from" id="traffic_major_from" placeholder=" @lang('lang.Traffic_Major_From')">
                     </div>
                     <div>
-                        <label class="text-[14px] font-normal" for="postalCode">@lang('lang.Postal_Code')</label>
-                        <input type="text"
+                        <label class="text-[14px] font-normal" for="guest_post_price">@lang('lang.Guest_Post_Price')</label>
+                        <input type="number" min="1"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="postal_code" id="postalCode" placeholder=" @lang('lang.Postal_Code_Here')">
-
-                    </div>
-
-                    <div>
-                        <label class="text-[14px] font-normal" for="City">@lang('lang.city')</label>
-                        <input type="text"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="city" id="City" placeholder=" @lang('lang.City_Here')">
+                            name="guest_post_price" id="guest_post_price" placeholder=" @lang('lang.Guest_Post_Price')">
 
                     </div>
                 </div>
-                <div class="grid grid-cols-2 mx-6 gap-4 mt-3">
-                    <div class="mt-2  ">
-                        <label class="text-[14px] font-normal" for="note">@lang('lang.Note')</label>
-                        <textarea name="note" id="note"
-                            class="w-full h-24  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
-                            placeholder="@lang('lang.Note_Here')"></textarea>
+                <div class="grid md:grid-cols-3 gap-6 mx-6 my-6">
+                    <div>
+                        <label class="text-[14px] font-normal" for="link_insertion_price">@lang('lang.Link_Insertion_Price')</label>
+                        <input type="number" min="1"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="link_insertion_price" id="link_insertion_price" placeholder=" @lang('lang.Link_Insertion_Price')">
                     </div>
-                    <div class="mt-2 ">
-                        <label class="text-[14px] font-normal" for="Address">@lang('lang.Address')</label>
-                        <textarea name="address" id="Address"
-                            class="w-full h-24  border-[#DEE2E6] rounded-[4px] focus:border-primary text-[14px] "
-                            placeholder="@lang('lang.Address_Here')"></textarea>
+                    <div>
+                        <label class="text-[14px] font-normal" for="guest_post_available">@lang('lang.Guest_Post_Available')</label>
+                        <select
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="guest_post_available" id="guest_post_available">
+                            <option value="yes">@lang('lang.Yes')</option>
+                            <option value="no">@lang('lang.No')</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="contact_no">@lang('lang.Contact_No')</label>
+                        <input type="number" min="1"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="contact_no" id="contact_no" placeholder=" @lang('lang.Contact_No')">
+
                     </div>
                 </div>
+
+                <div class="grid md:grid-cols-2 gap-6 mx-6 my-6">
+
+                    <div>
+                        <label class="text-[14px] font-normal" for="admin_gmail">@lang('lang.Admin_Gmail')</label>
+                        <input type="text"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="admin_gmail" id="admin_gmail" placeholder=" @lang('lang.Admin_Gmail')">
+                    </div>
+
+
+                    <div>
+                        <label class="text-[14px] font-normal" for="site_done_form">@lang('lang.Site_Done_From')</label>
+                        <input type="text"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="site_done_form" id="site_done_form" placeholder=" @lang('lang.Site_Done_From')">
+
+                    </div>
+                </div>
+
+
 
                 <div class="flex justify-end ">
                     <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold "

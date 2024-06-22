@@ -212,7 +212,21 @@ return [
     "Note" => "Note",
     "Postal_Code_Here" => "Postal Code Here",
     "Food_Service_By" => "FoodService By",
-    "Chats" => "Chats"
+    "Chats" => "Chats",
+    "Sites_List" => "Sites List",
+    "Add_Site" => "Add Site",
+    "Website_URL" => "Website URL",
+    "Traffic_Here" => "Traffic Here",
+    "Traffic" => "Traffic",
+    "Semrush_Traffic" => "Semrush Traffic",
+    "Ahref_Traffic" => "Ahref Traffic",
+    "Traffic_Major_From" => "Traffic Major From",
+    "Guest_Post_Price" => "Guest Post Price",
+    "Link_Insertion_Price" => "Link Insertion Price",
+    "Guest_Post_Available" => "Guest Post Available",
+    "Admin_Gmail" => "Admin Gmail",
+    "Site_Done_From" => "Site Done From",
+    "Contact_No" => "Contact No",
 
 
 
