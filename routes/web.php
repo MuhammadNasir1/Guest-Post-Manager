@@ -47,6 +47,10 @@ Route::get('chat', function () {
 
     return view("chat");
 });
+Route::get('rrequestInvoice', function () {
+
+    return view("request_invoice");
+});
 
 
 
