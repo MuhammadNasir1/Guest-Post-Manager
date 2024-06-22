@@ -27,43 +27,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($customers as $x => $data)
-                            <tr class="pt-4">
-                                <td>{{ $x + 1 }}</td>
-                                <td>{{ $data->name }}</td>
-                                <td>{{ $data->email }}</td>
-                                <td>{{ $data->phone }}</td>
-                                <td>{{ $data->role }}</td>
-                                <td> <button
-                                        class="px-4 py-2 rounded-md  {{ $data->verification == 'pending' ? 'bg-red-600' : 'bg-green-700' }}  text-white font-bold">
-                                        {{ $data->verification }}<button></td>
-                                <td>
-                                    <div class="flex gap-5 items-center justify-center">
 
-                                        <button data-modal-target="updatecustomermodal"
-                                            data-modal-toggle="updatecustomermodal"
-                                            class=" updateBtn cursor-pointer  w-[42px]"
-                                            updateId="{{ $data->id }}"><img width="38px"
-                                                src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
-                                        {{-- <a class="w-[42px]"  href="../delCustomer/{{ $data->id }}"><img
-                                                width="38px" src="{{ asset('images/icons/delete.svg') }}"
-                                                alt="update"></button></a> --}}
-                                        <button data-modal-target="deleteData" data-modal-toggle="deleteData"
-                                            class="delButton" delId="{{ $data->id }}">
-                                            <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
-                                                alt="delete" class="cursor-pointer">
-                                        </button>
-                                        {{-- <button updateId="{{ $data->id }}" data-modal-target="changeStatus"
-                                            data-modal-toggle="changeStatus" class="">
-                                            @lang('lang.Change_Status') </button> --}}
-                                        <button updateId="{{ $data->id }}" data-modal-target="changeStatus"
-                                            data-modal-toggle="changeStatus"
-                                            class="px-4 py-3 rounded-md  bg-primary  text-white font-bold updateVerBtn">
-                                            @lang('lang.Change_Verfication')<button>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
 
                     </tbody>
                 </table>

@@ -31,7 +31,9 @@ Route::middleware('custom')->group(function () {
         return view('help');
     });
 });
-
+Route::get('/customers', function () {
+    return view('customers');
+});
 
 Route::get('email', function () {
 
