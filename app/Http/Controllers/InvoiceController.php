@@ -11,6 +11,7 @@ class InvoiceController extends Controller
     {
 
         try {
+
             $validatedData = $request->validate([
                 "invoice_no" => "required",
                 "amount" => "required",
@@ -25,6 +26,7 @@ class InvoiceController extends Controller
 
             $site = new Invoice;
             $site->invoice_no = $validatedData['invoice_no'];
+            $site->user_id = session('user_det')['user_id'];
             $site->amount = $validatedData['amount'];
             $site->currency = $validatedData['currency'];;
             $site->payment_method = $validatedData['payment_method'];
