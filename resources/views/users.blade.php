@@ -241,7 +241,7 @@
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="user_email">@lang('lang.Email_Address')</label>
-                        <input type="text" required
+                        <input type="email" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="user_email" id="user_email" placeholder=" @lang('lang.Email_Address_Here')">
                     </div>
@@ -250,13 +250,13 @@
                 <div class="grid md:grid-cols-2 gap-6 mx-6 my-6">
                     <div>
                         <label class="text-[14px] font-normal" for="password">@lang('lang.Password')</label>
-                        <input type="text"
+                        <input type="password"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="password" id="password" placeholder=" @lang('lang.Password_Here')">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="confirm_password">@lang('lang.Confirm_Password')</label>
-                        <input type="text" required
+                        <input type="password" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="confirm_password" id="confirm_password" placeholder=" @lang('lang.Confirm_Password_Here')">
                     </div>
