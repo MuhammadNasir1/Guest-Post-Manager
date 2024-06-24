@@ -15,9 +15,9 @@
 <body class="bg-white">
     <div class="flex px-10  justify-center">
         <div class="md:w-1/2 px-8  sm:px-16  ">
-            <div>
-                <img class="mt-5 w-[180px]" src="{{ asset('images/logo.svg') }}" alt="logo">
-            </div>
+            {{-- <div>
+                <img class="mt-5 w-[180px]" src="{{ asset('images/comapnylogo.svg') }}" alt="logo">
+            </div> --}}
 
             <h2 class="font-semibold text-2xl mt-16 text-[#000000]">Log In</h2>
             <div>

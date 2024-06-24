@@ -244,6 +244,7 @@ return [
     "Customer_Name_Here" => "Customer Name Here",
     "Customer_Email_Here" => "Customer Email Here",
     "Customer_Phone_No" => "Customer Phone No",
+    "Sites" => "Sites",
 
 
 
