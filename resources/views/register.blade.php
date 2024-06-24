@@ -33,6 +33,7 @@
                 <p class="font-normal  leading-8 ">If you already have an account register <br> You can <a
                         href="login" class="text-primary">Login here !</a></p>
             </div>
+
             <form id="register_data" method="post" class="flex flex-col gap-4">
                 @csrf
                 <input type="hidden" name="role" value="parent">
@@ -178,7 +179,7 @@
                 let passinput = passinputs[index];
                 if (passinput.type === "password") {
                     passinput.type = "text";
-                    btn.src = "images/icons/eye-visible.pnsg";
+                    btn.src = "images/icons/eye-visible.png";
                 } else {
                     passinput.type = "password";
                     btn.src = "images/icons/eye-invisible.png";
