@@ -36,7 +36,8 @@
                                 <td>{{ $data->amount }}</td>
                                 <td>{{ $data->currency }}</td>
                                 <td>{{ $data->payment_method }}</td>
-                                <td>{{ $data->website }}</td>
+                                <td><a target="_blank" href="{{ $data->website }}"
+                                        class="text-blue-600">{{ $data->website }}</a></td>
                                 <td class="flex  justify-center">
                                     <div class="flex gap-5 items-center justify-center">
 
