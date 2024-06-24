@@ -31,8 +31,8 @@ Route::middleware('custom')->group(function () {
         return view('help');
     });
 });
-Route::get('/customers', function () {
-    return view('customers');
+Route::get('/users', function () {
+    return view('users');
 });
 Route::get('/addSite', function () {
     return view('addsites');

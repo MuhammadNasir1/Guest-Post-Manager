@@ -245,6 +245,15 @@ return [
     "Customer_Email_Here" => "Customer Email Here",
     "Customer_Phone_No" => "Customer Phone No",
     "Sites" => "Sites",
+    "Add_User" => "Add User",
+    "Users_List" => "Users List",
+    "User_Name" => "Users Name",
+    "User_Name_Here" => "Users Name Here",
+    "Email_Address" => "Email Address",
+    "Email_Address_Here" => "Email Address Here",
+    "Password" => "Password",
+    "Password_Here" => "Password Here",
+    "Confirm_Password_Here" => "Confirm Password Here",
 
 
 

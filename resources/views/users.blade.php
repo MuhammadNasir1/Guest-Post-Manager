@@ -5,12 +5,12 @@
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
         <div>
             <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
-                <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Sites_List')</h3>
+                <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Users_List')</h3>
                 <div>
 
                     <button data-modal-target="addcustomermodal" data-modal-toggle="addcustomermodal"
                         class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
-                        @lang('lang.Add_Site')</button>
+                        @lang('lang.Add_User')</button>
                 </div>
             </div>
             <div class="overflow-x-auto">
@@ -219,7 +219,7 @@
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
                     <h3 class="text-xl font-semibold text-white ">
-                        @lang('lang.Add_Site')
+                        @lang('lang.Add_User')
                     </h3>
                     <button type="button"
                         class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
@@ -232,102 +232,35 @@
                     </button>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-6 mx-6 my-6">
-                    <div>
-                        <label class="text-[14px] font-normal" for="website_url">@lang('lang.Website_URL')</label>
-                        <input type="text" required
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="website_url" id="website_url" placeholder=" @lang('lang.Website_URL')">
-                    </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="traffic">@lang('lang.Traffic')</label>
-                        <input type="text" required
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="traffic" id="traffic" placeholder=" @lang('lang.Traffic_Here')">
-                    </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="semrush_traffic">@lang('lang.Semrush_Traffic')</label>
-                        <input type="text"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="semrush_traffic" id="semrush_traffic" placeholder=" @lang('lang.Semrush_Traffic')">
-
-                    </div>
-                </div>
-                <div class="grid md:grid-cols-3 gap-6 mx-6 my-6">
-                    <div>
-                        <label class="text-[14px] font-normal" for="ahrref_traffic">@lang('lang.Ahref_Traffic')</label>
-                        <input type="text"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="ahrref_traffic" id="ahrref_traffic" placeholder=" @lang('lang.Ahref_Traffic')">
-                    </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="traffic_major_from">@lang('lang.Traffic_Major_From')</label>
-                        <input type="text" required
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="traffic_major_from" id="traffic_major_from" placeholder=" @lang('lang.Traffic_Major_From')">
-                    </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="guest_post_price">@lang('lang.Guest_Post_Price')</label>
-                        <input type="number" min="1"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="guest_post_price" id="guest_post_price" placeholder=" @lang('lang.Guest_Post_Price')">
-
-                    </div>
-                </div>
-                <div class="grid md:grid-cols-3 gap-6 mx-6 my-6">
-                    <div>
-                        <label class="text-[14px] font-normal" for="link_insertion_price">@lang('lang.Link_Insertion_Price')</label>
-                        <input type="number" min="1"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="link_insertion_price" id="link_insertion_price" placeholder=" @lang('lang.Link_Insertion_Price')">
-                    </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="guest_post_available">@lang('lang.Exchange')</label>
-                        <div class="flex justify-between mt-3">
-                            <label class="text-[14px] font-normal" for="link_insertion">@lang('lang.Link_Insertion')</label>
-                            <input type="radio" name="link_insertion" id="link_insertion" class="mt-0.5"
-                                value="link_insertion">
-
-                            <label class="text-[14px] font-normal" for="guest_post">@lang('lang.Guest_Post')</label>
-                            <input type="radio" name="guest_post" id="guest_post" class="mt-0.5"
-                                value="guest_post">
-
-                            <label class="text-[14px] font-normal" for="both">@lang('lang.Both')</label>
-                            <input type="radio" name="both" id="both" value="both" class="mt-0.5">
-                        </div>
-                        {{-- <select
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="guest_post_available" id="guest_post_available">
-                            <option value="link insertion">@lang('lang.Link_Insertion')</option>
-                            <option value="no">@lang('lang.No')</option>
-                        </select> --}}
-                    </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="contact_no">@lang('lang.Contact_No')</label>
-                        <input type="number" min="1"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="contact_no" id="contact_no" placeholder=" @lang('lang.Contact_No')">
-
-                    </div>
-                </div>
-
                 <div class="grid md:grid-cols-2 gap-6 mx-6 my-6">
-
                     <div>
-                        <label class="text-[14px] font-normal" for="admin_gmail">@lang('lang.Admin_Gmail')</label>
-                        <input type="text"
+                        <label class="text-[14px] font-normal" for="user_name">@lang('lang.User_Name')</label>
+                        <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="admin_gmail" id="admin_gmail" placeholder=" @lang('lang.Admin_Gmail')">
+                            name="user_name" id="user_name" placeholder=" @lang('lang.User_Name_Here')">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="user_email">@lang('lang.Email_Address')</label>
+                        <input type="text" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="user_email" id="user_email" placeholder=" @lang('lang.Email_Address_Here')">
                     </div>
 
-
+                </div>
+                <div class="grid md:grid-cols-2 gap-6 mx-6 my-6">
                     <div>
-                        <label class="text-[14px] font-normal" for="site_done_form">@lang('lang.Site_Done_From')</label>
+                        <label class="text-[14px] font-normal" for="password">@lang('lang.Password')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="site_done_form" id="site_done_form" placeholder=" @lang('lang.Site_Done_From')">
-
+                            name="password" id="password" placeholder=" @lang('lang.Password_Here')">
                     </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="confirm_password">@lang('lang.Confirm_Password')</label>
+                        <input type="text" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="confirm_password" id="confirm_password" placeholder=" @lang('lang.Confirm_Password_Here')">
+                    </div>
+
                 </div>
 
 

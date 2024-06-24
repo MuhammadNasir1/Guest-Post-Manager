@@ -63,7 +63,7 @@
                 </a>
             </li>
             <li>
-                <a href="../customers"
+                <a href="../users"
                     class="mt-3 flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <svg width="20" height="18" viewBox="0 0 20 14" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -88,7 +88,7 @@
                     </svg>
 
 
-                    <span class="flex-1 ms-3 whitespace-nowrap"> @lang('lang.Customers')</span>
+                    <span class="flex-1 ms-3 whitespace-nowrap"> @lang('lang.Users')</span>
                 </a>
             </li>
 
