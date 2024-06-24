@@ -18,16 +18,45 @@
                     <thead class="py-1 bg-primary text-white">
                         <tr>
                             <th class="whitespace-nowrap">@lang('lang.STN')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Name')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Email')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Phone_No')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Role')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Verification')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Invoice_No')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Amount')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Currency')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Payment_Method')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Website')</th>
                             <th class="flex  justify-center">@lang('lang.Action')</th>
                         </tr>
                     </thead>
                     <tbody>
 
+
+                        @foreach ($data as $data)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $data->invoice_no }}</td>
+                                <td>{{ $data->amount }}</td>
+                                <td>{{ $data->currency }}</td>
+                                <td>{{ $data->payment_method }}</td>
+                                <td>{{ $data->website }}</td>
+                                <td class="flex  justify-center">
+                                    <div class="flex gap-5 items-center justify-center">
+
+                                        <button data-modal-target="Updateproductmodal"
+                                            data-modal-toggle="Updateproductmodal"
+                                            class=" updateBtn cursor-pointer  w-[42px]"
+                                            updateId="{{ $data->id }}"><img width="38px"
+                                                src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
+                                        {{-- <a class="w-[42px] md:w-full" href="../delProduct/{{ $data->id }}"><img
+                                                width="38px" src="{{ asset('images/icons/delete.svg') }}"
+                                                alt="update"></button></a> --}}
+                                        <button data-modal-target="deleteData" data-modal-toggle="deleteData"
+                                            class="delButton" delId="{{ $data->id }}">
+                                            <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
+                                                alt="delete" class="cursor-pointer">
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
 
                     </tbody>
                 </table>
@@ -214,7 +243,7 @@
 <div id="addcustomermodal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="relative p-4 w-full   max-w-6xl max-h-full ">
-        <form id="customerData" method="post" enctype="multipart/form-data">
+        <form action="{{ route('addSite') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
@@ -234,10 +263,10 @@
 
                 <div class="grid md:grid-cols-3 gap-6 mx-6 my-6">
                     <div>
-                        <label class="text-[14px] font-normal" for="invoice_No">@lang('lang.Invoice_No')</label>
+                        <label class="text-[14px] font-normal" for="invoice_no">@lang('lang.Invoice_No')</label>
                         <input type="number" min="0" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="invoice_No" id="invoice_No" placeholder=" @lang('lang.Invoice_No')">
+                            name="invoice_no" id="invoice_no" placeholder=" @lang('lang.Invoice_No')">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="amount">@lang('lang.Amount')</label>
@@ -247,7 +276,7 @@
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="currency">@lang('lang.Currency')</label>
-                        <input list="currency" name="browser" id="browser"
+                        {{-- <input list="currency" name="browser" id="browser"
                             class="w-full border placeholder:ps-3 border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             placeholder="@lang('lang.Select_Currency')">
                         <datalist id="currency">
@@ -256,19 +285,19 @@
                             <option value="Chrome">
                             <option value="Opera">
                             <option value="Safari">
-                        </datalist>
-                        {{-- <select
+                        </datalist> --}}
+                        <select
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="guest_post_available" id="guest_post_available">
-                            <option value="link insertion">@lang('lang.Link_Insertion')</option>
+                            name="currency" id="currency">
+                            <option value="pkr">@lang('lang.PKR')</option>
                             <option value="no">@lang('lang.No')</option>
-                        </select> --}}
+                        </select>
                     </div>
                 </div>
                 <div class="grid md:grid-cols-3 gap-6 mx-6 my-6">
                     <div>
-                        <label class="text-[14px] font-normal" for="currency">@lang('lang.Payment_Method')</label>
-                        <input list="payment_method" name="browser" id="browser"
+                        <label class="text-[14px] font-normal" for="payment_method">@lang('lang.Payment_Method')</label>
+                        {{-- <input list="payment_method" name="browser" id="browser"
                             class="w-full border placeholder:ps-3 border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             placeholder="@lang('lang.Select_Payment_Method')">
                         <datalist id="payment_method">
@@ -277,13 +306,13 @@
                             <option value="Chrome">
                             <option value="Opera">
                             <option value="Safari">
-                        </datalist>
-                        {{-- <select
+                        </datalist> --}}
+                        <select
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="guest_post_available" id="guest_post_available">
-                            <option value="link insertion">@lang('lang.Link_Insertion')</option>
-                            <option value="no">@lang('lang.No')</option>
-                        </select> --}}
+                            name="payment_method" id="payment_method">
+                            <option value="payoneer">@lang('lang.Link_Insertion')</option>
+                            <option value="jazzcash">@lang('lang.No')</option>
+                        </select>
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="website">@lang('lang.Website')</label>
@@ -295,24 +324,24 @@
                 </div>
                 <div class="grid md:grid-cols-3 gap-6 mx-6 my-6">
                     <div>
-                        <label class="text-[14px] font-normal" for="customer_name">@lang('lang.Customer_Name')</label>
+                        <label class="text-[14px] font-normal" for="cust_name">@lang('lang.Customer_Name')</label>
                         <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="customer_name" id="customer_name" placeholder=" @lang('lang.Customer_Name_Here')">
+                            name="cust_name" id="cust_name" placeholder=" @lang('lang.Customer_Name_Here')">
 
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="customer_email">@lang('lang.Customer_Email')</label>
                         <input type="email" min="1"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="customer_email" id="customer_email" placeholder=" @lang('lang.Customer_Email_Here')">
+                            name="cust_email" id="customer_email" placeholder=" @lang('lang.Customer_Email_Here')">
 
                     </div>
                     <div>
-                        <label class="text-[14px] font-normal" for="customer_email">@lang('lang.Customer_Phone_No')</label>
+                        <label class="text-[14px] font-normal" for="customer_phone_no">@lang('lang.Customer_Phone_No')</label>
                         <input type="number" min="1"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="customer_email" id="customer_email" placeholder=" @lang('lang.Customer_Phone_No')">
+                            name="cust_phone_no" id="customer_phone_no" placeholder=" @lang('lang.Customer_Phone_No')">
 
                     </div>
 
@@ -323,8 +352,8 @@
 
 
                 <div class="flex justify-end ">
-                    <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold "
-                        id="addBtn">
+                    <button type="submit"
+                        class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold ">
                         <div class=" text-center hidden" id="spinner">
                             <svg aria-hidden="true"
                                 class="w-5 h-5 mx-auto text-center text-gray-200 animate-spin fill-primary"

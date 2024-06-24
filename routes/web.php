@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\authController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 
@@ -50,7 +51,7 @@ Route::get('chat', function () {
 
     return view("chat");
 });
-Route::get('rrequestInvoice', function () {
+Route::get('requestInvoice', function () {
 
     return view("request_invoice");
 });
@@ -59,4 +60,8 @@ Route::get('rrequestInvoice', function () {
 
 Route::controller(CompanyController::class)->group(function () {
     Route::post('/addComapany', 'addCompany')->name('addCompany');
+});
+Route::controller(InvoiceController::class)->group(function () {
+    Route::post('/siteadd', 'addSite')->name('addSite');
+    Route::get('/requestInvoice', 'siteData')->name('siteData');
 });
