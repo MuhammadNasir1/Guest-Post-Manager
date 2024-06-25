@@ -254,9 +254,11 @@ return [
     "Password" => "Password",
     "Password_Here" => "Password Here",
     "Confirm_Password_Here" => "Confirm Password Here",
-
-
-
-
-
+    "User" => "User",
+    "Processing" => "Processing",
+    "Total_Amount" => "Total Amount",
+    "Total_Amount_Here" => "Total Amount Here",
+    "Payable_Amount" => "Payable Amount",
+    "Payable_Amount_Here" => "Payable Amount Here",
+    "Add_Note" => "Add Note",
 ];

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoice;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -18,6 +19,7 @@ class InvoiceController extends Controller
                 "currency" => "required",
                 "payment_method" => "required",
                 "website" => "required",
+                "status" => "required",
                 "cust_name" => "required",
                 "cust_email" => "required",
                 "cust_phone_no" => "required",
@@ -31,6 +33,7 @@ class InvoiceController extends Controller
             $site->currency = $validatedData['currency'];;
             $site->payment_method = $validatedData['payment_method'];
             $site->website = $validatedData['website'];
+            $site->status = $validatedData['status'];
             $site->cust_name = $validatedData['cust_name'];
             $site->cust_email = $validatedData['cust_email'];
             $site->cust_phone_no = $validatedData['cust_phone_no'];
@@ -46,6 +49,14 @@ class InvoiceController extends Controller
     public function siteData()
     {
         $data = Invoice::all();
+
+        foreach ($data as $datas) {
+
+            $user = $datas['user_id'];
+            $userData = User::where('id', $user)->first();
+            $datas->user = $userData;
+        }
+
         return view("request_invoice", compact('data'));
     }
 }

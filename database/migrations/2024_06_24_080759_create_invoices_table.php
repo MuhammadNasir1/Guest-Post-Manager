@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string("currency");
             $table->string("payment_method");
             $table->string("website");
+            $table->string("status");
             $table->string("cust_name");
             $table->string("cust_email");
             $table->string("cust_phone_no");

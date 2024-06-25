@@ -55,6 +55,10 @@ Route::get('requestInvoice', function () {
 
     return view("request_invoice");
 });
+Route::get('transaction', function () {
+
+    return view("transaction");
+});
 
 
 
