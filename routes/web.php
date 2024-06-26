@@ -3,6 +3,7 @@
 use App\Http\Controllers\authController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 
@@ -69,3 +70,4 @@ Route::controller(InvoiceController::class)->group(function () {
     Route::post('/siteadd', 'addSite')->name('addSite');
     Route::get('/requestInvoice', 'siteData')->name('siteData');
 });
+Route::post("addTransaction/{id}", [TransactionController::class, 'addTransaction'])->name('addTransaction');

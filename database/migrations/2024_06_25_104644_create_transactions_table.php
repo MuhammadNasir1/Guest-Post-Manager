@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('credit');
+            $table->string('credit')->nullable();
             $table->string('debit');
             $table->string('balance');
             $table->string('user_id');

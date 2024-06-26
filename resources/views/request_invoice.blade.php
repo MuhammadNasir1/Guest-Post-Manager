@@ -509,7 +509,7 @@
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="relative p-4 w-full   max-w-2xl max-h-full ">
         {{-- <form action="../changeVerStatus/5" method="post" enctype="multipart/form-data"> --}}
-        <form id="CustomerStatusData" method="post" enctype="multipart/form-data">
+        <form action="" id="postId" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" id="updateid">
 
@@ -528,13 +528,13 @@
                         </svg>
                     </button>
                 </div>
-                <input type="text" name="invoice_id" value="" id="showInvoiceId">
-                <input type="text" name="user_id" value="" id="showUserId">
+                <input type="hidden" name="invoice_id" value="" id="showInvoiceId">
+                <input type="hidden" name="user_id" value="" id="showUserId">
                 <div class="grid md:grid-cols-2 gap-6 mx-6 mt-6">
                     <div class="pt-0.5">
                         <label class="text-[14px] font-normal" for="verification">@lang('lang.Status')</label>
                         <select class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary h-[40px] text-[14px]"
-                            name="verification" id="verification" required onchange="show()">
+                            name="status_update" id="verification" required onchange="show()">
                             <option selected disabled>@lang('lang.Change_Status')</option>
                             <option value="pending">@lang('lang.Pending')</option>
                             <option value="approved">@lang('lang.Approved')</option>
@@ -601,6 +601,7 @@
 <script>
     let verification = document.getElementById("verification");
     let manageAmount = document.getElementById("manageAmount")
+    let postId = document.getElementById("postId")
 
 
     manageAmount.style.display = "none";
@@ -621,5 +622,8 @@
 
         document.getElementById("showInvoiceId").value = invoice_id.value;
         document.getElementById("showUserId").value = user_id.value;
+        let postId = document.getElementById("postId");
+
+        postId.setAttribute("action", "../addTransaction/" + invoice_id.value);
     }
 </script>
