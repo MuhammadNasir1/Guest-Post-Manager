@@ -261,4 +261,10 @@ return [
     "Payable_Amount" => "Payable Amount",
     "Payable_Amount_Here" => "Payable Amount Here",
     "Add_Note" => "Add Note",
+    "Transaction_Voucher" => "Transaction Voucher",
+    "Account" => "Account",
+    "Date" => "Date",
+    "Credit" => "Credit",
+    "Debit" => "Debit",
+    "Hint" => "Hint",
 ];

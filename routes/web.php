@@ -60,6 +60,10 @@ Route::get('transaction', function () {
 
     return view("transaction");
 });
+Route::get('transactionVoucher', function () {
+
+    return view("transaction_voucher");
+});
 
 
 
