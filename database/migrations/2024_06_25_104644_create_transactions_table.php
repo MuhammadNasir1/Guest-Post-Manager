@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('balance');
             $table->string('user_id');
             $table->string('transaction_remarks');
-            $table->string('transaction_date');
+            $table->dateTime('transaction_date')->useCurrent();
             $table->string('transaction_type');
             $table->string('transaction_form');
             $table->timestamps();

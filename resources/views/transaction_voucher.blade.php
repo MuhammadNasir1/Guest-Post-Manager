@@ -21,17 +21,22 @@
                             name="date" id="date">
                     </div>
 
-                    <div class="md:w-[50%]  w-full mt-4">
-                        <label class="text-[16px] font-semibold block  text-[#452C88]"
-                            for="account">@lang('lang.Account')</label>
-                        <select
-                            class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                            name="account" id="account" required>
-                            <option selected disabled>@lang('lang.Change_Status')</option>
-                            <option value="pending">@lang('lang.Pending')</option>
-                            <option value="approved">@lang('lang.Approved')</option>
-                            <option value="processing">@lang('lang.Processing')</option>
-                        </select>
+                    <div class="md:w-[50%] flex  items-center gap-5 w-full mt-4">
+                        <div class="w-full">
+                            <label class="text-[16px] font-semibold block  text-[#452C88]"
+                                for="account">@lang('lang.Account')</label>
+                            <select
+                                class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
+                                name="account" id="account" required>
+                                <option selected disabled>@lang('lang.Change_Status')</option>
+                                <option value="pending">@lang('lang.Pending')</option>
+                                <option value="approved">@lang('lang.Approved')</option>
+                                <option value="processing">@lang('lang.Processing')</option>
+                            </select>
+                        </div>
+                        <div class="w-full bg-gray py-2 ps-3 mt-6 rounded-[6px]">
+                            Balance : <span>0</span>
+                        </div>
                     </div>
                 </div>
                 <div class="md:flex gap-[30px] mt-3">
@@ -93,12 +98,12 @@
 </div>
 
 <script>
-    let credit = document.getElementById("credit");
-    let debit = document.getElementById("debit");
+    // let credit = document.getElementById("credit");
+    // let debit = document.getElementById("debit");
 
-    credit.addEventListener("focus", () => {
-        debit.setAttribute("readonly")
-    });
+    // if (credit.value == "") {
+
+    // }
 </script>
 
 

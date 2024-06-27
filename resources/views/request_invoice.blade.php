@@ -36,6 +36,8 @@
                                 <input type="hidden" value="{{ $data->id }}"
                                     id="invoice_id_{{ $loop->iteration }}">
                                 <input type="hidden" value="{{ $data->user_id }}" id="user_id_{{ $loop->iteration }}">
+                                <input type="hidden" value="{{ $data->transaction_id }}"
+                                    id="transaction_id_{{ $loop->iteration }}">
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $data->invoice_no }}</td>
                                 <td>{{ $data->amount }}</td>
@@ -529,6 +531,7 @@
                     </button>
                 </div>
                 <input type="hidden" name="invoice_id" value="" id="showInvoiceId">
+                <input type="hidden" name="transaction_id" value="" id="showTransactionId">
                 <input type="hidden" name="user_id" value="" id="showUserId">
                 <div class="grid md:grid-cols-2 gap-6 mx-6 mt-6">
                     <div class="pt-0.5">
@@ -600,8 +603,7 @@
 
 <script>
     let verification = document.getElementById("verification");
-    let manageAmount = document.getElementById("manageAmount")
-    let postId = document.getElementById("postId")
+    let manageAmount = document.getElementById("manageAmount");
 
 
     manageAmount.style.display = "none";
@@ -619,9 +621,11 @@
 
         let invoice_id = document.getElementById("invoice_id_" + num);
         let user_id = document.getElementById("user_id_" + num);
+        let transaction_id = document.getElementById("transaction_id_" + num);
 
         document.getElementById("showInvoiceId").value = invoice_id.value;
         document.getElementById("showUserId").value = user_id.value;
+        document.getElementById("showTransactionId").value = transaction_id.value;
         let postId = document.getElementById("postId");
 
         postId.setAttribute("action", "../addTransaction/" + invoice_id.value);

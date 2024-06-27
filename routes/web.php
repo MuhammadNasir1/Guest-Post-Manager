@@ -64,6 +64,14 @@ Route::get('transactionVoucher', function () {
 
     return view("transaction_voucher");
 });
+Route::get('transactionVoucher', function () {
+
+    return view("transaction_voucher");
+});
+Route::get('reports', function () {
+
+    return view("reports");
+});
 
 
 

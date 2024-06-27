@@ -18,23 +18,24 @@ class TransactionController extends Controller
                 "note" => "nullable",
             ]);
 
-            // return $request;
-            $updateStatus = Invoice::find($id);
-            $updateStatus->status = $validatedData['status_update'];
-            $updateStatus->update();
-
 
             $transaction = new Transaction;
+
             $transaction->user_id = $request->user_id;
             $transaction->transaction_remarks = $validatedData['note'];
             $transaction->credit = $validatedData['payable_amount'];
-            $transaction->debit = "null";
-            $transaction->balance = "null";
-            $transaction->transaction_date = "null";
-            $transaction->transaction_type = "null";
-            $transaction->transaction_form = "null";
+            $transaction->debit = 0;
+            $transaction->balance = 0;
+            $transaction->transaction_type = 0;
+            $transaction->transaction_form = 0;
+
             $transaction->save();
 
+
+            $updateStatus = Invoice::find($id);
+            $updateStatus->status = $validatedData['status_update'];
+            $updateStatus->transaction_id =  $transaction->id;
+            $updateStatus->update();
             return redirect('requestInvoice');
         } catch (\Exception $error) {
             return response()->json(['error' => $error->getMessage()]);
