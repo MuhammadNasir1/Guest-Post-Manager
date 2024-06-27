@@ -3,8 +3,10 @@
 use App\Http\Controllers\authController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\SiteController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\userController;
+use App\Models\Site;
 use Illuminate\Support\Facades\Route;
 
 // language route
@@ -36,9 +38,9 @@ Route::middleware('custom')->group(function () {
 Route::get('/users', function () {
     return view('users');
 });
-Route::get('/addSite', function () {
-    return view('addsites');
-});
+// Route::get('/addSite', function () {
+//     return view('addsites');
+// });
 
 Route::get('email', function () {
 
@@ -79,7 +81,11 @@ Route::controller(CompanyController::class)->group(function () {
     Route::post('/addComapany', 'addCompany')->name('addCompany');
 });
 Route::controller(InvoiceController::class)->group(function () {
-    Route::post('/siteadd', 'addSite')->name('addSite');
+    Route::post('/request_invoice', 'addSite')->name('requestInvoice');
     Route::get('/requestInvoice', 'siteData')->name('siteData');
+});
+Route::controller(SiteController::class)->group(function () {
+    Route::post('/addSites', 'siteAdd')->name('addSite');
+    Route::get('/addSite', 'getSite')->name('getSite');
 });
 Route::post("addTransaction/{id}", [TransactionController::class, 'addTransaction'])->name('addTransaction');

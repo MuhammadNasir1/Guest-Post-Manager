@@ -18,15 +18,48 @@
                     <thead class="py-1 bg-primary text-white">
                         <tr>
                             <th class="whitespace-nowrap">@lang('lang.STN')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Name')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Email')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Phone_No')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Role')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Verification')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Website_URL')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Traffic')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Semrush_Traffic')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Ahref_Traffic')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Guest_Post_Price')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Link_Insertion_Price')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Exchange')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Contact_No')</th>
                             <th class="flex  justify-center">@lang('lang.Action')</th>
                         </tr>
                     </thead>
                     <tbody>
+
+                        @foreach ($data as $data)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $data->web_url }}</td>
+                                <td>{{ $data->traffic }}</td>
+                                <td>{{ $data->semrush_traffic }}</td>
+                                <td>{{ $data->ahref_traffic }}</td>
+                                <td>{{ $data->guest_post_price }}</td>
+                                <td>{{ $data->link_insertion_price }}</td>
+                                <td>{{ $data->exchange }}</td>
+                                <td>{{ $data->contact_no }}</td>
+                                <td>
+                                    <div class="flex gap-5 items-center justify-center">
+
+                                        <button data-modal-target="Updateproductmodal"
+                                            data-modal-toggle="Updateproductmodal"
+                                            class=" updateBtn cursor-pointer  w-[42px]"
+                                            updateId="{{ $data->id }}"><img width="38px"
+                                                src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
+                                        <button data-modal-target="deleteData" data-modal-toggle="deleteData"
+                                            class="delButton" delId="{{ $data->id }}">
+                                            <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
+                                                alt="delete" class="cursor-pointer">
+                                        </button>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
 
 
                     </tbody>
@@ -184,7 +217,8 @@
                             d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
                             fill="red" />
                     </svg>
-                    <h1 class="text-center pt-3 text-4xl">@lang('lang.Are_You_Sure')</h1>
+                    <h1 class="text-center pt-3 text-4xl">@lang('lang.Are_You_Sure')
+                    </h1>
                     <div class="flex  justify-center gap-5 mx-auto mt-5 pb-5">
                         <button data-modal-hide="deleteData" class="bg-primary px-7 py-3 text-white rounded-md">
                             @lang('lang.No')
@@ -214,7 +248,7 @@
 <div id="addcustomermodal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="relative p-4 w-full   max-w-6xl max-h-full ">
-        <form id="customerData" method="post" enctype="multipart/form-data">
+        <form action="{{ route('addSite') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
@@ -282,25 +316,15 @@
                             name="link_insertion_price" id="link_insertion_price" placeholder=" @lang('lang.Link_Insertion_Price')">
                     </div>
                     <div>
-                        <label class="text-[14px] font-normal" for="guest_post_available">@lang('lang.Exchange')</label>
-                        <div class="flex justify-between mt-3">
-                            <label class="text-[14px] font-normal" for="link_insertion">@lang('lang.Link_Insertion')</label>
-                            <input type="radio" name="link_insertion" id="link_insertion" class="mt-0.5"
-                                value="link_insertion">
-
-                            <label class="text-[14px] font-normal" for="guest_post">@lang('lang.Guest_Post')</label>
-                            <input type="radio" name="guest_post" id="guest_post" class="mt-0.5"
-                                value="guest_post">
-
-                            <label class="text-[14px] font-normal" for="both">@lang('lang.Both')</label>
-                            <input type="radio" name="both" id="both" value="both" class="mt-0.5">
-                        </div>
-                        {{-- <select
+                        <label class="text-[14px] font-normal" for="exchange">@lang('lang.Exchange')</label>
+                        <select
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="guest_post_available" id="guest_post_available">
-                            <option value="link insertion">@lang('lang.Link_Insertion')</option>
-                            <option value="no">@lang('lang.No')</option>
-                        </select> --}}
+                            name="exchange" id="exchange">
+                            <option value="link insertion">@lang('lang.Link_Insertion')
+                            </option>
+                            <option value="guest post">@lang('lang.Guest_Post')</option>
+                            <option value="both">@lang('lang.Both')</option>
+                        </select>
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="contact_no">@lang('lang.Contact_No')</label>
