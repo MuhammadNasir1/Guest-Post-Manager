@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use App\Models\Invoice;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -40,5 +41,12 @@ class TransactionController extends Controller
         } catch (\Exception $error) {
             return response()->json(['error' => $error->getMessage()]);
         }
+    }
+
+    public function getData()
+    {
+        $data = Transaction::all();
+        $users = User::all();
+        return view("reports", compact("data", "users"));
     }
 }

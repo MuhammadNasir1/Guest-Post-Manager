@@ -39,4 +39,10 @@ class VoucherController extends Controller
 
         return view('transaction_voucher', compact('user', 'data'));
     }
+
+    public function printVoucher(string $id)
+    {
+        $print = Voucher::find($id);
+        return view('print_voucher', compact('print'));
+    }
 }

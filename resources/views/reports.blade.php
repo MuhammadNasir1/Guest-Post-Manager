@@ -19,10 +19,11 @@
                             <select
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary h-[40px] text-[14px]"
                                 name="customer_account" id="customer_account" required onchange="show()">
-                                <option selected disabled>@lang('lang.Change_Status')</option>
-                                <option value="pending">@lang('lang.Pending')</option>
-                                <option value="approved">@lang('lang.Approved')</option>
-                                <option value="processing">@lang('lang.Processing')</option>
+                                <option selected disabled>@lang('lang.Select_Account')</option>
+                                @foreach ($users as $users)
+                                    <option value="{{ $users->id }}">{{ $users->name }}</option>
+                                @endforeach
+
                             </select>
                         </div>
                         <div>

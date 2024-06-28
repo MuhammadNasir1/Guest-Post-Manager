@@ -67,10 +67,7 @@ Route::get('transactionVoucher', function () {
 
     return view("transaction_voucher");
 });
-// Route::get('transactionVoucher', function () {
 
-//     return view("transaction_voucher");
-// });
 Route::get('reports', function () {
 
     return view("reports");
@@ -90,5 +87,9 @@ Route::controller(SiteController::class)->group(function () {
     Route::get('/addSite', 'getSite')->name('getSite');
 });
 Route::post("addTransaction/{id}", [TransactionController::class, 'addTransaction'])->name('addTransaction');
-Route::post("addVoucher", [VoucherController::class, 'addVoucher'])->name('addVoucher');
-Route::get("transactionVoucher", [VoucherController::class, 'getUser'])->name('getUser');
+Route::get("reports", [TransactionController::class, 'getData'])->name('getData');
+Route::controller(VoucherController::class)->group(function () {
+    Route::post("addVoucher", 'addVoucher')->name('addVoucher');
+    Route::get("transactionVoucher", 'getUser')->name('getUser');
+    Route::get("printVoucher/{id}", 'printVoucher')->name('printVoucher');
+});

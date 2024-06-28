@@ -55,7 +55,7 @@
                             for="credit">@lang('lang.Credit')</label>
                         <input type="number" min="0"
                             class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                            name="credit" id="credit" placeholder="@lang('lang.Credit')" value="">
+                            name="credit" id="creditInput" readonly placeholder="@lang('lang.Credit')" value="">
                     </div>
 
                     <div class="w-full">
@@ -63,8 +63,10 @@
                             for="debit">@lang('lang.Debit')</label>
                         <input type="number" min="0"
                             class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                            name="debit" id="debit" placeholder="@lang('lang.Debit')" value="">
+                            name="debit" id="debitInput" readonly placeholder="@lang('lang.Debit')" value="">
                     </div>
+
+
                 </div>
                 <div class=" gap-5 mt-4">
 
@@ -136,16 +138,15 @@
 
                                     <button data-modal-target="Updateproductmodal"
                                         data-modal-toggle="Updateproductmodal"
-                                        class=" updateBtn cursor-pointer  w-[42px]" updateId="{{ $data->id }}"><img
-                                            width="38px" src="{{ asset('images/icons/edit.svg') }}"
-                                            alt="update"></button>
+                                        class=" updateBtn cursor-pointer  w-[42px]"><img width="38px"
+                                            src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
 
                                     <button data-modal-target="deleteData" data-modal-toggle="deleteData"
                                         class="delButton" delId="{{ $data->id }}">
                                         <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
                                             alt="delete" class="cursor-pointer">
                                     </button>
-                                    <a href="../invoice/{{ $data->id }}">
+                                    <a href="{{ route('printVoucher', $data->id) }}">
                                         <div class="bg-secondary w-9 rounded-full p-1.5 text-white">
                                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -173,4 +174,16 @@
 
 
 
+
+<script>
+    let creditInput = document.getElementbyId("creditInput");
+    let debitInput = document.getElementbyId("debitInput");
+
+    creditInput.addEventListener("focus", () => {
+        creditInput.removeAttribute("readonly");
+    });
+    creditInput.addEventListener("blur", () => {
+        creditInput.setAttribute("readonly");
+    });
+</script>
 @include('layouts.footer')
