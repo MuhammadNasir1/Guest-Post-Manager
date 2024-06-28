@@ -8,11 +8,11 @@ body {
 }
 
 ::selection {
-    background-color: #027C56 !important;
+    background-color: #027c56 !important;
     color: white;
 }
 .accent-color {
-    accent-color: #027C56;
+    accent-color: #027c56;
 }
 
 input:focus,
@@ -92,28 +92,28 @@ table.dataTable.no-footer {
     cursor: pointer !important;
 }
 
- /* select 2  styling */
+/* select 2  styling */
 
 .select2-results__option[aria-selected="true"] {
-    background-color: #027C56 !important;
+    background-color: #027c56 !important;
 }
 
 .select2-container--default
     .select2-selection--single
     .select2-selection__rendered {
     color: #444 !important;
-    line-height: 34px !important;
+    line-height: 45px !important;
     text-align: left !important;
 }
 
 .select2-container--default .select2-selection--single {
     border: 1px solid #dee2e6 !important;
-    height: 36px !important;
+    height: 40px !important;
     border-radius: 0.375rem;
 }
 
 .select2-container--default .select2-selection--single:focus {
-    border: 2px solid #027C56 !important;
+    border: 2px solid #027c56 !important;
 }
 
 .select2-container--default

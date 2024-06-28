@@ -282,4 +282,5 @@ return [
     "Total_Debits" => "Total Debits",
     "Total_Credits" => "Total Credits",
     "Closing_Balance" => "Closing Balance",
+    "Voucher_Type" => "Voucher Type",
 ];

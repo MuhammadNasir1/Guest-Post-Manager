@@ -6,6 +6,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\VoucherController;
 use App\Models\Site;
 use Illuminate\Support\Facades\Route;
 
@@ -66,10 +67,10 @@ Route::get('transactionVoucher', function () {
 
     return view("transaction_voucher");
 });
-Route::get('transactionVoucher', function () {
+// Route::get('transactionVoucher', function () {
 
-    return view("transaction_voucher");
-});
+//     return view("transaction_voucher");
+// });
 Route::get('reports', function () {
 
     return view("reports");
@@ -89,3 +90,5 @@ Route::controller(SiteController::class)->group(function () {
     Route::get('/addSite', 'getSite')->name('getSite');
 });
 Route::post("addTransaction/{id}", [TransactionController::class, 'addTransaction'])->name('addTransaction');
+Route::post("addVoucher", [VoucherController::class, 'addVoucher'])->name('addVoucher');
+Route::get("transactionVoucher", [VoucherController::class, 'getUser'])->name('getUser');

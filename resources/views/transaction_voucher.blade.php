@@ -7,13 +7,13 @@
     </div>
 
     <div id="reloadDiv" class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="{{ route('addVoucher') }}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="user_id" value="" autocomplete="off">
             <div class="p-8">
 
-                <div class="md:flex gap-[30px] mt-3">
-                    <div class="md:w-[50%] w-full mt-4">
+                <div class="grid grid-cols-5 gap-5 mt-4">
+                    <div class="w-full ">
                         <label class="text-[16px] font-semibold block  text-[#452C88]"
                             for="date">@lang('lang.Date')</label>
                         <input type="date"
@@ -21,26 +21,36 @@
                             name="date" id="date">
                     </div>
 
-                    <div class="md:w-[50%] flex  items-center gap-5 w-full mt-4">
-                        <div class="w-full">
-                            <label class="text-[16px] font-semibold block  text-[#452C88]"
-                                for="account">@lang('lang.Account')</label>
-                            <select
-                                class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                name="account" id="account" required>
-                                <option selected disabled>@lang('lang.Change_Status')</option>
-                                <option value="pending">@lang('lang.Pending')</option>
-                                <option value="approved">@lang('lang.Approved')</option>
-                                <option value="processing">@lang('lang.Processing')</option>
-                            </select>
-                        </div>
-                        <div class="w-full bg-gray py-2 ps-3 mt-6 rounded-[6px]">
-                            Balance : <span>0</span>
-                        </div>
+                    <div class="w-full">
+                        <label class="text-[16px] font-semibold block mb-2  text-[#452C88]"
+                            for="account">@lang('lang.Account')</label>
+                        <select
+                            class="w-full  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
+                            name="account" id="account" required>
+                            <option selected disabled>@lang('lang.Change_Status')</option>
+                            @foreach ($user as $user)
+                                <option value="{{ $user->id }}" class="capitalize">{{ $user->name }}</option>
+                            @endforeach
+
+                        </select>
                     </div>
-                </div>
-                <div class="md:flex gap-[30px] mt-3">
-                    <div class="md:w-[50%] w-full mt-4">
+                    <div class="w-full">
+                        <label class="text-[16px] font-semibold block mb-2  text-[#452C88]"
+                            for="voucher_type">@lang('lang.Voucher_Type')</label>
+                        <select
+                            class="w-full  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
+                            name="voucher_type" id="voucher_type" required>
+                            <option selected disabled>@lang('lang.Change_Status')</option>
+
+                            <option value="payment clearance" class="capitalize">Payment Clearance</option>
+
+
+                        </select>
+                    </div>
+                    {{-- <div class="w-full bg-gray mt-7 flex items-center ps-3 rounded-[6px]">
+                        Balance : <span>0</span>
+                    </div> --}}
+                    <div class="w-full ">
                         <label class="text-[16px] font-semibold block  text-[#452C88]"
                             for="credit">@lang('lang.Credit')</label>
                         <input type="number" min="0"
@@ -48,27 +58,23 @@
                             name="credit" id="credit" placeholder="@lang('lang.Credit')" value="">
                     </div>
 
-                    <div class="md:flex md:w-[50%]   gap-[30px]">
-                        <div class=" w-full mt-4">
-                            <label class="text-[16px] font-semibold block  text-[#452C88]"
-                                for="debit">@lang('lang.Debit')</label>
-                            <input type="number" min="0"
-                                class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                name="debit" id="debit" placeholder="@lang('lang.Debit')" value="">
-                        </div>
-
+                    <div class="w-full">
+                        <label class="text-[16px] font-semibold block  text-[#452C88]"
+                            for="debit">@lang('lang.Debit')</label>
+                        <input type="number" min="0"
+                            class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
+                            name="debit" id="debit" placeholder="@lang('lang.Debit')" value="">
                     </div>
                 </div>
-                <div class="mt-3">
-                    <div class="w-full mt-4">
+                <div class=" gap-5 mt-4">
+
+                    <div class="w-full">
                         <label class="text-[16px] font-semibold block  text-[#452C88]"
-                            for="personal_no">@lang('lang.Hint')</label>
+                            for="hint">@lang('lang.Hint')</label>
                         <input type="text"
                             class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                            name="personal_no" id="personal_no" placeholder="Enter Personal No" value="">
+                            name="hint" id="hint" placeholder="Enter Personal No" value="">
                     </div>
-
-
                 </div>
 
 
@@ -94,17 +100,76 @@
                 </div>
             </div>
         </form>
+
+        <div class="overflow-x-auto">
+            <table id="datatable">
+                <thead class="py-1 bg-primary text-white">
+                    <tr>
+                        <th class="whitespace-nowrap">@lang('lang.STN')</th>
+                        <th class="whitespace-nowrap">@lang('lang.Date')</th>
+                        <th class="whitespace-nowrap">@lang('lang.Account')</th>
+                        <th class="whitespace-nowrap">@lang('lang.Voucher_Type')</th>
+                        <th class="whitespace-nowrap">@lang('lang.Credit')</th>
+                        <th class="whitespace-nowrap">@lang('lang.Debit')</th>
+                        <th class="whitespace-nowrap">@lang('lang.Hint')</th>
+                        <th class="flex  justify-center">@lang('lang.Action')</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach ($data as $data)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $data->date }}</td>
+                            @php
+                                $user = DB::table('users')
+                                    ->where('id', $data->user_id)
+                                    ->first();
+                            @endphp
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $data->voucher_type }}</td>
+                            <td>{{ $data->credit }}</td>
+                            <td>{{ $data->debit }}</td>
+                            <td>{{ $data->hint }}</td>
+                            <td>
+                                <div class="flex gap-5 items-center justify-center">
+
+                                    <button data-modal-target="Updateproductmodal"
+                                        data-modal-toggle="Updateproductmodal"
+                                        class=" updateBtn cursor-pointer  w-[42px]" updateId="{{ $data->id }}"><img
+                                            width="38px" src="{{ asset('images/icons/edit.svg') }}"
+                                            alt="update"></button>
+
+                                    <button data-modal-target="deleteData" data-modal-toggle="deleteData"
+                                        class="delButton" delId="{{ $data->id }}">
+                                        <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
+                                            alt="delete" class="cursor-pointer">
+                                    </button>
+                                    <a href="../invoice/{{ $data->id }}">
+                                        <div class="bg-secondary w-9 rounded-full p-1.5 text-white">
+                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                fill="currentColor" viewBox="0 0 24 24">
+                                                <path fill-rule="evenodd"
+                                                    d="M8 3a2 2 0 0 0-2 2v3h12V5a2 2 0 0 0-2-2H8Zm-3 7a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h1v-4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v4h1a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2H5Zm4 11a1 1 0 0 1-1-1v-4h8v4a1 1 0 0 1-1 1H9Z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </a>
+
+                            </td>
+                        </tr>
+                    @endforeach
+
+
+
+                </tbody>
+            </table>
+        </div>
+
     </div>
 </div>
 
-<script>
-    // let credit = document.getElementById("credit");
-    // let debit = document.getElementById("debit");
-
-    // if (credit.value == "") {
-
-    // }
-</script>
 
 
 
