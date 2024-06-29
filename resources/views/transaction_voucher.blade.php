@@ -50,21 +50,24 @@
                     {{-- <div class="w-full bg-gray mt-7 flex items-center ps-3 rounded-[6px]">
                         Balance : <span>0</span>
                     </div> --}}
-                    <div class="w-full ">
-                        <label class="text-[16px] font-semibold block  text-[#452C88]"
+                    <div class="w-full">
+                        <label class="text-[16px] font-semibold block text-[#452C88]"
                             for="credit">@lang('lang.Credit')</label>
                         <input type="number" min="0"
-                            class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                            name="credit" id="creditInput" readonly placeholder="@lang('lang.Credit')" value="">
+                            class="w-full mt-2 border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary h-[46px] text-[14px]"
+                            name="credit" id="creditInput" placeholder="@lang('lang.Credit')" value=""
+                            oninput="toggleInput('credit')">
                     </div>
 
                     <div class="w-full">
-                        <label class="text-[16px] font-semibold block  text-[#452C88]"
+                        <label class="text-[16px] font-semibold block text-[#452C88]"
                             for="debit">@lang('lang.Debit')</label>
                         <input type="number" min="0"
-                            class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                            name="debit" id="debitInput" readonly placeholder="@lang('lang.Debit')" value="">
+                            class="w-full mt-2 border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary h-[46px] text-[14px]"
+                            name="debit" id="debitInput" placeholder="@lang('lang.Debit')" value=""
+                            oninput="toggleInput('debit')">
                     </div>
+
 
 
                 </div>
@@ -176,14 +179,22 @@
 
 
 <script>
-    let creditInput = document.getElementbyId("creditInput");
-    let debitInput = document.getElementbyId("debitInput");
+    function toggleInput(field) {
+        const creditInput = document.getElementById('creditInput');
+        const debitInput = document.getElementById('debitInput');
 
-    creditInput.addEventListener("focus", () => {
-        creditInput.removeAttribute("readonly");
-    });
-    creditInput.addEventListener("blur", () => {
-        creditInput.setAttribute("readonly");
-    });
+        if (field === 'credit' && creditInput.value) {
+            debitInput.disabled = true;
+            debitInput.classList.add("bg-gray")
+        } else if (field === 'debit' && debitInput.value) {
+            creditInput.disabled = true;
+            creditInput.classList.add("bg-gray")
+        } else {
+            creditInput.disabled = false;
+            debitInput.disabled = false;
+            creditInput.classList.remove("bg-gray")
+            debitInput.classList.remove("bg-gray")
+        }
+    }
 </script>
 @include('layouts.footer')
