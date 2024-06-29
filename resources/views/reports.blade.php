@@ -7,7 +7,8 @@
     </div>
 
     <div id="reloadDiv" class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
-        <form action="" method="post" enctype="multipart/form-data">
+        {{-- <form action="../getLedgerData" method="get" enctype="multipart/form-data"> --}}
+        <form id="ledgerDataForm" method="get" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="user_id" value="" autocomplete="off">
             <div class="p-8">
@@ -158,15 +159,27 @@
     </div>
 </div>
 
-<script>
-    // let credit = document.getElementById("credit");
-    // let debit = document.getElementById("debit");
-
-    // if (credit.value == "") {
-
-    // }
-</script>
-
-
-
 @include('layouts.footer')
+
+<script>
+    $(document).ready(function() {
+        $('#ledgerDataForm').submit(function(e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+
+            $.ajax({
+                type: "Get",
+                url: "../getLedgerData",
+                data: formData,
+                dataType: "json",
+                success: function(response) {
+                    console.log(response);
+
+                }
+
+            })
+
+        })
+
+    })
+</script>

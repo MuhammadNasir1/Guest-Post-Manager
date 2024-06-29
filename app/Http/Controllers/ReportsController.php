@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invoice;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
@@ -14,8 +16,10 @@ class ReportsController extends Controller
 
             if ($request->has('customer_account')) {
             }
-
-            return response()->json(["data" => "ldsk"], 200);
+            $userId = $request['customer_account'];
+            // $invoice = Invoice::where('user_id', $userId)->get();
+            $transaction = Transaction::where('user_id', $userId)->get();
+            return response()->json(["data" => $transaction], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 500);
         }
