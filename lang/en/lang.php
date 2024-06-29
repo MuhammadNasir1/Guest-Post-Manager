@@ -284,4 +284,5 @@ return [
     "Closing_Balance" => "Closing Balance",
     "Voucher_Type" => "Voucher Type",
     "Select_Account" => "Select Account",
+    "Reports" => "Reports",
 ];
