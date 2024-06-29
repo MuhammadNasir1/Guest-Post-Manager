@@ -19,7 +19,6 @@ class InvoiceController extends Controller
                 "currency" => "required",
                 "payment_method" => "required",
                 "website" => "required",
-                "status" => "required",
                 "cust_name" => "required",
                 "cust_email" => "required",
                 "cust_phone_no" => "required",
@@ -33,7 +32,7 @@ class InvoiceController extends Controller
             $site->currency = $validatedData['currency'];;
             $site->payment_method = $validatedData['payment_method'];
             $site->website = $validatedData['website'];
-            $site->status = $validatedData['status'];
+            $site->status = "pending";
             $site->cust_name = $validatedData['cust_name'];
             $site->cust_email = $validatedData['cust_email'];
             $site->cust_phone_no = $validatedData['cust_phone_no'];

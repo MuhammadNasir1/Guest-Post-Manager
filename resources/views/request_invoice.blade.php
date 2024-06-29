@@ -435,16 +435,6 @@
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="website" id="website" placeholder=" @lang('lang.Website_URL_Here')">
                     </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="status">@lang('lang.Status')</label>
-                        <select
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="status" id="status">
-                            <option value="pending">@lang('lang.Pending')</option>
-                            <option value="approved">@lang('lang.Approved')</option>
-                            <option value="processing">@lang('lang.Processing')</option>
-                        </select>
-                    </div>
 
                 </div>
                 <div class="grid md:grid-cols-3 gap-6 mx-6 my-6">
