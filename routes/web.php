@@ -3,6 +3,7 @@
 use App\Http\Controllers\authController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\userController;
@@ -93,3 +94,5 @@ Route::controller(VoucherController::class)->group(function () {
     Route::get("transactionVoucher", 'getUser')->name('getUser');
     Route::get("printVoucher/{id}", 'printVoucher')->name('printVoucher');
 });
+
+Route::get("getLedgerData", [ReportsController::class, 'getLedgerData']);

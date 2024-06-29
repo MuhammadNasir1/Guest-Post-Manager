@@ -30,13 +30,13 @@
                             <label class="text-[14px] font-normal" for="from_date">@lang('lang.From_Date')</label>
                             <input type="date"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary h-[35px] mt-0.5 text-[14px]"
-                                name="from_date" id="from_date" required>
+                                name="from_date" id="from_date">
                         </div>
                         <div>
-                            <label class="text-[14px] font-normal" for="total_amount">@lang('lang.Total_Amount')</label>
+                            <label class="text-[14px] font-normal" for="total_amount">@lang('lang.To_Date')</label>
                             <input type="date"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary h-[35px] mt-0.5 text-[14px]"
-                                name="total_amount" id="total_amount" placeholder=" @lang('lang.Total_Amount')">
+                                name="to_date" id="to_date">
                         </div>
                     </div>
                     <div class="flex pt-4 gap-5 items-center">
@@ -87,8 +87,6 @@
                                     <th class="border-2 border-gray">@lang('lang.Debit')</th>
                                     <th class="border-2 border-gray">@lang('lang.Credit')</th>
                                     <th class="border-2 border-gray">@lang('lang.Balance')</th>
-                                    <th class="border-2 border-gray">@lang('lang.Remaining')</th>
-                                    <th class="border-2 border-gray">@lang('lang.Extra')</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -100,8 +98,7 @@
                                     <td class="py-3 text-center border border-gray font-bold text-blue-500">33</td>
                                     <td class="py-3 text-center border border-gray font-bold text-green-500">33</td>
                                     <td class="py-3 text-center border border-gray font-bold text-red-600">33</td>
-                                    <td class="py-3 text-center border border-gray">33</td>
-                                    <td class="py-3 text-center border border-gray font-bold text-red-600">33</td>
+
                                 <tr>
                                     <td class="py-3 text-right border border-gray font-bold" colspan="6">
                                         @lang('lang.Opening_Balance')
