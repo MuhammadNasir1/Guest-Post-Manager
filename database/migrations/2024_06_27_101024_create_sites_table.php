@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('sites', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id');
             $table->string('web_url');
             $table->string('traffic');
             $table->string('semrush_traffic');

@@ -25,6 +25,7 @@ class SiteController extends Controller
             ]);
 
             $site = new Site;
+            $site->user_id = session('user_det')['user_id'];
             $site->web_url = $validatedData['website_url'];
             $site->traffic = $validatedData['traffic'];
             $site->semrush_traffic = $validatedData['semrush_traffic'];
