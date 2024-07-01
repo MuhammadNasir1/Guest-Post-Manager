@@ -431,9 +431,20 @@
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="website">@lang('lang.Website')</label>
-                        <input type="text" required
+                        {{-- <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="website" id="website" placeholder=" @lang('lang.Website_URL_Here')">
+                            name="website" id="website" placeholder=" @lang('lang.Website_URL_Here')"> --}}
+                        <select
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="website" id="website">
+                            @php
+                                $site = DB::table('sites')->get();
+
+                            @endphp
+                            @foreach ($site as $site)
+                                <option value="{{ $site->id }}">{{ $site->web_url }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                 </div>
