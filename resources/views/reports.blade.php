@@ -1,6 +1,26 @@
 @include('layouts.header')
 @include('layouts.nav')
+<style>
+    @media print {
+        body * {
+            visibility: hidden;
+        }
 
+        .invoice,
+        .invoice * {
+            visibility: visible;
+        }
+
+        .invoice {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+
+        }
+    }
+</style>
 <div class="lg:mx-4 mt-12">
     <div>
         <h1 class=" font-semibold   text-2xl ">@lang('lang.Customer_Ledger')</h1>
@@ -52,81 +72,84 @@
 
 
                 {{--  --}}
-
-                <div class="report pt-10 border-t border-gray">
-                    <div class="flex justify-between items-center">
-                        <div class="flex gap-5 items-center">
-                            <img src="{{ asset('../images/your-logo.jpg') }}" width="100" alt="">
+                <div class="invoice">
+                    <div class="report pt-10 border-t border-gray ">
+                        <div class="flex justify-between items-center">
+                            <div class="flex gap-5 items-center">
+                                <img src="{{ asset('../images/your-logo.jpg') }}" width="100" alt="">
+                                <div>
+                                    <h1 class="pb-3 text-red-600 text-3xl font-bold">Your Company</h1>
+                                    <p class="ps-1">PH NO: 0303111111</p>
+                                </div>
+                            </div>
                             <div>
-                                <h1 class="pb-3 text-red-600 text-3xl font-bold">Your Company</h1>
-                                <p class="ps-1">PH NO: 0303111111</p>
+                                <div>
+                                    <h2 class="pb-2.5 font-bold">Account Name: <span class="font-light ps-3">M-Arham
+                                            Waheed</span></h2>
+                                    <h2 class="pb-2.5 font-bold">Phone No: <span
+                                            class="font-light ps-3">012345678</span>
+                                    </h2>
+
+                                </div>
                             </div>
                         </div>
+
+                        <div class="text-center py-5 font-bold mt-5 border-t border-gray">
+                            <h2>OverAll</h2>
+                        </div>
+
                         <div>
-                            <div>
-                                <h2 class="pb-2.5 font-bold">Account Name: <span class="font-light ps-3">M-Arham
-                                        Waheed</span></h2>
-                                <h2 class="pb-2.5 font-bold">Phone No: <span class="font-light ps-3">012345678</span>
-                                </h2>
+                            <table class="w-full" id="transactionTable">
+                                <thead>
+                                    <tr>
+                                        <th class="py-5 border-2 border-gray">@lang('lang.Transaction') #</th>
+                                        <th class="border-2 border-gray">@lang('lang.Date')</th>
+                                        <th class="border-2 border-gray">@lang('lang.Transfer_From')</th>
+                                        <th class="border-2 border-gray">@lang('lang.Remarks')</th>
+                                        <th class="border-2 border-gray">@lang('lang.Debit')</th>
+                                        <th class="border-2 border-gray">@lang('lang.Credit')</th>
+                                        <th class="border-2 border-gray">@lang('lang.Balance')</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                            </div>
+                                </tbody>
+                                <tfoot>
+
+                                    <tr>
+                                        <td class="py-3 text-right border border-gray font-bold" colspan="6">
+                                            @lang('lang.Opening_Balance')
+                                        <td class="py-3 text-center border border-gray font-bold text-green-400"
+                                            colspan="4" id="openingBalance">0
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3 text-right border border-gray font-bold" colspan="6">
+                                            @lang('lang.Total_Debits')
+                                        <td class="py-3 text-center border border-gray font-bold text-green-400"
+                                            colspan="4" id="totalDebits">0
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3 text-right border border-gray font-bold" colspan="6">
+                                            @lang('lang.Total_Credits')
+                                        <td class="py-3 text-center border border-gray font-bold text-yellow-300"
+                                            colspan="4" id="totalCredits">0
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3 text-right border border-gray font-bold" colspan="6">
+                                            @lang('lang.Closing_Balance')
+                                        <td class="py-3 text-center border border-gray font-bold text-green-400"
+                                            colspan="4" id="closingBalance">0
+                                        </td>
+                                    </tr>
+                                    </tr>
+                                    </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="text-center py-5 font-bold mt-5 border-t border-gray">
-                        <h2>OverAll</h2>
-                    </div>
-
-                    <div>
-                        <table class="w-full" id="transactionTable">
-                            <thead>
-                                <tr>
-                                    <th class="py-5 border-2 border-gray">@lang('lang.Transaction') #</th>
-                                    <th class="border-2 border-gray">@lang('lang.Date')</th>
-                                    <th class="border-2 border-gray">@lang('lang.Transfer_From')</th>
-                                    <th class="border-2 border-gray">@lang('lang.Remarks')</th>
-                                    <th class="border-2 border-gray">@lang('lang.Debit')</th>
-                                    <th class="border-2 border-gray">@lang('lang.Credit')</th>
-                                    <th class="border-2 border-gray">@lang('lang.Balance')</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                            <tfoot>
-
-                                <tr>
-                                    <td class="py-3 text-right border border-gray font-bold" colspan="6">
-                                        @lang('lang.Opening_Balance')
-                                    <td class="py-3 text-center border border-gray font-bold text-green-400"
-                                        colspan="4">0
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 text-right border border-gray font-bold" colspan="6">
-                                        @lang('lang.Total_Debits')
-                                    <td class="py-3 text-center border border-gray font-bold text-green-400"
-                                        colspan="4">0
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 text-right border border-gray font-bold" colspan="6">
-                                        @lang('lang.Total_Credits')
-                                    <td class="py-3 text-center border border-gray font-bold text-yellow-300"
-                                        colspan="4">0
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 text-right border border-gray font-bold" colspan="6">
-                                        @lang('lang.Closing_Balance')
-                                    <td class="py-3 text-center border border-gray font-bold text-green-400"
-                                        colspan="4">0
-                                    </td>
-                                </tr>
-                                </tr>
-                                </tbody>
-                        </table>
-                    </div>
                 </div>
 
                 <div class="mt-10  flex justify-end">
@@ -164,6 +187,13 @@
             $customerId = $('#customer_account').val();
             $fromData = $('#from_date').val();
             $toDate = $('#to_date').val();
+
+
+            $openingBalance = $('#openingBalance');
+            $totalDebits = $('#totalDebits');
+            $totalCredits = $('#totalCredits');
+            $closingBalance = $('#closingBalance');
+
             $.ajax({
                 type: "Get",
                 url: "../getLedgerData",
@@ -176,11 +206,16 @@
                 },
                 dataType: "json",
                 success: function(response) {
-                    // Assuming response.data is an array of transaction objects
                     var transactions = response.data;
                     var newRows = '';
-
+                    var tDebits = 0;
+                    var tCredits = 0;
                     transactions.forEach(function(transaction) {
+
+                        var debit = parseFloat(transaction.debit) || 0;
+                        var credit = parseFloat(transaction.credit) || 0;
+                        tDebits += debit;
+                        tCredits += credit;
                         var newRow =
                             `<tr>
                                 <td class="py-3 text-center border border-gray">${transaction.id}</td>
@@ -198,7 +233,8 @@
 
                     // Appending the new rows to the table body
                     $('#transactionTable tbody').append(newRows);
-
+                    $('#totalDebits').text(tDebits);
+                    $('#totalCredits').text(tCredits);
                 },
 
             })
