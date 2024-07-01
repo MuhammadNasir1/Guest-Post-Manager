@@ -78,7 +78,7 @@
                     </div>
 
                     <div>
-                        <table class="w-full">
+                        <table class="w-full" id="transactionTable">
                             <thead>
                                 <tr>
                                     <th class="py-5 border-2 border-gray">@lang('lang.Transaction') #</th>
@@ -91,14 +91,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="py-3 text-center border border-gray">33</td>
-                                    <td class="py-3 text-center border border-gray">33</td>
-                                    <td class="py-3 text-center border border-gray">33</td>
-                                    <td class="py-3 text-center border border-gray">33</td>
-                                    <td class="py-3 text-center border border-gray font-bold text-blue-500">33</td>
-                                    <td class="py-3 text-center border border-gray font-bold text-green-500">33</td>
-                                    <td class="py-3 text-center border border-gray font-bold text-red-600">33</td>
+
+                            </tbody>
+                            <tfoot>
 
                                 <tr>
                                     <td class="py-3 text-right border border-gray font-bold" colspan="6">
@@ -129,7 +124,7 @@
                                     </td>
                                 </tr>
                                 </tr>
-                            </tbody>
+                                </tbody>
                         </table>
                     </div>
                 </div>
@@ -166,16 +161,45 @@
         $('#ledgerDataForm').submit(function(e) {
             e.preventDefault();
             var formData = $(this).serialize();
-
+            $customerId = $('#customer_account').val();
+            $fromData = $('#from_date').val();
+            $toDate = $('#to_date').val();
             $.ajax({
                 type: "Get",
                 url: "../getLedgerData",
-                data: formData,
+                // data: formData,
+                data: {
+
+                    "customer_account": $customerId,
+                    "from_date": $fromData,
+                    "to_date": $toDate,
+                },
                 dataType: "json",
                 success: function(response) {
-                    console.log(response);
+                    // Assuming response.data is an array of transaction objects
+                    var transactions = response.data;
+                    var newRows = '';
 
-                }
+                    transactions.forEach(function(transaction) {
+                        var newRow =
+                            `<tr>
+                                <td class="py-3 text-center border border-gray">${transaction.id}</td>
+                                <td class="py-3 text-center border border-gray">${transaction.created_at}</td>
+                                <td class="py-3 text-center border border-gray">${transaction.transaction_form}</td>
+                                <td class="py-3 text-center border border-gray">${transaction.transaction_remarks}</td>
+                                <td class="py-3 text-center border border-gray font-bold text-blue-500">${transaction.debit}</td>
+                                <td class="py-3 text-center border border-gray font-bold text-green-500">${transaction.credit}</td>
+                                <td class="py-3 text-center border border-gray font-bold text-red-600">${transaction.balance}</td>
+                                 </tr>`;
+
+
+                        newRows += newRow;
+                    });
+
+                    // Appending the new rows to the table body
+                    $('#transactionTable tbody').append(newRows);
+
+                },
 
             })
 

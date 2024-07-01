@@ -14,12 +14,29 @@ class ReportsController extends Controller
     {
         try {
 
+            $userId = $request->input('customer_account');
             if ($request->has('customer_account')) {
+                $transactionQuery = Transaction::where('user_id', $userId);
+
+                if ($request->has('from_date') && $request->has('to_date')) {
+                    try {
+                        $fromDate = $request->input('from_date');
+                        $toDate = $request->input('to_date');
+                        $transactionQuery->whereBetween('created_at', [$fromDate, $toDate]);
+                    } catch (\Exception $e) {
+                        return response()->json(['error' => 'Invalid date format'], 400);
+                    }
+                }
+
+                $transactions = $transactionQuery->get();
+
+                // Return the transactions in the desired format, for example as a JSON response
+                return response()->json(['success' => true, "message" => "Data get successfully", "data" => $transactions], 200);
+            } else {
+                return response()->json(['success' => false, 'message' => 'customer_account is required'], 500);
             }
-            $userId = $request['customer_account'];
-            // $invoice = Invoice::where('user_id', $userId)->get();
-            $transaction = Transaction::where('user_id', $userId)->get();
-            return response()->json(["data" => $transaction], 200);
+
+            // return response()->json(["data" => $transaction], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 500);
         }
