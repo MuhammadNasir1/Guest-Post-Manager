@@ -213,6 +213,7 @@
                     var newRows = '';
                     var tDebits = 0;
                     var tCredits = 0;
+                    console.log(response);
                     transactions.forEach(function(transaction) {
 
                         var debit = parseFloat(transaction.debit) || 0;
