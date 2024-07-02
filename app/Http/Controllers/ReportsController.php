@@ -28,6 +28,7 @@ class ReportsController extends Controller
                     }
                 }
 
+                $transactionQuery = Transaction::where('user_id', $userId);
                 $transactions = $transactionQuery->get();
 
                 // Return the transactions in the desired format, for example as a JSON response
