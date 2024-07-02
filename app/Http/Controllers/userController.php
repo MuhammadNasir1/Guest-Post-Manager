@@ -18,10 +18,10 @@ class userController extends Controller
         return redirect()->back();
     }
     // dashboard  Users Couny
-    public function customers()
+    public function users()
     {
-        $customers =  User::where('role', 'customer')->get();
-        return view('customers', ['customers'  => $customers]);
+        $users =  User::where('role', 'admin')->get();
+        return view('users', ['users'  => $users]);
     }
 
     public function  addCustomer(Request $request)

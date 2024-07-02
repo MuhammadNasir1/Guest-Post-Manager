@@ -37,9 +37,10 @@ Route::middleware('custom')->group(function () {
         return view('help');
     });
 });
-Route::get('/users', function () {
-    return view('users');
-});
+// Route::get('/users', function () {
+//     return view('users');
+// });
+Route::get('/users', [userController::class, 'users']);
 // Route::get('/addSite', function () {
 //     return view('addsites');
 // });
