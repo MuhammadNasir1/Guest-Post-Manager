@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
+use App\Models\Transaction;
 
 class VoucherController extends Controller
 {
@@ -18,8 +19,20 @@ class VoucherController extends Controller
                 "hint" => "nullable",
             ]);
 
+            $transaction = new Transaction;
+
+            $transaction->user_id = $validatedData['account'];
+            $transaction->transaction_remarks = $validatedData['hint'];
+            $transaction->credit = $request->credit;
+            $transaction->debit =  $request->debit;
+            $transaction->balance = 0;
+            $transaction->transaction_type = $validatedData['voucher_type'];
+            $transaction->transaction_form = "voucher";
+
+            $transaction->save();
+
             $voucher = new Voucher;
-            $voucher->transaction_id = 1;
+            $voucher->transaction_id = $transaction->id;
             $voucher->date = $validatedData['date'];
             $voucher->user_id = $validatedData['account'];
             $voucher->voucher_type = $validatedData['voucher_type'];
@@ -27,6 +40,11 @@ class VoucherController extends Controller
             $voucher->debit = $request->debit;
             $voucher->hint = $validatedData['hint'];
             $voucher->save();
+
+
+
+
+
 
             return redirect('../transactionVoucher');
         } catch (\Exception $error) {

@@ -48,7 +48,8 @@
                                 </select>
                             </div>
                         @else
-                            <input type="hidden" value="{{ session('user_det')['user_id'] }}">
+                            <input type="hidden" value="{{ session('user_det')['user_id'] }}" id="customer_account"
+                                name="customer_account">
                         @endif
                         <div>
                             <label class="text-[14px] font-normal" for="from_date">@lang('lang.From_Date')</label>
