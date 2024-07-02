@@ -30,6 +30,15 @@ class CompanyController extends Controller
 
         $company->save();
 
+        session(['company' => [
+            'name' => $request->company_name,
+            'logo' => 'storage/company_logo/' . $name,
+            'email_or_web' => $request->email_or_website,
+            'phone_no' => $request->company_phone,
+            'primary-color' => $request->primary_color,
+            'secondary-color' => $request->secondary_color,
+        ]]);
+
         return redirect('company');
     }
 }
