@@ -14,8 +14,7 @@
         .invoice {
             position: absolute;
             left: 0;
-            top: 0;
-            width: 100%;
+            M-Arham width: 100%;
             height: 100%;
 
         }
@@ -35,18 +34,22 @@
 
                 <div class="get-report flex justify-between items-center pb-10">
                     <div class="flex gap-5">
-                        <div class="pt-0.5">
-                            <label class="text-[14px] font-normal" for="customer_account">@lang('lang.Customer_Account')</label>
-                            <select
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary h-[40px] text-[14px]"
-                                name="customer_account" id="customer_account" required onchange="show()">
-                                <option selected disabled>@lang('lang.Select_Account')</option>
-                                @foreach ($users as $users)
-                                    <option value="{{ $users->id }}">{{ $users->name }}</option>
-                                @endforeach
+                        @if (session('user_det')['role'] == 'admin')
+                            <div class="pt-0.5">
+                                <label class="text-[14px] font-normal" for="customer_account">@lang('lang.Customer_Account')</label>
+                                <select
+                                    class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary h-[40px] text-[14px]"
+                                    name="customer_account" id="customer_account" required onchange="show()">
+                                    <option selected disabled>@lang('lang.Select_Account')</option>
+                                    @foreach ($users as $users)
+                                        <option value="{{ $users->id }}">{{ $users->name }}</option>
+                                    @endforeach
 
-                            </select>
-                        </div>
+                                </select>
+                            </div>
+                        @else
+                            <input type="hidden" value="{{ session('user_det')['user_id'] }}">
+                        @endif
                         <div>
                             <label class="text-[14px] font-normal" for="from_date">@lang('lang.From_Date')</label>
                             <input type="date"
