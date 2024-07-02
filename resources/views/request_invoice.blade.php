@@ -387,9 +387,9 @@
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="amount">@lang('lang.Amount')</label>
-                        <input type="number" min="0" required App::setLocale($request->lang);
-                        class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="amount" id="amount" placeholder=" @lang('lang.Amount_Here')">
+                        <input type="number" min="0" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="amount" id="amount" placeholder=" @lang('lang.Amount_Here')">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="currency">@lang('lang.Currency')</label>
