@@ -22,8 +22,7 @@
                             <th class="whitespace-nowrap">@lang('lang.Email')</th>
                             <th class="whitespace-nowrap">@lang('lang.Phone_No')</th>
                             <th class="whitespace-nowrap">@lang('lang.Role')</th>
-                            <th class="flex  justify-center">@lang('lang.Action')</th>
-                        </tr>
+                            <th class="flex  justify-center">@lang('lang.Actadmin
                     </thead>
                     <tbody>
                         @foreach ($users as $data)
