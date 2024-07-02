@@ -69,7 +69,7 @@
     <div class="relative p-4 w-full   max-w-6xl max-h-full ">
         <form id="customerData" method="post" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" name="role" value="admin">
+            <input type="hidden" name="role" value="seller">
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
                     <h3 class="text-xl font-semibold text-white ">

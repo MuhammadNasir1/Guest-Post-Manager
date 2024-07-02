@@ -29,10 +29,10 @@ class DatabaseSeeder extends Seeder
             'verification' => 'approved',
         ]);
         DB::table('users')->insert([
-            'name' => 'Distributor',
-            'email' => 'distributor@gmail.com',
+            'name' => 'Seller',
+            'email' => 'seller@gmail.com',
             'password' => Hash::make('12345678'),
-            'role' => 'distributor',
+            'role' => 'seller',
             'verification' => 'approved',
         ]);
     }

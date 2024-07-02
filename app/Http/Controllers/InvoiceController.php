@@ -47,7 +47,12 @@ class InvoiceController extends Controller
 
     public function siteData()
     {
-        $data = Invoice::all();
+        $userId = session('user_det')['user_id'];
+        if (session('user_det')['role'] == "admin") {
+            $data = Invoice::all();
+        } else {
+            $data = Invoice::where('user_id', $userId)->get();
+        }
 
         foreach ($data as $datas) {
 

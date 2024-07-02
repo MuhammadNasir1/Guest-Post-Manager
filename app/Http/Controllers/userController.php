@@ -20,7 +20,7 @@ class userController extends Controller
     // dashboard  Users Couny
     public function users()
     {
-        $users =  User::where('role', 'admin')->get();
+        $users =  User::where('role', 'seller   ')->get();
         return view('users', ['users'  => $users]);
     }
 
