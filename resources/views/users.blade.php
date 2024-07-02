@@ -26,14 +26,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
+                        @foreach ($users as $data)
                             <tr>
-                                <td>{{ $user->id }}</td>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->phone_no }}</td>
-                                <td>{{ $user->role }}</td>
-                                <td>{{ $user->role }}</td>
+                                <td>{{ $data->id }}</td>
+                                <td>{{ $data->name }}</td>
+                                <td>{{ $data->email }}</td>
+                                <td>{{ $data->phone_no }}</td>
+                                <td>{{ $data->role }}</td>
+                                <td>
+                                    <div class="flex gap-5 items-center justify-center">
+
+                                        <button data-modal-target="Updateproductmodal"
+                                            data-modal-toggle="Updateproductmodal"
+                                            class=" updateBtn cursor-pointer  w-[42px]"
+                                            updateId="{{ $data->id }}"><img width="38px"
+                                                src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
+                                        <button data-modal-target="deleteData" data-modal-toggle="deleteData"
+                                            class="delButton" delId="{{ $data->id }}">
+                                            <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
+                                                alt="delete" class="cursor-pointer">
+                                        </button>
+
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
 
