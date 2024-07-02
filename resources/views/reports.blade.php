@@ -64,10 +64,10 @@
                         </div>
                     </div>
                     <div class="flex pt-4 gap-5 items-center">
-                        <button
-                            class="bg-blue-600 text-white py-1.5 px-6  rounded-[4px]   uaddBtn  font-semibold ">@lang('lang.Print_Report')</button>
-                        <button
-                            class="bg-primary text-white py-1.5 px-6  rounded-[4px]   uaddBtn  font-semibold ">@lang('lang.Full_Details')</button>
+                        {{-- <button
+                            class="bg-blue-600 text-white py-1.5 px-6  rounded-[4px]   uaddBtn  font-semibold ">@lang('lang.Print_Report')</button> --}}
+                        {{-- <button
+                            class="bg-primary text-white py-1.5 px-6  rounded-[4px]   uaddBtn  font-semibold ">@lang('lang.Full_Details')</button> --}}
                         <button
                             class="bg-red-600 text-white py-1.5 px-6  rounded-[4px]   uaddBtn  font-semibold ">@lang('lang.Ledger_Details')</button>
                     </div>
@@ -171,7 +171,7 @@
                             </svg>
                         </div>
                         <div id="text">
-                            Save
+                            @lang('lang.Print_Report')
                         </div>
                     </button>
                 </div>
