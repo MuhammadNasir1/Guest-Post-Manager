@@ -46,7 +46,15 @@ class SiteController extends Controller
 
     public function getSite()
     {
-        $data = Site::all();
+        $userId = session('user_det')['user_id'];
+        if (session('user_det')['role'] == "admin") {
+
+
+            $data = Site::all();
+        } else {
+
+            $data = Site::where('user_id', $userId)->get();
+        }
         return view("addsites", compact('data'));
     }
 }
