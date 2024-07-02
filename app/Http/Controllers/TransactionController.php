@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Transaction;
 use App\Models\Invoice;
 use App\Models\User;
+use App\Models\Voucher;
 use Illuminate\Http\Request;
+use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class TransactionController extends Controller
 {
@@ -48,5 +50,18 @@ class TransactionController extends Controller
         $data = Transaction::all();
         $users = User::all();
         return view("reports", compact("data", "users"));
+    }
+
+
+    public function deleteTransaction($id)
+    {
+        $transaction = Transaction::find($id);
+        $vouchers  = Voucher::where('transaction_id',  $id)->get();
+        foreach ($vouchers  as $voucher) {
+            $voucher->delete();
+        }
+        $transaction->delete();
+
+        return redirect('transactionVoucher');
     }
 }

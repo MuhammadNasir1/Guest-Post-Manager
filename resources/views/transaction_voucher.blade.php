@@ -143,15 +143,15 @@
                                         data-modal-toggle="Updateproductmodal"
                                         class=" updateBtn cursor-pointer  w-[42px]"><img width="38px"
                                             src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
-
-                                    <button data-modal-target="deleteData" data-modal-toggle="deleteData"
-                                        class="delButton" delId="{{ $data->id }}">
-                                        <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
-                                            alt="delete" class="cursor-pointer">
-                                    </button>
+                                    <a href="../deleteTransaction/{{ $data->id }}">
+                                        <button data-modal-target="deleteData" data-modal-toggle="deleteData"
+                                            class="delButton" delId="{{ $data->id }}">
+                                            <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
+                                                alt="delete" class="cursor-pointer">
+                                        </button></a>
                                     <a href="{{ route('printVoucher', $data->id) }}">
                                         <div class="bg-secondary w-9 rounded-full p-1.5 text-white">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                            <svg class="w-6 h-6 a-gray-800 dark:text-white" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 fill="currentColor" viewBox="0 0 24 24">
                                                 <path fill-rule="evenodd"

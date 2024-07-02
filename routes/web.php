@@ -93,3 +93,6 @@ Route::controller(VoucherController::class)->group(function () {
 });
 
 Route::get("getLedgerData", [ReportsController::class, 'getLedgerData']);
+
+// delete all Transaction data
+Route::match(["get", "post"], "deleteTransaction/{id}", [TransactionController::class, 'deleteTransaction']);
