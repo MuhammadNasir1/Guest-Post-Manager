@@ -159,4 +159,11 @@ class userController extends Controller
         $del->delete();
         return redirect("../users");
     }
+
+    public function updateUser(string $id)
+    {
+        $users =  User::where('role', 'seller   ')->get();
+        $user = User::find($id);
+        return view("users", compact("user", "users"));
+    }
 }
