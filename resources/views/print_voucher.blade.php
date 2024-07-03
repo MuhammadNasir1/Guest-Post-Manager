@@ -5,7 +5,8 @@
         $company = DB::table('companies')->first();
     @endphp
 
-    <img src="{{ asset($company->logo) }}" width="100" alt="">
+    <img src="{{ isset($company->logo) ? asset($company->logo) : asset('images/comapnylogo.svg') }}" width="100"
+        alt="">
     <div>
         <h1 class="pb-3 text-red-600 text-3xl font-bold">{{ $company->name }}</h1>
         <p class="ps-1">@lang('lang.PH_NO') : {{ $company->phone_no }}</p>

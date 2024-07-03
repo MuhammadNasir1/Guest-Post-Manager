@@ -1,5 +1,8 @@
 @include('layouts.header')
 @include('layouts.nav')
+@php
+    $company = DB::table('companies')->first();
+@endphp
 <style>
     @media print {
         body * {
@@ -80,10 +83,11 @@
                     <div class="report pt-10 border-t border-gray ">
                         <div class="flex justify-between items-center">
                             <div class="flex gap-5 items-center">
-                                <img src="{{ asset('../images/your-logo.jpg') }}" width="100" alt="">
+                                <img src="{{ isset($company->logo) ? asset($company->logo) : asset('images/comapnylogo.svg') }}"
+                                    width="100" alt="">
                                 <div>
-                                    <h1 class="pb-3 text-red-600 text-3xl font-bold">Your Company</h1>
-                                    <p class="ps-1">PH NO: 0303111111</p>
+                                    <h1 class="pb-3 text-red-600 text-3xl font-bold">{{ $company->name }}</h1>
+                                    <p class="ps-1">PH NO: {{ $company->phone_no }}</p>
                                 </div>
                             </div>
                             <div>
