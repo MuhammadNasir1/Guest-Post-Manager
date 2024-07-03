@@ -1,10 +1,14 @@
 @include('layouts.header')
 
 <div class="flex gap-5 items-center justify-center mt-5 border-b-2  pb-10">
-    <img src="{{ asset(session('company')['logo']) }}" width="100" alt="">
+    @php
+        $company = DB::table('companies')->first();
+    @endphp
+
+    <img src="{{ asset($company->logo) }}" width="100" alt="">
     <div>
-        <h1 class="pb-3 text-red-600 text-3xl font-bold">{{ session('company')['name'] }}</h1>
-        <p class="ps-1">@lang('lang.PH_NO') : {{ session('company')['phone_no'] }}</p>
+        <h1 class="pb-3 text-red-600 text-3xl font-bold">{{ $company->name }}</h1>
+        <p class="ps-1">@lang('lang.PH_NO') : {{ $company->phone_no }}</p>
     </div>
 </div>
 
@@ -67,8 +71,7 @@
         <div class="flex gap-3">
             {{-- <div class="w-[5px] h-[54px] bg-black mt-3"></div> --}}
             <div>
-                <h1 class="pb-2">@lang('lang.Thank_You_So_Much_For_Choosing') <span
-                        class="text-2xl font-bold pt-2">{{ session('company')['name'] }}</span>
+                <h1 class="pb-2">@lang('lang.Thank_You_So_Much_For_Choosing') <span class="text-2xl font-bold pt-2">{{ $company->name }}</span>
                 </h1>
                 <h1 class="">@lang('lang.Software_Developed_By') <span class="text-2xl font-bold">The Web Concept</span></h1>
             </div>
