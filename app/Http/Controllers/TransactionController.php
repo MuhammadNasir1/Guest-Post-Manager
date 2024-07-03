@@ -66,35 +66,40 @@ class TransactionController extends Controller
 
     public function editVoucher(Request $request, string $id)
     {
-        $validatedData = $request->validate([
-            "date" => "required",
-            "account" => "required",
-            "voucher_type" => "required",
-            "hint" => "nullable",
-        ]);
+        try {
 
-        $transaction = Transaction::find($id);
+            $validatedData = $request->validate([
+                "date" => "required",
+                "account" => "required",
+                "voucher_type" => "required",
+                "hint" => "nullable",
+            ]);
 
-        $transaction->user_id = $validatedData['account'];
-        $transaction->transaction_remarks = $validatedData['hint'];
-        $transaction->credit = $request->credit;
-        $transaction->debit =  $request->debit;
-        $transaction->balance = 0;
-        $transaction->transaction_type = $validatedData['voucher_type'];
-        $transaction->transaction_form = "voucher";
+            $transaction = Transaction::find($id);
 
-        $transaction->save();
+            $transaction->user_id = $validatedData['account'];
+            $transaction->transaction_remarks = $validatedData['hint'];
+            $transaction->credit = $request->credit;
+            $transaction->debit =  $request->debit;
+            $transaction->balance = 0;
+            $transaction->transaction_type = $validatedData['voucher_type'];
+            $transaction->transaction_form = "voucher";
 
-        $voucher = Voucher::Where('transaction_id', $id)->first();
-        // $voucher = new Voucher;
-        $voucher->date = $validatedData['date'];
-        $voucher->user_id = $validatedData['account'];
-        $voucher->voucher_type = $validatedData['voucher_type'];
-        $voucher->credit = $request->credit;
-        $voucher->debit = $request->debit;
-        $voucher->hint = $validatedData['hint'];
-        $voucher->save();
-        return response()->json("data updated");
+            $transaction->save();
+
+            $voucher = Voucher::Where('transaction_id', $id)->first();
+            // $voucher = new Voucher;
+            $voucher->date = $validatedData['date'];
+            $voucher->user_id = $validatedData['account'];
+            $voucher->voucher_type = $validatedData['voucher_type'];
+            $voucher->credit = $request->credit;
+            $voucher->debit = $request->debit;
+            $voucher->hint = $validatedData['hint'];
+            $voucher->save();
+            return redirect('../transactionVoucher');
+        } catch (\Exception $e) {
+            return redirect('../transactionVoucher');
+        }
     }
     // get update dataz
 

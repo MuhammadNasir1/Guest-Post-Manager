@@ -143,7 +143,7 @@
                             <td>{{ $data->hint }}</td>
                             <td>
                                 <div class="flex gap-5 items-center justify-center">
-                                    <a href="../transctionData/{{ $data->id }}}">
+                                    <a href="../transctionData/{{ $data->transaction_id }}}">
                                         <button data-modal-target="Updateproductmodal"
                                             data-modal-toggle="Updateproductmodal"
                                             class=" updateBtn cursor-pointer  w-[42px]"><img width="38px"
