@@ -152,4 +152,11 @@ class userController extends Controller
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
+
+    public function deleteUser(string $id)
+    {
+        $del = User::find($id);
+        $del->delete();
+        return redirect("../users");
+    }
 }
