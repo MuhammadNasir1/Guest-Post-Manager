@@ -10,7 +10,7 @@
         @if (!isset($transaction))
             <form action="{{ route('addVoucher') }}" method="post" enctype="multipart/form-data">
             @else
-                <form action="../editVoucher/7" method="post" enctype="multipart/form-data">
+                <form action="../editVoucher/2" method="post" enctype="multipart/form-data">
         @endif
         @csrf
         <input type="hidden" name="user_id" value="" autocomplete="off">
