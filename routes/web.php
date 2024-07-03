@@ -41,6 +41,7 @@ Route::middleware('custom')->group(function () {
 //     return view('users');
 // });
 Route::get('/users', [userController::class, 'users']);
+Route::get('/deleteUser/{id}', [userController::class, 'deleteUser'])->name("deleteUser");
 // Route::get('/addSite', function () {
 //     return view('addsites');
 // });

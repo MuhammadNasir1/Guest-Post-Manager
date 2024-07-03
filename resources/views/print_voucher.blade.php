@@ -41,11 +41,17 @@
             <body>
                 <tr>
                     <th class="py-3 border px-5">@lang('lang.Amount_Paid')</th>
-                    <td class="border px-5">5,000</td>
+                    <td class="border px-5">
+                        @if ($print->debit == null)
+                            0
+                        @else
+                            {{ $print->debit }}
+                        @endif
+                    </td>
                     <th class="border px-5">@lang('lang.Previous_Balance')</th>
-                    <td class="border px-5">5,000</td>
+                    <td class="border px-5">{{ $print->debit - $print->credit - $print->debit }}</td>
                     <th class="border px-5">@lang('lang.Current_Balance')</th>
-                    <td class="border px-5">5,000</td>
+                    <td class="border px-5">{{ $print->debit - $print->credit }}</td>
                 </tr>
                 <tr>
                     <th class="py-3 px-5  border">@lang('lang.Narration')</th>

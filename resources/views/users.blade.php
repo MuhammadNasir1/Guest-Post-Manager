@@ -41,11 +41,13 @@
                                             class=" updateBtn cursor-pointer  w-[42px]"
                                             updateId="{{ $data->id }}"><img width="38px"
                                                 src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
-                                        <button data-modal-target="deleteData" data-modal-toggle="deleteData"
-                                            class="delButton" delId="{{ $data->id }}">
-                                            <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
-                                                alt="delete" class="cursor-pointer">
-                                        </button>
+                                        <a href="{{ route('deleteUser', $data->id) }}">
+                                            <button data-modal-target="deleteData" data-modal-toggle="deleteData"
+                                                class="delButton" delId="{{ $data->id }}">
+                                                <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
+                                                    alt="delete" class="cursor-pointer">
+                                            </button>
+                                        </a>
 
                                     </div>
                                 </td>
