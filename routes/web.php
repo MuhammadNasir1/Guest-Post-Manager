@@ -98,4 +98,4 @@ Route::get("getLedgerData", [ReportsController::class, 'getLedgerData']);
 Route::match(["get", "post"], "deleteTransaction/{id}", [TransactionController::class, 'deleteTransaction']);
 Route::get("transctionData/{id}", [TransactionController::class, 'transctionData']);
 
-Route::post("editVoucher", [TransactionController::class, 'editVoucher'])->name('editVoucher');
+Route::post("/editVoucher/{id}", [TransactionController::class, 'editVoucher']);

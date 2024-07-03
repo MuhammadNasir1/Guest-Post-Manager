@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->string('credit')->nullable();
-            $table->string('debit');
+            $table->string('debit')->nullable();
             $table->string('balance');
             $table->string('user_id');
             $table->string('transaction_remarks');

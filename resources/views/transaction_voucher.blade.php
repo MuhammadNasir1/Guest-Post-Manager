@@ -7,10 +7,10 @@
     </div>
 
     <div id="reloadDiv" class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
-        @if (isset($transaction->credit))
+        @if (!isset($transaction))
             <form action="{{ route('addVoucher') }}" method="post" enctype="multipart/form-data">
             @else
-                <form action="{{ route('editVoucher') }}" method="post" enctype="multipart/form-data">
+                <form action="../editVoucher/7" method="post" enctype="multipart/form-data">
         @endif
         @csrf
         <input type="hidden" name="user_id" value="" autocomplete="off">

@@ -64,8 +64,9 @@ class TransactionController extends Controller
         return redirect('transactionVoucher');
     }
 
-    public function editVoucher(Request  $request, $id)
+    public function editVoucher(Request $request, string $id)
     {
+
         $validatedData = $request->validate([
             "date" => "required",
             "account" => "required",
@@ -86,14 +87,13 @@ class TransactionController extends Controller
         $transaction->update();
 
         $voucher = new Voucher;
-        $voucher->transaction_id = $transaction->id;
         $voucher->date = $validatedData['date'];
         $voucher->user_id = $validatedData['account'];
         $voucher->voucher_type = $validatedData['voucher_type'];
         $voucher->credit = $request->credit;
         $voucher->debit = $request->debit;
         $voucher->hint = $validatedData['hint'];
-        $voucher->save();
+        $voucher->update();
     }
     // get update dataz
 
