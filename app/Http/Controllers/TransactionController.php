@@ -7,7 +7,6 @@ use App\Models\Invoice;
 use App\Models\User;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
-use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class TransactionController extends Controller
 {
@@ -63,5 +62,48 @@ class TransactionController extends Controller
         $transaction->delete();
 
         return redirect('transactionVoucher');
+    }
+
+    public function editVoucher(Request  $request, $id)
+    {
+        $validatedData = $request->validate([
+            "date" => "required",
+            "account" => "required",
+            "voucher_type" => "required",
+            "hint" => "nullable",
+        ]);
+
+        $transaction = Transaction::find($id);
+
+        $transaction->user_id = $validatedData['account'];
+        $transaction->transaction_remarks = $validatedData['hint'];
+        $transaction->credit = $request->credit;
+        $transaction->debit =  $request->debit;
+        $transaction->balance = 0;
+        $transaction->transaction_type = $validatedData['voucher_type'];
+        $transaction->transaction_form = "voucher";
+
+        $transaction->update();
+
+        $voucher = new Voucher;
+        $voucher->transaction_id = $transaction->id;
+        $voucher->date = $validatedData['date'];
+        $voucher->user_id = $validatedData['account'];
+        $voucher->voucher_type = $validatedData['voucher_type'];
+        $voucher->credit = $request->credit;
+        $voucher->debit = $request->debit;
+        $voucher->hint = $validatedData['hint'];
+        $voucher->save();
+    }
+    // get update dataz
+
+    public function transctionData($id)
+    {
+        $transaction = Transaction::find($id);
+        $voucher = Voucher::find($id);
+        $user = User::all();
+        $data = Voucher::all();
+
+        return view('transaction_voucher', compact('transaction', 'voucher', 'user', 'data'));
     }
 }
