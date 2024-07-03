@@ -393,12 +393,14 @@
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="currency">@lang('lang.Currency')</label>
-                        <select
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="currency" id="currency">
-                            <option value="pkr">@lang('lang.PKR')</option>
-                            <option value="no">@lang('lang.No')</option>
-                        </select>
+                        <input list="browsers" name="currency" id="currency"
+                            class="w-full border border-[#DEE2E6] placeholder:ps-2 rounded-[4px] focus:border-primary focus:border ps-2  h-[40px] text-[14px]"
+                            placeholder="@lang('lang.Currency')">
+
+                        <datalist id="browsers">
+                            <option value="pkr">
+
+                        </datalist>
                     </div>
                 </div>
                 <div class="grid md:grid-cols-3 gap-6 mx-6 my-6">
