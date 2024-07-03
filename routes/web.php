@@ -42,6 +42,7 @@ Route::middleware('custom')->group(function () {
 // });
 Route::get('/users', [userController::class, 'users']);
 Route::get('/deleteUser/{id}', [userController::class, 'deleteUser'])->name("deleteUser");
+Route::get('/update-user/{id}', [userController::class, 'updateUser'])->name("updateUser");
 // Route::get('/addSite', function () {
 //     return view('addsites');
 // });

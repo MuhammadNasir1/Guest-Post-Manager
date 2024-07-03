@@ -36,11 +36,13 @@
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
 
-                                        <button data-modal-target="Updateproductmodal"
-                                            data-modal-toggle="Updateproductmodal"
-                                            class=" updateBtn cursor-pointer  w-[42px]"
-                                            updateId="{{ $data->id }}"><img width="38px"
-                                                src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
+                                        <a href="{{ route('updateUser', $data->id) }}">
+                                            <button data-modal-target="Updateproductmodal"
+                                                data-modal-toggle="Updateproductmodal"
+                                                class=" updateBtn cursor-pointer  w-[42px]"
+                                                updateId="{{ $data->id }}"><img width="38px"
+                                                    src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
+                                        </a>
                                         <a href="{{ route('deleteUser', $data->id) }}">
                                             <button data-modal-target="deleteData" data-modal-toggle="deleteData"
                                                 class="delButton" delId="{{ $data->id }}">
@@ -69,6 +71,9 @@
 <div id="addcustomermodal" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-5\0 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
     <div class="relative p-4 w-full   max-w-6xl max-h-full ">
+        @if (isset($user))
+            <input type="hidden" value="{{ $user->id }}">
+        @endif
         <form id="customerData" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="role" value="seller  ">
@@ -93,17 +98,20 @@
                         <label class="text-[14px] font-normal" for="user_name">@lang('lang.User_Name')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="name" id="user_name" placeholder=" @lang('lang.User_Name_Here')">
+                            name="name" id="user_name" value="{{ $user->name ?? '' }}"
+                            placeholder=" @lang('lang.User_Name_Here')">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="user_email">@lang('lang.Email_Address')</label>
                         <input type="email" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="email" id="user_email" placeholder=" @lang('lang.Email_Address_Here')">
+                            name="email" id="user_email" placeholder=" @lang('lang.Email_Address_Here')"
+                            value="{{ $user->email ?? '' }}">
                     </div>
 
                 </div>
-                <div class="grid md:grid-cols-2 gap-6 mx-6 my-6">
+                <div class="grid  md:grid-cols-2 gap-6 mx-6 my-6">
+
                     <div>
                         <label class="text-[14px] font-normal" for="password">@lang('lang.Password')</label>
                         <input type="password"
