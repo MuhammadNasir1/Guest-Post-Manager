@@ -409,8 +409,8 @@
                         <select
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="payment_method" id="payment_method">
-                            <option value="payoneer">@lang('lang.Link_Insertion')</option>
-                            <option value="jazzcash">@lang('lang.No')</option>
+                            <option value="payoneer">@lang('lang.Payoneer')</option>
+                            <option value="paypal">@lang('lang.PayPal')</option>
                         </select>
                     </div>
                     <div>
