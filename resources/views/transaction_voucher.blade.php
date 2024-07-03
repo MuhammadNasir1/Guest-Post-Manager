@@ -149,7 +149,7 @@
                                             class=" updateBtn cursor-pointer  w-[42px]"><img width="38px"
                                                 src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
                                     </a>
-                                    <a href="../deleteTransaction/{{ $data->id }}">
+                                    <a href="../deleteTransaction/{{ $data->transaction_id }}">
                                         <button data-modal-target="deleteData" data-modal-toggle="deleteData"
                                             class="delButton" delId="{{ $data->id }}">
                                             <img width="38px" src="{{ asset('images/icons/delete.svg') }}"

@@ -52,13 +52,11 @@ class TransactionController extends Controller
     }
 
 
-    public function deleteTransaction($id)
+    public function deleteTransaction(string $id)
     {
         $transaction = Transaction::find($id);
-        $vouchers  = Voucher::where('transaction_id',  $id)->get();
-        foreach ($vouchers  as $voucher) {
-            $voucher->delete();
-        }
+        $voucher  = Voucher::where('transaction_id',  $id)->first();
+        $voucher->delete();
         $transaction->delete();
 
         return redirect('transactionVoucher');
