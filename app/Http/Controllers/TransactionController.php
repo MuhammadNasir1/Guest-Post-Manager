@@ -104,7 +104,7 @@ class TransactionController extends Controller
     public function transctionData($id)
     {
         $transaction = Transaction::find($id);
-        $voucher = Voucher::find($id);
+        $voucher = Voucher::where('transaction_id', $id)->first();
         $user = User::all();
         $data = Voucher::all();
 

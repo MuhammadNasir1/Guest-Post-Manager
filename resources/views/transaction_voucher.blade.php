@@ -1,6 +1,5 @@
 @include('layouts.header')
 @include('layouts.nav')
-
 <div class="lg:mx-4 mt-12">
     <div>
         <h1 class=" font-semibold   text-2xl ">@lang('lang.Transaction_Voucher')</h1>
@@ -33,7 +32,8 @@
                         name="account" id="account" required>
                         <option selected disabled>@lang('lang.Change_Status')</option>
                         @foreach ($user as $user)
-                            <option value="{{ $user->id }}" class="capitalize">{{ $user->name }}</option>
+                            <option {{ isset($transaction) && $transaction->user_id == $user->id ? 'selected' : '' }}
+                                value="{{ $user->id }}" class="capitalize">{{ $user->name }}</option>
                         @endforeach
 
                     </select>
@@ -46,7 +46,9 @@
                         name="voucher_type" id="voucher_type" required>
                         <option selected disabled>@lang('lang.Change_Status')</option>
 
-                        <option value="payment clearance" class="capitalize">Payment Clearance</option>
+                        <option
+                            {{ isset($transaction) && $transaction->transaction_type == 'Payment Clearance' ? 'selected' : '' }}
+                            class="capitalize">Payment Clearance</option>
 
 
                     </select>
@@ -143,15 +145,13 @@
                             <td>{{ $data->hint }}</td>
                             <td>
                                 <div class="flex gap-5 items-center justify-center">
-                                    <a href="../transctionData/{{ $data->transaction_id }}}">
-                                        <button data-modal-target="Updateproductmodal"
-                                            data-modal-toggle="Updateproductmodal"
-                                            class=" updateBtn cursor-pointer  w-[42px]"><img width="38px"
+                                    <a href="../transctionData/{{ $data->transaction_id }}">
+                                        <button class="  cursor-pointer  w-[42px]"><img width="38px"
                                                 src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
                                     </a>
                                     <a href="../deleteTransaction/{{ $data->transaction_id }}">
                                         <button data-modal-target="deleteData" data-modal-toggle="deleteData"
-                                            class="delButton" delId="{{ $data->id }}">
+                                            class="delButton">
                                             <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
                                                 alt="delete" class="cursor-pointer">
                                         </button></a>
@@ -191,9 +191,11 @@
 
         if (field === 'credit' && creditInput.value) {
             debitInput.disabled = true;
-            debitInput.classList.add("bg-gray")
+            debitInput.classList.add("bg-gray");
+            debitInput.value = "";
         } else if (field === 'debit' && debitInput.value) {
             creditInput.disabled = true;
+            creditInput.value = "";
             creditInput.classList.add("bg-gray")
         } else {
             creditInput.disabled = false;
