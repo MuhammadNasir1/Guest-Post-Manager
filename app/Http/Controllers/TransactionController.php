@@ -99,8 +99,7 @@ class TransactionController extends Controller
             return redirect('../transactionVoucher');
         }
     }
-    // get update dataz
-
+    // get update data
     public function transctionData($id)
     {
         $transaction = Transaction::find($id);
@@ -109,5 +108,18 @@ class TransactionController extends Controller
         $data = Voucher::all();
 
         return view('transaction_voucher', compact('transaction', 'voucher', 'user', 'data'));
+    }
+
+    public function deleteInvoice($id)
+    {
+        $transaction = Transaction::find($id);
+        $invoice  = Invoice::where('transaction_id',  $id)->first();
+        if ($invoice) {
+
+            $invoice->delete();
+        }
+        $transaction->delete();
+
+        return redirect('requestInvoice');
     }
 }

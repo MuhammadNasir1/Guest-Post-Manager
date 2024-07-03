@@ -101,3 +101,5 @@ Route::match(["get", "post"], "deleteTransaction/{id}", [TransactionController::
 Route::get("transctionData/{id}", [TransactionController::class, 'transctionData']);
 
 Route::post("/editVoucher/{id}", [TransactionController::class, 'editVoucher']);
+
+Route::match(["get", "post"],  "/deleteInvoice/{id}", [TransactionController::class, 'deleteInvoice']);
