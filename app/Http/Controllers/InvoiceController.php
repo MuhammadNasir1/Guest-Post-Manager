@@ -112,12 +112,12 @@ class InvoiceController extends Controller
             $transaction->save();
 
 
-            $updateStatus = Invoice::find($id);
+            $updateStatus = Invoice::where('transaction_id',  $id)->first();
             $updateStatus->status = $validatedData['status_update'];
             $updateStatus->transaction_id =  $transaction->id;
             $updateStatus->update();
-
-            return response()->json(["success" => true,  "message" => "data get successfully"], 200);
+            return redirect('requestInvoice');
+            // return response()->json(["success" => true,  "message" => "data get successfully"], 200);
         } catch (\Exception $e) {
             return response()->json(["success" =>  false, "message" => $e->getMessage()], 500);
         }

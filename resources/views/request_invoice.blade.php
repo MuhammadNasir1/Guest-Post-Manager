@@ -397,50 +397,50 @@
 
 <script>
     $(document).ready(function() {
-        $("#postId").submit(function(event) {
-            event.preventDefault();
-            var formData = $(this).serialize();
-            var url = $(this).attr('action');
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: formData,
-                dataType: "json",
-                beforeSend: function() {
-                    $('#Aspinner').removeClass('hidden');
-                    $('#Atext').addClass('hidden');
-                    $('#Aloginbutton').attr('disabled', true);
-                },
-                success: function(response) {
-                    if (response.success == true) {
-                        $('#text').removeClass('hidden');
-                        $('#spinner').addClass('hidden');
+        // $("#postId").submit(function(event) {
+        //     event.preventDefault();
+        //     var formData = $(this).serialize();
+        //     var url = $(this).attr('action');
+        //     $.ajax({
+        //         type: "POST",
+        //         url: url,
+        //         data: formData,
+        //         dataType: "json",
+        //         beforeSend: function() {
+        //             $('#Aspinner').removeClass('hidden');
+        //             $('#Atext').addClass('hidden');
+        //             $('#Aloginbutton').attr('disabled', true);
+        //         },
+        //         success: function(response) {
+        //             if (response.success == true) {
+        //                 $('#text').removeClass('hidden');
+        //                 $('#spinner').addClass('hidden');
 
-                        window.location.href = '/requestInvoice';
+        //                 window.location.href = '/requestInvoice';
 
-                    } else if (response.success == false) {
-                        Swal.fire(
-                            'Warning!',
-                            response.message,
-                            'warning'
-                        )
-                    }
-                },
-                error: function(jqXHR) {
+        //             } else if (response.success == false) {
+        //                 Swal.fire(
+        //                     'Warning!',
+        //                     response.message,
+        //                     'warning'
+        //                 )
+        //             }
+        //         },
+        //         error: function(jqXHR) {
 
-                    let response = JSON.parse(jqXHR.responseText);
+        //             let response = JSON.parse(jqXHR.responseText);
 
-                    Swal.fire(
-                        'Warning!',
-                        response.message,
-                        'warning'
-                    )
-                    $('#Atext').removeClass('hidden');
-                    $('#Aspinner').addClass('hidden');
-                    $('#Aloginbutton').attr('disabled', false);
-                }
-            });
-        });
+        //             Swal.fire(
+        //                 'Warning!',
+        //                 response.message,
+        //                 'warning'
+        //             )
+        //             $('#Atext').removeClass('hidden');
+        //             $('#Aspinner').addClass('hidden');
+        //             $('#Aloginbutton').attr('disabled', false);
+        //         }
+        //     });
+        // });
         $('.ChangeStatusBtn').click(function() {
             var invoiceId = $(this).attr('invoiceId');
             var transId = $(this).attr('transactionId');
