@@ -415,7 +415,11 @@
 
                                 $('#verification').val("approved").trigger(
                                     'change');
-
+                                $('#total_amount').val(0)
+                                // $('total_amount').val(response.data.)
+                                $('#payable_amount').val(response.data.credit);
+                                $('#note').val(response.data
+                                    .transaction_remarks)
                             }
                         });
                     }
