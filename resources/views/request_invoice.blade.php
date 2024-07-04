@@ -93,7 +93,7 @@
                                                 aria-labelledby="dropdownDefaultButton{{ $loop->iteration }}">
                                                 <li class="py-1">
                                                     <a class="w-[42px] flex items-center gap-3"
-                                                        href="../order/{{ $data->id }}"><img width="38px"
+                                                        href="../updateInvoice/{{ $data->id }}"><img width="38px"
                                                             src="{{ asset('images/icons/edit.svg') }}"
                                                             alt="update">@lang('lang.Edit')</a>
                                                 </li>
@@ -103,15 +103,6 @@
                                                             width="38px"
                                                             src="{{ asset('images/icons/delete-green.svg') }}"
                                                             alt="update">@lang('lang.Delete')</a>
-                                                    {{-- <button data-modal-target="deleteData"
-                                                        data-modal-toggle="deleteData"
-                                                        class="delButton items-center flex gap-3"
-                                                        delId="{{ $data->invoice_no }}">
-                                                        <img width="38px"
-                                                            src="{{ asset('images/icons/delete-green.svg') }}"
-                                                            alt="delete" class="cursor-pointer">
-                                                        <p>@lang('lang.Delete')</p>
-                                                    </button> --}}
                                                 </li>
                                                 {{-- @if (session('user_det')['role'] == 'admin') --}}
                                                 <li class="py-1 text-black updateStatusBtn"
