@@ -80,7 +80,8 @@ class InvoiceController extends Controller
     {
         try {
             $InvoiceTrans = Transaction::where('id', $id)->first();
-            return response()->json(["success" => true,  "data" => $InvoiceTrans], 200);
+            $invouceAmout = Invoice::where('transaction_id', $id)->pluck('total_amount')->first();
+            return response()->json(["success" => true,  "data" => $InvoiceTrans, "invouceAmout" => $invouceAmout], 200);
         } catch (\Exception $e) {
             return response()->json(["success" =>  false, "message" => $e->getMessage()], 500);
         }
