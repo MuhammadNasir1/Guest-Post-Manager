@@ -114,13 +114,13 @@ class TransactionController extends Controller
 
     public function deleteInvoice($id)
     {
-        $transaction = Transaction::find($id);
-        $invoice  = Invoice::where('transaction_id',  $id)->first();
-        if ($invoice) {
-
-            $invoice->delete();
+        $invoice  = Invoice::find($id);
+        $transId = $invoice->transaction_id;
+        if ($transId) {
+            $transaction = Transaction::Where('id', $transId)->first();
+            $transaction->delete();
         }
-        $transaction->delete();
+        $invoice->delete();
 
         return redirect('requestInvoice');
     }
