@@ -1,8 +1,6 @@
 @include('layouts.header')
 @include('layouts.nav')
-@php
-    $company = DB::table('companies')->first();
-@endphp
+
 <style>
     @media print {
         body * {
@@ -23,6 +21,10 @@
         }
     }
 </style>
+@php
+    $company = DB::table('companies')->first();
+@endphp
+
 <div class="lg:mx-4 mt-12">
     <div>
         <h1 class=" font-semibold   text-2xl ">@lang('lang.Customer_Ledger')</h1>
@@ -83,11 +85,12 @@
                     <div class="report pt-10 border-t border-gray ">
                         <div class="flex justify-between items-center">
                             <div class="flex gap-5 items-center">
-                                <img src="{{ isset($company->logo) ? asset($company->logo) : asset('images/comapnylogo.svg') }}"
+                                <img src="{{ isset($company->logo) ? asset($company->logo) : asset('images/your-logo.jpg') }}"
                                     width="100" alt="">
                                 <div>
-                                    <h1 class="pb-3 text-red-600 text-3xl font-bold">{{ $company->name }}</h1>
-                                    <p class="ps-1">PH NO: {{ $company->phone_no }}</p>
+                                    <h1 class="pb-3 text-red-600 text-3xl font-bold">
+                                        {{ $company->name ?? 'The Web Concept' }}</h1>
+                                    <p class="ps-1">PH NO: {{ $company->phone_no ?? '123 456 789' }}</p>
                                 </div>
                             </div>
                             <div>
