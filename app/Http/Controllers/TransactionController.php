@@ -37,6 +37,8 @@ class TransactionController extends Controller
             $updateStatus = Invoice::find($id);
             $updateStatus->status = $validatedData['status_update'];
             $updateStatus->transaction_id =  $transaction->id;
+            $updateStatus->total_amount =  $validatedData['total_amount'];
+            $updateStatus->payable_amount =  $validatedData['payable_amount'];
             $updateStatus->update();
             return redirect('requestInvoice');
         } catch (\Exception $error) {

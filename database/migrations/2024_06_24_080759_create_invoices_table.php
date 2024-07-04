@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string("cust_name");
             $table->string("cust_email");
             $table->string("cust_phone_no");
+            $table->string("total_amount")->nullable();
+            $table->string("payable_amount")->nullable();
             $table->dateTime("datetime")->useCurrent();
         });
     }

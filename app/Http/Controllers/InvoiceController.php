@@ -115,6 +115,8 @@ class InvoiceController extends Controller
             $updateStatus = Invoice::where('transaction_id',  $id)->first();
             $updateStatus->status = $validatedData['status_update'];
             $updateStatus->transaction_id =  $transaction->id;
+            $updateStatus->total_amount =  $validatedData['total_amount'];
+            $updateStatus->payable_amount =  $validatedData['payable_amount'];
             $updateStatus->update();
             return redirect('requestInvoice');
             // return response()->json(["success" => true,  "message" => "data get successfully"], 200);
