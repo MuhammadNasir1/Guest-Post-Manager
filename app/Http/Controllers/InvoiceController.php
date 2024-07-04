@@ -85,4 +85,41 @@ class InvoiceController extends Controller
             return response()->json(["success" =>  false, "message" => $e->getMessage()], 500);
         }
     }
+
+    public function updateTransStatus(Request $request, $id)
+    {
+
+        try {
+
+            $validatedData = $request->validate([
+                "status_update" => "required",
+                "total_amount" => "nullable",
+                "payable_amount" => "nullable",
+                "note" => "nullable",
+            ]);
+
+
+            $transaction = Transaction::find($id);
+
+            $transaction->user_id = $request->user_id;
+            $transaction->transaction_remarks = $validatedData['note'];
+            $transaction->credit = $validatedData['payable_amount'];
+            $transaction->debit = 0;
+            $transaction->balance = 0;
+            $transaction->transaction_type = 0;
+            $transaction->transaction_form = "invoice";
+
+            $transaction->save();
+
+
+            $updateStatus = Invoice::find($id);
+            $updateStatus->status = $validatedData['status_update'];
+            $updateStatus->transaction_id =  $transaction->id;
+            $updateStatus->update();
+
+            return response()->json(["success" => true,  "message" => "data get successfully"], 200);
+        } catch (\Exception $e) {
+            return response()->json(["success" =>  false, "message" => $e->getMessage()], 500);
+        }
+    }
 }

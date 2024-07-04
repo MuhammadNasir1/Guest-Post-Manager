@@ -29,7 +29,7 @@ class TransactionController extends Controller
             $transaction->debit = 0;
             $transaction->balance = 0;
             $transaction->transaction_type = 0;
-            $transaction->transaction_form = 0;
+            $transaction->transaction_form = "invoice";
 
             $transaction->save();
 
