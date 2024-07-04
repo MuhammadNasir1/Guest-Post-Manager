@@ -129,13 +129,6 @@
 
                                     <tr>
                                         <td class="py-3 text-right border border-gray font-bold" colspan="6">
-                                            @lang('lang.Opening_Balance')
-                                        <td class="py-3 text-center border border-gray font-bold text-green-400"
-                                            colspan="4" id="openingBalance">0
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="py-3 text-right border border-gray font-bold" colspan="6">
                                             @lang('lang.Total_Debits')
                                         <td class="py-3 text-center border border-gray font-bold text-green-400"
                                             colspan="4" id="totalDebits">0
@@ -200,7 +193,6 @@
             $toDate = $('#to_date').val();
 
 
-            var openingBalance = $('#openingBalance');
             var totalDebits = $('#totalDebits');
             var totalCredits = $('#totalCredits');
             var closingBalance = $('#closingBalance');
@@ -248,7 +240,6 @@
                     $('#totalDebits').text(tDebits);
                     $('#totalCredits').text(tCredits);
                     $('#closingBalance ').text(tDebits - tCredits);
-                    $('#openingBalance ').text(tCredits - tDebits);
 
                 },
 
