@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoice;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -62,5 +63,26 @@ class InvoiceController extends Controller
         }
 
         return view("request_invoice", compact('data'));
+    }
+
+
+    public function getInvoiceStatus(string $id)
+    {
+        try {
+            $InvoiceStatus = Invoice::where('id', $id)->pluck('status')->first();
+            return response()->json(["success" => true,  "status" => $InvoiceStatus], 200);
+        } catch (\Exception $e) {
+            return response()->json(["success" =>  false, "message" => $e->getMessage()], 500);
+        }
+    }
+
+    public function getInvoiceTransData($id)
+    {
+        try {
+            $InvoiceTrans = Transaction::where('id', $id)->first();
+            return response()->json(["success" => true,  "data" => $InvoiceTrans], 200);
+        } catch (\Exception $e) {
+            return response()->json(["success" =>  false, "message" => $e->getMessage()], 500);
+        }
     }
 }
