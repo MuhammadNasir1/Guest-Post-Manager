@@ -125,4 +125,61 @@ class InvoiceController extends Controller
             return response()->json(["success" =>  false, "message" => $e->getMessage()], 500);
         }
     }
+
+    public function updateInvoiceData($id)
+    {
+
+        $userId = session('user_det')['user_id'];
+        if (session('user_det')['role'] == "admin") {
+            $data = Invoice::all();
+        } else {
+            $data = Invoice::where('user_id', $userId)->get();
+        }
+
+        foreach ($data as $datas) {
+
+            $user = $datas['user_id'];
+            $userData = User::where('id', $user)->first();
+            $datas->user = $userData;
+        }
+        $Invoicedata = Invoice::find($id);
+        return view("request_invoice", compact('data', 'Invoicedata'));
+    }
+
+    public function updateInvoice(Request $request, $id)
+    {
+
+        try {
+
+            $validatedData = $request->validate([
+                "invoice_no" => "required",
+                "amount" => "required",
+                "currency" => "required",
+                "payment_method" => "required",
+                "website" => "required",
+                "cust_name" => "required",
+                "cust_email" => "required",
+                "cust_phone_no" => "required",
+            ]);
+
+
+            $site = Invoice::find($id);
+            $site->invoice_no = $validatedData['invoice_no'];
+            $site->user_id = session('user_det')['user_id'];
+            $site->amount = $validatedData['amount'];
+            $site->currency = $validatedData['currency'];;
+            $site->payment_method = $validatedData['payment_method'];
+            $site->website = $validatedData['website'];
+            $site->status = "pending";
+            $site->cust_name = $validatedData['cust_name'];
+            $site->cust_email = $validatedData['cust_email'];
+            $site->cust_phone_no = $validatedData['cust_phone_no'];
+
+            $site->update();
+
+            return redirect('../requestInvoice');
+        } catch (\Exception $error) {
+            return response()->json(['error' => $error->getMessage()]);
+        }
+    }
 }

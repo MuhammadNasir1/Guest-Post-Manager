@@ -200,10 +200,10 @@
             $toDate = $('#to_date').val();
 
 
-            $openingBalance = $('#openingBalance');
-            $totalDebits = $('#totalDebits');
-            $totalCredits = $('#totalCredits');
-            $closingBalance = $('#closingBalance');
+            var openingBalance = $('#openingBalance');
+            var totalDebits = $('#totalDebits');
+            var totalCredits = $('#totalCredits');
+            var closingBalance = $('#closingBalance');
 
             $.ajax({
                 type: "Get",
@@ -247,6 +247,9 @@
                     $('#transactionTable tbody').append(newRows);
                     $('#totalDebits').text(tDebits);
                     $('#totalCredits').text(tCredits);
+                    $('#closingBalance ').text(tDebits - tCredits);
+                    $('#openingBalance ').text(tCredits - tDebits);
+
                 },
 
             })

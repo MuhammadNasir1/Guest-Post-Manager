@@ -110,3 +110,8 @@ Route::match(["get", "post"],  "/deleteInvoice/{id}", [TransactionController::cl
 Route::get("getInvoiceStatus/{id}", [InvoiceController::class, 'getInvoiceStatus']);
 Route::get("getInvoiceTransData/{id}", [InvoiceController::class, 'getInvoiceTransData']);
 Route::post("updateTransStatus/{id}", [InvoiceController::class, 'updateTransStatus']);
+
+//
+
+Route::get("updateInvoice/{id}", [InvoiceController::class, 'updateInvoiceData']);
+Route::post("updateInvoiceForm/{id}", [InvoiceController::class, 'updateInvoice']);
