@@ -16,6 +16,7 @@ Route::get('/lang', [userController::class, 'language_change']);
 // Authentication
 Route::post('login', [authController::class, 'login']);
 Route::post('registerdata', [authController::class, 'register']);
+Route::post('updateUser/{id}', [authController::class, 'update'])->name("update");
 Route::match(['get',  'post'], 'weblogout', [authController::class, 'weblogout']);
 
 Route::get('/login', function () {
@@ -85,6 +86,8 @@ Route::controller(InvoiceController::class)->group(function () {
 Route::controller(SiteController::class)->group(function () {
     Route::post('/addSites', 'siteAdd')->name('addSite');
     Route::get('/addSite', 'getSite')->name('getSite');
+    Route::get('/update-site/{id}', 'updateData')->name('updateSite');
+    Route::post('/updateSite/{id}', 'updateSite')->name('updateSiteData');
 });
 Route::post("addTransaction/{id}", [TransactionController::class, 'addTransaction'])->name('addTransaction');
 Route::get("reports", [TransactionController::class, 'getData'])->name('getData');
