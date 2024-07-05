@@ -115,3 +115,9 @@ Route::post("updateTransStatus/{id}", [InvoiceController::class, 'updateTransSta
 
 Route::get("updateInvoice/{id}", [InvoiceController::class, 'updateInvoiceData']);
 Route::post("updateInvoiceForm/{id}", [InvoiceController::class, 'updateInvoice']);
+
+
+Route::get('home', function () {
+
+    return view("home");
+});
