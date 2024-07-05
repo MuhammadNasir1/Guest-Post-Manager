@@ -13,9 +13,9 @@
         $company = DB::table('companies')->first();
     @endphp
     <div class="md:hidden flex justify-center m-auto">
-        {{-- <img class="w-48" src="{{ isset($company->logo) ? asset($company->logo) : asset('images/comapnylogo.svg') }}"
-            alt="logo"> --}}
-        <img class="w-48" src="{{ asset('images/comapnylogo.svg') }}" alt="logo">
+        <img class="w-48" src="{{ isset($company->logo) ? asset($company->logo) : asset('images/comapnylogo.svg') }}"
+            alt="logo">
+        {{-- <img class="w-48" src="{{ asset('images/comapnylogo.svg') }}" alt="logo"> --}}
     </div>
 </div>
 <aside id="sidebar-multi-level-sidebar"
