@@ -42,8 +42,8 @@
                 <div>
                     <input type="text" id="voice-search"
                         class=" border border-white text-gray-900 text-sm rounded-lg focus:rounded-b-none bg-white  focus:border-white block w-full ps-5 p-2.5  dark:bg-gray-700  placeholder:text-black dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Search Mockups, Logos, Design Templates..." required name="query"
-                        id="searchInput" onfocus="show()" onblur="hide()" />
+                        placeholder="Search Webistes..." required name="query" id="searchInput" onfocus="show()"
+                        onblur="hide()" />
                 </div>
 
 
