@@ -40,21 +40,17 @@
             <div class="relative w-[50vw]">
 
                 <div>
-                    <input type="text" id="voice-search"
+                    <input type="text"
                         class=" border border-white text-gray-900 text-sm rounded-lg focus:rounded-b-none bg-white  focus:border-white block w-full ps-5 p-2.5  dark:bg-gray-700  placeholder:text-black dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Search Webistes..." required name="query" id="searchInput" onfocus="show()"
-                        onblur="hide()" />
+                        placeholder="Search Websites..." required name="query" id="searchInput" autocomplete="off" />
                 </div>
 
 
                 <div class="absolute top-10 h-[200px] w-full bg-white rounded-b-lg hidden" id="siteArea">
 
-                    <ul>
-                        <li><a href="#"></a></li>
-                        <li><a href="#"></a></li>
-                        <li><a href="#"></a></li>
-                        <li><a href="#"></a></li>
-                        <li><a href="#"></a></li>
+                    <ul class="ml-4 mt-2 min-h-56" id="resOutput">
+                        <li class="text-center siteList">No Website Found</li>
+
                     </ul>
                 </div>
 
@@ -77,15 +73,49 @@
 @include('layouts.footer')
 
 <script>
-    function show() {
-        let siteArea = document.getElementById("siteArea");
-        siteArea.classList.remove("hidden");
-        siteArea.classList.add("block");
-    }
+    $('#searchInput').on('focus', function() {
+        $('#siteArea').removeClass('hidden').addClass('block');
+    });
+    $(document).ready(function() {
+        $('#searchInput').on('input', function() {
+            let query = $('#searchInput').val();
+            $.ajax({
+                type: "Get",
+                url: "/search",
+                data: {
+                    "query": query,
+                },
+                success: function(response) {
+                    let Alldata = response.data;
+                    let resOutput = $('#resOutput');
+                    resOutput.html('');
+                    Alldata.forEach(data => {
+                        let outputData =
+                            `<span url="siteData/${data.id}" class="siteList cursor-pointer"><li>${data.web_url}</li></span>`;
+                        resOutput.append(outputData);
+                    });
+                    getSiteData();
 
-    function hide() {
-        let siteArea = document.getElementById("siteArea");
-        siteArea.classList.remove("block");
-        siteArea.classList.add("hidden");
-    }
+                },
+
+            });
+        });
+
+        function getSiteData() {
+            $('.siteList').click(function() {
+                let url = $(this).attr('url');
+                $.ajax({
+                    type: "Get",
+                    url: url,
+                    success: function(response) {
+                        console.log(response.data);
+
+                    }
+                });
+            });
+        }
+        getSiteData();
+
+
+    });
 </script>

@@ -12,13 +12,24 @@ class SearchController extends Controller
         try {
             $query = $request->input('query');
             $results = Site::where('web_url', 'LIKE', '%' . $query . '%')->get();
-            if(!$results){
+            if (!$results) {
                 $results = Site::orderBy('id')->take(5)->get();
             }
-            return response()->json(['success' => false , 'error' => "Data get successfully" , 'data' => $results], 500);
-        }   catch (\Exception $e) {
-            return response()->json(['success' => false , 'error' => $e->getMessage() ], 500);
+            return response()->json(['success' => true, 'message' => "Data get successfully", 'data' => $results], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
 
+    public function siteData($siteId)
+    {
+        try {
+
+            $data = Site::find($siteId);
+
+            return response()->json(['success' => true, 'message' => "Data get successfully", 'data' => $data], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
 }

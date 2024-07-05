@@ -123,4 +123,5 @@ Route::get('home', function () {
     return view("home");
 });
 
-Route::get("search"  ,  [SearchController::class , 'Search']);
+Route::get("search",  [SearchController::class, 'Search']);
+Route::get("siteData/{siteId}",  [SearchController::class, 'siteData']);
