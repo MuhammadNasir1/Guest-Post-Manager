@@ -8,6 +8,7 @@ use App\Http\Controllers\SiteController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\VoucherController;
+use App\Http\Controllers\SearchController;
 use App\Models\Site;
 use Illuminate\Support\Facades\Route;
 
@@ -121,3 +122,5 @@ Route::get('home', function () {
 
     return view("home");
 });
+
+Route::get("search"  ,  [SearchController::class , 'Search']);

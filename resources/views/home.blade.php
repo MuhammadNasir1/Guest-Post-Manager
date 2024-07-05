@@ -52,7 +52,7 @@
 {{-- Hero Section --}}
 <section class="flex justify-center items-center h-[80vh]">
 
-    <form class="flex items-center max-w-lg mx-auto">
+    <form action="../search" method="get" class="flex items-center max-w-lg mx-auto">
         <label for="voice-search" class="sr-only">Search</label>
         <div class="relative w-full">
             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -64,7 +64,7 @@
             </div>
             <input type="text" id="voice-search"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[500px] ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Search Mockups, Logos, Design Templates..." required />
+                placeholder="Search Mockups, Logos, Design Templates..." required  name="query" />
             <button type="button" class="absolute inset-y-0 end-0 flex items-center pe-3">
                 <svg class="w-4 h-4 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
