@@ -72,50 +72,50 @@
     <div class="py-5 px-5 border flex items-center font-bold">
         @lang('lang.STN')
     </div>
-    <div class="py-5 px-5 border flex items-center">
-        01
+    <div class="py-5 px-5 border flex items-center" id="stn">
+
     </div>
     <div class="py-5 px-5 border flex items-center font-bold">
         @lang('lang.Website_URL')
     </div>
     <div class="py-5 px-5 border flex items-center">
-        <a href="https:://www.youtube.com">www.youtube.com</a>
+        <a href="https:://www.youtube.com" id="url"></a>
     </div>
     <div class="py-5 px-5 border flex items-center font-bold">
         @lang('lang.Traffic')
     </div>
-    <div class="py-5 px-5 border flex items-center">
-        10k
+    <div class="py-5 px-5 border flex items-center" id="traffic">
+
     </div>
     <div class="py-5 px-5 border flex items-center font-bold">
         @lang('lang.Semrush_Traffic')
     </div>
-    <div class="py-5 px-5 border flex items-center">
-        10k
+    <div class="py-5 px-5 border flex items-center" id="semrushTraffic">
+
     </div>
     <div class="py-5 px-5 border flex items-center font-bold">
         @lang('lang.Ahref_Traffic')
     </div>
-    <div class="py-5 px-5 border flex items-center">
-        10k
+    <div class="py-5 px-5 border flex items-center" id="hrefTraffic">
+
     </div>
     <div class="py-5 px-5 border flex items-center font-bold">
         @lang('lang.Guest_Post_Price')
     </div>
-    <div class="py-5 px-5 border flex items-center">
-        1000
+    <div class="py-5 px-5 border flex items-center" id="price">
+
     </div>
     <div class="py-5 px-5 border flex items-center font-bold">
         @lang('lang.Link_Insertion_Price')
     </div>
-    <div class="py-5 px-5 border flex items-center">
-        1000
+    <div class="py-5 px-5 border flex items-center" id="linkInser">
+
     </div>
     <div class="py-5 px-5 border flex items-center font-bold">
         @lang('lang.Exchange')
     </div>
-    <div class="py-5 px-5 border flex items-center">
-        Guest Post
+    <div class="py-5 px-5 border flex items-center" id="exchange">
+
     </div>
 </div>
 
@@ -123,10 +123,10 @@
 @include('layouts.footer')
 
 <script>
-    $('#searchInput').on('focus', function() {
-        $('#siteArea').removeClass('hidden').addClass('block');
-    });
     $(document).ready(function() {
+        $('#searchInput').on('focus', function() {
+            $('#siteArea').removeClass('hidden').addClass('block');
+        });
         $('#searchInput').on('input', function() {
             let query = $('#searchInput').val();
             $.ajax({
@@ -158,7 +158,15 @@
                     type: "Get",
                     url: url,
                     success: function(response) {
-                        console.log(response.data);
+                        let data = response.data
+                        $("#stn").text(data.id)
+                        $("#url").text(data.web_url)
+                        $("#traffic").text(data.traffic)
+                        $("#semrushTraffic").text(data.semrush_traffic)
+                        $("#hrefTraffic").text(data.ahref_traffic)
+                        $("#price").text(data.guest_post_price)
+                        $("#linkInser").text(data.link_insertion_price)
+                        $("#exchange").text(data.exchange)
 
                     }
                 });
