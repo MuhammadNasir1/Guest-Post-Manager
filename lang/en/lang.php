@@ -267,6 +267,7 @@ return [
     "Credit" => "Credit",
     "Debit" => "Debit",
     "Hint" => "Hint",
+    "Website_Details" => "Website Details",
     "Customer_Ledger" => "Customer Ledger",
     "Full_Details" => "Full Details",
     "Ledger_Details" => "Ledger Details",
