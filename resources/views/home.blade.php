@@ -13,8 +13,7 @@
     }
 </style>
 
-<nav
-    class="h-[100vh] hero-section dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+<nav class=" hero-section dark:bg-gray-900  w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img class="w-48"
@@ -33,7 +32,7 @@
     </div>
 
     {{-- Hero Section --}}
-    <section class="flex mt-[30vh]  justify-center items-center">
+    <section class="flex h-[70vh] justify-center items-center">
 
         <form action="../search" method="get" class="flex items-center max-w-lg mx-auto">
             <label for="voice-search" class="sr-only">Search</label>
@@ -68,6 +67,57 @@
     </section>
 </nav>
 
+<h1 class="text-center p-5 font-bold text-3xl">@lang('lang.Website_Details')</h1>
+<div class="grid lg:grid-cols-4 grid-cols-2  px-5 pb-5">
+    <div class="py-5 px-5 border flex items-center font-bold">
+        @lang('lang.STN')
+    </div>
+    <div class="py-5 px-5 border flex items-center">
+        01
+    </div>
+    <div class="py-5 px-5 border flex items-center font-bold">
+        @lang('lang.Website_URL')
+    </div>
+    <div class="py-5 px-5 border flex items-center">
+        <a href="https:://www.youtube.com">www.youtube.com</a>
+    </div>
+    <div class="py-5 px-5 border flex items-center font-bold">
+        @lang('lang.Traffic')
+    </div>
+    <div class="py-5 px-5 border flex items-center">
+        10k
+    </div>
+    <div class="py-5 px-5 border flex items-center font-bold">
+        @lang('lang.Semrush_Traffic')
+    </div>
+    <div class="py-5 px-5 border flex items-center">
+        10k
+    </div>
+    <div class="py-5 px-5 border flex items-center font-bold">
+        @lang('lang.Ahref_Traffic')
+    </div>
+    <div class="py-5 px-5 border flex items-center">
+        10k
+    </div>
+    <div class="py-5 px-5 border flex items-center font-bold">
+        @lang('lang.Guest_Post_Price')
+    </div>
+    <div class="py-5 px-5 border flex items-center">
+        1000
+    </div>
+    <div class="py-5 px-5 border flex items-center font-bold">
+        @lang('lang.Link_Insertion_Price')
+    </div>
+    <div class="py-5 px-5 border flex items-center">
+        1000
+    </div>
+    <div class="py-5 px-5 border flex items-center font-bold">
+        @lang('lang.Exchange')
+    </div>
+    <div class="py-5 px-5 border flex items-center">
+        Guest Post
+    </div>
+</div>
 
 
 @include('layouts.footer')
