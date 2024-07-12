@@ -73,6 +73,9 @@
 {{-- ============ add  site modal  =========== --}}
 <div id="addsitemodal" data-modal-backdrop="static"
     class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+    <div class="fixed inset-0 transition-opacity">
+        <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
+    </div>
     <div class="relative p-4 w-full   max-w-6xl max-h-full ">
         @if (isset($site))
             <form action="{{ route('updateSiteData', $site->id) }}" method="post" enctype="multipart/form-data">
