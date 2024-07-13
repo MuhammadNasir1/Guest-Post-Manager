@@ -20,11 +20,7 @@
             </div> --}}
 
             <h2 class="font-semibold text-2xl mt-16 text-[#000000]">Log In</h2>
-            <div>
-                <p class="font-normal  leading-8 ">If you don't have an account registered <br> You can <a
-                        href="register" class="text-primary">Register here !</a></p>
-            </div>
-            <form id="login_data" method="post" class="flex flex-col gap-4">
+            <form id="login_data" method="post" class="flex flex-col gap-4 mt-5">
                 @csrf
                 <div class="relative mt-16 border-b-2 border-black">
                     <label for="email" class="text-sm text-gray">Email</label>
@@ -47,14 +43,11 @@
 
                     </div>
                 </div>
-                <div>
-                    <a href="/forgot" class="text-primary text-[12px]/[18px]  text-end m-0">Forgotpassword ?</a>
-                </div>
                 <button type="submit" id="loginbutton"
-                    class="bg-pink rounded-full w-full text-white  py-4 hover:scale-105 duration-300 shadow-sm">
+                    class="bg-primary rounded-full w-full text-white  py-4 hover:scale-105 duration-300 shadow-sm mt-4">
                     <div class=" text-center hidden" id="spinner">
                         <svg aria-hidden="true"
-                            class="w-5 h-5 mx-auto text-center text-gray-200 animate-spin fill-primary"
+                            class="w-5 h-5 mx-auto text-center text-gray-200 animate-spin fill-white"
                             viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
@@ -72,8 +65,12 @@
         </div>
 
         <!-- image -->
-        <div class="md:block hidden w-1/2  h-[100vh] ">
-            <img class="rounded-2xl  h-full" src="{{ asset('images/loginpage.svg') }}">
+        <div class="  w-1/2  h-[100vh] hidden md:flex items-center  ">
+            <div class="h-[98%] w-full bg-primary rounded-2xl flex justify-center align-items-center">
+                <img src="{{ asset('images/cube.png') }}" class="w-[70%] object-contain" alt="Logo">
+
+            </div>
+            {{-- <img class="rounded-2xl  h-full" src="{{ asset('images/loginpage.svg') }}"> --}}
         </div>
     </div>
     <script src="{{ asset('javascript/jquery.js') }}"></script>
