@@ -246,7 +246,7 @@
                     <input type="text"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="cust_name" id="cust_name" placeholder=" @lang('lang.Customer_Name_Here')"
-                        value=" {{ $Invoicedata->cust_name ?? '' }}">
+                        value=" {{ $Invoicedata->cust_name ?? '' }}" required>
 
                 </div>
                 <div>
@@ -254,7 +254,7 @@
                     <input type="email" min="1"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="cust_email" id="customer_email" placeholder=" @lang('lang.Customer_Email_Here')"
-                        value=" {{ $Invoicedata->cust_email ?? '' }}">
+                        value=" {{ $Invoicedata->cust_email ?? '' }}" required>
 
                 </div>
                 <div>
@@ -262,7 +262,7 @@
                     <input type="number" min="1"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="cust_phone_no" id="customer_phone_no" placeholder=" @lang('lang.Customer_Phone_No')"
-                        value="{{ $Invoicedata->cust_phone_no ?? '' }}">
+                        value="{{ $Invoicedata->cust_phone_no ?? '' }}" required>
 
                 </div>
 
@@ -271,7 +271,7 @@
             <div class="mx-6 my-4">
                 <label class="text-[14px] font-normal" for="Description">@lang('lang.Description')</label>
                 <textarea class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[120px] text-[14px]"
-                    name="description" id="Description">{{ $Invoicedata->description ?? '' }}</textarea>
+                    name="description" id="Description" required>{{ $Invoicedata->description ?? '' }}</textarea>
 
             </div>
 

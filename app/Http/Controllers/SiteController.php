@@ -47,7 +47,8 @@ class SiteController extends Controller
     public function getSite()
     {
         $userId = session('user_det')['user_id'];
-        if (session('user_det')['role'] == "admin") {
+        $userRole = session('user_det')['role'];
+        if ($userRole == "admin" || $userRole == "manager") {
 
 
             $data = Site::all();

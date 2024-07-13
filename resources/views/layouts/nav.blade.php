@@ -399,7 +399,7 @@
                 <div class="flex items-center gap-2">
                     <div class="leading-tight  text-end">
                         <h2 class="text-md">{{ session('user_det')['name'] }}</h2>
-                        <p class="text-xs  text-gray">{{ session('user_det')['role'] }}</p>
+                        <p class="text-xs ">{{ session('user_det')['role'] }}</p>
                     </div>
                     <div>
                         <img height="42px" width="42px" class="rounded-[5px] h-[42px] object-fill"

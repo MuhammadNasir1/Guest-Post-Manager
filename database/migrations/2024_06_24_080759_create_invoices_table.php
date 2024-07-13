@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string("cust_phone_no");
             $table->string("total_amount")->nullable();
             $table->string("payable_amount")->nullable();
-            $table->string("description")->nullable();
+            $table->text("description")->nullable();
             $table->dateTime("datetime")->useCurrent();
         });
     }
