@@ -109,12 +109,6 @@ class authController extends Controller
             ]);
 
             $token = $user->createToken($request->email)->plainTextToken;
-            session(['user_det' => [
-                'user_id' => $user->id,
-                'name' => $validatedData['name'],
-                'email' => $validatedData['email'],
-                'role' => $validatedData['role'],
-            ]]);
             return response()->json([
                 'token' => $token,
                 'success' => true,

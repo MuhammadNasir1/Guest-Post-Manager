@@ -66,7 +66,7 @@
                                         }
                                     @endphp
                                     <button
-                                        class="px-4 py-2 rounded-md  capitalize  {{ $bgColorClass }} text-white font-bold">
+                                        class="p-1 rounded-md  capitalize  {{ $bgColorClass }} text-white font-bold">
                                         {{ $data->status }}</button>
                                 </td>
                                 <td>{{ $data->user->name }}</td>
@@ -175,7 +175,11 @@
         @csrf
         <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
             <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
-                <h3 class="text-xl font-semibold text-white ">
+                <h3 class="text-xl font-semibold                     {{-- <select class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                        name="payment_method" id="payment_method">
+                        <option value="payoneer">@lang('lang.Payoneer')</option>
+                        <option value="paypal">@lang('lang.PayPal')</option>
+                    </select> --}}text-white ">
                     @lang('lang.Request_Invoice')
                 </h3>
                 <button type="button"
@@ -220,11 +224,11 @@
             <div class="grid md:grid-cols-3 gap-6 mx-6 my-6">
                 <div>
                     <label class="text-[14px] font-normal" for="payment_method">@lang('lang.Payment_Method')</label>
-                    <select class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="payment_method" id="payment_method">
-                        <option value="payoneer">@lang('lang.Payoneer')</option>
-                        <option value="paypal">@lang('lang.PayPal')</option>
-                    </select>
+                    <input list="currencies" name="payment_method" id="payment_method"
+                        class="w-full border border-[#DEE2E6] placeholder:ps-2 rounded-[4px] focus:border-primary focus:border ps-2  h-[40px] text-[14px]"
+                        placeholder="@lang('lang.Currency')" value="{{ $Invoicedata->payment_method ?? '' }}">
+                    <datalist id="currencies">
+                    </datalist>
                 </div>
                 <div>
                     <label class="text-[14px] font-normal" for="website">@lang('lang.Website')</label>

@@ -80,7 +80,6 @@
                 <form id="customerData" method="post" enctype="multipart/form-data">
         @endif
         @csrf
-        <input type="hidden" name="role" value="seller  ">
         <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
             <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
                 <h3 class="text-xl font-semibold text-white ">
@@ -114,7 +113,7 @@
                 </div>
 
             </div>
-            <div class="grid  md:grid-cols-2 gap-6 mx-6 my-6">
+            <div class="grid  md:grid-cols-3 gap-6 mx-6 my-6">
 
                 <div>
                     <label class="text-[14px] font-normal" for="password">@lang('lang.Password')</label>
@@ -127,6 +126,15 @@
                     <input type="password" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="confirm_password" id="confirm_password" placeholder=" @lang('lang.Confirm_Password_Here')">
+                </div>
+                <div>
+                    <label class="text-[14px] font-normal" for="role">@lang('lang.Role')</label>
+                    <select name="role" id="role">
+                        <option value="seller" {{ isset($user->role) && $user->role == 'seller' ? 'selected' : '' }}>
+                            Seller</option>
+                        <option value="manager" {{ isset($user->role) && $user->role == 'manager' ? 'selected' : '' }}>
+                            Manager</option>
+                    </select>
                 </div>
 
             </div>
