@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoice;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
@@ -30,9 +31,10 @@ class ReportsController extends Controller
 
                 $transactionQuery = Transaction::where('user_id', $userId);
                 $transactions = $transactionQuery->get();
+                $userData = User::select('name', 'phone')->find($userId);
 
                 // Return the transactions in the desired format, for example as a JSON response
-                return response()->json(['success' => true, "message" => "Data get successfully", "data" => $transactions], 200);
+                return response()->json(['success' => true, "message" => "Data get successfully", "data" => $transactions, "user" => $userData], 200);
             } else {
                 return response()->json(['success' => false, 'message' => 'customer_account is required'], 500);
             }
