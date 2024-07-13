@@ -30,7 +30,7 @@
         <h1 class=" font-semibold   text-2xl ">@lang('lang.Customer_Ledger')</h1>
     </div>
 
-    <div id="reloadDiv" class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
+    <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
         {{-- <form action="../getLedgerData" method="get" enctype="multipart/form-data"> --}}
         <form id="ledgerDataForm" method="get" enctype="multipart/form-data">
             @csrf
@@ -44,7 +44,7 @@
                                 <label class="text-[14px] font-normal" for="customer_account">@lang('lang.Customer_Account')</label>
                                 <select
                                     class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary h-[40px] text-[14px]"
-                                    name="customer_account" id="customer_account" required onchange="show()">
+                                    name="customer_account" id="customer_account" required>
                                     <option selected disabled>@lang('lang.Select_Account')</option>
                                     @foreach ($users as $users)
                                         <option value="{{ $users->id }}">{{ $users->name }}</option>
@@ -122,7 +122,7 @@
                                         <th class="border-2 border-gray">@lang('lang.Balance')</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="reloadDiv">
 
                                 </tbody>
                                 <tfoot>
@@ -186,6 +186,8 @@
 <script>
     $(document).ready(function() {
         $('#ledgerDataForm').submit(function(e) {
+            $("#reloadDiv").load(" #reloadDiv > *");
+
             e.preventDefault();
             var formData = $(this).serialize();
             $customerId = $('#customer_account').val();
