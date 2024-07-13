@@ -23,6 +23,7 @@ class InvoiceController extends Controller
                 "cust_name" => "required",
                 "cust_email" => "required",
                 "cust_phone_no" => "required",
+                "description" => "required",
             ]);
 
 
@@ -37,6 +38,7 @@ class InvoiceController extends Controller
             $site->cust_name = $validatedData['cust_name'];
             $site->cust_email = $validatedData['cust_email'];
             $site->cust_phone_no = $validatedData['cust_phone_no'];
+            $site->description = $validatedData['description'];
 
             $site->save();
 
@@ -160,6 +162,7 @@ class InvoiceController extends Controller
                 "cust_name" => "required",
                 "cust_email" => "required",
                 "cust_phone_no" => "required",
+                "description" => "required",
             ]);
 
 
@@ -174,6 +177,7 @@ class InvoiceController extends Controller
             $site->cust_name = $validatedData['cust_name'];
             $site->cust_email = $validatedData['cust_email'];
             $site->cust_phone_no = $validatedData['cust_phone_no'];
+            $site->description = $validatedData['description'];
 
             $site->update();
 

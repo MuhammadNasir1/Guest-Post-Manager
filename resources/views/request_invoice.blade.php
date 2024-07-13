@@ -268,7 +268,12 @@
 
             </div>
 
+            <div class="mx-6 my-4">
+                <label class="text-[14px] font-normal" for="Description">@lang('lang.Description')</label>
+                <textarea class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[120px] text-[14px]"
+                    name="description" id="Description">{{ $Invoicedata->description ?? '' }}</textarea>
 
+            </div>
 
 
 
@@ -408,50 +413,6 @@
 @endif
 <script>
     $(document).ready(function() {
-        // $("#postId").submit(function(event) {
-        //     event.preventDefault();
-        //     var formData = $(this).serialize();
-        //     var url = $(this).attr('action');
-        //     $.ajax({
-        //         type: "POST",
-        //         url: url,
-        //         data: formData,
-        //         dataType: "json",
-        //         beforeSend: function() {
-        //             $('#Aspinner').removeClass('hidden');
-        //             $('#Atext').addClass('hidden');
-        //             $('#Aloginbutton').attr('disabled', true);
-        //         },
-        //         success: function(response) {
-        //             if (response.success == true) {
-        //                 $('#text').removeClass('hidden');
-        //                 $('#spinner').addClass('hidden');
-
-        //                 window.location.href = '/requestInvoice';
-
-        //             } else if (response.success == false) {
-        //                 Swal.fire(
-        //                     'Warning!',
-        //                     response.message,
-        //                     'warning'
-        //                 )
-        //             }
-        //         },
-        //         error: function(jqXHR) {
-
-        //             let response = JSON.parse(jqXHR.responseText);
-
-        //             Swal.fire(
-        //                 'Warning!',
-        //                 response.message,
-        //                 'warning'
-        //             )
-        //             $('#Atext').removeClass('hidden');
-        //             $('#Aspinner').addClass('hidden');
-        //             $('#Aloginbutton').attr('disabled', false);
-        //         }
-        //     });
-        // });
         $('.ChangeStatusBtn').click(function() {
             var invoiceId = $(this).attr('invoiceId');
             var transId = $(this).attr('transactionId');
