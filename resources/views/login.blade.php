@@ -61,16 +61,19 @@
                         Login
                     </div>
                 </button>
+                <div class=" text-center">
+                    <h2><a href="../home" class="text-primary font-bold underline">Websites Collections</a></h2>
+                </div>
             </form>
         </div>
 
         <!-- image -->
         <div class="  w-1/2  h-[100vh] hidden md:flex items-center  ">
-            <div class="h-[98%] w-full bg-primary rounded-2xl flex justify-center align-items-center">
-                <img src="{{ asset('images/cube.png') }}" class="w-[70%] object-contain" alt="Logo">
+            <div class="h-[98%] w-full bg-slate-400 rounded-2xl flex justify-center align-items-center">
+                <img src="{{ asset('images/qblogo.png') }}" class="w-[70%] object-contain" alt="Logo">
+                {{-- <img src="{{ asset('images/cube.png') }}" class="w-[70%] object-contain" alt="Logo"> --}}
 
             </div>
-            {{-- <img class="rounded-2xl  h-full" src="{{ asset('images/loginpage.svg') }}"> --}}
         </div>
     </div>
     <script src="{{ asset('javascript/jquery.js') }}"></script>

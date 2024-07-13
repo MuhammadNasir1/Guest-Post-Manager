@@ -367,7 +367,7 @@
                 <div class="mt-3 mx-6">
                     <label class="text-[14px] font-normal" for="note">@lang('lang.Add_Note')</label>
                     <textarea name="note" class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary h-[80px] text-[14px]"
-                        id="note" placeholder="@lang('lang.Note_Here')"></textarea>
+                        id="note" placeholder="@lang('lang.Note_Here')" required></textarea>
                 </div>
                 <div class="flex justify-end ">
                     <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold "

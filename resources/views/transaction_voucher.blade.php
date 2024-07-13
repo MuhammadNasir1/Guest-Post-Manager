@@ -21,15 +21,15 @@
                         for="date">@lang('lang.Date')</label>
                     <input type="date"
                         class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                        name="date" id="date" value="{{ old('hint', $voucher->date ?? '') }}">
+                        name="date" id="date" value="{{ old('hint', $voucher->date ?? '') }}" required>
                 </div>
 
                 <div class="w-full">
                     <label class="text-[16px] font-semibold block mb-2  text-[#452C88]"
                         for="account">@lang('lang.Account')</label>
-                    <select
+                    <select required
                         class="w-full  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                        name="account" id="account" required>
+                        name="account" id="account">
                         <option selected disabled>@lang('lang.Change_Status')</option>
                         @foreach ($user as $user)
                             <option {{ isset($transaction) && $transaction->user_id == $user->id ? 'selected' : '' }}
@@ -41,9 +41,9 @@
                 <div class="w-full">
                     <label class="text-[16px] font-semibold block mb-2  text-[#452C88]"
                         for="voucher_type">@lang('lang.Voucher_Type')</label>
-                    <select
+                    <select required
                         class="w-full  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                        name="voucher_type" id="voucher_type" required>
+                        name="voucher_type" id="voucher_type">
                         <option selected disabled>@lang('lang.Change_Status')</option>
 
                         <option
