@@ -131,4 +131,13 @@ class SiteController extends Controller
             return response()->json(['error' => $error->getMessage()]);
         }
     }
+
+    public function delSite($id)
+    {
+
+        $site = Site::find($id);
+        $site->delete();
+
+        return redirect('../addSite');
+    }
 }

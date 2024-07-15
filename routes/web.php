@@ -85,6 +85,7 @@ Route::middleware('custom')->group(function () {
         Route::get('/addSite', 'getSite')->name('getSite');
         Route::get('/update-site/{id}', 'updateData')->name('updateSite');
         Route::post('/updateSite/{id}', 'updateSite')->name('updateSiteData');
+        Route::get('/delSite/{id}', 'delSite');
     });
     Route::post("addTransaction/{id}", [TransactionController::class, 'addTransaction'])->name('addTransaction');
     Route::get("reports", [TransactionController::class, 'getData'])->name('getData');

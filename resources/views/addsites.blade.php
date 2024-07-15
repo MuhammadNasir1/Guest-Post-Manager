@@ -50,10 +50,10 @@
                                                 updateId="{{ $data->id }}"><img width="38px"
                                                     src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
                                         </a>
-                                        <button class="delButton" delId="{{ $data->id }}">
+                                        <a href="../delSite/{{ $data->id }}" class="delButton">
                                             <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
                                                 alt="delete" class="cursor-pointer">
-                                        </button>
+                                        </a>
 
                                     </div>
                                 </td>
@@ -290,10 +290,6 @@
 @endif
 <script>
     $(document).ready(function() {
-        $('.delButton').click(function() {
-            var id = $(this).attr('delId');
-            $('#delLink').attr('href', '../delCustomer/' + id);
-        });
         // insert data
         $("#customerData").submit(function(event) {
             var url = "../addCustomer";
