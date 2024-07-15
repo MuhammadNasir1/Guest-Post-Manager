@@ -80,7 +80,7 @@
         @if (isset($site))
             <form action="{{ route('updateSiteData', $site->id) }}" method="post" enctype="multipart/form-data">
             @else
-                <form action="{{ route('addSite') }}" method="post" enctype="multipart/form-data">
+                <form id="recordData" method="post" enctype="multipart/form-data">
         @endif
         @csrf
         <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
