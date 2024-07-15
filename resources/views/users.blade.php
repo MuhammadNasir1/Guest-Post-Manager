@@ -1,5 +1,18 @@
 @include('layouts.header')
 @include('layouts.nav')
+@php
+    $company = DB::table('companies')->first();
+@endphp
+@if (isset($company->logo))
+    @php
+
+        $img = $company->logo;
+    @endphp
+@else
+    @php
+        $img = 'images/comapnylogo.svg';
+    @endphp
+@endif
 <div class="md:mx-4 mt-12">
 
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
@@ -32,8 +45,9 @@
                                 <td>{{ $data->id }}</td>
                                 <td>
                                     <div class="rounded-full flex justify-content-center ">
-                                        <img src="{{ isset($data->user_image) ? asset($data->user_image) : asset('images/comapnylogo.jpg') }}"
-                                            class="object-contain rounded-full" width="80">
+                                        <img src="{{ isset($data->user_image) ? asset($data->user_image) : asset($img) }}"
+                                            class="object-contain rounded-full h-[80px] w-[80px] bg-slate-400"
+                                            width="80">
                                     </div>
 
                                     {{-- <img src="{{ $data->user_image }}" alt=""> --}}
@@ -80,7 +94,7 @@
 
 {{-- ============ add  customer modal  =========== --}}
 <div id="addcustomermodal" data-modal-backdrop="static"
-    class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-5\0 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
+    class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
     <div class="fixed inset-0 transition-opacity">
         <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
     </div>
@@ -204,6 +218,14 @@
 
 
 @include('layouts.footer')
+@if (isset($user))
+    <script>
+        $(document).ready(function() {
+            $('#addcustomermodal').removeClass("hidden");
+
+        });
+    </script>
+@endif
 <script>
     let fileInput = document.getElementById('user_image');
     let imageView = document.getElementById('img_view');

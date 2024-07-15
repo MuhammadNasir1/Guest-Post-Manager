@@ -28,7 +28,7 @@ Route::get('/notifications', function () {
     return view('notification');
 });
 Route::get('/company', function () {
-    return view('company    ');
+    return view('company');
 });
 
 
@@ -39,102 +39,103 @@ Route::middleware('custom')->group(function () {
     Route::get('help', function () {
         return view('help');
     });
-});
-// Route::get('/users', function () {
-//     return view('users');
-// });
-Route::get('/users', [userController::class, 'users']);
-Route::get('/deleteUser/{id}', [userController::class, 'deleteUser'])->name("deleteUser");
-Route::get('/update-user/{id}', [userController::class, 'updateUser'])->name("updateUser");
-// Route::get('/addSite', function () {
-//     return view('addsites');
-// });
 
-Route::get('email', function () {
+    // Route::get('/users', function () {
+    //     return view('users');
+    // });
+    Route::get('/users', [userController::class, 'users']);
+    Route::get('/deleteUser/{id}', [userController::class, 'deleteUser'])->name("deleteUser");
+    Route::get('/update-user/{id}', [userController::class, 'updateUser'])->name("updateUser");
+    // Route::get('/addSite', function () {
+    //     return view('addsites');
+    // });
 
-    return view("emails.parent");
-});
-Route::get('register', function () {
+    Route::get('email', function () {
 
-    return view("register");
-});
-Route::get('chat', function () {
+        return view("emails.parent");
+    });
+    Route::get('register', function () {
 
-    return view("chat");
-});
-Route::get('transaction', function () {
+        return view("register");
+    });
+    Route::get('chat', function () {
 
-    return view("transaction");
-});
-Route::get('transactionVoucher', function () {
+        return view("chat");
+    });
+    Route::get('transaction', function () {
 
-    return view("transaction_voucher");
-});
+        return view("transaction");
+    });
+    Route::get('transactionVoucher', function () {
 
-Route::get('reports', function () {
+        return view("transaction_voucher");
+    });
 
-    return view("reports");
-});
+    Route::get('reports', function () {
 
-
-
-Route::controller(CompanyController::class)->group(function () {
-    Route::post('/addComapany', 'addCompany')->name('addCompany');
-});
-Route::controller(InvoiceController::class)->group(function () {
-    Route::post('/request_invoice', 'addSite')->name('requestInvoice');
-    Route::get('/requestInvoice', 'siteData')->name('siteData');
-});
-Route::controller(SiteController::class)->group(function () {
-    Route::post('/addSites', 'siteAdd')->name('addSite');
-    Route::get('/addSite', 'getSite')->name('getSite');
-    Route::get('/update-site/{id}', 'updateData')->name('updateSite');
-    Route::post('/updateSite/{id}', 'updateSite')->name('updateSiteData');
-});
-Route::post("addTransaction/{id}", [TransactionController::class, 'addTransaction'])->name('addTransaction');
-Route::get("reports", [TransactionController::class, 'getData'])->name('getData');
-Route::controller(VoucherController::class)->group(function () {
-    Route::post("addVoucher", 'addVoucher')->name('addVoucher');
-    Route::get("transactionVoucher", 'getUser')->name('getUser');
-    Route::get("printVoucher/{id}", 'printVoucher')->name('printVoucher');
-});
-
-Route::get("getLedgerData", [ReportsController::class, 'getLedgerData']);
-
-// delete all Transaction data
-Route::match(["get", "post"], "deleteTransaction/{id}", [TransactionController::class, 'deleteTransaction']);
-Route::get("transctionData/{id}", [TransactionController::class, 'transctionData']);
-
-Route::post("/editVoucher/{id}", [TransactionController::class, 'editVoucher']);
-
-Route::match(["get", "post"],  "/deleteInvoice/{id}", [TransactionController::class, 'deleteInvoice']);
-
-Route::get("getInvoiceStatus/{id}", [InvoiceController::class, 'getInvoiceStatus']);
-Route::get("getInvoiceTransData/{id}", [InvoiceController::class, 'getInvoiceTransData']);
-Route::post("updateTransStatus/{id}", [InvoiceController::class, 'updateTransStatus']);
-
-//
-
-Route::get("updateInvoice/{id}", [InvoiceController::class, 'updateInvoiceData']);
-Route::post("updateInvoiceForm/{id}", [InvoiceController::class, 'updateInvoice']);
+        return view("reports");
+    });
 
 
-Route::get('home', function () {
 
-    return view("home");
-});
+    Route::controller(CompanyController::class)->group(function () {
+        Route::post('/addComapany', 'addCompany')->name('addCompany');
+    });
+    Route::controller(InvoiceController::class)->group(function () {
+        Route::post('/request_invoice', 'addSite')->name('requestInvoice');
+        Route::get('/requestInvoice', 'siteData')->name('siteData');
+    });
+    Route::controller(SiteController::class)->group(function () {
+        Route::post('/addSites', 'siteAdd')->name('addSite');
+        Route::get('/addSite', 'getSite')->name('getSite');
+        Route::get('/update-site/{id}', 'updateData')->name('updateSite');
+        Route::post('/updateSite/{id}', 'updateSite')->name('updateSiteData');
+    });
+    Route::post("addTransaction/{id}", [TransactionController::class, 'addTransaction'])->name('addTransaction');
+    Route::get("reports", [TransactionController::class, 'getData'])->name('getData');
+    Route::controller(VoucherController::class)->group(function () {
+        Route::post("addVoucher", 'addVoucher')->name('addVoucher');
+        Route::get("transactionVoucher", 'getUser')->name('getUser');
+        Route::get("printVoucher/{id}", 'printVoucher')->name('printVoucher');
+    });
+
+    Route::get("getLedgerData", [ReportsController::class, 'getLedgerData']);
+
+    // delete all Transaction data
+    Route::match(["get", "post"], "deleteTransaction/{id}", [TransactionController::class, 'deleteTransaction']);
+    Route::get("transctionData/{id}", [TransactionController::class, 'transctionData']);
+
+    Route::post("/editVoucher/{id}", [TransactionController::class, 'editVoucher']);
+
+    Route::match(["get", "post"],  "/deleteInvoice/{id}", [TransactionController::class, 'deleteInvoice']);
+
+    Route::get("getInvoiceStatus/{id}", [InvoiceController::class, 'getInvoiceStatus']);
+    Route::get("getInvoiceTransData/{id}", [InvoiceController::class, 'getInvoiceTransData']);
+    Route::post("updateTransStatus/{id}", [InvoiceController::class, 'updateTransStatus']);
+
+    //
+
+    Route::get("updateInvoice/{id}", [InvoiceController::class, 'updateInvoiceData']);
+    Route::post("updateInvoiceForm/{id}", [InvoiceController::class, 'updateInvoice']);
 
 
-Route::get("search",  [SearchController::class, 'Search']);
-Route::get("siteData/{siteId}",  [SearchController::class, 'siteData']);
+    Route::get('home', function () {
+
+        return view("home");
+    });
 
 
-// Records Page
+    Route::get("search",  [SearchController::class, 'Search']);
+    Route::get("siteData/{siteId}",  [SearchController::class, 'siteData']);
 
-Route::controller(RecordController::class)->group(function () {
-    Route::post('/addRecord', 'addRecord')->name('addRecord');
-    Route::get('/customer', 'view')->name('records');
-    Route::get('/delRecord/{id}', 'deleteRecord')->name("getForUpdateRecord");
-    Route::get('/update-customer/{id}', 'getForUpdate');
-    Route::post('/updateRecord/{id}', 'update');
+
+    // Records Page
+
+    Route::controller(RecordController::class)->group(function () {
+        Route::post('/addRecord', 'addRecord')->name('addRecord');
+        Route::get('/customer', 'view')->name('records');
+        Route::get('/delRecord/{id}', 'deleteRecord')->name("getForUpdateRecord");
+        Route::get('/update-customer/{id}', 'getForUpdate');
+        Route::post('/updateRecord/{id}', 'update');
+    });
 });
