@@ -18,16 +18,44 @@
                     <thead class="py-1 bg-primary text-white">
                         <tr>
                             <th class="whitespace-nowrap">@lang('lang.STN')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Image')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Name')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Email')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Phone_No')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Role')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Client_From')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Client_Name')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Client_Email')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Client_Company')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Client_Profile')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Client_Contact')</th>
                             <th class="flex  justify-center">@lang('lang.Action')</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($data as $data)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $data->client_from }}</td>
+                                <td>{{ $data->client_name }}</td>
+                                <td>{{ $data->client_email }}</td>
+                                <td>{{ $data->client_company }}</td>
+                                <td>{{ $data->client_profile }}</td>
+                                <td>{{ $data->client_contact }}</td>
+                                <td>
+                                    <div class="flex gap-5 items-center justify-center">
 
+                                        <a href="{{ route('updateSite', $data->id) }}">
+                                            <button class=" updateBtn cursor-pointer  w-[42px]"
+                                                updateId="{{ $data->id }}"><img width="38px"
+                                                    src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
+                                        </a>
+                                        <a href="" id="delLink">
+                                            <button class="delButton" delId="{{ $data->id }}">
+                                                <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
+                                                    alt="delete" class="cursor-pointer">
+                                            </button>
+                                        </a>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
 
                     </tbody>
                 </table>
@@ -50,7 +78,7 @@
         @if (isset($user))
             <form action="{{ route('update', $user->id) }}" method="post" enctype="multipart/form-data">
             @else
-                <form id="customerData" method="post" enctype="multipart/form-data">
+                <form action="{{ route('addRecord') }}" method="post" enctype="multipart/form-data">
         @endif
         @csrf
         <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
@@ -74,22 +102,19 @@
                     <label class="text-[14px] font-normal" for="client_from">@lang('lang.Client_From')</label>
                     <input type="text" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="client_from" id="client_from" value="{{ $user->name ?? '' }}"
-                        placeholder=" @lang('lang.Client_From')">
+                        name="client_from" id="client_from" placeholder=" @lang('lang.Client_From')">
                 </div>
                 <div>
                     <label class="text-[14px] font-normal" for="client_name">@lang('lang.Client_Name')</label>
                     <input type="text" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="client_name" id="client_name" placeholder=" @lang('lang.Client_Name')"
-                        value="{{ $user->email ?? '' }}">
+                        name="client_name" id="client_name" placeholder=" @lang('lang.Client_Name')">
                 </div>
                 <div>
                     <label class="text-[14px] font-normal" for="client_company">@lang('lang.Client_Company')</label>
                     <input type="text" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="client_company" id="client_company" placeholder=" @lang('lang.Client_Company')"
-                        value="{{ $user->email ?? '' }}">
+                        name="client_company" id="client_company" placeholder=" @lang('lang.Client_Company')">
                 </div>
 
             </div>
@@ -99,22 +124,19 @@
                     <label class="text-[14px] font-normal" for="client_email">@lang('lang.Client_Email')</label>
                     <input type="email" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="client_email" id="client_email" placeholder=" @lang('lang.Client_Email')"
-                        value="{{ $user->email ?? '' }}">
+                        name="client_email" id="client_email" placeholder=" @lang('lang.Client_Email')">
                 </div>
                 <div>
                     <label class="text-[14px] font-normal" for="client_profile">@lang('lang.Client_Profile')</label>
                     <input type="text" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="client_profile" id="client_profile" placeholder=" @lang('lang.Client_Profile')"
-                        value="{{ $user->email ?? '' }}">
+                        name="client_profile" id="client_profile" placeholder=" @lang('lang.Client_Profile')">
                 </div>
                 <div>
                     <label class="text-[14px] font-normal" for="client_contact">@lang('lang.Client_Conatact')</label>
                     <input type="number" min="0" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="client_contact" id="client_contact" placeholder=" @lang('lang.Client_Conatact')"
-                        value="{{ $user->email ?? '' }}">
+                        name="client_contact" id="client_contact" placeholder=" @lang('lang.Client_Conatact')">
                 </div>
 
 
@@ -155,3 +177,50 @@
 
 
 @include('layouts.footer')
+<script>
+    $(document).ready(function() {
+        $('.delButton').click(function() {
+            var id = $(this).attr('delId');
+            $('#delLink').attr('href', '../delRecord/' + id);
+        });
+        // insert data
+        $("#recordData").submit(function(event) {
+            var url = "../addRecord";
+            event.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: formData,
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    $('#spinner').removeClass('hidden');
+                    $('#text').addClass('hidden');
+                    $('#addBtn').attr('disabled', true);
+                },
+                success: function(response) {
+                    window.location.href = '../records';
+
+                },
+                error: function(jqXHR) {
+                    let response = JSON.parse(jqXHR.responseText);
+                    console.log("error");
+                    Swal.fire(
+                        'Warning!',
+                        response.message,
+                        'warning'
+                    );
+
+                    $('#text').removeClass('hidden');
+                    $('#spinner').addClass('hidden');
+                    $('#addBtn').attr('disabled', false);
+                }
+            });
+        });
+
+
+
+    });
+</script>

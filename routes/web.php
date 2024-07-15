@@ -3,6 +3,7 @@
 use App\Http\Controllers\authController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\RecordController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\TransactionController;
@@ -129,3 +130,14 @@ Route::get('records', function () {
 
 Route::get("search",  [SearchController::class, 'Search']);
 Route::get("siteData/{siteId}",  [SearchController::class, 'siteData']);
+
+
+// Records Page
+
+Route::controller(RecordController::class)->group(function () {
+    Route::post('/addRecord', 'addRecord')->name('addRecord');
+    Route::get('/records', 'view')->name('records');
+    Route::get('/delRecord/{id}', 'deleteRecord')->name("getForUpdateRecord");
+    Route::get('/update-record/{id}', 'getForUpdate')->name("getForUpdateRecord");
+    Route::post('/updateRecord/{id}', 'update')->name('update');
+});
