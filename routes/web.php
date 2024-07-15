@@ -114,10 +114,6 @@ Route::middleware('custom')->group(function () {
     Route::post("updateInvoiceForm/{id}", [InvoiceController::class, 'updateInvoice']);
 
 
-    Route::get('home', function () {
-
-        return view("home");
-    });
 
 
     Route::get("search",  [SearchController::class, 'Search']);
@@ -133,4 +129,8 @@ Route::middleware('custom')->group(function () {
         Route::get('/update-customer/{id}', 'getForUpdate');
         Route::post('/updateRecord/{id}', 'update');
     });
+});
+Route::get('home', function () {
+
+    return view("home");
 });
