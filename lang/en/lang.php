@@ -315,6 +315,7 @@ return [
 
 
     "Record_List" => "Record List",
+    "Records" => "Records",
     "Add_Record" => "Add Record",
     "Client_From" => "Client From",
     "Client_Name" => "Client Name",
