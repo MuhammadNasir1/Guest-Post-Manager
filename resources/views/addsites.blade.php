@@ -99,7 +99,7 @@
                 </button>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-6 mx-6 my-6">
+            <div class="grid md:grid-cols-3 gap-6 mx-6 my-4">
                 <div>
                     <label class="text-[14px] font-normal" for="website_url">@lang('lang.Website_URL')</label>
                     <input type="text" required
@@ -123,7 +123,7 @@
 
                 </div>
             </div>
-            <div class="grid md:grid-cols-3 gap-6 mx-6 my-6">
+            <div class="grid md:grid-cols-3 gap-6 mx-6 my-4">
                 <div>
                     <label class="text-[14px] font-normal" for="ahrref_traffic">@lang('lang.Ahref_Traffic')</label>
                     <input type="text"
@@ -140,14 +140,14 @@
                 </div>
                 <div>
                     <label class="text-[14px] font-normal" for="guest_post_price">@lang('lang.Guest_Post_Price')</label>
-                    <input type="number" min="1"
+                    <input type="text" min="1"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="guest_post_price" id="guest_post_price" placeholder=" @lang('lang.Guest_Post_Price')"
                         value="{{ $site->guest_post_price ?? '' }}">
 
                 </div>
             </div>
-            <div class="grid md:grid-cols-3 gap-6 mx-6 my-6">
+            <div class="grid md:grid-cols-3 gap-6 mx-6 my-4">
                 <div>
                     <label class="text-[14px] font-normal" for="link_insertion_price">@lang('lang.Link_Insertion_Price')</label>
                     <input type="number" min="1"
@@ -180,15 +180,42 @@
 
                 </div>
             </div>
-
-            <div class="grid md:grid-cols-2 gap-6 mx-6 my-6">
+            <div class="grid md:grid-cols-3 gap-6 mx-6 my-4">
 
                 <div>
-                    <label class="text-[14px] font-normal" for="admin_gmail">@lang('lang.Admin_Gmail')</label>
+                    <label class="text-[14px] font-normal" for="Dr">@lang('lang.DR')</label>
                     <input type="text"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="admin_gmail" id="admin_gmail" placeholder=" @lang('lang.Admin_Gmail')"
-                        value="{{ $site->admin_gmail ?? '' }}">
+                        name="dr" id="Dr" placeholder=" @lang('lang.DR')"
+                        value="{{ $site->id ?? '' }}">
+                </div>
+
+
+                <div>
+                    <label class="text-[14px] font-normal" for="DA">@lang('lang.DA')</label>
+                    <input type="text"
+                        class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                        name="da" id="DA" placeholder=" @lang('lang.DA')"
+                        value="{{ $site->site_done_from ?? '' }}">
+
+                </div>
+                <div>
+                    <label class="text-[14px] font-normal" for="Casino">@lang('lang.Casino')</label>
+                    <select name="casino" id="Casino">
+                        <option disabled>@lang('lang.Select_Casino')</option>
+                        <option value="yes">@lang('lang.Yes')</option>
+                        <option value="no">@lang('lang.No')</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mx-6 my-4">
+                <div>
+                    <label class="text-[14px] font-normal" for="category">@lang('lang.Website_Category')</label>
+                    <input type="text"
+                        class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                        name="category" id="category" placeholder=" @lang('lang.Category_Here')"
+                        value="{{ $site->id ?? '' }}">
                 </div>
 
 
@@ -200,9 +227,22 @@
                         value="{{ $site->site_done_from ?? '' }}">
 
                 </div>
+                <div>
+                    <label class="text-[14px] font-normal" for="admin_gmail">@lang('lang.Admin_Gmail')</label>
+                    <input type="text"
+                        class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                        name="admin_gmail" id="admin_gmail" placeholder=" @lang('lang.Admin_Gmail')"
+                        value="{{ $site->admin_gmail ?? '' }}">
+                </div>
             </div>
+            <div class=" mx-6 my-4">
 
-
+                <div>
+                    <label class="text-[14px] font-normal" for="admin_gmail">@lang('lang.Guidelines')</label>
+                    <textarea name="guideline" class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[140px] text-[14px]"
+                        placeholder="@lang('lang.Guidelines_Here')"></textarea>
+                </div>
+            </div>
 
             <div class="flex justify-end ">
                 <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold "

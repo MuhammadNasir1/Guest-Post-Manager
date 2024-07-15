@@ -22,6 +22,11 @@ class SiteController extends Controller
                 "contact_no" => "required",
                 "admin_gmail" => "required",
                 "site_done_form" => "required",
+                "dr" => "required",
+                "da" => "required",
+                "casino" => "required",
+                "category" => "required",
+                "guideline" => "required",
             ]);
 
             $site = new Site;
@@ -37,6 +42,12 @@ class SiteController extends Controller
             $site->contact_no = $validatedData['contact_no'];
             $site->admin_gmail = $validatedData['admin_gmail'];
             $site->site_done_from = $validatedData['site_done_form'];
+            $site->dr = $validatedData['dr'];
+            $site->da = $validatedData['da'];
+            $site->casino = $validatedData['casino'];
+            $site->category = $validatedData['category'];
+            $site->guideline = $validatedData['guideline'];
+
             $site->save();
             return redirect("../addSite");
         } catch (\Exception $error) {

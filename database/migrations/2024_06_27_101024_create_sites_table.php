@@ -25,6 +25,11 @@ return new class extends Migration
             $table->string('contact_no');
             $table->string('admin_gmail');
             $table->string('site_done_from');
+            $table->string('dr');
+            $table->string('da');
+            $table->string('casino');
+            $table->string('category');
+            $table->text('guideline');
             $table->timestamps();
         });
     }
