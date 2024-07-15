@@ -107,6 +107,7 @@ class authController extends Controller
                 'email' => $validatedData['email'],
                 'role' =>  $validatedData['role'],
                 'password' => Hash::make($validatedData['password']),
+                'verification' => "approved",
             ]);
 
             if ($request->hasFile('upload_image')) {
