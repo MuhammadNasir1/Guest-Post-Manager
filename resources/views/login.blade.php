@@ -23,7 +23,7 @@
             <form id="login_data" method="post" class="flex flex-col gap-4 mt-5">
                 @csrf
                 <div class="relative mt-16 border-b-2 border-black">
-                    <label for="email" class="text-sm text-gray">Email</label>
+                    <label for="email" class="text-sm text-black">Email</label>
                     <input
                         class="p-2 pl-6 relative focus:outline-none focus:border-none focus:border-transparent outline-none border-none w-full text-sm"
                         type="email" name="email" placeholder="Enter your Email Address" id="email">
@@ -31,7 +31,7 @@
                         alt="email">
                 </div>
                 <div class="relative border-b-2 border-black">
-                    <label for="Password" class="text-sm text-gray">Password</label>
+                    <label for="Password" class="text-sm text-black">Password</label>
                     <input
                         class="passinput p-2 pl-6  focus:outline-none focus:border-transparent outline-none border-none w-full  text-sm"
                         type="password" name="password" placeholder="Enter your Password" id="Password">
