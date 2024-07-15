@@ -135,6 +135,6 @@ Route::controller(RecordController::class)->group(function () {
     Route::post('/addRecord', 'addRecord')->name('addRecord');
     Route::get('/customer', 'view')->name('records');
     Route::get('/delRecord/{id}', 'deleteRecord')->name("getForUpdateRecord");
-    Route::get('/update-record/{id}', 'getForUpdate')->name("getForUpdateRecord");
-    Route::post('/updateRecord/{id}', 'update')->name('update');
+    Route::get('/update-customer/{id}', 'getForUpdate');
+    Route::post('/updateRecord/{id}', 'update');
 });

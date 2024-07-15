@@ -40,7 +40,7 @@
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
 
-                                        <a href="{{ route('updateSite', $data->id) }}">
+                                        <a href="../update-customer/{{ $data->id }}">
                                             <button class=" updateBtn cursor-pointer  w-[42px]"
                                                 updateId="{{ $data->id }}"><img width="38px"
                                                     src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
@@ -70,13 +70,13 @@
 
 {{-- ============ add  customer modal  =========== --}}
 <div id="addcustomermodal" data-modal-backdrop="static"
-    class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-5\0 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
+    class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
     <div class="fixed inset-0 transition-opacity">
         <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
     </div>
     <div class="relative p-4 w-full   max-w-6xl max-h-full ">
-        @if (isset($user))
-            <form action="{{ route('update', $user->id) }}" method="post" enctype="multipart/form-data">
+        @if (isset($updateData))
+            <form action="../updateRecord/{{ $updateData->id }}" method="post" enctype="multipart/form-data">
             @else
                 <form action="{{ route('addRecord') }}" method="post" enctype="multipart/form-data">
         @endif
@@ -102,19 +102,22 @@
                     <label class="text-[14px] font-normal" for="client_from">@lang('lang.Client_From')</label>
                     <input type="text" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="client_from" id="client_from" placeholder=" @lang('lang.Client_From')">
+                        name="client_from" id="client_from" placeholder=" @lang('lang.Client_From')"
+                        value="{{ $updateData->client_from ?? '' }}">
                 </div>
                 <div>
                     <label class="text-[14px] font-normal" for="client_name">@lang('lang.Client_Name')</label>
                     <input type="text" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="client_name" id="client_name" placeholder=" @lang('lang.Client_Name')">
+                        name="client_name" id="client_name" placeholder=" @lang('lang.Client_Name')"
+                        value="{{ $updateData->client_name ?? '' }}">
                 </div>
                 <div>
                     <label class="text-[14px] font-normal" for="client_company">@lang('lang.Client_Company')</label>
                     <input type="text" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="client_company" id="client_company" placeholder=" @lang('lang.Client_Company')">
+                        name="client_company" id="client_company" placeholder=" @lang('lang.Client_Company')"
+                        value="{{ $updateData->client_company ?? '' }}">
                 </div>
 
             </div>
@@ -124,19 +127,22 @@
                     <label class="text-[14px] font-normal" for="client_email">@lang('lang.Client_Email')</label>
                     <input type="email" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="client_email" id="client_email" placeholder=" @lang('lang.Client_Email')">
+                        name="client_email" id="client_email" placeholder=" @lang('lang.Client_Email')"
+                        value="{{ $updateData->client_email ?? '' }}">
                 </div>
                 <div>
                     <label class="text-[14px] font-normal" for="client_profile">@lang('lang.Client_Profile')</label>
                     <input type="text" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="client_profile" id="client_profile" placeholder=" @lang('lang.Client_Profile')">
+                        name="client_profile" id="client_profile" placeholder=" @lang('lang.Client_Profile')"
+                        value="{{ $updateData->client_profile ?? '' }}">
                 </div>
                 <div>
                     <label class="text-[14px] font-normal" for="client_contact">@lang('lang.Client_Contact')</label>
                     <input type="number" min="0" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="client_contact" id="client_contact" placeholder=" @lang('lang.Client_Contact')">
+                        name="client_contact" id="client_contact" placeholder=" @lang('lang.Client_Contact')"
+                        value="{{ $updateData->client_contact ?? '' }}">
                 </div>
 
 
@@ -161,7 +167,8 @@
                         </svg>
                     </div>
                     <div id="text">
-                        @lang('lang.Save')
+                        @lang(isset($updateData) ? 'lang.Update' : 'lang.Save')
+
                     </div>
 
                 </button>
@@ -177,6 +184,14 @@
 
 
 @include('layouts.footer')
+@if (isset($updateData))
+    <script>
+        $(document).ready(function() {
+            $('#addcustomermodal').removeClass("hidden");
+
+        });
+    </script>
+@endif
 <script>
     $(document).ready(function() {
         $('.delButton').click(function() {

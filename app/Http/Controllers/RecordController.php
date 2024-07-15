@@ -51,7 +51,8 @@ class RecordController extends Controller
     public function getForUpdate(string $id)
     {
         $updateData = Record::find($id);
-        return view("records", compact('updateData'));
+        $data = Record::all();
+        return view("records", compact('updateData', 'data'));
     }
 
     public function update(Request $request, string $id)
