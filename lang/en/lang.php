@@ -311,4 +311,17 @@ return [
     "Select_Casino" => "Select Casino",
     "Guidelines" => "Guidelines",
     "Guidelines_Here" => "Guidelines Here",
+
+
+
+    "Record_List" => "Record List",
+    "Records" => "Records",
+    "Add_Record" => "Add Record",
+    "Client_From" => "Client From",
+    "Client_Name" => "Client Name",
+    "Client_Company" => "Client Company",
+    "Client_Email" => "Client Email",
+    "Client_Profile" => "Client Profile",
+    "Client_Conatact" => "Client Contact",
+
 ];
