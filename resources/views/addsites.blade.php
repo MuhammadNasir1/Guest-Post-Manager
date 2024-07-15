@@ -187,7 +187,7 @@
                     <input type="text"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="dr" id="Dr" placeholder=" @lang('lang.DR')"
-                        value="{{ $site->id ?? '' }}">
+                        value="{{ $site->dr ?? '' }}">
                 </div>
 
 
@@ -196,15 +196,17 @@
                     <input type="text"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="da" id="DA" placeholder=" @lang('lang.DA')"
-                        value="{{ $site->site_done_from ?? '' }}">
+                        value="{{ $site->da ?? '' }}">
 
                 </div>
                 <div>
                     <label class="text-[14px] font-normal" for="Casino">@lang('lang.Casino')</label>
                     <select name="casino" id="Casino">
                         <option disabled>@lang('lang.Select_Casino')</option>
-                        <option value="yes">@lang('lang.Yes')</option>
-                        <option value="no">@lang('lang.No')</option>
+                        <option value="yes" {{ isset($site->casino) && $site->casino == 'yes' ? 'selected' : '' }}>
+                            @lang('lang.Yes')</option>
+                        <option value="no" {{ isset($site->casino) && $site->casino == 'no' ? 'selected' : '' }}>
+                            @lang('lang.No')</option>
                     </select>
                 </div>
             </div>
@@ -215,7 +217,7 @@
                     <input type="text"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="category" id="category" placeholder=" @lang('lang.Category_Here')"
-                        value="{{ $site->id ?? '' }}">
+                        value="{{ $site->category ?? '' }}">
                 </div>
 
 
@@ -240,7 +242,8 @@
                 <div>
                     <label class="text-[14px] font-normal" for="admin_gmail">@lang('lang.Guidelines')</label>
                     <textarea name="guideline" class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[140px] text-[14px]"
-                        placeholder="@lang('lang.Guidelines_Here')"></textarea>
+                        placeholder="@lang('lang.Guidelines_Here')" maxlength="500">{{ $site->guideline ?? '' }}</textarea>
+                    <p class="text-sm font-bold text-neutral-600 ml-2">500 letters Only</p>
                 </div>
             </div>
 
