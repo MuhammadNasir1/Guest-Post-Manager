@@ -304,4 +304,11 @@ return [
     "Customer_Copy" => "Customer Copy",
     "Vendor_Date_Time" => "Vendor Date/Time",
     "Thank_You_So_Much_For_Choosing" => "Thank You So Much For Choosing",
+    "DR" => "DR",
+    "DA" => "DA",
+    "Casino" => "Casino",
+    "Website_Category" => "Website Category",
+    "Select_Casino" => "Select Casino",
+    "Guidelines" => "Guidelines",
+    "Guidelines_Here" => "Guidelines Here",
 ];
