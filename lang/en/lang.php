@@ -322,6 +322,6 @@ return [
     "Client_Company" => "Client Company",
     "Client_Email" => "Client Email",
     "Client_Profile" => "Client Profile",
-    "Client_Conatact" => "Client Contact",
+    "Client_Contact" => "Client Contact",
 
 ];

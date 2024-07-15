@@ -29,7 +29,7 @@ class RecordController extends Controller
             $record->client_contact = $validateData['client_contact'];
             $record->save();
 
-            return redirect('../records');
+            return redirect('../customer');
         } catch (\Exception $error) {
             return response()->json(['success' => false, 'message' => $error->getMessage()]);
         }
@@ -76,7 +76,7 @@ class RecordController extends Controller
             $record->client_contact = $validateData['client_contact'];
             $record->update();
 
-            return redirect('../records');
+            return redirect('../customer');
         } catch (\Exception $error) {
             return response()->json(['success' => false, 'message' => $error->getMessage()]);
         }

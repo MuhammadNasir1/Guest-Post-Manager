@@ -5,12 +5,12 @@
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
         <div>
             <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
-                <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Record_List')</h3>
+                <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Customer_List')</h3>
                 <div>
 
                     <button data-modal-target="addcustomermodal" data-modal-toggle="addcustomermodal"
                         class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
-                        @lang('lang.Add_Record')</button>
+                        @lang('lang.Add_Customer')</button>
                 </div>
             </div>
             <div class="overflow-x-auto">
@@ -84,7 +84,7 @@
         <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
             <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
                 <h3 class="text-xl font-semibold text-white ">
-                    @lang('lang.Add_Record')
+                    @lang('lang.Add_Customer')
                 </h3>
                 <button type="button"
                     class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
@@ -133,10 +133,10 @@
                         name="client_profile" id="client_profile" placeholder=" @lang('lang.Client_Profile')">
                 </div>
                 <div>
-                    <label class="text-[14px] font-normal" for="client_contact">@lang('lang.Client_Conatact')</label>
+                    <label class="text-[14px] font-normal" for="client_contact">@lang('lang.Client_Contact')</label>
                     <input type="number" min="0" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="client_contact" id="client_contact" placeholder=" @lang('lang.Client_Conatact')">
+                        name="client_contact" id="client_contact" placeholder=" @lang('lang.Client_Contact')">
                 </div>
 
 
