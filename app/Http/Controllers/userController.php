@@ -166,4 +166,43 @@ class userController extends Controller
         $user = User::find($id);
         return view("users", compact("user", "users"));
     }
+
+    public function updateUserCar(Request $request, $id)
+    {
+
+        try {
+
+            $validatedData = $request->validate([
+                'name' => 'required|string',
+                'role' => 'nullable',
+            ]);
+
+            if ($request->has('password'))
+
+                $user = User::find($id);
+            $user->name = $validatedData['name'];
+            $user->role = $validatedData['role'];
+
+
+            if ($request->has('email')) {
+                $user->email = $request['email'];
+            }
+            if ($request->has('password')) {
+                $user->password = Hash::make($request['password']);
+            }
+
+
+            if ($request->hasFile('upload_image')) {
+                $image = $request->file('upload_image');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->storeAs('public/user_images', $imageName); // Adjust storage path as needed
+                $user->user_image = 'storage/user_images/' . $imageName;
+            }
+            $user->update();
+            return redirect('../users');
+        } catch (\Exception $e) {
+
+            return redirect('../users');
+        }
+    }
 }

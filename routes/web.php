@@ -40,15 +40,10 @@ Route::middleware('custom')->group(function () {
         return view('help');
     });
 
-    // Route::get('/users', function () {
-    //     return view('users');
-    // });
     Route::get('/users', [userController::class, 'users']);
     Route::get('/deleteUser/{id}', [userController::class, 'deleteUser'])->name("deleteUser");
     Route::get('/update-user/{id}', [userController::class, 'updateUser'])->name("updateUser");
-    // Route::get('/addSite', function () {
-    //     return view('addsites');
-    // });
+    Route::post('/updateUserCar/{id}', [userController::class, 'updateUserCar']);
 
     Route::get('email', function () {
 

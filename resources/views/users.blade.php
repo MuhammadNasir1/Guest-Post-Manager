@@ -100,7 +100,7 @@
     </div>
     <div class="relative p-4 w-full   max-w-6xl max-h-full ">
         @if (isset($user))
-            <form action="{{ route('update', $user->id) }}" method="post" enctype="multipart/form-data">
+            <form action="../updateUserCar/{{ $user->id }}" method="post" enctype="multipart/form-data">
             @else
                 <form id="customerData" method="post" enctype="multipart/form-data">
         @endif
@@ -163,11 +163,12 @@
                     <label class="text-[14px] font-normal" for="password">@lang('lang.Password')</label>
                     <input type="password"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="password" id="password" placeholder=" @lang('lang.Password_Here')">
+                        name="password" id="password" placeholder=" @lang('lang.Password_Here')"
+                        {{ isset($user->id) ? '' : 'required' }}>
                 </div>
                 <div>
                     <label class="text-[14px] font-normal" for="confirm_password">@lang('lang.Confirm_Password')</label>
-                    <input type="password" required
+                    <input type="password" {{ isset($user->id) ? '' : 'required' }}
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="confirm_password" id="confirm_password" placeholder=" @lang('lang.Confirm_Password_Here')">
                 </div>
