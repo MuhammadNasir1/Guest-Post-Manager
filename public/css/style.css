@@ -95,7 +95,7 @@ table.dataTable.no-footer {
 /* select 2  styling */
 
 .select2-results__option[aria-selected="true"] {
-    background-color: #027c56 !important;
+    background-color: #13242c !important;
 }
 
 .select2-container--default
@@ -113,7 +113,7 @@ table.dataTable.no-footer {
 }
 
 .select2-container--default .select2-selection--single:focus {
-    border: 2px solid #027c56 !important;
+    border: 2px solid #13242c !important;
 }
 
 .select2-container--default
