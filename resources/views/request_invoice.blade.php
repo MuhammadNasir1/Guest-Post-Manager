@@ -345,15 +345,15 @@
                             <option value="processing">@lang('lang.Processing')</option>
                         </select>
                     </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="Paypal_Id">@lang('lang.Paypal_Id')</label>
+                    <div id="hideInput">
+                        <label class="text-[14px] font-normal" for="paypal_no">@lang('lang.paypal_No')</label>
                         <input type="number" min="0"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary h-[40px] text-[14px]"
-                            name="paypal_id" id="Paypal_Id" placeholder=" @lang('lang.Paypal_Id')">
+                            name="paypal_no" id="paypal_no" placeholder=" @lang('lang.paypal_No')">
                     </div>
                     <div id="manageAmount" class="flex gap-3">
                         {{-- <div>
-                            <label class="text-[14px] font-normal" for="total_amount">@lang('lang.Total_Amount')</label> --}}
+                            <label clasids="text-[14px] font-normal" for="total_amount">@lang('lang.Total_Amount')</label> --}}
                         <input type="hidden" min="0"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary h-[40px] text-[14px]"
                             name="total_amount" id="total_amount" placeholder=" @lang('lang.Total_Amount')">
@@ -439,12 +439,17 @@
                             type: "GET",
                             url: transactionUrl,
                             success: function(response) {
-                                console.log();
+                                console.log(response.invouceAmout);
 
                                 $('#verification').val("approved").trigger(
                                     'change');
-                                $('#total_amount').val(response.invouceAmout)
+                                $('#total_amount').val(response.invouceAmout
+                                    .total_amount)
                                 $('#payable_amount').val(response.data.credit);
+                                $('#paypal_no').val(response.invouceAmout
+                                    .paypal_no);
+                                $('#Received_Amount').val(response.invouceAmout
+                                    .received_Amount);
                                 $('#note').val(response.data
                                     .transaction_remarks)
                                 var updateUrl = "../updateTransStatus/" +
@@ -465,15 +470,19 @@
 
     let verification = document.getElementById("verification");
     let manageAmount = document.getElementById("manageAmount");
+    let Input = document.getElementById("hideInput");
 
 
     manageAmount.style.display = "none";
+    Input.style.display = "none";
 
     function show() {
         if (verification.value === 'approved') {
             manageAmount.style.display = "flex";
+            Input.style.display = "block";
         } else {
             manageAmount.style.display = "none";
+            Input.style.display = "none";
         }
     }
 

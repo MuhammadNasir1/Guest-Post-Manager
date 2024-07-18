@@ -18,6 +18,8 @@ class TransactionController extends Controller
                 "total_amount" => "nullable",
                 "payable_amount" => "nullable",
                 "note" => "nullable",
+                "paypal_no" => "nullable",
+                "received_amount" => "nullable",
             ]);
 
 
@@ -39,6 +41,8 @@ class TransactionController extends Controller
             $updateStatus->transaction_id =  $transaction->id;
             $updateStatus->total_amount =  $validatedData['total_amount'];
             $updateStatus->payable_amount =  $validatedData['payable_amount'];
+            $updateStatus->paypal_no =  $validatedData['paypal_no'];
+            $updateStatus->received_amount =  $validatedData['received_amount'];
             $updateStatus->update();
             return redirect('requestInvoice');
         } catch (\Exception $error) {

@@ -82,7 +82,10 @@ class InvoiceController extends Controller
     {
         try {
             $InvoiceTrans = Transaction::where('id', $id)->first();
-            $invouceAmout = Invoice::where('transaction_id', $id)->pluck('total_amount')->first();
+            $invouceAmout =
+                Invoice::where('transaction_id', $id)
+                ->select('total_amount', 'paypal_no', 'received_Amount')
+                ->first();
             return response()->json(["success" => true,  "data" => $InvoiceTrans, "invouceAmout" => $invouceAmout], 200);
         } catch (\Exception $e) {
             return response()->json(["success" =>  false, "message" => $e->getMessage()], 500);
@@ -99,6 +102,8 @@ class InvoiceController extends Controller
                 "total_amount" => "nullable",
                 "payable_amount" => "nullable",
                 "note" => "nullable",
+                "paypal_no" => "nullable",
+                "received_amount" => "nullable",
             ]);
 
 
@@ -120,6 +125,8 @@ class InvoiceController extends Controller
             $updateStatus->transaction_id =  $transaction->id;
             $updateStatus->total_amount =  $validatedData['total_amount'];
             $updateStatus->payable_amount =  $validatedData['payable_amount'];
+            $updateStatus->paypal_no =  $validatedData['paypal_no'];
+            $updateStatus->received_amount =  $validatedData['received_amount'];
             $updateStatus->update();
             return redirect('requestInvoice');
             // return response()->json(["success" => true,  "message" => "data get successfully"], 200);

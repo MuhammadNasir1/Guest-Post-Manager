@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("transaction_id")->nullable();
             $table->string("invoice_no");
+            $table->string("paypal_no")->nullable();
             $table->string("user_id");
             $table->string("amount");
             $table->string("currency");
@@ -26,6 +27,7 @@ return new class extends Migration
             $table->string("cust_phone_no");
             $table->string("total_amount")->nullable();
             $table->string("payable_amount")->nullable();
+            $table->string("received_amount")->nullable();
             $table->text("description")->nullable();
             $table->dateTime("datetime")->useCurrent();
         });

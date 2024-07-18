@@ -324,7 +324,7 @@ return [
     "Client_Profile" => "Client Profile",
     "Client_Contact" => "Client Contact",
     "Link" => "Link",
-    "Paypal_Id" => "Paypal Id",
+    "paypal_No" => "paypal No",
     "Received_Amount" => "Received Amount",
 
 ];
