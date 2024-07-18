@@ -323,5 +323,8 @@ return [
     "Client_Email" => "Client Email",
     "Client_Profile" => "Client Profile",
     "Client_Contact" => "Client Contact",
+    "Link" => "Link",
+    "Paypal_Id" => "Paypal Id",
+    "Received_Amount" => "Received Amount",
 
 ];

@@ -8,11 +8,11 @@ body {
 }
 
 ::selection {
-    background-color: #027c56 !important;
+    background-color: #13242c !important;
     color: white;
 }
 .accent-color {
-    accent-color: #027c56;
+    accent-color: #13242c;
 }
 
 input:focus,

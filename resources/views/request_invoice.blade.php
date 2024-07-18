@@ -44,7 +44,7 @@
                                 <td>{{ $data->currency }}</td>
                                 <td>{{ $data->payment_method }}</td>
                                 <td><a target="_blank" href="{{ $data->website }}"
-                                        class="text-blue-600">{{ $data->website }}</a></td>
+                                        class="text-blue-600">@lang('lang.Link')</a></td>
                                 <td>
                                     @php
                                         $bgColorClass = '';
@@ -78,7 +78,7 @@
                                         <button id="dropdownDefaultButton{{ $loop->iteration }}"
                                             data-dropdown-toggle="dropdown{{ $loop->iteration }}"
                                             class="text-white bg-secondary font-bold rounded-lg px-5 py-2.5 text-center inline-flex items-center "
-                                            type="button">@lang('lang.Select_Action') <svg class="w-2.5 h-2.5 ms-3"
+                                            type="button">@lang('lang.Action') <svg class="w-2.5 h-2.5 ms-3"
                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                                 viewBox="0 0 10 6">
                                                 <path stroke="currentColor" stroke-linecap="round"
@@ -345,13 +345,24 @@
                             <option value="processing">@lang('lang.Processing')</option>
                         </select>
                     </div>
-
+                    <div>
+                        <label class="text-[14px] font-normal" for="Paypal_Id">@lang('lang.Paypal_Id')</label>
+                        <input type="number" min="0"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary h-[40px] text-[14px]"
+                            name="paypal_id" id="Paypal_Id" placeholder=" @lang('lang.Paypal_Id')">
+                    </div>
                     <div id="manageAmount" class="flex gap-3">
+                        {{-- <div>
+                            <label class="text-[14px] font-normal" for="total_amount">@lang('lang.Total_Amount')</label> --}}
+                        <input type="hidden" min="0"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary h-[40px] text-[14px]"
+                            name="total_amount" id="total_amount" placeholder=" @lang('lang.Total_Amount')">
+                        {{-- </div> --}}
                         <div>
-                            <label class="text-[14px] font-normal" for="total_amount">@lang('lang.Total_Amount')</label>
+                            <label class="text-[14px] font-normal" for="Received_Amount">@lang('lang.Received_Amount')</label>
                             <input type="number" min="0"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary h-[40px] text-[14px]"
-                                name="total_amount" id="total_amount" placeholder=" @lang('lang.Total_Amount')">
+                                name="received_amount" id="Received_Amount" placeholder=" @lang('lang.Received_Amount')">
                         </div>
                         <div>
                             <label class="text-[14px] font-normal" for="payable_amount">@lang('lang.Payable_Amount')</label>
