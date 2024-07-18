@@ -351,13 +351,13 @@
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary h-[40px] text-[14px]"
                             name="paypal_no" id="paypal_no" placeholder=" @lang('lang.paypal_No')">
                     </div>
-                    <div id="manageAmount" class="flex gap-3">
-                        {{-- <div>
-                            <label clasids="text-[14px] font-normal" for="total_amount">@lang('lang.Total_Amount')</label> --}}
-                        <input type="hidden" min="0"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary h-[40px] text-[14px]"
-                            name="total_amount" id="total_amount" placeholder=" @lang('lang.Total_Amount')">
-                        {{-- </div> --}}
+                    <div id="manageAmount" class="flex gap-3 col-span-2">
+                        <div>
+                            <label clasids="text-[14px] font-normal" for="total_amount">@lang('lang.Total_Amount')</label>
+                            <input type="number" min="0"
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary h-[40px] text-[14px]"
+                                name="total_amount" id="total_amount" placeholder=" @lang('lang.Total_Amount')">
+                        </div>
                         <div>
                             <label class="text-[14px] font-normal" for="Received_Amount">@lang('lang.Received_Amount')</label>
                             <input type="number" min="0"
@@ -429,7 +429,6 @@
             var transId = $(this).attr('transactionId');
             var transactionUrl = "../getInvoiceTransData/" + transId;
             var url = "../getInvoiceStatus/" + invoiceId;
-            console.log(url);
             $.ajax({
                 type: "GET",
                 url: url,
@@ -439,7 +438,6 @@
                             type: "GET",
                             url: transactionUrl,
                             success: function(response) {
-                                console.log(response.invouceAmout);
 
                                 $('#verification').val("approved").trigger(
                                     'change');
