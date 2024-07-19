@@ -20,6 +20,7 @@
                             <th class="whitespace-nowrap">@lang('lang.STN')</th>
                             <th class="whitespace-nowrap">@lang('lang.Invoice_No')</th>
                             <th class="whitespace-nowrap">@lang('lang.Amount')</th>
+                            <th class="whitespace-nowrap">@lang('lang.Received/Payable')</th>
                             <th class="whitespace-nowrap">@lang('lang.Currency')</th>
                             <th class="whitespace-nowrap">@lang('lang.Payment_Method')</th>
                             <th class="whitespace-nowrap">@lang('lang.Website')</th>
@@ -41,6 +42,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $data->invoice_no }}</td>
                                 <td>{{ $data->amount }}</td>
+                                <td>{{ $data->payable_amount }} / {{ $data->received_amount }}</td>
                                 <td>{{ $data->currency }}</td>
                                 <td>{{ $data->payment_method }}</td>
                                 <td><a target="_blank" href="{{ $data->website }}"
@@ -341,8 +343,8 @@
                             name="status_update" id="verification" required onchange="show()">
                             <option selected disabled>@lang('lang.Change_Status')</option>
                             <option value="pending">@lang('lang.Pending')</option>
-                            <option value="approved">@lang('lang.Approved')</option>
                             <option value="processing">@lang('lang.Processing')</option>
+                            <option value="approved">@lang('lang.Approved')</option>
                         </select>
                     </div>
                     <div id="hideInput">
@@ -478,6 +480,11 @@
         if (verification.value === 'approved') {
             manageAmount.style.display = "flex";
             Input.style.display = "block";
+        } else if (verification.value === "processing") {
+
+            Input.style.display = "block";
+
+
         } else {
             manageAmount.style.display = "none";
             Input.style.display = "none";

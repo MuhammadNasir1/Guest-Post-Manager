@@ -326,5 +326,6 @@ return [
     "Link" => "Link",
     "paypal_No" => "paypal No",
     "Received_Amount" => "Received Amount",
+    "Received/Payable" => "Received / Payable",
 
 ];
