@@ -435,13 +435,13 @@
                 type: "GET",
                 url: url,
                 success: function(response) {
-                    if (response.status == "approved") {
+                    if (response.status == "approved" || response.status == "processing") {
+                        let status = response.status;
                         $.ajax({
                             type: "GET",
                             url: transactionUrl,
                             success: function(response) {
-
-                                $('#verification').val("approved").trigger(
+                                $('#verification').val(status).trigger(
                                     'change');
                                 $('#total_amount').val(response.invouceAmout
                                     .total_amount)
