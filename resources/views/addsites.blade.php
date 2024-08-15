@@ -18,6 +18,7 @@
                     <thead class="py-1 bg-primary text-white">
                         <tr>
                             <th class="whitespace-nowrap text-sm">@lang('lang.STN')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Add_From')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.URL')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Traffic')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Semrush_Href') <br>@lang('lang.Traffic')</th>
@@ -31,7 +32,7 @@
                             <th class="whitespace-nowrap text-sm">@lang('lang.Contact_No')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Done_From')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Admin_Gmail')</th>
-                            <th class="flex  justify-center">@lang('lang.Action')</th>
+                            <th class="flex  justify-center text-sm">@lang('lang.Action')</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,6 +40,8 @@
                         @foreach ($data as $data)
                             <tr>
                                 <td class="text-sm">{{ $loop->iteration }}</td>
+                                <td class="text-sm">{{ \App\Models\User::find($data->user_id)->name }}</td>
+
                                 <td class="text-sm"><a href="{{ $data->web_url }}" target="_blank"
                                         class="text-blue-500">@lang('lang.Link')</a></td>
                                 <td class="text-sm">{{ $data->traffic }}</td>

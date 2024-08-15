@@ -17,16 +17,16 @@
                 <table id="datatable">
                     <thead class="py-1 bg-primary text-white">
                         <tr>
-                            <th class="whitespace-nowrap">@lang('lang.STN')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Invoice_No')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Amount')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Received/Payable')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Currency')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Payment_Method')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Website')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Status')</th>
-                            <th class="whitespace-nowrap">@lang('lang.User')</th>
-                            <th class="flex  justify-center">@lang('lang.Action')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.STN')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Invoice_No')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Amount')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Received/Payable')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Currency')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Payment_Method')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Website')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Status')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.User')</th>
+                            <th class="flex  justify-center text-sm">@lang('lang.Action')</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,13 +39,13 @@
                                 <input type="hidden" value="{{ $data->user_id }}" id="user_id_{{ $loop->iteration }}">
                                 <input type="hidden" value="{{ $data->transaction_id }}"
                                     id="transaction_id_{{ $loop->iteration }}">
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $data->invoice_no }}</td>
-                                <td>{{ $data->amount }}</td>
-                                <td>{{ $data->payable_amount }} / {{ $data->received_amount }}</td>
-                                <td>{{ $data->currency }}</td>
-                                <td>{{ $data->payment_method }}</td>
-                                <td><a target="_blank" href="{{ $data->website }}"
+                                <td class="text-sm">{{ $loop->iteration }}</td>
+                                <td class="text-sm">{{ $data->invoice_no }}</td>
+                                <td class="text-sm">{{ $data->amount }}</td>
+                                <td class="text-sm">{{ $data->payable_amount }} / {{ $data->received_amount }}</td>
+                                <td class="text-sm">{{ $data->currency }}</td>
+                                <td class="text-sm">{{ $data->payment_method }}</td>
+                                <td class="text-sm"><a target="_blank" href="{{ $data->website }}"
                                         class="text-blue-600">@lang('lang.Link')</a></td>
                                 <td>
                                     @php
@@ -68,7 +68,7 @@
                                         }
                                     @endphp
                                     <button
-                                        class="p-1 rounded-md  capitalize  {{ $bgColorClass }} text-white font-bold">
+                                        class="p-1 rounded-md  capitalize  {{ $bgColorClass }} text-white font-bold text-md">
                                         {{ $data->status }}</button>
                                 </td>
                                 <td>{{ $data->user->name }}</td>
@@ -187,8 +187,8 @@
                 <button type="button"
                     class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
                     data-modal-hide="addInvoiceModal">
-                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 14 14">
+                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                     </svg>

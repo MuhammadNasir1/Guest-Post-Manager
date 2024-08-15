@@ -332,5 +332,7 @@ return [
     "Semrush_Href" => "Semrush/Href",
     "Insertion" => "Insertion",
     "Done_From" => "Done From",
+    "paypal_Invoice_Id" => "paypal Invoice Id",
+    "Add_From" => "Add From",
 
 ];
