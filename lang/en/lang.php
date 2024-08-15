@@ -311,9 +311,6 @@ return [
     "Select_Casino" => "Select Casino",
     "Guidelines" => "Guidelines",
     "Guidelines_Here" => "Guidelines Here",
-
-
-
     "Record_List" => "Record List",
     "Records" => "Records",
     "Add_Record" => "Add Record",
@@ -327,5 +324,13 @@ return [
     "paypal_No" => "paypal No",
     "Received_Amount" => "Received Amount",
     "Received/Payable" => "Received / Payable",
+
+
+    "URL" => "URL",
+    "Category" => "Category",
+    "Insertion_Price" => "Insertion Price",
+    "Semrush_Href" => "Semrush/Href",
+    "Insertion" => "Insertion",
+    "Done_From" => "Done From",
 
 ];

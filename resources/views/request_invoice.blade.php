@@ -196,7 +196,7 @@
             </div>
 
 
-            <div class="grid md:grid-cols-3 gap-6 mx-6 my-6">
+            <div class="flex gap-6 mx-6 my-6 ">
                 <div>
                     <label class="text-[14px] font-normal" for="invoice_no">@lang('lang.Invoice_No')</label>
                     <input type="number" min="0" required
@@ -222,8 +222,6 @@
 
                     </datalist>
                 </div>
-            </div>
-            <div class="grid md:grid-cols-3 gap-6 mx-6 my-6">
                 <div>
                     <label class="text-[14px] font-normal" for="payment_method">@lang('lang.Payment_Method')</label>
                     <input list="currencies" name="payment_method" id="payment_method"
@@ -240,7 +238,6 @@
                         value="{{ $Invoicedata->website ?? '' }}">
 
                 </div>
-
             </div>
             <div class="grid md:grid-cols-3 gap-6 mx-6 my-6">
                 <div>
@@ -348,7 +345,7 @@
                         </select>
                     </div>
                     <div id="hideInput">
-                        <label class="text-[14px] font-normal" for="paypal_no">@lang('lang.paypal_No')</label>
+                        <label class="text-[14px] font-normal" for="paypal_no">@lang('lang.paypal_Invoice_Id')</label>
                         <input type="number" min="0"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary h-[40px] text-[14px]"
                             name="paypal_no" id="paypal_no" placeholder=" @lang('lang.paypal_No')">

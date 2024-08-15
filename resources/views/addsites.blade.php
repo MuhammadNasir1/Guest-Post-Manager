@@ -17,15 +17,20 @@
                 <table id="datatable">
                     <thead class="py-1 bg-primary text-white">
                         <tr>
-                            <th class="whitespace-nowrap">@lang('lang.STN')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Website_URL')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Traffic')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Semrush_Traffic')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Ahref_Traffic')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Guest_Post_Price')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Link_Insertion_Price')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Exchange')</th>
-                            <th class="whitespace-nowrap">@lang('lang.Contact_No')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.STN')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.URL')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Traffic')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Semrush_Href') <br>@lang('lang.Traffic')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Price')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Insertion') <br> @lang('lang.Price')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Exchange')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.DA')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.DR')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Casino')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Category')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Contact_No')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Done_From')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Admin_Gmail')</th>
                             <th class="flex  justify-center">@lang('lang.Action')</th>
                         </tr>
                     </thead>
@@ -33,22 +38,29 @@
 
                         @foreach ($data as $data)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td><a href="" class="text-blue-500">{{ $data->web_url }}</a></td>
-                                <td>{{ $data->traffic }}</td>
-                                <td>{{ $data->semrush_traffic }}</td>
-                                <td>{{ $data->ahref_traffic }}</td>
-                                <td>{{ $data->guest_post_price }}</td>
-                                <td>{{ $data->link_insertion_price }}</td>
-                                <td>{{ $data->exchange }}</td>
-                                <td>{{ $data->contact_no }}</td>
+                                <td class="text-sm">{{ $loop->iteration }}</td>
+                                <td class="text-sm"><a href="{{ $data->web_url }}" target="_blank"
+                                        class="text-blue-500">@lang('lang.Link')</a></td>
+                                <td class="text-sm">{{ $data->traffic }}</td>
+                                <td class="text-sm">{{ $data->semrush_traffic }} / {{ $data->ahref_traffic }}</td>
+                                <td class="text-sm">{{ $data->guest_post_price }}</td>
+                                <td class="text-sm">{{ $data->link_insertion_price }}</td>
+                                <td class="text-sm">{{ $data->exchange }}</td>
+                                <td class="text-sm">{{ $data->da }}</td>
+                                <td class="text-sm">{{ $data->dr }}</td>
+                                <td class="text-sm">{{ $data->casino }}</td>
+                                <td class="text-sm">{{ $data->category }}</td>
+                                <td class="text-sm">{{ $data->contact_no }}</td>
+                                <td class="text-sm">{{ $data->site_done_from }}</td>
+                                <td class="text-sm">{{ $data->admin_gmail }}</td>
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
 
                                         <a href="{{ route('updateSite', $data->id) }}">
                                             <button class=" updateBtn cursor-pointer  w-[42px]"
                                                 updateId="{{ $data->id }}"><img width="38px"
-                                                    src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
+                                                    src="{{ asset('images/icons/update.svg') }}"
+                                                    alt="update"></button>
                                         </a>
                                         <a href="../delSite/{{ $data->id }}" class="delButton">
                                             <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
