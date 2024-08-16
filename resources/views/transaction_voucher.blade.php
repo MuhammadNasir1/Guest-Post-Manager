@@ -192,10 +192,10 @@
         if (field === 'credit' && creditInput.value) {
             debitInput.disabled = true;
             debitInput.classList.add("bg-gray");
-            debitInput.value = "";
+            debitInput.value = "0";
         } else if (field === 'debit' && debitInput.value) {
             creditInput.disabled = true;
-            creditInput.value = "";
+            creditInput.value = "0";
             creditInput.classList.add("bg-gray")
         } else {
             creditInput.disabled = false;
