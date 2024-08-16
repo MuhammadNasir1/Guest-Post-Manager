@@ -139,11 +139,7 @@
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="M3 15v4m6-6v6m6-4v4m6-6v6M3 11l6-5 6 5 5.5-5.5" />
                             </svg>
-
-
-
-
-                            <span class="flex-1 ms-2.5 whitespace-nowrap"> @lang('lang.Transaction_Voucher')</span>
+                            <span class="flex-1 ms-2.5 whitespace-nowrap"> @lang('lang.Payment_Voucher')</span>
                         </a>
                     </li>
                 @endif

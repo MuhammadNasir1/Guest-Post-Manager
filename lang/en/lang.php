@@ -335,5 +335,7 @@ return [
     "paypal_Invoice_Id" => "paypal Invoice Id",
     "Add_From" => "Add From",
     "Email_Phone" => "Email / Phone",
+    "Date/Time" => "Date / Time",
+    "Payment_Voucher" => "Payment Voucher",
 
 ];

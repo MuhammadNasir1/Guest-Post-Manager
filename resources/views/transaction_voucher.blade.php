@@ -2,7 +2,7 @@
 @include('layouts.nav')
 <div class="lg:mx-4 mt-12">
     <div>
-        <h1 class=" font-semibold   text-2xl ">@lang('lang.Transaction_Voucher')</h1>
+        <h1 class=" font-semibold   text-2xl ">@lang('lang.Payment_Voucher')</h1>
     </div>
 
     <div id="reloadDiv" class="shadow-dark mt-3  rounded-xl pt-8  bg-white">

@@ -136,7 +136,7 @@
                                 <thead>
                                     <tr>
                                         <th class="py-5 border-2 border-gray">@lang('lang.Transaction') #</th>
-                                        <th class="border-2 border-gray">@lang('lang.Date')</th>
+                                        <th class="border-2 border-gray">@lang('lang.Date/Time')</th>
                                         <th class="border-2 border-gray">@lang('lang.Transfer_From')</th>
                                         <th class="border-2 border-gray">@lang('lang.Remarks')</th>
                                         <th class="border-2 border-gray">@lang('lang.Debit')</th>
@@ -229,6 +229,15 @@
                     $('#phone').text(user.phone)
                     //
                     let transactions = response.data;
+                    if (transactions.length == 0) {
+
+                        Swal.fire(
+                            'Warning!',
+                            `${user.name} Has no data`,
+                            'warning'
+                        )
+
+                    }
                     let newRows = '';
                     let tDebits = 0;
                     var tCredits = 0;
@@ -242,7 +251,7 @@
                         var newRow =
                             `<tr>
                                 <td class="py-3 text-center border border-gray">${transaction.id}</td>
-                                <td class="py-3 text-center border border-gray">${transaction.created_at}</td>
+                                <td class="py-3 text-center border border-gray">${transaction.transaction_date}</td>
                                 <td class="py-3 text-center border border-gray">${transaction.transaction_form}</td>
                                 <td class="py-3 text-center border border-gray">${transaction.transaction_remarks}</td>
                                 <td class="py-3 text-center border border-gray font-bold text-blue-500">${transaction.debit}</td>
