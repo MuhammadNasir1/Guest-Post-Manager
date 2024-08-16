@@ -334,5 +334,6 @@ return [
     "Done_From" => "Done From",
     "paypal_Invoice_Id" => "paypal Invoice Id",
     "Add_From" => "Add From",
+    "Email_Phone" => "Email / Phone",
 
 ];

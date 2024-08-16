@@ -18,12 +18,14 @@
                     <thead class="py-1 bg-primary text-white">
                         <tr>
                             <th class="whitespace-nowrap text-sm">@lang('lang.STN')</th>
-                            <th class="whitespace-nowrap text-sm">@lang('lang.Invoice_No')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.paypal_Invoice_Id')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Amount')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Received/Payable')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Currency')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Payment_Method')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Website')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Customer_Name')</th>
+                            <th class="whitespace-nowrap text-sm"> @lang('lang.Email_Phone')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Status')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.User')</th>
                             <th class="flex  justify-center text-sm">@lang('lang.Action')</th>
@@ -40,13 +42,19 @@
                                 <input type="hidden" value="{{ $data->transaction_id }}"
                                     id="transaction_id_{{ $loop->iteration }}">
                                 <td class="text-sm">{{ $loop->iteration }}</td>
-                                <td class="text-sm">{{ $data->invoice_no }}</td>
+                                <td class="text-sm">{{ $data->paypal_no }}</td>
                                 <td class="text-sm">{{ $data->amount }}</td>
                                 <td class="text-sm">{{ $data->payable_amount }} / {{ $data->received_amount }}</td>
                                 <td class="text-sm">{{ $data->currency }}</td>
                                 <td class="text-sm">{{ $data->payment_method }}</td>
                                 <td class="text-sm"><a target="_blank" href="{{ $data->website }}"
                                         class="text-blue-600">@lang('lang.Link')</a></td>
+                                <td class="text-sm">{{ $data->cust_name }}</td>
+                                <td class="text-sm"><a href="tel:{{ $data->cust_phone_no }}"
+                                        class="text-blue-600">{{ $data->cust_phone_no }}</a> <br>
+                                    <a href="mailto:{{ $data->cust_email }}"
+                                        class="text-blue-500 mt-1">{{ $data->cust_email }}</a>
+                                </td>
                                 <td>
                                     @php
                                         $bgColorClass = '';
@@ -71,7 +79,7 @@
                                         class="p-1 rounded-md  capitalize  {{ $bgColorClass }} text-white font-bold text-md">
                                         {{ $data->status }}</button>
                                 </td>
-                                <td>{{ $data->user->name }}</td>
+                                <td class="text-sm">{{ $data->user->name }}</td>
 
                                 <td>
                                     <div class="flex gap-5 items-center justify-center">
@@ -96,14 +104,13 @@
                                                 <li class="py-1">
                                                     <a class="w-[42px] flex items-center gap-3"
                                                         href="../updateInvoice/{{ $data->id }}"><img width="38px"
-                                                            src="{{ asset('images/icons/edit.svg') }}"
+                                                            src="{{ asset('images/icons/update.svg') }}"
                                                             alt="update">@lang('lang.Edit')</a>
                                                 </li>
                                                 <li class="py-1 ">
                                                     <a class="w-[42px] flex items-center gap-3"
                                                         href="../deleteInvoice/{{ $data->id }}"> <img
-                                                            width="38px"
-                                                            src="{{ asset('images/icons/delete-green.svg') }}"
+                                                            width="38px" src="{{ asset('images/icons/delete.svg') }}"
                                                             alt="update">@lang('lang.Delete')</a>
                                                 </li>
                                                 {{-- @if (session('user_det')['role'] == 'admin') --}}
@@ -111,7 +118,7 @@
                                                     updateId="{{ $data->id }}s">
                                                     <div class="flex items-center gap-3">
                                                         <div
-                                                            class="bg-secondary w-9 text-white p-1.5 rounded-full flex items-center gap-3">
+                                                            class="bg-primary w-9 text-white p-1.5 rounded-full flex items-center gap-3">
                                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                                 viewBox="0 0 512 512" fill="white">
                                                                 <path
@@ -364,7 +371,8 @@
                                 name="received_amount" id="Received_Amount" placeholder=" @lang('lang.Received_Amount')">
                         </div>
                         <div>
-                            <label class="text-[14px] font-normal" for="payable_amount">@lang('lang.Payable_Amount')</label>
+                            <label class="text-[14px] font-normal" for="payable_amount">@lang('lang.Payable_Amount')
+                                (PKR)</label>
                             <input type="number" min="0"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary h-[40px] text-[14px]"
                                 name="payable_amount" id="payable_amount" placeholder=" @lang('lang.Payable_Amount')">
