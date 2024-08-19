@@ -5,28 +5,13 @@
     <div>
         <h1 class=" font-semibold   text-2xl ">@lang('lang.Dashboard')</h1>
     </div>
-    <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-6  mt-4">
+    <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-6  mt-4">
         <div class="card-1 ">
             <div class="bg-white  border border-secondary rounded-[10px] py-5 px-8">
                 <div class="flex gap-1 justify-between items-center">
                     <div>
-                        <p class="text-sm text-[#808191]">@lang('lang.Total_orders')</p>
-                        <h2 class="text-2xl font-semibold mt-1">1</h2>
-                    </div>
-                    <div>
-                        <img width="60px" height="60px" src="{{ asset('images/icons/total_orders.svg') }}"
-                            alt="Orders">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-1 ">
-            <div class="bg-white  border border-secondary rounded-[10px] py-5 px-8">
-                <div class="flex gap-1 justify-between items-center">
-                    <div>
-                        <p class="text-sm text-[#808191]">@lang('lang.Pending_orders')</p>
-                        <h2 class="text-2xl font-semibold mt-1">2</h2>
+                        <p class="text-sm text-[#808191]">@lang('lang.Request_Invoice')</p>
+                        <h2 class="text-2xl font-semibold mt-1">{{ $dasboard_data['total_invoices'] }}</h2>
                     </div>
                     <div>
                         <img width="52px" height=52px" src="{{ asset('images/icons/pending-orders.svg') }}"
@@ -40,8 +25,8 @@
             <div class="bg-white  border border-secondary rounded-[10px] py-5 px-8">
                 <div class="flex gap-1 justify-between items-center">
                     <div>
-                        <p class="text-sm text-[#808191]">@lang('lang.Total_product')</p>
-                        <h2 class="text-2xl font-semibold mt-1">10</h2>
+                        <p class="text-sm text-[#808191]">@lang('lang.Total_Sites')</p>
+                        <h2 class="text-2xl font-semibold mt-1">{{ $dasboard_data['total_sites'] }}</h2>
                     </div>
                     <div>
                         <img width="60px" height="60px" src="{{ asset('images/icons/total-product.svg') }}"
@@ -55,12 +40,12 @@
             <div class="bg-white  border border-secondary rounded-[10px] py-5 px-8">
                 <div class="flex gap-1 justify-between items-center">
                     <div>
-                        <p class="text-sm text-[#808191]">@lang('lang.Total_customers')</p>
-                        <h2 class="text-2xl font-semibold mt-1">100</h2>
+                        <p class="text-sm text-[#808191]">@lang('lang.Total_Users')</p>
+                        <h2 class="text-2xl font-semibold mt-1">{{ $dasboard_data['total_user'] }}</h2>
                     </div>
                     <div>
                         <img width="50px" height="50px" src="{{ asset('images/icons/customers.svg') }}"
-                            alt="Customers">
+                            alt="User">
                     </div>
                 </div>
             </div>
@@ -113,79 +98,41 @@
                 shared: true
             },
             data: [{
-                    name: "Received",
-                    type: "area",
-                    fillOpacity: 100,
-                    color: "#417dfc",
-                    markerSize: 0,
-                    dataPoints: [{
-                            x: new Date(2017, 1, 6),
-                            y: 550
-                        },
-                        {
-                            x: new Date(2017, 1, 7),
-                            y: 450
-                        },
-                        {
-                            x: new Date(2017, 1, 8),
-                            y: 500
-                        },
-                        {
-                            x: new Date(2017, 1, 9),
-                            y: 162
-                        },
-                        {
-                            x: new Date(2017, 1, 10),
-                            y: 150
-                        },
-                        {
-                            x: new Date(2017, 1, 11),
-                            y: 400
-                        },
-                        {
-                            x: new Date(2017, 1, 12),
-                            y: 129
-                        }
-                    ]
-                },
-                {
-
-                    name: "Sent",
-                    type: "area",
-                    color: "#13242C",
-                    fillOpacity: 100,
-                    markerSize: 2,
-                    dataPoints: [{
-                            x: new Date(2017, 1, 6),
-                            y: 200
-                        },
-                        {
-                            x: new Date(2017, 1, 7),
-                            y: 150
-                        },
-                        {
-                            x: new Date(2017, 1, 8),
-                            y: 300
-                        },
-                        {
-                            x: new Date(2017, 1, 9),
-                            y: 550
-                        },
-                        {
-                            x: new Date(2017, 1, 10),
-                            y: 50
-                        },
-                        {
-                            x: new Date(2017, 1, 11),
-                            y: 80
-                        },
-                        {
-                            x: new Date(2017, 1, 12),
-                            y: 200
-                        }
-                    ]
-                }
-            ]
+                name: "Received",
+                type: "area",
+                fillOpacity: 100,
+                color: "#13242C",
+                markerSize: 0,
+                dataPoints: [{
+                        x: new Date(2017, 1, 6),
+                        y: 550
+                    },
+                    {
+                        x: new Date(2017, 1, 7),
+                        y: 450
+                    },
+                    {
+                        x: new Date(2017, 1, 8),
+                        y: 500
+                    },
+                    {
+                        x: new Date(2017, 1, 9),
+                        y: 162
+                    },
+                    {
+                        x: new Date(2017, 1, 10),
+                        y: 150
+                    },
+                    {
+                        x: new Date(2017, 1, 11),
+                        y: 400
+                    },
+                    {
+                        x: new Date(2017, 1, 12),
+                        y: 129
+                    }
+                ]
+            }]
         });
 
         var chart2 = new CanvasJS.Chart("studentChart", {

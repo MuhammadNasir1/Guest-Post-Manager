@@ -337,5 +337,7 @@ return [
     "Email_Phone" => "Email / Phone",
     "Date/Time" => "Date / Time",
     "Payment_Voucher" => "Payment Voucher",
+    "Total_Sites" => "Total Sites",
+    "Total_Users" => "Total Users",
 
 ];

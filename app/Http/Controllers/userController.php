@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invoice;
+use App\Models\Site;
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
 use  Illuminate\Support\Facades\Hash;
@@ -132,7 +134,27 @@ class userController extends Controller
 
     public function Dashboard()
     {
-        return view('dashboard');
+        $dasboard_data = [];
+        $user_id = session('user_det')['user_id'];
+
+
+        if (session('user_det')['role'] == "admin") {
+            $total_user = User::whereNotIn('role', ['admin'])->count();
+            $total_sites = Site::all()->count();
+            $total_invoices = Invoice::all()->count();
+        } else {
+            $total_sites = Site::Where('user_id', $user_id)->get()->count();
+            $total_user = User::whereNotIn('role', ['admin'])->count();
+            $total_invoices = Invoice::where('user_id', $user_id)->count();
+        }
+
+
+        $dasboard_data['total_user'] = $total_user;
+        $dasboard_data['total_sites'] = $total_sites;
+        $dasboard_data['total_invoices'] = $total_invoices;
+
+
+        return view('dashboard', compact('dasboard_data'));
     }
 
     public function changeVerifictionStatus(Request $request, $user_id)
