@@ -185,6 +185,7 @@ class userController extends Controller
             $total_sites = Site::Where('user_id', $user_id)->get()->count();
             $total_user = User::whereNotIn('role', ['admin'])->count();
             $total_invoices = Invoice::where('user_id', $user_id)->count();
+            $transactionData = null;
         }
 
 

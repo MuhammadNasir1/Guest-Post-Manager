@@ -53,146 +53,145 @@
     </div>
 
 </div>
+@if (session('user_det')['role'] == 'admin')
+    <div class="lg:flex gap-14 mt-16 px-3 ">
+        <div class="lg:w-[60%] w-full">
+            <div class=" shadow-med p-3 rounded-xl">
+                <h2 class="text-xl  font-semibold  ml-6">@lang('lang.Earning')</h2>
+                <div id="earningChart" class="mt-4" style="height: 370px; width: 100%;"></div>
 
-
-<div class="lg:flex gap-14 mt-16 px-3 ">
-    <div class="lg:w-[60%] w-full">
-        <div class=" shadow-med p-3 rounded-xl">
-            <h2 class="text-xl  font-semibold  ml-6">@lang('lang.Earning')</h2>
-            <div id="earningChart" class="mt-4" style="height: 370px; width: 100%;"></div>
+            </div>
 
         </div>
+        <div class="lg:w-[40%] w-full">
+            <div class=" shadow-med p-3 rounded-xl ">
+                <div>
+                    <div class="flex justify-between px-6">
+                        <h2 class="text-xl  font-semibold ">@lang('lang.Request_Invoice')</h2>
+                    </div>
+                    <div id="attendanceChart" class="mt-4" style="height: 270px; width: 100%;"></div>
+                    <div class="mt-8 mx-10">
+                        <div class="flex justify-around">
+                            <div class="flex flex-col items-center">
+                                <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Pending')</p>
+                                <h1 class="text-3xl font-semibold text-red-600">
+                                    {{ $dasboard_data['invoice_chart']['pending'] }}</h1>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Confirm')</p>
+                                <h1 class="text-3xl font-semibold text-primary">
+                                    {{ $dasboard_data['invoice_chart']['approved'] }}</h1>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Processing')</p>
+                                <h1 class="text-3xl font-semibold text-secondary">
+                                    {{ $dasboard_data['invoice_chart']['processing'] }}</h1>
+                            </div>
 
-    </div>
-    <div class="lg:w-[40%] w-full">
-        <div class=" shadow-med p-3 rounded-xl ">
-            <div>
-                <div class="flex justify-between px-6">
-                    <h2 class="text-xl  font-semibold ">@lang('lang.Request_Invoice')</h2>
-                </div>
-                <div id="attendanceChart" class="mt-4" style="height: 270px; width: 100%;"></div>
-                <div class="mt-8 mx-10">
-                    <div class="flex justify-around">
-                        <div class="flex flex-col items-center">
-                            <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Pending')</p>
-                            <h1 class="text-3xl font-semibold text-red-600">
-                                {{ $dasboard_data['invoice_chart']['pending'] }}</h1>
                         </div>
-                        <div class="flex flex-col items-center">
-                            <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Confirm')</p>
-                            <h1 class="text-3xl font-semibold text-primary">
-                                {{ $dasboard_data['invoice_chart']['approved'] }}</h1>
-                        </div>
-                        <div class="flex flex-col items-center">
-                            <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Processing')</p>
-                            <h1 class="text-3xl font-semibold text-secondary">
-                                {{ $dasboard_data['invoice_chart']['processing'] }}</h1>
-                        </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
 
-<script>
-    window.onload = function() {
-        CanvasJS.addColorSet("colors",
-            [
+    <script>
+        window.onload = function() {
+            CanvasJS.addColorSet("colors",
+                [
 
-                "#417dfc",
-                "#339B96",
-                "#13242C",
+                    "#417dfc",
+                    "#339B96",
+                    "#13242C",
 
-            ]);
-        var chart = new CanvasJS.Chart("earningChart", {
-            animationEnabled: true,
-            axisX: {
-                valueFormatString: "DDD",
-                minimum: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
-                maximum: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-            },
-            axisY: {
-                gridColor: "#00000016",
-                lineDashType: "dot"
-            },
-            toolTip: {
-                shared: true
-            },
-            data: [{
-                    name: "Debit",
-                    type: "area",
-                    fillOpacity: 100,
-                    color: "#13242C",
-                    markerSize: 0,
-                    dataPoints: [
-                        @foreach ($transactionData as $data)
-
-                            {
-                                x: new Date("{{ $data['date'] }}"),
-                                y: {{ $data['total_debit'] }}
-                            },
-                        @endforeach
-                    ]
+                ]);
+            var chart = new CanvasJS.Chart("earningChart", {
+                animationEnabled: true,
+                axisX: {
+                    valueFormatString: "DDD",
+                    minimum: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
+                    maximum: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
                 },
-                {
-                    name: "Credit",
-                    type: "area",
-                    fillOpacity: 100,
-                    color: "#417DFC",
-                    markerSize: 0,
-                    dataPoints: [
+                axisY: {
+                    gridColor: "#00000016",
+                    lineDashType: "dot"
+                },
+                toolTip: {
+                    shared: true
+                },
+                data: [{
+                        name: "Debit",
+                        type: "area",
+                        fillOpacity: 100,
+                        color: "#13242C",
+                        markerSize: 0,
+                        dataPoints: [
+                            @foreach ($transactionData as $data)
 
-                        @foreach ($transactionData as $data)
+                                {
+                                    x: new Date("{{ $data['date'] }}"),
+                                    y: {{ $data['total_debit'] }}
+                                },
+                            @endforeach
+                        ]
+                    },
+                    {
+                        name: "Credit",
+                        type: "area",
+                        fillOpacity: 100,
+                        color: "#417DFC",
+                        markerSize: 0,
+                        dataPoints: [
 
-                            {
-                                x: new Date("{{ $data['date'] }}"),
-                                y: {{ $data['total_credit'] }}
-                            },
-                        @endforeach
+                            @foreach ($transactionData as $data)
+
+                                {
+                                    x: new Date("{{ $data['date'] }}"),
+                                    y: {{ $data['total_credit'] }}
+                                },
+                            @endforeach
+
+                        ]
+                    }
+                ]
+            });
+
+
+            var chart3 = new CanvasJS.Chart("attendanceChart", {
+                animationEnabled: true,
+
+                data: [{
+                    type: "doughnut",
+                    startAngle: 60,
+                    //innerRadius: 60,
+                    indexLabelFontColor: "transparent",
+                    indexLabelPlacement: "inside",
+                    dataPoints: [{
+                            y: {{ $dasboard_data['invoice_chart']['pending'] }},
+                            color: "#C5443B",
+                            label: "Pending"
+                        },
+                        {
+                            y: {{ $dasboard_data['invoice_chart']['processing'] }},
+                            color: "#417DFC",
+                            label: "Processing"
+                        },
+                        {
+                            y: {{ $dasboard_data['invoice_chart']['approved'] }},
+                            color: "#13242C",
+                            label: "Approved"
+                        },
 
                     ]
-                }
-            ]
-        });
+                }]
+            });
 
+            chart.render();
+            chart3.render();
 
-        var chart3 = new CanvasJS.Chart("attendanceChart", {
-            animationEnabled: true,
-
-            data: [{
-                type: "doughnut",
-                startAngle: 60,
-                //innerRadius: 60,
-                indexLabelFontColor: "transparent",
-                indexLabelPlacement: "inside",
-                dataPoints: [{
-                        y: {{ $dasboard_data['invoice_chart']['pending'] }},
-                        color: "#C5443B",
-                        label: "Pending"
-                    },
-                    {
-                        y: {{ $dasboard_data['invoice_chart']['processing'] }},
-                        color: "#417DFC",
-                        label: "Processing"
-                    },
-                    {
-                        y: {{ $dasboard_data['invoice_chart']['approved'] }},
-                        color: "#13242C",
-                        label: "Approved"
-                    },
-
-                ]
-            }]
-        });
-
-        chart.render();
-        chart3.render();
-
-    }
-</script>
+        }
+    </script>
+@endif
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"
     integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw=="
