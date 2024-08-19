@@ -65,9 +65,30 @@
 
     </div>
     <div class="lg:w-[40%] w-full">
-        <div class=" shadow-med p-3 rounded-xl">
-            <h2 class="text-xl  font-semibold ml-6">@lang('lang.Orders')</h2>
-            <div id="studentChart" class="mt-4" style="height: 370px; width: 100%;"></div>
+        <div class=" shadow-med p-3 rounded-xl mt-10">
+            <div>
+                <div class="flex justify-between px-6">
+                    <h2 class="text-xl  font-semibold ">@lang('lang.Orders')</h2>
+                </div>
+                <div id="attendanceChart" class="mt-4" style="height: 270px; width: 100%;"></div>
+                <div class="mt-8 mx-10">
+                    <div class="flex justify-around">
+                        <div class="flex flex-col items-center">
+                            <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Pending')</p>
+                            <div class="h-10  w-10 bg-secondary rounded-full">
+
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Confirm')</p>
+                            <div class="h-10  w-10 bg-primary rounded-full">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -135,45 +156,33 @@
             }]
         });
 
-        var chart2 = new CanvasJS.Chart("studentChart", {
-            colorSet: "colors",
-            animationEnabled: true,
-            theme: "light1",
-            axisY: {
-                gridColor: "#00000016",
-                suffix: "-"
 
-            },
+        var chart3 = new CanvasJS.Chart("attendanceChart", {
+            animationEnabled: true,
 
             data: [{
-                type: "column",
-                yValueFormatString: "#,##0.0#\"\"",
+                type: "doughnut",
+                startAngle: 60,
+                //innerRadius: 60,
+                indexLabelFontColor: "transparent",
+                indexLabelPlacement: "inside",
                 dataPoints: [{
-                        label: "Jan",
-
-                        y: 78
+                        y: '10',
+                        color: "#417dfc",
+                        label: "Pending Orders"
                     },
                     {
-                        label: "Feb",
-                        y: 55
+                        y: 20,
+                        color: "#13242C",
+                        label: "Complete Orders"
                     },
-                    {
-                        label: "Mar",
-                        y: 80
-                    },
-                    {
-                        label: "Apr",
-                        y: 60
-                    },
-
 
                 ]
             }]
         });
 
-
         chart.render();
-        chart2.render();
+        chart3.render();
 
     }
 </script>
