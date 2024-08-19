@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoice;
 use App\Models\Site;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
 use  Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 
 class userController extends Controller
 {
@@ -145,6 +148,39 @@ class userController extends Controller
             $invoice_chart['pending']  = Invoice::where('status', 'pending')->get()->count();
             $invoice_chart['approved']  = Invoice::where('status', 'approved')->get()->count();
             $invoice_chart['processing']  = Invoice::where('status', 'processing')->get()->count();
+
+            $sevenDaysAgo = Carbon::now()->subDays(7);
+            // Fetch transactions from the last 7 days
+            $transactions = Transaction::where('created_at', '>=', $sevenDaysAgo)
+                ->orderBy('created_at', 'asc')
+                ->get();
+            // return response()->json($transactions);
+
+            // $transactionData = $transactions->map(function ($transaction) {
+            //     return [
+            //         'date' => $transaction->created_at->format('Y-m-d'),
+            //         'credit' => $transaction->credit,
+            //         'debit' => $transaction->debit,
+            //     ];
+            // });
+            // Group transactions by date and sum credit and debit
+            $transactionData = $transactions->groupBy(function ($transaction) {
+                return $transaction->created_at->format('Y-m-d');
+            })->map(function (Collection $dailyTransactions) {
+                $date = $dailyTransactions->first()->created_at;
+                $formattedDate = $date->format('Y') . ', ' . $date->format('n') . ', ' . $date->format('j');
+                return [
+                    'date' => $formattedDate,
+                    // 'date' => $dailyTransactions->first()->created_at->format('Y-n-j'),
+                    'total_credit' => $dailyTransactions->sum('credit'),
+                    'total_debit' => $dailyTransactions->sum('debit'),
+                ];
+            })->values(); // Use values() to reset the keys
+
+            // return response()->json($transactionData);
+
+
+            // return response()->json($transactions);
         } else {
             $total_sites = Site::Where('user_id', $user_id)->get()->count();
             $total_user = User::whereNotIn('role', ['admin'])->count();
@@ -158,7 +194,8 @@ class userController extends Controller
         $dasboard_data['invoice_chart'] = $invoice_chart;
 
 
-        return view('dashboard', compact('dasboard_data'));
+
+        return view('dashboard', compact('dasboard_data', 'transactionData'));
     }
 
     public function changeVerifictionStatus(Request $request, $user_id)

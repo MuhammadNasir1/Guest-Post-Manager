@@ -111,8 +111,8 @@
             animationEnabled: true,
             axisX: {
                 valueFormatString: "DDD",
-                minimum: new Date(2017, 1, 5, 23),
-                maximum: new Date(2017, 1, 12, 1)
+                minimum: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
+                maximum: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
             },
             axisY: {
                 gridColor: "#00000016",
@@ -122,41 +122,40 @@
                 shared: true
             },
             data: [{
-                name: "Received",
-                type: "area",
-                fillOpacity: 100,
-                color: "#13242C",
-                markerSize: 0,
-                dataPoints: [{
-                        x: new Date(2017, 1, 6),
-                        y: 550
-                    },
-                    {
-                        x: new Date(2017, 1, 7),
-                        y: 450
-                    },
-                    {
-                        x: new Date(2017, 1, 8),
-                        y: 500
-                    },
-                    {
-                        x: new Date(2017, 1, 9),
-                        y: 162
-                    },
-                    {
-                        x: new Date(2017, 1, 10),
-                        y: 150
-                    },
-                    {
-                        x: new Date(2017, 1, 11),
-                        y: 400
-                    },
-                    {
-                        x: new Date(2017, 1, 12),
-                        y: 129
-                    }
-                ]
-            }]
+                    name: "Debit",
+                    type: "area",
+                    fillOpacity: 100,
+                    color: "#13242C",
+                    markerSize: 0,
+                    dataPoints: [
+                        @foreach ($transactionData as $data)
+
+                            {
+                                x: new Date("{{ $data['date'] }}"),
+                                y: {{ $data['total_debit'] }}
+                            },
+                        @endforeach
+                    ]
+                },
+                {
+                    name: "Credit",
+                    type: "area",
+                    fillOpacity: 100,
+                    color: "#417DFC",
+                    markerSize: 0,
+                    dataPoints: [
+
+                        @foreach ($transactionData as $data)
+
+                            {
+                                x: new Date("{{ $data['date'] }}"),
+                                y: {{ $data['total_credit'] }}
+                            },
+                        @endforeach
+
+                    ]
+                }
+            ]
         });
 
 
