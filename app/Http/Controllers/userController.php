@@ -136,12 +136,15 @@ class userController extends Controller
     {
         $dasboard_data = [];
         $user_id = session('user_det')['user_id'];
-
+        $invoice_chart = [];
 
         if (session('user_det')['role'] == "admin") {
             $total_user = User::whereNotIn('role', ['admin'])->count();
             $total_sites = Site::all()->count();
             $total_invoices = Invoice::all()->count();
+            $invoice_chart['pending']  = Invoice::where('status', 'pending')->get()->count();
+            $invoice_chart['approved']  = Invoice::where('status', 'approved')->get()->count();
+            $invoice_chart['processing']  = Invoice::where('status', 'processing')->get()->count();
         } else {
             $total_sites = Site::Where('user_id', $user_id)->get()->count();
             $total_user = User::whereNotIn('role', ['admin'])->count();
@@ -152,6 +155,7 @@ class userController extends Controller
         $dasboard_data['total_user'] = $total_user;
         $dasboard_data['total_sites'] = $total_sites;
         $dasboard_data['total_invoices'] = $total_invoices;
+        $dasboard_data['invoice_chart'] = $invoice_chart;
 
 
         return view('dashboard', compact('dasboard_data'));

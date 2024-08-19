@@ -65,25 +65,28 @@
 
     </div>
     <div class="lg:w-[40%] w-full">
-        <div class=" shadow-med p-3 rounded-xl mt-10">
+        <div class=" shadow-med p-3 rounded-xl ">
             <div>
                 <div class="flex justify-between px-6">
-                    <h2 class="text-xl  font-semibold ">@lang('lang.Orders')</h2>
+                    <h2 class="text-xl  font-semibold ">@lang('lang.Request_Invoice')</h2>
                 </div>
                 <div id="attendanceChart" class="mt-4" style="height: 270px; width: 100%;"></div>
                 <div class="mt-8 mx-10">
                     <div class="flex justify-around">
                         <div class="flex flex-col items-center">
                             <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Pending')</p>
-                            <div class="h-10  w-10 bg-secondary rounded-full">
-
-                            </div>
+                            <h1 class="text-3xl font-semibold text-red-600">
+                                {{ $dasboard_data['invoice_chart']['pending'] }}</h1>
                         </div>
                         <div class="flex flex-col items-center">
                             <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Confirm')</p>
-                            <div class="h-10  w-10 bg-primary rounded-full">
-
-                            </div>
+                            <h1 class="text-3xl font-semibold text-primary">
+                                {{ $dasboard_data['invoice_chart']['approved'] }}</h1>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <p class="text-[#CECECE] text-lg font-semibold">@lang('lang.Processing')</p>
+                            <h1 class="text-3xl font-semibold text-secondary">
+                                {{ $dasboard_data['invoice_chart']['processing'] }}</h1>
                         </div>
 
                     </div>
@@ -167,14 +170,19 @@
                 indexLabelFontColor: "transparent",
                 indexLabelPlacement: "inside",
                 dataPoints: [{
-                        y: '10',
-                        color: "#417dfc",
-                        label: "Pending Orders"
+                        y: {{ $dasboard_data['invoice_chart']['pending'] }},
+                        color: "#C5443B",
+                        label: "Pending"
                     },
                     {
-                        y: 20,
+                        y: {{ $dasboard_data['invoice_chart']['processing'] }},
+                        color: "#417DFC",
+                        label: "Processing"
+                    },
+                    {
+                        y: {{ $dasboard_data['invoice_chart']['approved'] }},
                         color: "#13242C",
-                        label: "Complete Orders"
+                        label: "Approved"
                     },
 
                 ]
