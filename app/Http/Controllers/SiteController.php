@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Site;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SiteController extends Controller
 {
@@ -139,5 +141,52 @@ class SiteController extends Controller
         $site->delete();
 
         return redirect('../addSite');
+    }
+
+
+    public function importsite(Request $request)
+    {
+        try {
+
+            // Validate the uploaded file
+            $validateData = $request->validate([
+                'excel_file' => 'required|mimes:xlsx,xls',
+            ]);
+
+            // Get the uploaded file
+            $file = $request->file('excel_file');
+
+            // Convert the Excel data to an array
+            $data = Excel::toArray([], $file);
+
+            // Start the loop from the second row to skip the header
+            foreach (array_slice($data[0], 1) as $row) {
+                Site::create([
+                    'user_id' => session('user_det')['user_id'],
+                    'web_url' => $row[0],
+                    'traffic' => $row[1],
+                    'semrush_traffic' => $row[2],
+                    'ahref_traffic' => $row[3],
+                    'traffic_from' => $row[4],
+                    'guest_post_price' => $row[5],
+                    'link_insertion_price' => $row[6],
+                    'dr' => $row[7],
+                    'da' => $row[8],
+                    'exchange' => $row[9],
+                    'contact_no' => $row[10],
+                    'casino' => $row[11],
+                    'category' => $row[12],
+                    'site_done_from' => $row[13],
+                    'admin_gmail' => $row[14],
+                    'guideline' => $row[15],
+                ]);
+            }
+
+            return redirect()->back();
+        } catch (\Exception $e) {
+
+            // return redirect()->back();
+            return response()->json($e->getMessage());
+        }
     }
 }
