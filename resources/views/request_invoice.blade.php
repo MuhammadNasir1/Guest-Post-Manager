@@ -2,10 +2,30 @@
 @include('layouts.nav')
 <div class="md:mx-4 mt-12">
 
+    <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Request_Invoice')</h3>
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
         <div>
             <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
-                <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Request_Invoice')</h3>
+                <div>
+                    @if (session('user_det')['role'] == 'admin')
+                        <form id="filterForm">
+
+                            <label class="text-[14px] font-normal" for="filter">@lang('lang.Filter_by_User')</label>
+                            <select name="filter" id="filter">
+                                <option disabled>@lang('lang.Select_User')</option>
+
+                                @foreach ($users as $user)
+                                    <option {{ request('filter') == 'All' ? 'selected' : '' }} value="All">
+                                        @lang('lang.All')</option>
+                                    <option {{ request('filter') == $user->id ? 'selected' : '' }}
+                                        value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endforeach
+
+                            </select>
+                        </form>
+                    @endif
+                </div>
+
                 <div>
 
                     <button data-modal-target="addInvoiceModal" data-modal-toggle="addInvoiceModal"
@@ -27,7 +47,7 @@
                             <th class="whitespace-nowrap text-sm">@lang('lang.Customer_Name')</th>
                             <th class="whitespace-nowrap text-sm"> @lang('lang.Email_Phone')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Status')</th>
-                            <th class="whitespace-nowrap text-sm">@lang('lang.User')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Add_From')</th>
                             <th class="flex  justify-center text-sm">@lang('lang.Action')</th>
                         </tr>
                     </thead>
@@ -44,11 +64,11 @@
                                 <td class="text-sm">{{ $loop->iteration }}</td>
                                 <td class="text-sm">{{ $data->paypal_no }}</td>
                                 <td class="text-sm">{{ $data->amount }}</td>
-                                <td class="text-sm">{{ $data->payable_amount }} / {{ $data->received_amount }}</td>
+                                <td class="text-sm"> {{ $data->received_amount }} / {{ $data->payable_amount }} </td>
                                 <td class="text-sm">{{ $data->currency }}</td>
                                 <td class="text-sm">{{ $data->payment_method }}</td>
                                 <td class="text-sm"><a target="_blank" href="{{ $data->website }}"
-                                        class="text-blue-600">@lang('lang.Link')</a></td>
+                                        class="text-blue-600">{{ $data->website }}</a></td>
                                 <td class="text-sm">{{ $data->cust_name }}</td>
                                 <td class="text-sm"><a href="tel:{{ $data->cust_phone_no }}"
                                         class="text-blue-600">{{ $data->cust_phone_no }}</a> <br>
@@ -82,63 +102,68 @@
                                 <td class="text-sm">{{ $data->user->name }}</td>
 
                                 <td>
-                                    <div class="flex gap-5 items-center justify-center">
+                                    @if (session('user_det')['role'] == 'admin' || (session('user_det')['role'] !== 'admin' && $data->status == 'pending'))
+                                        <div class="flex gap-5 items-center justify-center">
 
 
-                                        <button id="dropdownDefaultButton{{ $loop->iteration }}"
-                                            data-dropdown-toggle="dropdown{{ $loop->iteration }}"
-                                            class="text-white bg-secondary font-bold rounded-lg px-5 py-2.5 text-center inline-flex items-center "
-                                            type="button">@lang('lang.Action') <svg class="w-2.5 h-2.5 ms-3"
-                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 10 6">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
-                                            </svg>
-                                        </button>
+                                            <button id="dropdownDefaultButton{{ $loop->iteration }}"
+                                                data-dropdown-toggle="dropdown{{ $loop->iteration }}"
+                                                class="text-white bg-secondary font-bold rounded-lg px-5 py-2.5 text-center inline-flex items-center "
+                                                type="button">@lang('lang.Action') <svg class="w-2.5 h-2.5 ms-3"
+                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 10 6">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                                                </svg>
+                                            </button>
 
-                                        <!-- Dropdown menu -->
-                                        <div id="dropdown{{ $loop->iteration }}"
-                                            class="z-10 hidden absolute top-1 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                                aria-labelledby="dropdownDefaultButton{{ $loop->iteration }}">
-                                                <li class="py-1">
-                                                    <a class="w-[42px] flex items-center gap-3"
-                                                        href="../updateInvoice/{{ $data->id }}"><img width="38px"
-                                                            src="{{ asset('images/icons/update.svg') }}"
-                                                            alt="update">@lang('lang.Edit')</a>
-                                                </li>
-                                                <li class="py-1 ">
-                                                    <a class="w-[42px] flex items-center gap-3"
-                                                        href="../deleteInvoice/{{ $data->id }}"> <img
-                                                            width="38px" src="{{ asset('images/icons/delete.svg') }}"
-                                                            alt="update">@lang('lang.Delete')</a>
-                                                </li>
-                                                {{-- @if (session('user_det')['role'] == 'admin') --}}
-                                                <li class="py-1 text-black updateStatusBtn"
-                                                    updateId="{{ $data->id }}s">
-                                                    <div class="flex items-center gap-3">
-                                                        <div
-                                                            class="bg-primary w-9 text-white p-1.5 rounded-full flex items-center gap-3">
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                viewBox="0 0 512 512" fill="white">
-                                                                <path
-                                                                    d="M105.1 202.6c7.7-21.8 20.2-42.3 37.8-59.8c62.5-62.5 163.8-62.5 226.3 0L386.3 160H352c-17.7 0-32 14.3-32 32s14.3 32 32 32H463.5c0 0 0 0 0 0h.4c17.7 0 32-14.3 32-32V80c0-17.7-14.3-32-32-32s-32 14.3-32 32v35.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0C73.2 122 55.6 150.7 44.8 181.4c-5.9 16.7 2.9 34.9 19.5 40.8s34.9-2.9 40.8-19.5zM39 289.3c-5 1.5-9.8 4.2-13.7 8.2c-4 4-6.7 8.8-8.1 14c-.3 1.2-.6 2.5-.8 3.8c-.3 1.7-.4 3.4-.4 5.1V432c0 17.7 14.3 32 32 32s32-14.3 32-32V396.9l17.6 17.5 0 0c87.5 87.4 229.3 87.4 316.7 0c24.4-24.4 42.1-53.1 52.9-83.7c5.9-16.7-2.9-34.9-19.5-40.8s-34.9 2.9-40.8 19.5c-7.7 21.8-20.2 42.3-37.8 59.8c-62.5 62.5-163.8 62.5-226.3 0l-.1-.1L125.6 352H160c17.7 0 32-14.3 32-32s-14.3-32-32-32H48.4c-1.6 0-3.2 .1-4.8 .3s-3.1 .5-4.6 1z" />
-                                                            </svg>
-                                                        </div>
-                                                        <button class="ChangeStatusBtn" invoiceId="{{ $data->id }}"
-                                                            transactionId="{{ $data->transaction_id }}"
-                                                            data-modal-target="changeStatus"
-                                                            data-modal-toggle="changeStatus"
-                                                            onclick="getId({{ $loop->iteration }})">
-                                                            @lang('lang.Change_Status') </button>
-                                                    </div>
-                                                </li>
-                                                {{-- @endif --}}
-                                            </ul>
+                                            <!-- Dropdown menu -->
+                                            <div id="dropdown{{ $loop->iteration }}"
+                                                class="z-10 hidden absolute top-1 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                                                    aria-labelledby="dropdownDefaultButton{{ $loop->iteration }}">
+                                                    <li class="py-1">
+                                                        <a class="w-[42px] flex items-center gap-3"
+                                                            href="../updateInvoice/{{ $data->id }}"><img
+                                                                width="38px"
+                                                                src="{{ asset('images/icons/update.svg') }}"
+                                                                alt="update">@lang('lang.Edit')</a>
+                                                    </li>
+                                                    <li class="py-1 ">
+                                                        <a class="w-[42px] flex items-center gap-3"
+                                                            href="../deleteInvoice/{{ $data->id }}"> <img
+                                                                width="38px"
+                                                                src="{{ asset('images/icons/delete.svg') }}"
+                                                                alt="update">@lang('lang.Delete')</a>
+                                                    </li>
+                                                    @if (session('user_det')['role'] == 'admin')
+                                                        <li class="py-1 text-black updateStatusBtn"
+                                                            updateId="{{ $data->id }}s">
+                                                            <div class="flex items-center gap-3">
+                                                                <div
+                                                                    class="bg-primary w-9 text-white p-1.5 rounded-full flex items-center gap-3">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                        viewBox="0 0 512 512" fill="white">
+                                                                        <path
+                                                                            d="M105.1 202.6c7.7-21.8 20.2-42.3 37.8-59.8c62.5-62.5 163.8-62.5 226.3 0L386.3 160H352c-17.7 0-32 14.3-32 32s14.3 32 32 32H463.5c0 0 0 0 0 0h.4c17.7 0 32-14.3 32-32V80c0-17.7-14.3-32-32-32s-32 14.3-32 32v35.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0C73.2 122 55.6 150.7 44.8 181.4c-5.9 16.7 2.9 34.9 19.5 40.8s34.9-2.9 40.8-19.5zM39 289.3c-5 1.5-9.8 4.2-13.7 8.2c-4 4-6.7 8.8-8.1 14c-.3 1.2-.6 2.5-.8 3.8c-.3 1.7-.4 3.4-.4 5.1V432c0 17.7 14.3 32 32 32s32-14.3 32-32V396.9l17.6 17.5 0 0c87.5 87.4 229.3 87.4 316.7 0c24.4-24.4 42.1-53.1 52.9-83.7c5.9-16.7-2.9-34.9-19.5-40.8s-34.9 2.9-40.8 19.5c-7.7 21.8-20.2 42.3-37.8 59.8c-62.5 62.5-163.8 62.5-226.3 0l-.1-.1L125.6 352H160c17.7 0 32-14.3 32-32s-14.3-32-32-32H48.4c-1.6 0-3.2 .1-4.8 .3s-3.1 .5-4.6 1z" />
+                                                                    </svg>
+                                                                </div>
+                                                                <button class="ChangeStatusBtn"
+                                                                    invoiceId="{{ $data->id }}"
+                                                                    transactionId="{{ $data->transaction_id }}"
+                                                                    data-modal-target="changeStatus"
+                                                                    data-modal-toggle="changeStatus"
+                                                                    onclick="getId({{ $loop->iteration }})">
+                                                                    @lang('lang.Change_Status') </button>
+                                                            </div>
+                                                        </li>
+                                                    @endif
+                                                </ul>
+                                            </div>
+
+
                                         </div>
-
-
-                                    </div>
+                                    @endif
                                 </td>
                                 {{-- <div class="flex gap-5 items-center justify-center"> --}}
 
@@ -175,6 +200,9 @@
 
 <div id="addInvoiceModal" data-modal-backdrop="static"
     class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+    <div class="fixed inset-0 transition-opacity">
+        <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
+    </div>
     <div class="relative p-4 w-full   max-w-6xl max-h-full ">
         @if (isset($Invoicedata))
             <form action="../updateInvoiceForm/{{ $Invoicedata->id }}" method="post" enctype="multipart/form-data">
@@ -184,11 +212,7 @@
         @csrf
         <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
             <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
-                <h3 class="text-xl font-semibold                     {{-- <select class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="payment_method" id="payment_method">
-                        <option value="payoneer">@lang('lang.Payoneer')</option>
-                        <option value="paypal">@lang('lang.PayPal')</option>
-                    </select> --}}text-white ">
+                <h3 class="text-xl font-semibold text-white ">
                     @lang('lang.Request_Invoice')
                 </h3>
                 <button type="button"
@@ -204,12 +228,20 @@
 
 
             <div class="flex gap-6 mx-6 my-6 ">
-                <div>
-                    <label class="text-[14px] font-normal" for="invoice_no">@lang('lang.Invoice_No')</label>
-                    <input type="number" min="0" required
-                        class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="invoice_no" id="invoice_no" placeholder=" @lang('lang.Invoice_No')"
-                        value="{{ $Invoicedata->invoice_no ?? '' }}">
+                <div class="flex gap-2">
+                    <div>
+                        <label class="text-[14px] font-normal" for="invoice_no">@lang('lang.Invoice_No')</label>
+                        <input type="number" min="0" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="invoice_no" id="invoice_no" placeholder=" @lang('lang.Invoice_No')"
+                            value="{{ $Invoicedata->invoice_no ?? '' }}">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="Sending_Date">@lang('lang.Sending_Date')</label>
+                        <input type="date" min="0" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="sending_date" id="Sending_Date" value="{{ $Invoicedata->sending_date ?? '' }}">
+                    </div>
                 </div>
                 <div>
                     <label class="text-[14px] font-normal" for="amount">@lang('lang.Amount')</label>
@@ -219,7 +251,7 @@
                         value="{{ $Invoicedata->amount ?? '' }}">
                 </div>
                 <div>
-                    <label class="text-[14px] font-normal" for="currency">@lang('lang.Currency')</label>
+                    <label class="text-[14px] font-normal" for="curency">@lang('lang.Currency')</label>
                     <input list="browsers" name="currency" id="currency"
                         class="w-full border border-[#DEE2E6] placeholder:ps-2 rounded-[4px] focus:border-primary focus:border ps-2  h-[40px] text-[14px]"
                         placeholder="@lang('lang.Currency')" value="{{ $Invoicedata->currency ?? '' }}">
@@ -316,6 +348,9 @@
 
 <div id="changeStatus" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
+    <div class="fixed inset-0 transition-opacity">
+        <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
+    </div>
     <div class="relative p-4 w-full   max-w-2xl max-h-full ">
         {{-- <form action="../changeVerStatus/5" method="post" enctype="multipart/form-data"> --}}
         <form action="" id="postId" method="post" enctype="multipart/form-data">
@@ -430,7 +465,34 @@
     </script>
 @endif
 <script>
+    function dropdownrun() {
+
+        // Select all dropdown buttons
+        const dropdownButtons = document.querySelectorAll('[data-dropdown-toggle]');
+
+        dropdownButtons.forEach(button => {
+            // Get the target dropdown ID from the button's data attribute
+            const dropdownId = button.getAttribute('data-dropdown-toggle');
+            const dropdown = document.getElementById(dropdownId);
+
+            // Add click event listener to the button
+            button.addEventListener('click', function(event) {
+                event.stopPropagation();
+                // Toggle the visibility of the dropdown
+                dropdown.classList.toggle('hidden');
+            });
+
+            // Add click event listener to the document to close dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!dropdown.contains(event.target) && !button.contains(event.target)) {
+                    dropdown.classList.add('hidden');
+                }
+            });
+        });
+    }
+    dropdownrun();
     $(document).ready(function() {
+
         $('.ChangeStatusBtn').click(function() {
             var invoiceId = $(this).attr('invoiceId');
             var transId = $(this).attr('transactionId');
@@ -510,4 +572,9 @@
 
         postId.setAttribute("action", "../addTransaction/" + invoice_id.value);
     }
+
+    $('#filter').change(function() {
+        let userId = $(this).val();
+        $('#filterForm').submit();
+    })
 </script>

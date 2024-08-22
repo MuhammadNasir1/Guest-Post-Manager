@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("transaction_id")->nullable();
             $table->string("invoice_no");
+            $table->date("sending_date");
             $table->string("paypal_no")->nullable();
             $table->string("user_id");
             $table->string("amount");

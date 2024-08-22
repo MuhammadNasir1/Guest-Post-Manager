@@ -16,6 +16,7 @@ class InvoiceController extends Controller
 
             $validatedData = $request->validate([
                 "invoice_no" => "required",
+                "sending_date" => "required",
                 "amount" => "required",
                 "currency" => "required",
                 "payment_method" => "required",
@@ -29,6 +30,7 @@ class InvoiceController extends Controller
 
             $site = new Invoice;
             $site->invoice_no = $validatedData['invoice_no'];
+            $site->sending_date = $validatedData['sending_date'];
             $site->user_id = session('user_det')['user_id'];
             $site->amount = $validatedData['amount'];
             $site->currency = $validatedData['currency'];;
@@ -48,11 +50,19 @@ class InvoiceController extends Controller
         }
     }
 
-    public function siteData()
+    public function siteData(Request $request)
     {
         $userId = session('user_det')['user_id'];
+        $users =  User::wherenot('role', 'admin')->get();
         if (session('user_det')['role'] == "admin") {
-            $data = Invoice::all();
+
+
+            if ($request->has('filter') & $request['filter'] !== "All") {
+                $data = Invoice::where('user_id', $request['filter'])->get();
+            } else {
+
+                $data = Invoice::all();
+            }
         } else {
             $data = Invoice::where('user_id', $userId)->get();
         }
@@ -64,7 +74,7 @@ class InvoiceController extends Controller
             $datas->user = $userData;
         }
 
-        return view("request_invoice", compact('data'));
+        return view("request_invoice", compact('data', 'users'));
     }
 
 
@@ -137,7 +147,7 @@ class InvoiceController extends Controller
 
     public function updateInvoiceData($id)
     {
-
+        $users =  User::wherenot('role', 'admin')->get();
         $userId = session('user_det')['user_id'];
         if (session('user_det')['role'] == "admin") {
             $data = Invoice::all();
@@ -152,7 +162,7 @@ class InvoiceController extends Controller
             $datas->user = $userData;
         }
         $Invoicedata = Invoice::find($id);
-        return view("request_invoice", compact('data', 'Invoicedata'));
+        return view("request_invoice", compact('data', 'Invoicedata',  'users'));
     }
 
     public function updateInvoice(Request $request, $id)
@@ -162,6 +172,7 @@ class InvoiceController extends Controller
 
             $validatedData = $request->validate([
                 "invoice_no" => "required",
+                "sending_date" => "required",
                 "amount" => "required",
                 "currency" => "required",
                 "payment_method" => "required",
@@ -175,6 +186,7 @@ class InvoiceController extends Controller
 
             $site = Invoice::find($id);
             $site->invoice_no = $validatedData['invoice_no'];
+            $site->sending_date = $validatedData['sending_date'];
             $site->user_id = session('user_det')['user_id'];
             $site->amount = $validatedData['amount'];
             $site->currency = $validatedData['currency'];;

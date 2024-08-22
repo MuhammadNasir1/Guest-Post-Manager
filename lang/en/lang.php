@@ -348,5 +348,6 @@ return [
     "Update_Client" => "Update Client",
     "Add_From" => "Add From",
     "Client" => "Client",
+    "Sending_Date" => "Sending Date",
 
 ];
