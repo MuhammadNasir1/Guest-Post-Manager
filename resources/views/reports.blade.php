@@ -254,8 +254,8 @@
                                 <td class="py-3 text-center border border-gray">${transaction.transaction_date}</td>
                                 <td class="py-3 text-center border border-gray">${transaction.transaction_form}</td>
                                 <td class="py-3 text-center border border-gray">${transaction.transaction_remarks}</td>
-                                <td class="py-3 text-center border border-gray font-bold text-blue-500">${transaction.debit}</td>
-                                <td class="py-3 text-center border border-gray font-bold text-green-500">${transaction.credit}</td>
+                                <td class="py-3 text-center border border-gray font-bold text-blue-500">${transaction.debit !== null ? transaction.debit : 0}</td>
+                                <td class="py-3 text-center border border-gray font-bold text-green-500">${transaction.credit !== null ? transaction.credit : 0}</td>
                                 <td class="py-3 text-center border border-gray font-bold text-red-600">${transaction.balance}</td>
                                  </tr>`;
 
