@@ -17,19 +17,19 @@ class SiteController extends Controller
                 "website_url" => "required",
                 "traffic" => "required",
                 "semrush_traffic" => "required",
-                "ahrref_traffic" => "required",
-                "traffic_major_from" => "required",
+                "ahrref_traffic" => "nullable",
+                "traffic_major_from" => "nullable",
                 "guest_post_price" => "required",
                 "link_insertion_price" => "required",
-                "exchange" => "required",
+                "exchange" => "nullable",
                 "contact_no" => "required",
-                "admin_gmail" => "required",
-                "site_done_form" => "required",
-                "dr" => "required",
-                "da" => "required",
-                "casino" => "required",
+                "admin_gmail" => "nullable",
+                "site_done_form" => "nullable",
+                "dr" => "nullable",
+                "da" => "nullable",
+                "casino" => "nullable",
                 "category" => "required",
-                "guideline" => "required",
+                "guideline" => "nullable",
                 "insertion_currency" => "required",
             ]);
 
@@ -92,7 +92,8 @@ class SiteController extends Controller
             $data = Site::where('user_id', $userId)->get();
         }
         $site = Site::find($id);
-        return view("addsites", compact("site", "data"));
+        $users =  User::wherenot('role', 'admin')->get();
+        return view("addsites", compact("site", "data", "users"));
     }
 
     public function updateSite(Request $request, string $id)
@@ -102,19 +103,19 @@ class SiteController extends Controller
                 "website_url" => "required",
                 "traffic" => "required",
                 "semrush_traffic" => "required",
-                "ahrref_traffic" => "required",
-                "traffic_major_from" => "required",
+                "ahrref_traffic" => "nullable",
+                "traffic_major_from" => "nullable",
                 "guest_post_price" => "required",
                 "link_insertion_price" => "required",
-                "exchange" => "required",
+                "exchange" => "nullable",
                 "contact_no" => "required",
-                "admin_gmail" => "required",
-                "site_done_form" => "required",
-                "dr" => "required",
-                "da" => "required",
-                "casino" => "required",
+                "admin_gmail" => "nullable",
+                "site_done_form" => "nullable",
+                "dr" => "nullable",
+                "da" => "nullable",
+                "casino" => "nullable",
                 "category" => "required",
-                "guideline" => "required",
+                "guideline" => "nullable",
                 "insertion_currency" => "required",
             ]);
 
@@ -180,15 +181,16 @@ class SiteController extends Controller
                     'traffic_from' => $row[4],
                     'guest_post_price' => $row[5],
                     'link_insertion_price' => $row[6],
-                    'dr' => $row[7],
-                    'da' => $row[8],
-                    'exchange' => $row[9],
-                    'contact_no' => $row[10],
-                    'casino' => $row[11],
-                    'category' => $row[12],
-                    'site_done_from' => $row[13],
-                    'admin_gmail' => $row[14],
-                    'guideline' => $row[15],
+                    'insertion_currency' => $row[7],
+                    'dr' => $row[8],
+                    'da' => $row[9],
+                    'exchange' => $row[10],
+                    'contact_no' => $row[11],
+                    'casino' => $row[12],
+                    'category' => $row[13],
+                    'site_done_from' => $row[14],
+                    'admin_gmail' => $row[15],
+                    'guideline' => $row[16],
                 ]);
             }
 

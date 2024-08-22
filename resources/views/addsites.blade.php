@@ -157,21 +157,24 @@
 
             <div class="grid md:grid-cols-4 gap-6 mx-6 my-4">
                 <div>
-                    <label class="text-[14px] font-normal" for="website_url">@lang('lang.Website_URL')</label>
+                    <label class="text-[14px] font-normal" for="website_url">@lang('lang.Website_URL')<span
+                            class="text-red-700 text-xl">*</span></label>
                     <input type="text" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="website_url" id="website_url" placeholder=" @lang('lang.Website_URL')"
                         value="{{ $site->web_url ?? '' }}">
                 </div>
                 <div>
-                    <label class="text-[14px] font-normal" for="traffic">@lang('lang.Traffic')</label>
+                    <label class="text-[14px] font-normal" for="traffic">@lang('lang.Traffic')<span
+                            class="text-red-700 text-xl">*</span></label>
                     <input type="text" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="traffic" id="traffic" placeholder=" @lang('lang.Traffic_Here')"
                         value="{{ $site->traffic ?? '' }}">
                 </div>
                 <div>
-                    <label class="text-[14px] font-normal" for="semrush_traffic">@lang('lang.Semrush_Traffic')</label>
+                    <label class="text-[14px] font-normal" for="semrush_traffic">@lang('lang.Semrush_Traffic')<span
+                            class="text-red-700 text-xl">*</span></label>
                     <input type="text"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="semrush_traffic" id="semrush_traffic" placeholder=" @lang('lang.Semrush_Traffic')"
@@ -190,13 +193,14 @@
 
                 <div>
                     <label class="text-[14px] font-normal" for="traffic_major_from">@lang('lang.Traffic_Major_From')</label>
-                    <input type="text" required
+                    <input type="text"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="traffic_major_from" id="traffic_major_from" placeholder=" @lang('lang.Traffic_Major_From')"
                         value="{{ $site->traffic_from ?? '' }}">
                 </div>
                 <div>
-                    <label class="text-[14px] font-normal" for="guest_post_price">@lang('lang.Guest_Post_Price')</label>
+                    <label class="text-[14px] font-normal" for="guest_post_price">@lang('lang.Guest_Post_Price')<span
+                            class="text-red-700 text-xl">*</span></label>
                     <input type="text" min="1"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="guest_post_price" id="guest_post_price" placeholder=" @lang('lang.Guest_Post_Price')"
@@ -205,14 +209,16 @@
                 </div>
                 <div class="flex gap-2">
                     <div>
-                        <label class="text-[14px] font-normal" for="link_insertion_price">@lang('lang.Insertion_Price')</label>
+                        <label class="text-[14px] font-normal" for="link_insertion_price">@lang('lang.Insertion_Price')<span
+                                class="text-red-700 text-xl">*</span></label>
                         <input type="number" min="1"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="link_insertion_price" id="link_insertion_price" placeholder=" @lang('lang.Link_Insertion_Price')"
                             value="{{ $site->link_insertion_price ?? '' }}">
                     </div>
                     <div>
-                        <label class="text-[14px] font-normal" for="insertion_currency">@lang('lang.Currency')</label>
+                        <label class="text-[14px] font-normal" for="insertion_currency">@lang('lang.Currency')<span
+                                class="text-red-700 text-xl">*</span></label>
                         <input type="text" min="1"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="insertion_currency" id="insertion_currency" placeholder=" @lang('lang.Currency')"
@@ -258,8 +264,9 @@
                     </select>
                 </div>
                 <div>
-                    <label class="text-[14px] font-normal" for="contact_no">@lang('lang.Contact_No')</label>
-                    <input type="number" min="1"
+                    <label class="text-[14px] font-normal" for="contact_no">@lang('lang.Contact_No')<span
+                            class="text-red-700 text-xl">*</span></label>
+                    <input type="number" min="1" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="contact_no" id="contact_no" placeholder=" @lang('lang.Contact_No')"
                         value="{{ $site->contact_no ?? '' }}">
@@ -278,8 +285,9 @@
             </div>
             <div class="grid md:grid-cols-3 gap-6 mx-6 my-4">
                 <div>
-                    <label class="text-[14px] font-normal" for="category">@lang('lang.Website_Category')</label>
-                    <input type="text"
+                    <label class="text-[14px] font-normal" for="category">@lang('lang.Website_Category')<span
+                            class="text-red-700 text-xl">*</span></label>
+                    <input type="text" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="category" id="category" placeholder=" @lang('lang.Category_Here')"
                         value="{{ $site->category ?? '' }}">
