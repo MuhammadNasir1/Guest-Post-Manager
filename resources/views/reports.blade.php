@@ -43,8 +43,7 @@
     }
 </style>
 @php
-    $lastCompany = DB::table('companies')->orderBy('id', 'desc')->first();
-
+    $company = DB::table('companies')->first();
 @endphp
 
 <div class="lg:mx-4 mt-12" id="mainDiv">

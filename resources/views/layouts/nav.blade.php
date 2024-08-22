@@ -12,8 +12,7 @@
             </svg>
         </button>
         @php
-            $lastCompany = DB::table('companies')->orderBy('id', 'desc')->first();
-
+            $company = DB::table('companies')->first();
         @endphp
         <div class="md:hidden flex justify-center m-auto">
             <img class="w-48"
