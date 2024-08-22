@@ -343,5 +343,10 @@ return [
     "Select_User" => "Select User",
     "Filter_by_User" => "Filter by User",
     "All" => "All",
+    "Client_List" => "Client List",
+    "Add_Client" => "Add Client",
+    "Update_Client" => "Update Client",
+    "Add_From" => "Add From",
+    "Client" => "Client",
 
 ];

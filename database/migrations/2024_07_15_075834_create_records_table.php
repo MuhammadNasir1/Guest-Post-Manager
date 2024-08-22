@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string("user_id");
             $table->string("client_from");
             $table->string("client_name");
-            $table->string("client_company");
-            $table->string("client_email");
-            $table->string("client_profile");
+            $table->string("client_company")->nullable();
+            $table->string("client_email")->nullable();
+            $table->string("client_profile")->nullable();
             $table->string("client_contact");
             $table->timestamps();
         });

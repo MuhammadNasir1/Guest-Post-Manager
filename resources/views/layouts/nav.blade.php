@@ -111,7 +111,7 @@
 
 
 
-                        <span class="flex-1 ms-2.5 whitespace-nowrap"> @lang('lang.Customer')</span>
+                        <span class="flex-1 ms-2.5 whitespace-nowrap"> @lang('lang.Client')</span>
                     </a>
                 </li>
                 <li>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Record;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RecordController extends Controller
@@ -13,9 +14,9 @@ class RecordController extends Controller
             $validateData = $request->validate([
                 "client_from" => "required",
                 "client_name" => "required",
-                "client_company" => "required",
-                "client_email" => "required",
-                "client_profile" => "required",
+                "client_company" => "nullable",
+                "client_email" => "nullable",
+                "client_profile" => "nullable",
                 "client_contact" => "required",
             ]);
 
@@ -35,10 +36,25 @@ class RecordController extends Controller
         }
     }
 
-    public function view()
+    public function view(Request $request)
     {
-        $data = Record::all();
-        return view('records', compact("data"));
+
+        $userId = session('user_det')['user_id'];
+        $userRole = session('user_det')['role'];
+        $users =  User::wherenot('role', 'admin')->get();
+
+        if ($userRole == "admin" || $userRole == "manager") {
+            if ($request->has('filter') & $request['filter'] !== "All") {
+                $data = Record::where('user_id', $request['filter'])->get();
+            } else {
+
+                $data = Record::all();
+            }
+        } else {
+
+            $data = Record::where('user_id', $userId)->get();
+        }
+        return view('records', compact("data", "users"));
     }
 
     public function deleteRecord(string $id)
@@ -52,7 +68,8 @@ class RecordController extends Controller
     {
         $updateData = Record::find($id);
         $data = Record::all();
-        return view("records", compact('updateData', 'data'));
+        $users =  User::wherenot('role', 'admin')->get();
+        return view("records", compact('updateData', 'data', 'users'));
     }
 
     public function update(Request $request, string $id)
@@ -61,9 +78,9 @@ class RecordController extends Controller
             $validateData = $request->validate([
                 "client_from" => "required",
                 "client_name" => "required",
-                "client_company" => "required",
-                "client_email" => "required",
-                "client_profile" => "required",
+                "client_company" => "nullable",
+                "client_email" => "nullable",
+                "client_profile" => "nullable",
                 "client_contact" => "required",
             ]);
 

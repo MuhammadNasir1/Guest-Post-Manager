@@ -6,8 +6,8 @@
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white main">
         <div>
             <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
-                <div class="flex gap-3">
-                    <div>
+                <div>
+                    @if (session('user_det')['role'] == 'admin')
                         <form id="filterForm">
 
                             <label class="text-[14px] font-normal" for="filter">@lang('lang.Filter_by_User')</label>
@@ -23,9 +23,9 @@
 
                             </select>
                         </form>
-                    </div>
-
+                    @endif
                 </div>
+
                 <div class="flex">
 
                     <button data-modal-target="addsitemodal" data-modal-toggle="addsitemodal" id="addModal"
