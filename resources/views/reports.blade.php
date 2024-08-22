@@ -200,7 +200,7 @@
     $(document).ready(function() {
         $('#ledgerDataForm').submit(function(e) {
             // $("#reloadDiv").load(" #reloadDiv > *");
-            $('#transactionTable tbody').html();
+            $('#transactionTable tbody').html('');
             e.preventDefault();
             var formData = $(this).serialize();
             $customerId = $('#customer_account').val();
