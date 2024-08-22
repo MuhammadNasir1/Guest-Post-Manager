@@ -14,10 +14,10 @@
                             <label class="text-[14px] font-normal" for="filter">@lang('lang.Filter_by_User')</label>
                             <select name="filter" id="filter">
                                 <option disabled>@lang('lang.Select_User')</option>
+                                <option {{ request('filter') == 'All' ? 'selected' : '' }} value="All">
+                                    @lang('lang.All')</option>
 
                                 @foreach ($users as $user)
-                                    <option {{ request('filter') == 'All' ? 'selected' : '' }} value="All">
-                                        @lang('lang.All')</option>
                                     <option {{ request('filter') == $user->id ? 'selected' : '' }}
                                         value="{{ $user->id }}">{{ $user->name }}</option>
                                 @endforeach
