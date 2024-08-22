@@ -39,6 +39,7 @@
                         <tr>
                             <th class="whitespace-nowrap text-sm">@lang('lang.STN')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.paypal_Invoice_Id')</th>
+                            <th class="whitespace-nowrap text-sm">@lang('lang.Invoice_Url')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Amount')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Received/Payable')</th>
                             <th class="whitespace-nowrap text-sm">@lang('lang.Currency')</th>
@@ -63,6 +64,8 @@
                                     id="transaction_id_{{ $loop->iteration }}">
                                 <td class="text-sm">{{ $loop->iteration }}</td>
                                 <td class="text-sm">{{ $data->paypal_no }}</td>
+                                <td class="text-sm"><a target="_blank" href="{{ $data->invoice_url }}"
+                                        class="text-blue-600">{{ $data->invoice_url }}</a></td>
                                 <td class="text-sm">{{ $data->amount }}</td>
                                 <td class="text-sm"> {{ $data->received_amount }} / {{ $data->payable_amount }} </td>
                                 <td class="text-sm">{{ $data->currency }}</td>
@@ -230,28 +233,32 @@
             <div class="flex gap-6 mx-6 my-6 ">
                 <div class="flex gap-2">
                     <div>
-                        <label class="text-[14px] font-normal" for="invoice_no">@lang('lang.Invoice_No')</label>
+                        <label class="text-[14px] font-normal" for="invoice_no">@lang('lang.Invoice_No')<span
+                                class="text-red-700 text-xl">*</span></label>
                         <input type="number" min="0" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="invoice_no" id="invoice_no" placeholder=" @lang('lang.Invoice_No')"
                             value="{{ $Invoicedata->invoice_no ?? '' }}">
                     </div>
                     <div>
-                        <label class="text-[14px] font-normal" for="Sending_Date">@lang('lang.Sending_Date')</label>
+                        <label class="text-[14px] font-normal" for="Sending_Date">@lang('lang.Sending_Date')<span
+                                class="text-red-700 text-xl">*</span></label>
                         <input type="date" min="0" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="sending_date" id="Sending_Date" value="{{ $Invoicedata->sending_date ?? '' }}">
                     </div>
                 </div>
                 <div>
-                    <label class="text-[14px] font-normal" for="amount">@lang('lang.Amount')</label>
+                    <label class="text-[14px] font-normal" for="amount">@lang('lang.Amount')<span
+                            class="text-red-700 text-xl">*</span></label>
                     <input type="number" min="0" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="amount" id="amount" placeholder=" @lang('lang.Amount_Here')"
                         value="{{ $Invoicedata->amount ?? '' }}">
                 </div>
                 <div>
-                    <label class="text-[14px] font-normal" for="curency">@lang('lang.Currency')</label>
+                    <label class="text-[14px] font-normal" for="curency">@lang('lang.Currency')<span
+                            class="text-red-700 text-xl">*</span></label>
                     <input list="browsers" name="currency" id="currency"
                         class="w-full border border-[#DEE2E6] placeholder:ps-2 rounded-[4px] focus:border-primary focus:border ps-2  h-[40px] text-[14px]"
                         placeholder="@lang('lang.Currency')" value="{{ $Invoicedata->currency ?? '' }}">
@@ -262,7 +269,8 @@
                     </datalist>
                 </div>
                 <div>
-                    <label class="text-[14px] font-normal" for="payment_method">@lang('lang.Payment_Method')</label>
+                    <label class="text-[14px] font-normal" for="payment_method">@lang('lang.Payment_Method')<span
+                            class="text-red-700 text-xl">*</span></label>
                     <input list="currencies" name="payment_method" id="payment_method"
                         class="w-full border border-[#DEE2E6] placeholder:ps-2 rounded-[4px] focus:border-primary focus:border ps-2  h-[40px] text-[14px]"
                         placeholder="@lang('lang.Currency')" value="{{ $Invoicedata->payment_method ?? '' }}">
@@ -270,7 +278,8 @@
                     </datalist>
                 </div>
                 <div>
-                    <label class="text-[14px] font-normal" for="website">@lang('lang.Website')</label>
+                    <label class="text-[14px] font-normal" for="website">@lang('lang.Website')<span
+                            class="text-red-700 text-xl">*</span></label>
                     <input type="text" required
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="website" id="website" placeholder=" @lang('lang.Website_URL_Here')"
@@ -284,7 +293,7 @@
                     <input type="text"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="cust_name" id="cust_name" placeholder=" @lang('lang.Customer_Name_Here')"
-                        value=" {{ $Invoicedata->cust_name ?? '' }}" required>
+                        value=" {{ $Invoicedata->cust_name ?? '' }}">
 
                 </div>
                 <div>
@@ -292,7 +301,7 @@
                     <input type="email" min="1"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="cust_email" id="customer_email" placeholder=" @lang('lang.Customer_Email_Here')"
-                        value=" {{ $Invoicedata->cust_email ?? '' }}" required>
+                        value=" {{ $Invoicedata->cust_email ?? '' }}">
 
                 </div>
                 <div>
@@ -300,7 +309,7 @@
                     <input type="number" min="1"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="cust_phone_no" id="customer_phone_no" placeholder=" @lang('lang.Customer_Phone_No')"
-                        value="{{ $Invoicedata->cust_phone_no ?? '' }}" required>
+                        value="{{ $Invoicedata->cust_phone_no ?? '' }}">
 
                 </div>
 
@@ -309,7 +318,7 @@
             <div class="mx-6 my-4">
                 <label class="text-[14px] font-normal" for="Description">@lang('lang.Description')</label>
                 <textarea class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[120px] text-[14px]"
-                    name="description" id="Description" required>{{ $Invoicedata->description ?? '' }}</textarea>
+                    name="description" id="Description">{{ $Invoicedata->description ?? '' }}</textarea>
 
             </div>
 
@@ -391,6 +400,12 @@
                         <input type="number" min="0"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary h-[40px] text-[14px]"
                             name="paypal_no" id="paypal_no" placeholder=" @lang('lang.paypal_No')">
+                    </div>
+                    <div class="col-span-2" id="hideInput2">
+                        <label class="text-[14px] font-normal" for="Invoice_Url">@lang('lang.Invoice_Url')</label>
+                        <input type="text" min="0"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary h-[40px] text-[14px]"
+                            name="invoice_url" id="Invoice_Url" placeholder=" @lang('lang.Invoice_Url')">
                     </div>
                     <div id="manageAmount" class="flex gap-3 col-span-2">
                         <div>
@@ -508,11 +523,15 @@
                             type: "GET",
                             url: transactionUrl,
                             success: function(response) {
+                                console.log(response.data);
+
                                 $('#verification').val(status).trigger(
                                     'change');
                                 $('#total_amount').val(response.invouceAmout
                                     .total_amount)
                                 $('#payable_amount').val(response.data.credit);
+                                $('#Invoice_Url').val(response.invouceAmout
+                                    .invoice_url);
                                 $('#paypal_no').val(response.invouceAmout
                                     .paypal_no);
                                 $('#Received_Amount').val(response.invouceAmout
@@ -538,23 +557,28 @@
     let verification = document.getElementById("verification");
     let manageAmount = document.getElementById("manageAmount");
     let Input = document.getElementById("hideInput");
+    let Input2 = document.getElementById("hideInput2");
 
 
     manageAmount.style.display = "none";
     Input.style.display = "none";
+    Input2.style.display = "none";
 
     function show() {
         if (verification.value === 'approved') {
             manageAmount.style.display = "flex";
             Input.style.display = "block";
+            Input2.style.display = "block";
         } else if (verification.value === "processing") {
 
             Input.style.display = "block";
+            Input2.style.display = "block";
 
 
         } else {
             manageAmount.style.display = "none";
             Input.style.display = "none";
+            Input2.style.display = "none";
         }
     }
 

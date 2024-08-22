@@ -23,13 +23,14 @@ return new class extends Migration
             $table->string("payment_method");
             $table->string("website");
             $table->string("status");
-            $table->string("cust_name");
-            $table->string("cust_email");
-            $table->string("cust_phone_no");
+            $table->string("cust_name")->nullable();
+            $table->string("cust_email")->nullable();;
+            $table->string("cust_phone_no")->nullable();;
             $table->string("total_amount")->nullable();
             $table->string("payable_amount")->nullable();
             $table->string("received_amount")->nullable();
             $table->text("description")->nullable();
+            $table->string("invoice_url")->nullable();
             $table->dateTime("datetime")->useCurrent();
         });
     }

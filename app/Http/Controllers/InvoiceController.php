@@ -21,10 +21,10 @@ class InvoiceController extends Controller
                 "currency" => "required",
                 "payment_method" => "required",
                 "website" => "required",
-                "cust_name" => "required",
-                "cust_email" => "required",
-                "cust_phone_no" => "required",
-                "description" => "required",
+                "cust_name" => "nullable",
+                "cust_email" => "nullable",
+                "cust_phone_no" => "nullable",
+                "description" => "nullable",
             ]);
 
 
@@ -94,7 +94,7 @@ class InvoiceController extends Controller
             $InvoiceTrans = Transaction::where('id', $id)->first();
             $invouceAmout =
                 Invoice::where('transaction_id', $id)
-                ->select('total_amount', 'paypal_no', 'received_Amount')
+                ->select('total_amount', 'paypal_no', 'received_Amount', 'invoice_url')
                 ->first();
             return response()->json(["success" => true,  "data" => $InvoiceTrans, "invouceAmout" => $invouceAmout], 200);
         } catch (\Exception $e) {
@@ -114,6 +114,7 @@ class InvoiceController extends Controller
                 "note" => "nullable",
                 "paypal_no" => "nullable",
                 "received_amount" => "nullable",
+                "invoice_url" => "nullable",
             ]);
 
 
@@ -137,6 +138,7 @@ class InvoiceController extends Controller
             $updateStatus->payable_amount =  $validatedData['payable_amount'];
             $updateStatus->paypal_no =  $validatedData['paypal_no'];
             $updateStatus->received_amount =  $validatedData['received_amount'];
+            $updateStatus->invoice_url =  $validatedData['invoice_url'];
             $updateStatus->update();
             return redirect('requestInvoice');
             // return response()->json(["success" => true,  "message" => "data get successfully"], 200);
@@ -177,10 +179,10 @@ class InvoiceController extends Controller
                 "currency" => "required",
                 "payment_method" => "required",
                 "website" => "required",
-                "cust_name" => "required",
-                "cust_email" => "required",
-                "cust_phone_no" => "required",
-                "description" => "required",
+                "cust_name" => "nullable",
+                "cust_email" => "nullable",
+                "cust_phone_no" => "nullable",
+                "description" => "nullable",
             ]);
 
 
