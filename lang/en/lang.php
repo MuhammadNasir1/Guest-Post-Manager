@@ -339,5 +339,9 @@ return [
     "Payment_Voucher" => "Payment Voucher",
     "Total_Sites" => "Total Sites",
     "Total_Users" => "Total Users",
+    "Insertion_Price" => "Insertion Price",
+    "Select_User" => "Select User",
+    "Filter_by_User" => "Filter by User",
+    "All" => "All",
 
 ];

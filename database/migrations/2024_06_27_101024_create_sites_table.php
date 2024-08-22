@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('casino');
             $table->string('category');
             $table->text('guideline');
+            $table->text('insertion_currency');
             $table->timestamps();
         });
     }

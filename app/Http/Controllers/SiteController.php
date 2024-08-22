@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Site;
+use App\Models\User;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -29,6 +30,7 @@ class SiteController extends Controller
                 "casino" => "required",
                 "category" => "required",
                 "guideline" => "required",
+                "insertion_currency" => "required",
             ]);
 
             $site = new Site;
@@ -49,6 +51,7 @@ class SiteController extends Controller
             $site->casino = $validatedData['casino'];
             $site->category = $validatedData['category'];
             $site->guideline = $validatedData['guideline'];
+            $site->insertion_currency = $validatedData['insertion_currency'];
 
             $site->save();
             return redirect("../addSite");
@@ -57,19 +60,24 @@ class SiteController extends Controller
         }
     }
 
-    public function getSite()
+    public function getSite(Request $request)
     {
+
         $userId = session('user_det')['user_id'];
         $userRole = session('user_det')['role'];
+        $users =  User::wherenot('role', 'admin')->get();
         if ($userRole == "admin" || $userRole == "manager") {
+            if ($request->has('filter') & $request['filter'] !== "All") {
+                $data = Site::where('user_id', $request['filter'])->get();
+            } else {
 
-
-            $data = Site::all();
+                $data = Site::all();
+            }
         } else {
 
             $data = Site::where('user_id', $userId)->get();
         }
-        return view("addsites", compact('data'));
+        return view("addsites", compact('data', 'users'));
     }
 
     public function updateData(string $id)
@@ -107,6 +115,7 @@ class SiteController extends Controller
                 "casino" => "required",
                 "category" => "required",
                 "guideline" => "required",
+                "insertion_currency" => "required",
             ]);
 
             $site = Site::find($id);
@@ -127,6 +136,7 @@ class SiteController extends Controller
             $site->casino = $validatedData['casino'];
             $site->category = $validatedData['category'];
             $site->guideline = $validatedData['guideline'];
+            $site->insertion_currency = $validatedData['insertion_currency'];
             $site->update();
             return redirect("../addSite");
         } catch (\Exception $error) {
