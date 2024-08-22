@@ -10,8 +10,7 @@ class CompanyController extends Controller
     public function addCompany(Request $request)
     {
 
-        $company = new Company;
-
+        $company =  Company::where('id', 1)->first();
         if ($request->hasFile('upload_image')) {
             $upload_image = $request->file('upload_image');
             $name = time() . '.' . $upload_image->getClientOriginalExtension();
@@ -28,7 +27,8 @@ class CompanyController extends Controller
         $company->address = $request->company_address;
         $company->personal_no = $request->personal_no;
 
-        $company->save();
+        $company->update();
+        return response()->json($company);
         return redirect('company');
     }
 }
