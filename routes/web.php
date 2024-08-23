@@ -27,9 +27,7 @@ Route::get('/login', function () {
 Route::get('/notifications', function () {
     return view('notification');
 });
-Route::get('/company', function () {
-    return view('company');
-});
+
 
 
 Route::middleware('custom')->group(function () {
@@ -75,6 +73,7 @@ Route::middleware('custom')->group(function () {
 
     Route::controller(CompanyController::class)->group(function () {
         Route::post('/addComapany', 'addCompany')->name('addCompany');
+        Route::get('/company', 'index');
     });
     Route::controller(InvoiceController::class)->group(function () {
         Route::post('/request_invoice', 'addSite')->name('requestInvoice');

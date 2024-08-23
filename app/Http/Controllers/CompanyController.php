@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
+
+    public function index()
+    {
+        $data = Company::find(1);
+        return view('company', compact('data'));
+    }
     public function addCompany(Request $request)
     {
 
@@ -17,18 +23,17 @@ class CompanyController extends Controller
             $upload_image->storeAs('public/company_logo', $name);
             $company->logo = 'storage/company_logo/' . $name;
         }
-        $company->name = $request->company_name;
-        $company->phone_no = $request->company_phone;
-        $company->email_or_website = $request->email_or_website;
-        $company->primary_color = $request->primary_color;
-        $company->secondary_color = $request->secondary_color;
-        $company->personal_no = $request->personal_no;
-        $company->ntn = $request->company_ntn;
-        $company->address = $request->company_address;
-        $company->personal_no = $request->personal_no;
+        $company->name = $request["company_name"];
+        $company->phone_no = $request["company_phone"];
+        $company->email_or_website = $request["email_or_website"];
+        $company->primary_color = $request["primary_color"];
+        $company->secondary_color = $request["secondary_color"];
+        $company->personal_no = $request["personal_no"];
+        $company->ntn = $request["company_ntn"];
+        $company->address = $request["company_address"];
+        $company->personal_no = $request["personal_no"];
 
         $company->update();
-        return response()->json($company);
         return redirect('company');
     }
 }

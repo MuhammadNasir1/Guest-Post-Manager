@@ -15,8 +15,7 @@
                     <div class="h-[200px] w-[200px] relative  rounded-[50%]">
                         <img id="img_view" height="200px" width="200px"
                             class="h-[200px] w-[200px]  border border-primary  rounded-[50%] cursor-pointer object-contain "
-                            src=" {{ isset($user->user_image) ? asset($user->user_image) : 'images/owlicon.svg' }}"
-                            alt="user">
+                            src=" {{ isset($data->logo) ? asset($data->logo) : 'images/owlicon.svg' }}" alt="user">
                         <input class="absolute top-0 opacity-0     h-[210px] w-[200px] z-50 cursor-pointer "
                             type="file" name="upload_image" id="user_image">
                         <div class="absolute bottom-[6px] right-5  z-10 ">
@@ -40,7 +39,8 @@
                             Name</label>
                         <input type="text"
                             class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                            name="company_name" id="company_name" placeholder="Enter Company Name" value="">
+                            name="company_name" id="company_name" placeholder="Enter Company Name"
+                            value="{{ $data->name ?? '' }}" required>
                     </div>
 
                     <div class="md:w-[50%]  w-full mt-4">
@@ -48,7 +48,8 @@
                             No</label>
                         <input type="number"
                             class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                            name="company_phone" id="company_phone" placeholder="Enter Company No" value="">
+                            name="company_phone" id="company_phone" placeholder="Enter Company No"
+                            value="{{ $data->phone_no ?? '' }}" required>
                     </div>
                 </div>
                 <div class="md:flex gap-[30px] mt-3">
@@ -58,7 +59,8 @@
                             Website</label>
                         <input type="text"
                             class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                            name="email_or_website" id="email_or_website" placeholder="Email or Website" value="">
+                            name="email_or_website" id="email_or_website" placeholder="Email or Website"
+                            value="{{ $data->email_or_website ?? '' }}" required>
                     </div>
 
                     <div class="md:flex md:w-[50%]   gap-[30px]">
@@ -67,7 +69,7 @@
                                 Color</label>
                             <input type="color"
                                 class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                name="primary_color" id="primary_color" value="">
+                                name="primary_color" id="primary_color" value="{{ $data->primary_color ?? '' }}">
                         </div>
                         <div class=" w-full mt-4">
                             <label class="text-[16px] font-semibold block  text-[#452C88]"
@@ -75,7 +77,7 @@
                                 Color</label>
                             <input type="color"
                                 class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                name="secondary_color" id="secondary_color" value="">
+                                name="secondary_color" id="secondary_color" value="{{ $data->secondary_color ?? '' }}">
                         </div>
                     </div>
                 </div>
@@ -85,7 +87,8 @@
                             Personal No</label>
                         <input type="text"
                             class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                            name="personal_no" id="personal_no" placeholder="Enter Personal No" value="">
+                            name="personal_no" id="personal_no" placeholder="Enter Personal No"
+                            value="{{ $data->personal_no ?? '' }}">
                     </div>
 
                     <div class="md:w-[50%]  w-full mt-4">
@@ -93,7 +96,8 @@
                             Ntn</label>
                         <input type="text"
                             class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                            name="company_ntn" placeholder="Enter Comapny Ntn" id="company_ntn" value="">
+                            name="company_ntn" placeholder="Enter Comapny Ntn" id="company_ntn"
+                            value="{{ $data->ntn ?? '' }}">
                     </div>
                 </div>
                 <div class=" mt-4">
@@ -103,7 +107,7 @@
                         <input type="text"
                             class="w-full mt-2  border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
                             name="company_address" id="company_address" placeholder="Enter Company Address"
-                            value="">
+                            value="{{ $data->address ?? '' }}">
                     </div>
                 </div>
 
