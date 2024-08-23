@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->string('logo');
-            $table->string('name');
-            $table->string('phone_no');
-            $table->text('email_or_website');
-            $table->text('primary_color');
-            $table->text('secondary_color');
-            $table->text('personal_no');
-            $table->text('ntn');
-            $table->text('address');
+            $table->string('logo')->nullable();
+            $table->string('name')->nullable();
+            $table->string('phone_no')->nullable();
+            $table->string('email_or_website')->nullable();
+            $table->string('primary_color')->nullable();
+            $table->string('secondary_color')->nullable();
+            $table->string('personal_no')->nullable();
+            $table->string('ntn')->nullable();
+            $table->text('address')->nullable();
             $table->dateTime('datetime')->useCurrent();
         });
     }
