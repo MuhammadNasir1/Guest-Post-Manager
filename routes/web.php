@@ -130,6 +130,7 @@ Route::middleware('custom')->group(function () {
         Route::get('/delRecord/{id}', 'deleteRecord')->name("getForUpdateRecord");
         Route::get('/update-customer/{id}', 'getForUpdate');
         Route::post('/updateRecord/{id}', 'update');
+        Route::get('/getClientData/{id}', 'getSelectedData');
     });
 });
 Route::get('home', function () {

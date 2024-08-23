@@ -99,4 +99,16 @@ class RecordController extends Controller
             return response()->json(['success' => false, 'message' => $error->getMessage()]);
         }
     }
+
+    public function getSelectedData($id)
+    {
+
+        try {
+
+            $clientData = Record::find($id);
+            return response()->json(['data' => $clientData], 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
 }

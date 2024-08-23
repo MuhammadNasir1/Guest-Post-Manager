@@ -287,7 +287,19 @@
 
                 </div>
             </div>
-            <div class="grid md:grid-cols-3 gap-6 mx-6 my-6">
+            <div class="grid md:grid-cols-4 gap-6 mx-6 my-6">
+                <div>
+                    <label class="text-[14px] font-normal" for="clientSelect">@lang('lang.Customers')</label>
+                    <select name="client" id="clientSelect">
+                        <option>@lang('lang.Select_Customer')</option>
+                        @lang('lang.All')</option>
+
+                        @foreach ($clients as $client)
+                            <option value="{{ $client->id }}">{{ $client->client_name }}</option>
+                        @endforeach
+
+                    </select>
+                </div>
                 <div>
                     <label class="text-[14px] font-normal" for="cust_name">@lang('lang.Customer_Name')</label>
                     <input type="text"
@@ -507,6 +519,25 @@
     }
     dropdownrun();
     $(document).ready(function() {
+        $('#clientSelect').on('change select', function() {
+            var clientId = $(this).val();
+            $.ajax({
+                type: "GET",
+                url: "../getClientData/" + clientId,
+                success: function(response) {
+                    $('#cust_name').val(response.data.client_name);
+                    $('#customer_email').val(response.data.client_email);
+                    $('#customer_phone_no').val(response.data.client_contact);
+                },
+
+
+            });
+
+            // Add your logic here based on the selected clientId
+        });
+
+
+
 
         $('.ChangeStatusBtn').click(function() {
             var invoiceId = $(this).attr('invoiceId');
@@ -551,6 +582,11 @@
 
         })
 
+
+        $('#filter').change(function() {
+            let userId = $(this).val();
+            $('#filterForm').submit();
+        })
     })
 
 
@@ -596,9 +632,4 @@
 
         postId.setAttribute("action", "../addTransaction/" + invoice_id.value);
     }
-
-    $('#filter').change(function() {
-        let userId = $(this).val();
-        $('#filterForm').submit();
-    })
 </script>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoice;
+use App\Models\Record;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -73,8 +74,8 @@ class InvoiceController extends Controller
             $userData = User::where('id', $user)->first();
             $datas->user = $userData;
         }
-
-        return view("request_invoice", compact('data', 'users'));
+        $clients = Record::all();
+        return view("request_invoice", compact('data', 'users', 'clients'));
     }
 
 
