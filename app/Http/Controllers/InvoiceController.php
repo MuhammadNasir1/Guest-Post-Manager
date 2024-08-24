@@ -165,7 +165,8 @@ class InvoiceController extends Controller
             $datas->user = $userData;
         }
         $Invoicedata = Invoice::find($id);
-        return view("request_invoice", compact('data', 'Invoicedata',  'users'));
+        $clients = Record::all();
+        return view("request_invoice", compact('data', 'Invoicedata',  'users', 'clients'));
     }
 
     public function updateInvoice(Request $request, $id)

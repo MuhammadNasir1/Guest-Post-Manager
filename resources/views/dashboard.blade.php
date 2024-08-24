@@ -35,21 +35,22 @@
                 </div>
             </div>
         </div>
-
-        <div class="card-1 ">
-            <div class="bg-white  border border-secondary rounded-[10px] py-5 px-8">
-                <div class="flex gap-1 justify-between items-center">
-                    <div>
-                        <p class="text-sm text-[#808191]">@lang('lang.Total_Users')</p>
-                        <h2 class="text-2xl font-semibold mt-1">{{ $dasboard_data['total_user'] }}</h2>
-                    </div>
-                    <div>
-                        <img width="50px" height="50px" src="{{ asset('images/icons/customers.svg') }}"
-                            alt="User">
+        @if (session('user_det')['role'] == 'admin')
+            <div class="card-1 ">
+                <div class="bg-white  border border-secondary rounded-[10px] py-5 px-8">
+                    <div class="flex gap-1 justify-between items-center">
+                        <div>
+                            <p class="text-sm text-[#808191]">@lang('lang.Total_Users')</p>
+                            <h2 class="text-2xl font-semibold mt-1">{{ $dasboard_data['total_user'] }}</h2>
+                        </div>
+                        <div>
+                            <img width="50px" height="50px" src="{{ asset('images/icons/customers.svg') }}"
+                                alt="User">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endif
     </div>
 
 </div>
