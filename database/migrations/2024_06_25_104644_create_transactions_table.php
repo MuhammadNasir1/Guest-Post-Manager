@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('debit')->nullable();
             $table->string('balance');
             $table->string('user_id');
-            $table->string('transaction_remarks');
+            $table->string('transaction_remarks')->nullable();
             $table->dateTime('transaction_date')->useCurrent();
             $table->string('transaction_type');
             $table->string('transaction_form');

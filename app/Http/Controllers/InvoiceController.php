@@ -60,6 +60,8 @@ class InvoiceController extends Controller
 
             if ($request->has('filter') & $request['filter'] !== "All") {
                 $data = Invoice::where('user_id', $request['filter'])->get();
+            } else if ($request->has('status') & $request['status'] !== "All") {
+                $data = Invoice::where('status', $request['status'])->get();
             } else {
 
                 $data = Invoice::all();

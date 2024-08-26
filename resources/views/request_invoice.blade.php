@@ -8,21 +8,41 @@
             <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
                 <div>
                     @if (session('user_det')['role'] == 'admin')
-                        <form id="filterForm">
 
-                            <label class="text-[14px] font-normal" for="filter">@lang('lang.Filter_by_User')</label>
-                            <select name="filter" id="filter">
-                                <option disabled>@lang('lang.Select_User')</option>
-                                <option {{ request('filter') == 'All' ? 'selected' : '' }} value="All">
-                                    @lang('lang.All')</option>
+                        <div class="flex gap-2">
+                            <form id="filterForm">
+                                <div>
+                                    <label class="text-[14px] font-normal" for="filter">@lang('lang.Filter_by_User')</label>
+                                    <select name="filter" id="filter">
+                                        <option disabled>@lang('lang.Select_User')</option>
+                                        <option {{ request('filter') == 'All' ? 'selected' : '' }} value="All">
+                                            @lang('lang.All')</option>
 
-                                @foreach ($users as $user)
-                                    <option {{ request('filter') == $user->id ? 'selected' : '' }}
-                                        value="{{ $user->id }}">{{ $user->name }}</option>
-                                @endforeach
+                                        @foreach ($users as $user)
+                                            <option {{ request('filter') == $user->id ? 'selected' : '' }}
+                                                value="{{ $user->id }}">{{ $user->name }}</option>
+                                        @endforeach
 
-                            </select>
-                        </form>
+                                    </select>
+                                </div>
+                            </form>
+                            <form id="filterStatusForm">
+                                <div>
+                                    <label class="text-[14px] font-normal" for="filterStatus">@lang('lang.Status')</label>
+                                    <select name="status" id="filterStatus">
+                                        <option selected disabled>@lang('lang.Select_Status')</option>
+                                        <option {{ request('status') == 'All' ? 'selected' : '' }} value="All">
+                                            @lang('lang.All')</option>
+                                        <option {{ request('status') == 'pending' ? 'selected' : '' }} value="pending">
+                                            @lang('lang.Pending')</option>
+                                        <option {{ request('status') == 'processing' ? 'selected' : '' }}
+                                            value="processing">@lang('lang.Processing')</option>
+                                        <option {{ request('status') == 'approved' ? 'selected' : '' }}
+                                            value="approved">@lang('lang.Approved')</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
                     @endif
                 </div>
 
@@ -59,7 +79,8 @@
                             <tr>
                                 <input type="hidden" value="{{ $data->id }}"
                                     id="invoice_id_{{ $loop->iteration }}">
-                                <input type="hidden" value="{{ $data->user_id }}" id="user_id_{{ $loop->iteration }}">
+                                <input type="hidden" value="{{ $data->user_id }}"
+                                    id="user_id_{{ $loop->iteration }}">
                                 <input type="hidden" value="{{ $data->transaction_id }}"
                                     id="transaction_id_{{ $loop->iteration }}">
                                 <td class="text-sm">{{ $loop->iteration }}</td>
@@ -449,7 +470,7 @@
                 <div class="mt-3 mx-6">
                     <label class="text-[14px] font-normal" for="note">@lang('lang.Add_Note')</label>
                     <textarea name="note" class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary h-[80px] text-[14px]"
-                        id="note" placeholder="@lang('lang.Note_Here')" required></textarea>
+                        id="note" placeholder="@lang('lang.Note_Here')"></textarea>
                 </div>
                 <div class="flex justify-end ">
                     <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold "
@@ -589,6 +610,12 @@
         $('#filter').change(function() {
             let userId = $(this).val();
             $('#filterForm').submit();
+        })
+
+
+
+        $('#filterStatus').change(function() {
+            $('#filterStatusForm').submit();
         })
     })
 
