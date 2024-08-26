@@ -67,7 +67,9 @@
                                 <td class="text-sm"><a target="_blank" href="{{ $data->invoice_url }}"
                                         class="text-blue-600">{{ $data->invoice_url }}</a></td>
                                 <td class="text-sm">{{ $data->amount }}</td>
-                                <td class="text-sm"> {{ $data->received_amount }} / {{ $data->payable_amount }} </td>
+                                <td class="text-sm"> {{ $data->received_amount }} <br> <span class="border-t-2">
+                                        {{ $data->payable_amount }}</span>
+                                </td>
                                 <td class="text-sm">{{ $data->currency }}</td>
                                 <td class="text-sm">{{ $data->payment_method }}</td>
                                 <td class="text-sm"><a target="_blank" href="{{ $data->website }}"

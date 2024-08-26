@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string("client_company")->nullable();
             $table->string("client_email")->nullable();
             $table->string("client_profile")->nullable();
-            $table->string("client_contact");
+            $table->string("client_contact")->nullable();
             $table->timestamps();
         });
     }

@@ -207,23 +207,13 @@
                         value="{{ $site->guest_post_price ?? '' }}">
 
                 </div>
-                <div class="flex gap-2">
-                    <div>
-                        <label class="text-[14px] font-normal" for="link_insertion_price">@lang('lang.Insertion_Price')<span
-                                class="text-red-700 text-xl">*</span></label>
-                        <input type="number" min="1"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="link_insertion_price" id="link_insertion_price" placeholder=" @lang('lang.Link_Insertion_Price')"
-                            value="{{ $site->link_insertion_price ?? '' }}">
-                    </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="insertion_currency">@lang('lang.Currency')<span
-                                class="text-red-700 text-xl">*</span></label>
-                        <input type="text" min="1"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="insertion_currency" id="insertion_currency" placeholder=" @lang('lang.Currency')"
-                            value="{{ $site->insertion_currency ?? '' }}">
-                    </div>
+                <div>
+                    <label class="text-[14px] font-normal" for="link_insertion_price">@lang('lang.Insertion_Price')<span
+                            class="text-red-700 text-xl">*</span></label>
+                    <input type="text" min="1"
+                        class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                        name="link_insertion_price" id="link_insertion_price" placeholder=" @lang('lang.Link_Insertion_Price')"
+                        value="{{ $site->link_insertion_price ?? '' }}">
                 </div>
                 <div class="flex gap-4">
                     <div>
@@ -264,9 +254,8 @@
                     </select>
                 </div>
                 <div>
-                    <label class="text-[14px] font-normal" for="contact_no">@lang('lang.Contact_No')<span
-                            class="text-red-700 text-xl">*</span></label>
-                    <input type="number" min="1" required
+                    <label class="text-[14px] font-normal" for="contact_no">@lang('lang.Contact_No')</label>
+                    <input type="number" min="1"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="contact_no" id="contact_no" placeholder=" @lang('lang.Contact_No')"
                         value="{{ $site->contact_no ?? '' }}">

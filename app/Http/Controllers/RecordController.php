@@ -17,7 +17,7 @@ class RecordController extends Controller
                 "client_company" => "nullable",
                 "client_email" => "nullable",
                 "client_profile" => "nullable",
-                "client_contact" => "required",
+                "client_contact" => "nullable",
             ]);
 
             $record = new Record;
@@ -81,7 +81,7 @@ class RecordController extends Controller
                 "client_company" => "nullable",
                 "client_email" => "nullable",
                 "client_profile" => "nullable",
-                "client_contact" => "required",
+                "client_contact" => "nullable",
             ]);
 
             $record = Record::find($id);

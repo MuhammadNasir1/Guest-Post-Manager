@@ -178,9 +178,8 @@
                         value="{{ $updateData->client_profile ?? '' }}">
                 </div>
                 <div>
-                    <label class="text-[14px] font-normal" for="client_contact">@lang('lang.Client_Contact')<span
-                            class="text-red-700 text-xl">*</span></label>
-                    <input type="number" min="0" required
+                    <label class="text-[14px] font-normal" for="client_contact">@lang('lang.Client_Contact')</label>
+                    <input type="number" min="0"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="client_contact" id="client_contact" placeholder=" @lang('lang.Client_Contact')"
                         value="{{ $updateData->client_contact ?? '' }}">

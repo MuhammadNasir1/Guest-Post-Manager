@@ -22,7 +22,7 @@ class SiteController extends Controller
                 "guest_post_price" => "required",
                 "link_insertion_price" => "required",
                 "exchange" => "nullable",
-                "contact_no" => "required",
+                "contact_no" => "nullable",
                 "admin_gmail" => "nullable",
                 "site_done_form" => "nullable",
                 "dr" => "nullable",
@@ -30,7 +30,6 @@ class SiteController extends Controller
                 "casino" => "nullable",
                 "category" => "required",
                 "guideline" => "nullable",
-                "insertion_currency" => "required",
             ]);
 
             $site = new Site;
@@ -51,7 +50,7 @@ class SiteController extends Controller
             $site->casino = $validatedData['casino'];
             $site->category = $validatedData['category'];
             $site->guideline = $validatedData['guideline'];
-            $site->insertion_currency = $validatedData['insertion_currency'];
+            $site->insertion_currency = 0;
 
             $site->save();
             return redirect("../addSite");
@@ -108,7 +107,7 @@ class SiteController extends Controller
                 "guest_post_price" => "required",
                 "link_insertion_price" => "required",
                 "exchange" => "nullable",
-                "contact_no" => "required",
+                "contact_no" => "nullable",
                 "admin_gmail" => "nullable",
                 "site_done_form" => "nullable",
                 "dr" => "nullable",
@@ -116,7 +115,6 @@ class SiteController extends Controller
                 "casino" => "nullable",
                 "category" => "required",
                 "guideline" => "nullable",
-                "insertion_currency" => "required",
             ]);
 
             $site = Site::find($id);
@@ -137,7 +135,7 @@ class SiteController extends Controller
             $site->casino = $validatedData['casino'];
             $site->category = $validatedData['category'];
             $site->guideline = $validatedData['guideline'];
-            $site->insertion_currency = $validatedData['insertion_currency'];
+            $site->insertion_currency = 0;
             $site->update();
             return redirect("../addSite");
         } catch (\Exception $error) {

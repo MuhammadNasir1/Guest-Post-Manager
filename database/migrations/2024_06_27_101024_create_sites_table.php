@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('guest_post_price');
             $table->string('link_insertion_price');
             $table->string('exchange')->nullable();
-            $table->string('contact_no');
+            $table->string('contact_no')->nullable();
             $table->string('admin_gmail')->nullable();
             $table->string('site_done_from')->nullable();
             $table->string('dr')->nullable();
@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('casino')->nullable();
             $table->string('category');
             $table->text('guideline')->nullable();
-            $table->string('insertion_currency');
+            $table->string('insertion_currency')->nullable();
             $table->timestamps();
         });
     }
