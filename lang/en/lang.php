@@ -352,5 +352,6 @@ return [
     "Invoice_Url" => "Invoice Url",
     "Select_Customer" => "Select Customer",
     "Select_Status" => "Select Status",
+    "Seller_Name" => "Seller Name",
 
 ];

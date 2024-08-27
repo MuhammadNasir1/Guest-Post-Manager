@@ -45,7 +45,7 @@
                 </div>
 
 
-                <div class="absolute top-10 h-[200px] w-full bg-white rounded-b-lg hidden" id="siteArea">
+                <div class="absolute top-10 min-h-[200px] w-full bg-white rounded-b-lg hidden" id="siteArea">
 
                     <ul class="ml-4 mt-2 min-h-56" id="resOutput">
                         <li class="text-center siteList">No Website Found</li>
@@ -73,6 +73,12 @@
         @lang('lang.STN')
     </div>
     <div class="py-5 px-5 border flex items-center" id="stn">
+
+    </div>
+    <div class="py-5 px-5 border flex items-center font-bold">
+        @lang('lang.Seller_Name')
+    </div>
+    <div class="py-5 px-5 border flex items-center" id="sellerName">
 
     </div>
     <div class="py-5 px-5 border flex items-center font-bold">
@@ -128,6 +134,9 @@
         $('#searchInput').on('focus', function() {
             $('#siteArea').removeClass('hidden').addClass('block');
         });
+        $('#searchInput').on('blur', function() {
+
+        });
         $('#searchInput').on('input', function() {
             let query = $('#searchInput').val();
             $.ajax({
@@ -159,8 +168,12 @@
                     type: "Get",
                     url: url,
                     success: function(response) {
+                        $('#siteArea').removeClass('block').addClass('hidden');
                         let data = response.data
+                        console.log(response);
+
                         $("#stn").text(data.id)
+                        $("#sellerName").text(data.userName.name)
                         $("#url").text(data.web_url)
                         $("#traffic").text(data.traffic)
                         $("#semrushTraffic").text(data.semrush_traffic)
