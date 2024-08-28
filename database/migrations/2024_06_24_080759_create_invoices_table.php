@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string("received_amount")->nullable();
             $table->text("description")->nullable();
             $table->string("invoice_url")->nullable();
+            $table->string("req_invoice_url")->nullable();
             $table->dateTime("datetime")->useCurrent();
         });
     }

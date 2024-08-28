@@ -309,6 +309,9 @@
                     <datalist id="currencies">
                     </datalist>
                 </div>
+
+            </div>
+            <div class="grid grid-cols-4 gap-6 mx-6 ">
                 <div>
                     <label class="text-[14px] font-normal" for="website">@lang('lang.Website')<span
                             class="text-red-700 text-xl">*</span></label>
@@ -316,6 +319,14 @@
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="website" id="website" placeholder=" @lang('lang.Website_URL_Here')"
                         value="{{ $Invoicedata->website ?? '' }}">
+
+                </div>
+                <div>
+                    <label class="text-[14px] font-normal" for="invoiceUrl">@lang('lang.Invoice_Url')</label>
+                    <input type="email" min="1"
+                        class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                        name="req_invoice_url" id="invoiceUrl" placeholder=" @lang('lang.Invoice_Url')"
+                        value=" {{ $Invoicedata->invoice_url ?? '' }}">
 
                 </div>
             </div>

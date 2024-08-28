@@ -355,4 +355,5 @@ return [
     "Seller_Name" => "Seller Name",
     "Site_Details" => "Site Details",
     "Invoice_Details" => "Invoice Details",
+    "Invoice_Url" => "Invoice Url",
 ];
