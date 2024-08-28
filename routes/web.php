@@ -113,6 +113,7 @@ Route::middleware('custom')->group(function () {
 
     Route::get("updateInvoice/{id}", [InvoiceController::class, 'updateInvoiceData']);
     Route::post("updateInvoiceForm/{id}", [InvoiceController::class, 'updateInvoice']);
+    Route::get("viewInvoiceData/{id}", [InvoiceController::class, 'viewInvoiceData']);
 
 
 

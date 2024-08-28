@@ -353,5 +353,6 @@ return [
     "Select_Customer" => "Select Customer",
     "Select_Status" => "Select Status",
     "Seller_Name" => "Seller Name",
-
+    "Site_Details" => "Site Details",
+    "Invoice_Details" => "Invoice Details",
 ];

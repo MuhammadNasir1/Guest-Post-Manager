@@ -54,7 +54,7 @@
                 </div>
 
             </div>
-            <button type="submit"
+            <button type="button"
                 class="inline-flex items-center py-3 px-4 duration-500 ms-2 text-sm font-medium text-white bg-black rounded-lg border border-black  hover:bg-transparent focus:border-white focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 <svg class="w-4 h-4 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 20 20">
@@ -170,7 +170,6 @@
                     success: function(response) {
                         $('#siteArea').removeClass('block').addClass('hidden');
                         let data = response.data
-                        console.log(response);
 
                         $("#stn").text(data.id)
                         $("#sellerName").text(data.userName.name)

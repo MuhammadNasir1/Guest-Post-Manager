@@ -67,7 +67,12 @@ class InvoiceController extends Controller
                 $data = Invoice::all();
             }
         } else {
-            $data = Invoice::where('user_id', $userId)->get();
+            if ($request->has('status') & $request['status'] !== "All") {
+                $data = Invoice::where('status', $request['status'])->Where('user_id', $userId)->get();
+            } else {
+
+                $data = Invoice::where('user_id', $userId)->get();
+            }
         }
 
         foreach ($data as $datas) {
@@ -169,6 +174,12 @@ class InvoiceController extends Controller
         $Invoicedata = Invoice::find($id);
         $clients = Record::all();
         return view("request_invoice", compact('data', 'Invoicedata',  'users', 'clients'));
+    }
+    public function viewInvoiceData($id)
+    {
+
+        $Invoicedata = Invoice::find($id);
+        return response()->json(['data' => $Invoicedata]);
     }
 
     public function updateInvoice(Request $request, $id)

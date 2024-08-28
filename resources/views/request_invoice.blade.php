@@ -7,9 +7,9 @@
         <div>
             <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
                 <div>
-                    @if (session('user_det')['role'] == 'admin')
+                    <div class="flex gap-2">
+                        @if (session('user_det')['role'] == 'admin')
 
-                        <div class="flex gap-2">
                             <form id="filterForm">
                                 <div>
                                     <label class="text-[14px] font-normal" for="filter">@lang('lang.Filter_by_User')</label>
@@ -26,24 +26,26 @@
                                     </select>
                                 </div>
                             </form>
-                            <form id="filterStatusForm">
-                                <div>
-                                    <label class="text-[14px] font-normal" for="filterStatus">@lang('lang.Status')</label>
-                                    <select name="status" id="filterStatus">
-                                        <option selected disabled>@lang('lang.Select_Status')</option>
-                                        <option {{ request('status') == 'All' ? 'selected' : '' }} value="All">
-                                            @lang('lang.All')</option>
-                                        <option {{ request('status') == 'pending' ? 'selected' : '' }} value="pending">
-                                            @lang('lang.Pending')</option>
-                                        <option {{ request('status') == 'processing' ? 'selected' : '' }}
-                                            value="processing">@lang('lang.Processing')</option>
-                                        <option {{ request('status') == 'approved' ? 'selected' : '' }}
-                                            value="approved">@lang('lang.Approved')</option>
-                                    </select>
-                                </div>
-                            </form>
-                        </div>
-                    @endif
+                        @endif
+                        <form id="filterStatusForm">
+                            <div>
+                                <label class="text-[14px] font-normal" for="filterStatus">@lang('lang.Status')</label>
+                                <select name="status" id="filterStatus">
+                                    <option selected disabled>@lang('lang.Select_Status')</option>
+                                    <option {{ request('status') == 'All' ? 'selected' : '' }} value="All">
+                                        @lang('lang.All')</option>
+                                    <option {{ request('status') == 'pending' ? 'selected' : '' }} value="pending">
+                                        @lang('lang.Pending')</option>
+                                    <option {{ request('status') == 'processing' ? 'selected' : '' }}
+                                        value="processing">
+                                        @lang('lang.Processing')</option>
+                                    <option {{ request('status') == 'approved' ? 'selected' : '' }} value="approved">
+                                        @lang('lang.Approved')</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
 
                 <div>
@@ -162,6 +164,12 @@
                                                                 src="{{ asset('images/icons/delete.svg') }}"
                                                                 alt="update">@lang('lang.Delete')</a>
                                                     </li>
+                                                    <li class="py-1 text-black viewSite">
+                                                        <button class="cursor-pointer viewBtn  flex gap-3 items-center"
+                                                            invoiceId="{{ $data->id }}"><img width="38px"
+                                                                src="{{ asset('images/icons/view.svg') }}"
+                                                                alt="View">@lang('lang.Site_Details')</button>
+                                                    </li>
                                                     @if (session('user_det')['role'] == 'admin')
                                                         <li class="py-1 text-black updateStatusBtn"
                                                             updateId="{{ $data->id }}s">
@@ -184,6 +192,7 @@
                                                             </div>
                                                         </li>
                                                     @endif
+
                                                 </ul>
                                             </div>
 
@@ -504,6 +513,129 @@
     </div>
 </div>
 </div>
+
+<button data-modal-target="InvoiceShowModal" data-modal-toggle="InvoiceShowModal" class="hidden"></button>
+
+<div id="InvoiceShowModal" data-modal-backdrop="static"
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
+    <div class="fixed inset-0 transition-opacity">
+        <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
+    </div>
+    <div class="relative p-4 w-full   max-w-6xl max-h-full ">
+        <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
+            <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
+                <h3 class="text-xl font-semibold text-white ">
+                    @lang('lang.Invoice_Details')
+                </h3>
+                <button type="button"
+                    class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
+                    data-modal-hide="InvoiceShowModal">
+                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                </button>
+            </div>
+            <div class="flex justify-center items-center gap-5 flex-col py-4">
+                <div>
+                    <h1 class="text-center text-3xl text-secondary font-semibold">Invoice Details</h1>
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <h1 class="text-right font-semibold">@lang('lang.paypal_Invoice_Id')</h1>
+                    </div>
+                    <div>
+                        <h1 id="paypalNo"></h1>
+
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <h1 class="text-right font-semibold">@lang('lang.Invoice_Url')</h1>
+                    </div>
+                    <div>
+                        <h1 id="InvoiceUrl"></h1>
+
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <h1 class="text-right font-semibold">@lang('lang.Amount')</h1>
+                    </div>
+                    <div>
+                        <h1 id="Amount"></h1>
+
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <h1 class="text-right font-semibold">@lang('lang.Received/Payable')</h1>
+                    </div>
+                    <div>
+                        <h1 id="recPayAmount"> </h1>
+
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <h1 class="text-right font-semibold">@lang('lang.Currency')</h1>
+                    </div>
+                    <div>
+                        <h1 id="Currency"></h1>
+
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <h1 class="text-right font-semibold">@lang('lang.Website')</h1>
+                    </div>
+                    <div>
+                        <h1 id="Website"></h1>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <h1 class="text-right font-semibold">@lang('lang.Customer_Name')</h1>
+                    </div>
+                    <div>
+                        <h1 id="customerName"></h1>
+
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <h1 class="text-right font-semibold">@lang('lang.Email_Phone')</h1>
+                    </div>
+                    <div id="emailPhone">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <h1 class="text-right font-semibold">@lang('lang.Add_From')</h1>
+                    </div>
+                    <div id="addFrom">
+
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <h1 class="text-right font-semibold">@lang('lang.Status')</h1>
+                    </div>
+                    <div>
+                        <h1 id="invoiceStatus"></h1>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+</div>
 @include('layouts.footer')
 
 @if (isset($Invoicedata))
@@ -515,6 +647,8 @@
         });
     </script>
 @endif
+
+
 <script>
     function dropdownrun() {
 
@@ -543,6 +677,41 @@
     }
     dropdownrun();
     $(document).ready(function() {
+        $('.viewBtn').click(function() {
+            let invoiceId = $(this).attr('invoiceId');
+            let url = "../viewInvoiceData/" + invoiceId;
+            console.log(url);
+
+            $.ajax({
+
+                type: "GET",
+                url: url,
+                success: function(response) {
+                    $('#InvoiceShowModal').removeClass("hidden");
+                    $('#InvoiceShowModal').addClass("flex");
+                    console.log(response);
+                    let data = response.data;
+                    $('#paypalNo').text(data.paypal_no);
+                    $('#InvoiceUrl').text(data.invoice_url);
+                    $('#Amount').text(data.amount);
+                    $('#recPayAmount').text(data.received_amount + "/" + data
+                        .payable_amount);
+                    $('#Currency').text(data.currency);
+                    $('#Website').text(data.website);
+                    $('#customerName').text(data.cust_name);
+                    $('#emailPhone').html(`<a href="tel:${data.cust_phone_no}"
+                    class="text-blue-600">${data.cust_phone_no}</a> <br>
+                    <a href="mailto:${data.cust_email}"
+                    class="text-blue-500 mt-1">${data.cust_email}</a>`);
+                    $('#addFrom').text(data.user_id);
+                    $('#invoiceStatus').text(data.status)
+
+
+                }
+            })
+        })
+
+
         $('#clientSelect').on('change select', function() {
             var clientId = $(this).val();
             $.ajax({
