@@ -26,6 +26,7 @@ class InvoiceController extends Controller
                 "cust_email" => "nullable",
                 "cust_phone_no" => "nullable",
                 "description" => "nullable",
+                "req_invoice_url" => "nullable",
             ]);
 
 
@@ -42,6 +43,7 @@ class InvoiceController extends Controller
             $site->cust_email = $validatedData['cust_email'];
             $site->cust_phone_no = $validatedData['cust_phone_no'];
             $site->description = $validatedData['description'];
+            $site->req_invoice_url = $validatedData['req_invoice_url'];
 
             $site->save();
 
@@ -198,6 +200,7 @@ class InvoiceController extends Controller
                 "cust_email" => "nullable",
                 "cust_phone_no" => "nullable",
                 "description" => "nullable",
+                "req_invoice_url" => "nullable",
             ]);
 
 
@@ -214,6 +217,7 @@ class InvoiceController extends Controller
             $site->cust_email = $validatedData['cust_email'];
             $site->cust_phone_no = $validatedData['cust_phone_no'];
             $site->description = $validatedData['description'];
+            $site->req_invoice_url = $validatedData['req_invoice_url'];
 
             $site->update();
 

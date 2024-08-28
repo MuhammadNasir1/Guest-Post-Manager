@@ -323,7 +323,7 @@
                 </div>
                 <div>
                     <label class="text-[14px] font-normal" for="invoiceUrl">@lang('lang.Invoice_Url')</label>
-                    <input type="email" min="1"
+                    <input type="text" min="1"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="req_invoice_url" id="invoiceUrl" placeholder=" @lang('lang.Invoice_Url')"
                         value=" {{ $Invoicedata->invoice_url ?? '' }}">
