@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->string("transaction_id")->nullable();
-            $table->string("invoice_no");
+            $table->string("invoice_no")->nullable();
             $table->date("sending_date");
             $table->string("paypal_no")->nullable();
             $table->string("user_id");
             $table->string("amount");
-            $table->string("currency");
+            $table->string("currency")->nullable();
             $table->string("payment_method");
             $table->string("website");
             $table->string("status");
@@ -32,6 +32,7 @@ return new class extends Migration
             $table->text("description")->nullable();
             $table->string("invoice_url")->nullable();
             $table->string("req_invoice_url")->nullable();
+            $table->string("invoice_status");
             $table->dateTime("datetime")->useCurrent();
         });
     }

@@ -78,6 +78,7 @@ Route::middleware('custom')->group(function () {
     Route::controller(InvoiceController::class)->group(function () {
         Route::post('/request_invoice', 'addSite')->name('requestInvoice');
         Route::get('/requestInvoice', 'siteData')->name('siteData');
+        Route::get('/addSendInvoice', 'addSendInvoiceData');
     });
     Route::controller(SiteController::class)->group(function () {
         Route::post('/addSites', 'siteAdd')->name('addSite');

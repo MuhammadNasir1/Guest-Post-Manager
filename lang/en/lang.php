@@ -356,4 +356,10 @@ return [
     "Site_Details" => "Site Details",
     "Invoice_Details" => "Invoice Details",
     "Invoice_Url" => "Invoice Url",
+    "Sending_Invoice" => "Sending Invoice",
+    "Sending_Source" => "Sending Source",
+    "Pkr_Amount" => "Pkr Amount",
+    "Bank_Name" => "Bank Name",
+    "Transaction_id_bank_name" => "Transaction Id/bank Name",
+    "Local_Bank" => "Local Bank",
 ];

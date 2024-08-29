@@ -44,6 +44,7 @@ class InvoiceController extends Controller
             $site->cust_phone_no = $validatedData['cust_phone_no'];
             $site->description = $validatedData['description'];
             $site->req_invoice_url = $validatedData['req_invoice_url'];
+            $site->invoice_status = "request";
 
             $site->save();
 
@@ -226,4 +227,6 @@ class InvoiceController extends Controller
             return response()->json(['error' => $error->getMessage()]);
         }
     }
+
+    public function addSendInvoiceData(Request $request) {}
 }
