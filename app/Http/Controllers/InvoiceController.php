@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoice;
 use App\Models\Record;
+use App\Models\SendingInvoice;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -60,7 +61,7 @@ class InvoiceController extends Controller
         $users =  User::wherenot('role', 'admin')->get();
         if (session('user_det')['role'] == "admin") {
 
-
+            $clients = Record::all();
             if ($request->has('filter') & $request['filter'] !== "All") {
                 $data = Invoice::where('user_id', $request['filter'])->get();
             } else if ($request->has('status') & $request['status'] !== "All") {
@@ -73,7 +74,7 @@ class InvoiceController extends Controller
             if ($request->has('status') & $request['status'] !== "All") {
                 $data = Invoice::where('status', $request['status'])->Where('user_id', $userId)->get();
             } else {
-
+                $clients = Record::where('user_id', $userId)->get();
                 $data = Invoice::where('user_id', $userId)->get();
             }
         }
@@ -84,7 +85,7 @@ class InvoiceController extends Controller
             $userData = User::where('id', $user)->first();
             $datas->user = $userData;
         }
-        $clients = Record::all();
+
         return view("request_invoice", compact('data', 'users', 'clients'));
     }
 
@@ -163,8 +164,10 @@ class InvoiceController extends Controller
         $users =  User::wherenot('role', 'admin')->get();
         $userId = session('user_det')['user_id'];
         if (session('user_det')['role'] == "admin") {
+            $clients = Record::all();
             $data = Invoice::all();
         } else {
+            $clients = Record::where('user_id', $userId)->get();
             $data = Invoice::where('user_id', $userId)->get();
         }
 
@@ -175,7 +178,7 @@ class InvoiceController extends Controller
             $datas->user = $userData;
         }
         $Invoicedata = Invoice::find($id);
-        $clients = Record::all();
+
         return view("request_invoice", compact('data', 'Invoicedata',  'users', 'clients'));
     }
     public function viewInvoiceData($id)
@@ -228,5 +231,41 @@ class InvoiceController extends Controller
         }
     }
 
-    public function addSendInvoiceData(Request $request) {}
+    public function addSendInvoiceData(Request $request)
+    {
+        try {
+
+            $validatedData = $request->validate([
+
+                "user_id" => 'nullable',
+                "invoice_no" => 'nullable',
+                "sending_date" => 'nullable',
+                "amount" => 'required',
+                "payment_method" => 'required',
+                "website" => 'required',
+                "invoice_url" => 'required',
+                "pkr_amount" => 'nullable',
+                "bank_name" => 'nullable',
+                "Transaction_id" => 'nullable',
+            ]);
+
+            $send_invoice = SendingInvoice::create([
+                "user_id" => session('user_det')['user_id'],
+                "invoice_no" => $validatedData['invoice_no'],
+                "sending_date" => $validatedData['sending_date'],
+                "amount" => $validatedData['amount'],
+                "payment_method" => $validatedData['payment_method'],
+                "website" => $validatedData['website'],
+                "invoice_url" => $validatedData['invoice_url'],
+                "pkr_amount" => $validatedData['pkr_amount'],
+                "bank_name" => $validatedData['bank_name'],
+                "Transaction_id" => $validatedData['Transaction_id'],
+
+
+            ]);
+            return redirect('../requestInvoice');
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
 }

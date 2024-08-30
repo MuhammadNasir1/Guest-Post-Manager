@@ -272,7 +272,7 @@
                         <label class="text-[14px] font-normal" for="invoice_no">@lang('lang.Invoice_No')</label>
                         <input type="number" min="0"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="invoice_no" id="invoice_no" placeholder=" @lang('lang.Invoice_No')"
+                            name="invoice_no" id="invoice_no" placeholder=" @lang('lang.invoice_no')"
                             value="{{ $Invoicedata->invoice_no ?? '' }}">
                     </div>
                     <div>
@@ -319,7 +319,7 @@
                                 class="text-red-700 text-xl">*</span></label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="pkr_Amount" id="pkrAmount" placeholder=" @lang('lang.Pkr_Amount')"
+                            name="pkr_amount" id="pkrAmount" placeholder=" @lang('lang.Pkr_Amount')"
                             value="{{ $Invoicedata->pkr_Amount ?? '' }}">
 
                     </div>
@@ -328,16 +328,16 @@
                                 class="text-red-700 text-xl">*</span></label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="pkr_Amount" id="pkrAmount" placeholder=" @lang('lang.Pkr_Amount')"
-                            value="{{ $Invoicedata->pkr_Amount ?? '' }}">
+                            name="bank_name" id="pkrAmount" placeholder=" @lang('lang.Pkr_Amount')"
+                            value="{{ $Invoicedata->bank_name ?? '' }}">
 
                     </div>
                     <div>
-                        <label class="text-[14px] font-normal" for="bank_namewebsite">@lang('lang.Transaction_id_bank_name')<span
+                        <label class="text-[14px] font-normal" for="Transaction_id">@lang('lang.Transaction_id_bank_name')<span
                                 class="text-red-700 text-xl">*</span></label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="bank_name" id="bank_name" placeholder=" @lang('lang.Transaction_id_bank_name')"
+                            name="Transaction_id" id="Transaction_id" placeholder=" @lang('lang.Transaction_id_bank_name')"
                             value="{{ $Invoicedata->bank_name ?? '' }}">
 
                     </div>
@@ -359,7 +359,7 @@
                     <label class="text-[14px] font-normal" for="invoiceUrl">@lang('lang.Invoice_Url')</label>
                     <input type="text"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="req_invoice_url" id="invoiceUrl" placeholder="@lang('lang.Invoice_Url')"
+                        name="invoice_url" id="invoiceUrl" placeholder="@lang('lang.Invoice_Url')"
                         value="{{ $Invoicedata->invoice_url ?? '' }}">
 
                 </div>
@@ -484,11 +484,11 @@
 
                 </div>
                 <div>
-                    <label class="text-[14px] font-normal" for="invoiceUrl">@lang('lang.Invoice_Url')</label>
-                    <input type="text" min="1"
+                    <label class="text-[14px] font-normal" for="invoiceUrl">@lang('lang.Live_Link')</label>
+                    <input type="text"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="req_invoice_url" id="invoiceUrl" placeholder=" @lang('lang.Invoice_Url')"
-                        value=" {{ $Invoicedata->invoice_url ?? '' }}">
+                        name="req_invoice_url" id="invoiceUrl" placeholder="@lang('lang.Live_Link')"
+                        value="{{ $Invoicedata->invoice_url ?? '' }}">
 
                 </div>
             </div>
@@ -496,7 +496,7 @@
                 <div>
                     <label class="text-[14px] font-normal" for="clientSelect">@lang('lang.Customers')</label>
                     <select name="client" id="clientSelect">
-                        <option>@lang('lang.Select_Customer')</option>
+                        <option selected disabled>@lang('lang.Select_Customer')</option>
                         @lang('lang.All')</option>
 
                         @foreach ($clients as $client)
@@ -510,7 +510,7 @@
                     <input type="text"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="cust_name" id="cust_name" placeholder=" @lang('lang.Customer_Name_Here')"
-                        value=" {{ $Invoicedata->cust_name ?? '' }}">
+                        value="{{ $Invoicedata->cust_name ?? '' }}">
 
                 </div>
                 <div>
@@ -535,7 +535,7 @@
             <div class="mx-6 my-4">
                 <label class="text-[14px] font-normal" for="Description">@lang('lang.Description')</label>
                 <textarea class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[120px] text-[14px]"
-                    name="description" id="Description">{{ $Invoicedata->description ?? '' }}</textarea>
+                    name="description" id="Description" placeholder="@lang('lang.Description')">{{ $Invoicedata->description ?? '' }}</textarea>
 
             </div>
 

@@ -16,13 +16,13 @@ return new class extends Migration
             $table->string('user_id');
             $table->string('invoice_no')->nullable();
             $table->date('sending_date')->nullable();
-            $table->string('Amount');
+            $table->string('amount');
+            $table->string('payment_method');
             $table->string('website');
             $table->string('invoice_url');
-            $table->string('payment_method');
             $table->string('pkr_amount')->nullable();
             $table->string('bank_name')->nullable();
-            $table->string('bank_name')->nullable();
+            $table->string('Transaction_id')->nullable();
             $table->timestamps();
         });
     }
