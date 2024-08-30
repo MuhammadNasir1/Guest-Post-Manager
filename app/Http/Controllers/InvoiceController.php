@@ -62,14 +62,14 @@ class InvoiceController extends Controller
         if (session('user_det')['role'] == "admin") {
             $sendInvoice = SendingInvoice::all();
             $clients = Record::all();
-            if ($request->has('filter') & $request['filter'] !== "All") {
-                $data = Invoice::where('user_id', $request['filter'])->get();
-            } else if ($request->has('status') & $request['status'] !== "All") {
-                $data = Invoice::where('status', $request['status'])->get();
-            } else {
-
-                $data = Invoice::all();
-            }
+            $data = Invoice::query()
+                ->when($request->has('filter') && $request['filter'] !== "All", function ($query) use ($request) {
+                    return $query->where('user_id', $request['filter']);
+                })
+                ->when($request->has('status') && $request['status'] !== "All", function ($query) use ($request) {
+                    return $query->where('status', $request['status']);
+                })
+                ->get();
         } else {
             if ($request->has('status') & $request['status'] !== "All") {
                 $data = Invoice::where('status', $request['status'])->Where('user_id', $userId)->get();

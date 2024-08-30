@@ -7,11 +7,11 @@
         <div>
             <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
                 <div>
-                    <div class="flex gap-2">
-                        @if (session('user_det')['role'] == 'admin')
+                    <form id="filterForm">
+                        <div class="flex gap-2">
 
-                            <form id="filterForm">
-                                <div>
+                            <div>
+                                @if (session('user_det')['role'] == 'admin')
                                     <label class="text-[14px] font-normal" for="filter">@lang('lang.Filter_by_User')</label>
                                     <select name="filter" id="filter">
                                         <option disabled>@lang('lang.Select_User')</option>
@@ -24,10 +24,8 @@
                                         @endforeach
 
                                     </select>
-                                </div>
-                            </form>
-                        @endif
-                        <form id="filterStatusForm">
+                                @endif
+                            </div>
                             <div>
                                 <label class="text-[14px] font-normal" for="filterStatus">@lang('lang.Status')</label>
                                 <select name="status" id="filterStatus">
@@ -43,8 +41,8 @@
                                         @lang('lang.Approved')</option>
                                 </select>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
 
                 </div>
 
@@ -1055,16 +1053,12 @@
         })
 
 
-        $('#filter').change(function() {
-            let userId = $(this).val();
+        $('#filter, #filterStatus').change(function() {
             $('#filterForm').submit();
-        })
+        });
 
 
 
-        $('#filterStatus').change(function() {
-            $('#filterStatusForm').submit();
-        })
 
         $('#bankInfoFeilds').css('display', 'none');
         $('#sendingMethod').change(function() {
