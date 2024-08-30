@@ -60,7 +60,7 @@ class InvoiceController extends Controller
         $userId = session('user_det')['user_id'];
         $users =  User::wherenot('role', 'admin')->get();
         if (session('user_det')['role'] == "admin") {
-
+            $sendInvoice = SendingInvoice::all();
             $clients = Record::all();
             if ($request->has('filter') & $request['filter'] !== "All") {
                 $data = Invoice::where('user_id', $request['filter'])->get();
@@ -76,6 +76,7 @@ class InvoiceController extends Controller
             } else {
                 $clients = Record::where('user_id', $userId)->get();
                 $data = Invoice::where('user_id', $userId)->get();
+                $sendInvoice = SendingInvoice::where('user_id', $userId)->get();
             }
         }
 
@@ -86,7 +87,7 @@ class InvoiceController extends Controller
             $datas->user = $userData;
         }
 
-        return view("request_invoice", compact('data', 'users', 'clients'));
+        return view("request_invoice", compact('data', 'users', 'clients', 'sendInvoice'));
     }
 
 

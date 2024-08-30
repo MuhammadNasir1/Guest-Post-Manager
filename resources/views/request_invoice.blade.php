@@ -48,8 +48,25 @@
 
                 </div>
 
-                <div class="flex gap-4">
-
+                <div class="flex gap-4 items-center">
+                    <div class="flex gap-4 items-center">
+                        <div class="flex items-center ">
+                            <input id="sending" type="radio" value="" name="default-radio"
+                                {{ @$_GET['type'] == 'sending' ? 'checked' : '' }}
+                                class="w-4 h-4 text-primary bg-gray-100 border-gray-300 focus:ring-primary dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="sending"
+                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Sending
+                                Invoice</label>
+                        </div>
+                        <div class="flex items-center ">
+                            <input id="request" type="radio" value="" name="default-radio"
+                                {{ @$_GET['type'] == 'sending' ? '' : 'checked' }}
+                                class="w-4 h-4 text-primary bg-gray-100 border-gray-300 focus:ring-primary dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="request"
+                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Request
+                                Invoice</label>
+                        </div>
+                    </div>
                     <button data-modal-target="sendInvoiceModal" data-modal-toggle="sendInvoiceModal"
                         class="bg-secondary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
                         @lang('lang.Sending_Invoice')</button>
@@ -60,179 +77,249 @@
                 </div>
             </div>
             <div class="overflow-x-auto">
-                <table id="datatable">
-                    <thead class="py-1 bg-primary text-white">
-                        <tr>
-                            <th class="whitespace-nowrap text-sm">@lang('lang.STN')</th>
-                            <th class="whitespace-nowrap text-sm">@lang('lang.paypal_Invoice_Id')</th>
-                            <th class="whitespace-nowrap text-sm">@lang('lang.Invoice_Url')</th>
-                            <th class="whitespace-nowrap text-sm">@lang('lang.Amount')</th>
-                            <th class="whitespace-nowrap text-sm">@lang('lang.Received/Payable')</th>
-                            <th class="whitespace-nowrap text-sm">@lang('lang.Currency')</th>
-                            <th class="whitespace-nowrap text-sm">@lang('lang.Payment_Method')</th>
-                            <th class="whitespace-nowrap text-sm">@lang('lang.Website')</th>
-                            <th class="whitespace-nowrap text-sm">@lang('lang.Customer_Name')</th>
-                            <th class="whitespace-nowrap text-sm"> @lang('lang.Email_Phone')</th>
-                            <th class="whitespace-nowrap text-sm">@lang('lang.Status')</th>
-                            <th class="whitespace-nowrap text-sm">@lang('lang.Add_From')</th>
-                            <th class="flex  justify-center text-sm">@lang('lang.Action')</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-
-                        @foreach ($data as $data)
+                @if (@$_GET['type'] == 'sending')
+                    <table id="datatable">
+                        <thead class="py-1 bg-primary text-white">
                             <tr>
-                                <input type="hidden" value="{{ $data->id }}"
-                                    id="invoice_id_{{ $loop->iteration }}">
-                                <input type="hidden" value="{{ $data->user_id }}"
-                                    id="user_id_{{ $loop->iteration }}">
-                                <input type="hidden" value="{{ $data->transaction_id }}"
-                                    id="transaction_id_{{ $loop->iteration }}">
-                                <td class="text-sm">{{ $loop->iteration }}</td>
-                                <td class="text-sm">{{ $data->paypal_no }}</td>
-                                <td class="text-sm"><a target="_blank" href="{{ $data->invoice_url }}"
-                                        class="text-blue-600">{{ $data->invoice_url }}</a></td>
-                                <td class="text-sm">{{ $data->amount }}</td>
-                                <td class="text-sm"> {{ $data->received_amount }} <br> <span class="border-t-2">
-                                        {{ $data->payable_amount }}</span>
-                                </td>
-                                <td class="text-sm">{{ $data->currency }}</td>
-                                <td class="text-sm">{{ $data->payment_method }}</td>
-                                <td class="text-sm"><a target="_blank" href="{{ $data->website }}"
-                                        class="text-blue-600">{{ $data->website }}</a></td>
-                                <td class="text-sm">{{ $data->cust_name }}</td>
-                                <td class="text-sm"><a href="tel:{{ $data->cust_phone_no }}"
-                                        class="text-blue-600">{{ $data->cust_phone_no }}</a> <br>
-                                    <a href="mailto:{{ $data->cust_email }}"
-                                        class="text-blue-500 mt-1">{{ $data->cust_email }}</a>
-                                </td>
-                                <td>
-                                    @php
-                                        $bgColorClass = '';
-                                        switch ($data->status) {
-                                            case 'pending':
-                                                $bgColorClass = 'bg-red-500';
-                                                break;
-                                            case 'approved':
-                                                $bgColorClass = 'bg-blue-800';
-                                                break;
+                                <th class="whitespace-nowrap text-sm">@lang('lang.STN')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Invoice_No')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Sending_Date')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Amount')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Payment_Method')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Website')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Invoice_Url')</th>
+                                <th class="whitespace-nowrap text-sm"> @lang('lang.Pkr_Amount')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Bank_Name')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Transaction_id')</th>
+                                <th class="flex  justify-center text-sm">@lang('lang.Action')</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                                            case 'confirmed':
-                                                $bgColorClass = 'bg-green-500';
-                                                break;
 
-                                            default:
-                                                $bgColorClass = 'bg-red-600';
-                                                break;
-                                        }
-                                    @endphp
-                                    <button
-                                        class="p-1 rounded-md  capitalize  {{ $bgColorClass }} text-white font-bold text-md">
-                                        {{ $data->status }}</button>
-                                </td>
-                                <td class="text-sm">{{ $data->user->name }}</td>
-
-                                <td>
-                                    @if (session('user_det')['role'] == 'admin' || (session('user_det')['role'] !== 'admin' && $data->status == 'pending'))
+                            @foreach ($sendInvoice as $Invoice)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $Invoice->invoice_no }}</td>
+                                    <td>{{ $Invoice->sending_date }}</td>
+                                    <td>{{ $Invoice->amount }}</td>
+                                    <td>{{ $Invoice->payment_method }}</td>
+                                    <td><a href="{{ $Invoice->website }}" target="_blank" class="text-blue-600"></a>
+                                    </td>
+                                    <td><a href="{{ $Invoice->invoice_url }}" target="_blank"
+                                            class="text-blue-600">{{ $Invoice->invoice_url }}</a></td>
+                                    <td>{{ $Invoice->pkr_amount }}</td>
+                                    <td>{{ $Invoice->bank_name }}</td>
+                                    <td>{{ $Invoice->Transaction_id }}</td>
+                                    <td>
                                         <div class="flex gap-5 items-center justify-center">
 
-
-                                            <button id="dropdownDefaultButton{{ $loop->iteration }}"
-                                                data-dropdown-toggle="dropdown{{ $loop->iteration }}"
-                                                class="text-white bg-secondary font-bold rounded-lg px-5 py-2.5 text-center inline-flex items-center "
-                                                type="button">@lang('lang.Action') <svg class="w-2.5 h-2.5 ms-3"
-                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 10 6">
-                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                                            <button data-modal-target="Updateproductmodal"
+                                                data-modal-toggle="Updateproductmodal"
+                                                class=" updateBtn cursor-pointer  w-[42px]"
+                                                updateId="{{ $Invoice->id }}"><svg width="36" height="36"
+                                                    viewBox="0 0 36 36" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <circle opacity="0.1" cx="18" cy="18" r="18"
+                                                        fill="#233A85" />
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M16.1637 23.6197L22.3141 15.666C22.6484 15.2371 22.7673 14.7412 22.6558 14.2363C22.5593 13.7773 22.277 13.3408 21.8536 13.0097L20.8211 12.1895C19.9223 11.4747 18.8081 11.5499 18.1693 12.3701L17.4784 13.2663C17.3893 13.3785 17.4116 13.544 17.523 13.6343C17.523 13.6343 19.2686 15.0339 19.3058 15.064C19.4246 15.1769 19.5137 15.3274 19.536 15.508C19.5732 15.8616 19.328 16.1927 18.9641 16.2379C18.7932 16.2605 18.6298 16.2078 18.511 16.11L16.6762 14.6502C16.5871 14.5832 16.4534 14.5975 16.3791 14.6878L12.0188 20.3314C11.7365 20.6851 11.64 21.1441 11.7365 21.588L12.2936 24.0035C12.3233 24.1314 12.4348 24.2217 12.5685 24.2217L15.0197 24.1916C15.4654 24.1841 15.8814 23.9809 16.1637 23.6197ZM19.5957 22.8676H23.5928C23.9828 22.8676 24.2999 23.1889 24.2999 23.5839C24.2999 23.9797 23.9828 24.3003 23.5928 24.3003H19.5957C19.2058 24.3003 18.8886 23.9797 18.8886 23.5839C18.8886 23.1889 19.2058 22.8676 19.5957 22.8676Z"
+                                                        fill="#233A85" />
                                                 </svg>
                                             </button>
-
-                                            <!-- Dropdown menu -->
-                                            <div id="dropdown{{ $loop->iteration }}"
-                                                class="z-10 hidden absolute top-1 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                                    aria-labelledby="dropdownDefaultButton{{ $loop->iteration }}">
-                                                    <li class="py-1">
-                                                        <a class="w-[42px] flex items-center gap-3"
-                                                            href="../updateInvoice/{{ $data->id }}"><img
-                                                                width="38px"
-                                                                src="{{ asset('images/icons/update.svg') }}"
-                                                                alt="update">@lang('lang.Edit')</a>
-                                                    </li>
-                                                    <li class="py-1 ">
-                                                        <a class="w-[42px] flex items-center gap-3"
-                                                            href="../deleteInvoice/{{ $data->id }}"> <img
-                                                                width="38px"
-                                                                src="{{ asset('images/icons/delete.svg') }}"
-                                                                alt="update">@lang('lang.Delete')</a>
-                                                    </li>
-                                                    <li class="py-1 text-black viewSite">
-                                                        <button class="cursor-pointer viewBtn  flex gap-3 items-center"
-                                                            invoiceId="{{ $data->id }}"><img width="38px"
-                                                                src="{{ asset('images/icons/view.svg') }}"
-                                                                alt="View">@lang('lang.Site_Details')</button>
-                                                    </li>
-                                                    @if (session('user_det')['role'] == 'admin')
-                                                        <li class="py-1 text-black updateStatusBtn"
-                                                            updateId="{{ $data->id }}s">
-                                                            <div class="flex items-center gap-3">
-                                                                <div
-                                                                    class="bg-primary w-9 text-white p-1.5 rounded-full flex items-center gap-3">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                                        viewBox="0 0 512 512" fill="white">
-                                                                        <path
-                                                                            d="M105.1 202.6c7.7-21.8 20.2-42.3 37.8-59.8c62.5-62.5 163.8-62.5 226.3 0L386.3 160H352c-17.7 0-32 14.3-32 32s14.3 32 32 32H463.5c0 0 0 0 0 0h.4c17.7 0 32-14.3 32-32V80c0-17.7-14.3-32-32-32s-32 14.3-32 32v35.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0C73.2 122 55.6 150.7 44.8 181.4c-5.9 16.7 2.9 34.9 19.5 40.8s34.9-2.9 40.8-19.5zM39 289.3c-5 1.5-9.8 4.2-13.7 8.2c-4 4-6.7 8.8-8.1 14c-.3 1.2-.6 2.5-.8 3.8c-.3 1.7-.4 3.4-.4 5.1V432c0 17.7 14.3 32 32 32s32-14.3 32-32V396.9l17.6 17.5 0 0c87.5 87.4 229.3 87.4 316.7 0c24.4-24.4 42.1-53.1 52.9-83.7c5.9-16.7-2.9-34.9-19.5-40.8s-34.9 2.9-40.8 19.5c-7.7 21.8-20.2 42.3-37.8 59.8c-62.5 62.5-163.8 62.5-226.3 0l-.1-.1L125.6 352H160c17.7 0 32-14.3 32-32s-14.3-32-32-32H48.4c-1.6 0-3.2 .1-4.8 .3s-3.1 .5-4.6 1z" />
-                                                                    </svg>
-                                                                </div>
-                                                                <button class="ChangeStatusBtn"
-                                                                    invoiceId="{{ $data->id }}"
-                                                                    transactionId="{{ $data->transaction_id }}"
-                                                                    data-modal-target="changeStatus"
-                                                                    data-modal-toggle="changeStatus"
-                                                                    onclick="getId({{ $loop->iteration }})">
-                                                                    @lang('lang.Change_Status') </button>
-                                                            </div>
-                                                        </li>
-                                                    @endif
-
-                                                </ul>
-                                            </div>
-
+                                            <a class="w-[42px] md:w-full" href="../delProduct/{{ $Invoice->id }}"><svg
+                                                    width="36" height="36" viewBox="0 0 36 36" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <circle opacity="0.1" cx="18" cy="18" r="18"
+                                                        fill="#DF6F79" />
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M23.4905 13.7433C23.7356 13.7433 23.9396 13.9468 23.9396 14.2057V14.4451C23.9396 14.6977 23.7356 14.9075 23.4905 14.9075H13.0493C12.8036 14.9075 12.5996 14.6977 12.5996 14.4451V14.2057C12.5996 13.9468 12.8036 13.7433 13.0493 13.7433H14.8862C15.2594 13.7433 15.5841 13.478 15.6681 13.1038L15.7642 12.6742C15.9137 12.0889 16.4058 11.7002 16.9688 11.7002H19.5704C20.1273 11.7002 20.6249 12.0889 20.7688 12.6433L20.8718 13.1032C20.9551 13.478 21.2798 13.7433 21.6536 13.7433H23.4905ZM22.5573 22.4946C22.7491 20.7073 23.0849 16.4611 23.0849 16.4183C23.0971 16.2885 23.0548 16.1656 22.9709 16.0667C22.8808 15.9741 22.7669 15.9193 22.6412 15.9193H13.9028C13.7766 15.9193 13.6565 15.9741 13.5732 16.0667C13.4886 16.1656 13.447 16.2885 13.4531 16.4183C13.4542 16.4261 13.4663 16.5757 13.4864 16.8258C13.5759 17.9366 13.8251 21.0305 13.9861 22.4946C14.1001 23.5731 14.8078 24.251 15.8328 24.2756C16.6238 24.2938 17.4387 24.3001 18.272 24.3001C19.0569 24.3001 19.854 24.2938 20.6696 24.2756C21.7302 24.2573 22.4372 23.5914 22.5573 22.4946Z"
+                                                        fill="#D11A2A" />
+                                                </svg>
+                                            </a>
 
                                         </div>
-                                    @endif
-                                </td>
-                                {{-- <div class="flex gap-5 items-center justify-center"> --}}
+                                    </td>
+                                </tr>
+                            @endforeach
 
-                                {{-- <button data-modal-target="Updateproductmodal"
+                        </tbody>
+                    </table>
+                @else
+                    <table id="datatable">
+                        <thead class="py-1 bg-primary text-white">
+                            <tr>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.STN')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.paypal_Invoice_Id')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Invoice_Url')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Amount')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Received/Payable')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Currency')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Payment_Method')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Website')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Customer_Name')</th>
+                                <th class="whitespace-nowrap text-sm"> @lang('lang.Email_Phone')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Status')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Add_From')</th>
+                                <th class="flex  justify-center text-sm">@lang('lang.Action')</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            @foreach ($data as $data)
+                                <tr>
+                                    <input type="hidden" value="{{ $data->id }}"
+                                        id="invoice_id_{{ $loop->iteration }}">
+                                    <input type="hidden" value="{{ $data->user_id }}"
+                                        id="user_id_{{ $loop->iteration }}">
+                                    <input type="hidden" value="{{ $data->transaction_id }}"
+                                        id="transaction_id_{{ $loop->iteration }}">
+                                    <td class="text-sm">{{ $loop->iteration }}</td>
+                                    <td class="text-sm">{{ $data->paypal_no }}</td>
+                                    <td class="text-sm"><a target="_blank" href="{{ $data->invoice_url }}"
+                                            class="text-blue-600">{{ $data->invoice_url }}</a></td>
+                                    <td class="text-sm">{{ $data->amount }}</td>
+                                    <td class="text-sm"> {{ $data->received_amount }} <br> <span class="border-t-2">
+                                            {{ $data->payable_amount }}</span>
+                                    </td>
+                                    <td class="text-sm">{{ $data->currency }}</td>
+                                    <td class="text-sm">{{ $data->payment_method }}</td>
+                                    <td class="text-sm"><a target="_blank" href="{{ $data->website }}"
+                                            class="text-blue-600">{{ $data->website }}</a></td>
+                                    <td class="text-sm">{{ $data->cust_name }}</td>
+                                    <td class="text-sm"><a href="tel:{{ $data->cust_phone_no }}"
+                                            class="text-blue-600">{{ $data->cust_phone_no }}</a> <br>
+                                        <a href="mailto:{{ $data->cust_email }}"
+                                            class="text-blue-500 mt-1">{{ $data->cust_email }}</a>
+                                    </td>
+                                    <td>
+                                        @php
+                                            $bgColorClass = '';
+                                            switch ($data->status) {
+                                                case 'pending':
+                                                    $bgColorClass = 'bg-red-500';
+                                                    break;
+                                                case 'approved':
+                                                    $bgColorClass = 'bg-blue-800';
+                                                    break;
+
+                                                case 'confirmed':
+                                                    $bgColorClass = 'bg-green-500';
+                                                    break;
+
+                                                default:
+                                                    $bgColorClass = 'bg-red-600';
+                                                    break;
+                                            }
+                                        @endphp
+                                        <button
+                                            class="p-1 rounded-md  capitalize  {{ $bgColorClass }} text-white font-bold text-md">
+                                            {{ $data->status }}</button>
+                                    </td>
+                                    <td class="text-sm">{{ $data->user->name }}</td>
+
+                                    <td>
+                                        @if (session('user_det')['role'] == 'admin' || (session('user_det')['role'] !== 'admin' && $data->status == 'pending'))
+                                            <div class="flex gap-5 items-center justify-center">
+
+
+                                                <button id="dropdownDefaultButton{{ $loop->iteration }}"
+                                                    data-dropdown-toggle="dropdown{{ $loop->iteration }}"
+                                                    class="text-white bg-secondary font-bold rounded-lg px-5 py-2.5 text-center inline-flex items-center "
+                                                    type="button">@lang('lang.Action') <svg class="w-2.5 h-2.5 ms-3"
+                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none" viewBox="0 0 10 6">
+                                                        <path stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="2"
+                                                            d="m1 1 4 4 4-4" />
+                                                    </svg>
+                                                </button>
+
+                                                <!-- Dropdown menu -->
+                                                <div id="dropdown{{ $loop->iteration }}"
+                                                    class="z-10 hidden absolute top-1 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                                                        aria-labelledby="dropdownDefaultButton{{ $loop->iteration }}">
+                                                        <li class="py-1">
+                                                            <a class="w-[42px] flex items-center gap-3"
+                                                                href="../updateInvoice/{{ $data->id }}"><img
+                                                                    width="38px"
+                                                                    src="{{ asset('images/icons/update.svg') }}"
+                                                                    alt="update">@lang('lang.Edit')</a>
+                                                        </li>
+                                                        <li class="py-1 ">
+                                                            <a class="w-[42px] flex items-center gap-3"
+                                                                href="../deleteInvoice/{{ $data->id }}"> <img
+                                                                    width="38px"
+                                                                    src="{{ asset('images/icons/delete.svg') }}"
+                                                                    alt="update">@lang('lang.Delete')</a>
+                                                        </li>
+                                                        <li class="py-1 text-black viewSite">
+                                                            <button
+                                                                class="cursor-pointer viewBtn  flex gap-3 items-center"
+                                                                invoiceId="{{ $data->id }}"><img width="38px"
+                                                                    src="{{ asset('images/icons/view.svg') }}"
+                                                                    alt="View">@lang('lang.Site_Details')</button>
+                                                        </li>
+                                                        @if (session('user_det')['role'] == 'admin')
+                                                            <li class="py-1 text-black updateStatusBtn"
+                                                                updateId="{{ $data->id }}s">
+                                                                <div class="flex items-center gap-3">
+                                                                    <div
+                                                                        class="bg-primary w-9 text-white p-1.5 rounded-full flex items-center gap-3">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                            viewBox="0 0 512 512" fill="white">
+                                                                            <path
+                                                                                d="M105.1 202.6c7.7-21.8 20.2-42.3 37.8-59.8c62.5-62.5 163.8-62.5 226.3 0L386.3 160H352c-17.7 0-32 14.3-32 32s14.3 32 32 32H463.5c0 0 0 0 0 0h.4c17.7 0 32-14.3 32-32V80c0-17.7-14.3-32-32-32s-32 14.3-32 32v35.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0C73.2 122 55.6 150.7 44.8 181.4c-5.9 16.7 2.9 34.9 19.5 40.8s34.9-2.9 40.8-19.5zM39 289.3c-5 1.5-9.8 4.2-13.7 8.2c-4 4-6.7 8.8-8.1 14c-.3 1.2-.6 2.5-.8 3.8c-.3 1.7-.4 3.4-.4 5.1V432c0 17.7 14.3 32 32 32s32-14.3 32-32V396.9l17.6 17.5 0 0c87.5 87.4 229.3 87.4 316.7 0c24.4-24.4 42.1-53.1 52.9-83.7c5.9-16.7-2.9-34.9-19.5-40.8s-34.9 2.9-40.8 19.5c-7.7 21.8-20.2 42.3-37.8 59.8c-62.5 62.5-163.8 62.5-226.3 0l-.1-.1L125.6 352H160c17.7 0 32-14.3 32-32s-14.3-32-32-32H48.4c-1.6 0-3.2 .1-4.8 .3s-3.1 .5-4.6 1z" />
+                                                                        </svg>
+                                                                    </div>
+                                                                    <button class="ChangeStatusBtn"
+                                                                        invoiceId="{{ $data->id }}"
+                                                                        transactionId="{{ $data->transaction_id }}"
+                                                                        data-modal-target="changeStatus"
+                                                                        data-modal-toggle="changeStatus"
+                                                                        onclick="getId({{ $loop->iteration }})">
+                                                                        @lang('lang.Change_Status') </button>
+                                                                </div>
+                                                            </li>
+                                                        @endif
+
+                                                    </ul>
+                                                </div>
+
+
+                                            </div>
+                                        @endif
+                                    </td>
+                                    {{-- <div class="flex gap-5 items-center justify-center"> --}}
+
+                                    {{-- <button data-modal-target="Updateproductmodal"
                                             data-modal-toggle="Updateproductmodal"
                                             class=" updateBtn cursor-pointer  w-[42px]"
                                             updateId="{{ $data->id }}"><img width="38px"
                                                 src="{{ asset('images/icons/edit.svg') }}" alt="update"></button> --}}
-                                {{-- <a class="w-[42px] md:w-full" href="../delProduct/{{ $data->id }}"><img
+                                    {{-- <a class="w-[42px] md:w-full" href="../delProduct/{{ $data->id }}"><img
                                                 width="38px" src="{{ asset('images/icons/delete.svg') }}"
                                                 alt="update"></button></a> --}}
-                                {{-- <button data-modal-target="deleteData" data-modal-toggle="deleteData"
+                                    {{-- <button data-modal-target="deleteData" data-modal-toggle="deleteData"
                                             class="delButton" delId="{{ $data->id }}">
                                             <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
                                                 alt="delete" class="cursor-pointer">
                                         </button> --}}
-                                {{-- </div> --}}
+                                    {{-- </div> --}}
 
-                            </tr>
-                        @endforeach
+                                </tr>
+                            @endforeach
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                @endif
             </div>
 
         </div>
     </div>
 </div>
-
-
 
 
 
@@ -315,27 +402,24 @@
 
                 </div> --}}
                     <div>
-                        <label class="text-[14px] font-normal" for="website">@lang('lang.PKR')<span
-                                class="text-red-700 text-xl">*</span></label>
-                        <input type="text" required
+                        <label class="text-[14px] font-normal" for="website">@lang('lang.PKR')</label>
+                        <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="pkr_amount" id="pkrAmount" placeholder=" @lang('lang.Pkr_Amount')"
                             value="{{ $Invoicedata->pkr_Amount ?? '' }}">
 
                     </div>
                     <div>
-                        <label class="text-[14px] font-normal" for="website">@lang('lang.Bank_Name')<span
-                                class="text-red-700 text-xl">*</span></label>
-                        <input type="text" required
+                        <label class="text-[14px] font-normal" for="website">@lang('lang.Bank_Name')</label>
+                        <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="bank_name" id="pkrAmount" placeholder=" @lang('lang.Pkr_Amount')"
                             value="{{ $Invoicedata->bank_name ?? '' }}">
 
                     </div>
                     <div>
-                        <label class="text-[14px] font-normal" for="Transaction_id">@lang('lang.Transaction_id_bank_name')<span
-                                class="text-red-700 text-xl">*</span></label>
-                        <input type="text" required
+                        <label class="text-[14px] font-normal" for="Transaction_id">@lang('lang.Transaction_id_bank_name')</label>
+                        <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="Transaction_id" id="Transaction_id" placeholder=" @lang('lang.Transaction_id_bank_name')"
                             value="{{ $Invoicedata->bank_name ?? '' }}">
@@ -850,6 +934,19 @@
     }
     dropdownrun();
     $(document).ready(function() {
+        $('#sending').change(function() {
+            if ($(this).is(':checked')) {
+                // Redirect to the desired page
+                window.location.href = '../requestInvoice?type=sending';
+            }
+        });
+        $('#request').change(function() {
+            if ($(this).is(':checked')) {
+                // Redirect to the desired page
+                window.location.href = '../requestInvoice';
+            }
+        });
+
         $('.viewBtn').click(function() {
             let invoiceId = $(this).attr('invoiceId');
             let url = "../viewInvoiceData/" + invoiceId;
@@ -914,7 +1011,8 @@
                 type: "GET",
                 url: url,
                 success: function(response) {
-                    if (response.status == "approved" || response.status == "processing") {
+                    if (response.status == "approved" || response.status ==
+                        "processing") {
                         let status = response.status;
                         $.ajax({
                             type: "GET",
@@ -922,22 +1020,30 @@
                             success: function(response) {
                                 console.log(response.data);
 
-                                $('#verification').val(status).trigger(
-                                    'change');
-                                $('#total_amount').val(response.invouceAmout
+                                $('#verification').val(status)
+                                    .trigger(
+                                        'change');
+                                $('#total_amount').val(response
+                                    .invouceAmout
                                     .total_amount)
-                                $('#payable_amount').val(response.data.credit);
-                                $('#Invoice_Url').val(response.invouceAmout
+                                $('#payable_amount').val(response
+                                    .data.credit);
+                                $('#Invoice_Url').val(response
+                                    .invouceAmout
                                     .invoice_url);
-                                $('#paypal_no').val(response.invouceAmout
+                                $('#paypal_no').val(response
+                                    .invouceAmout
                                     .paypal_no);
-                                $('#Received_Amount').val(response.invouceAmout
+                                $('#Received_Amount').val(response
+                                    .invouceAmout
                                     .received_Amount);
                                 $('#note').val(response.data
                                     .transaction_remarks)
-                                var updateUrl = "../updateTransStatus/" +
+                                var updateUrl =
+                                    "../updateTransStatus/" +
                                     transId
-                                $('#postId').attr('action', updateUrl);
+                                $('#postId').attr('action',
+                                    updateUrl);
                             }
                         });
                     }
