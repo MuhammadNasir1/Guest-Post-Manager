@@ -5,26 +5,56 @@
     <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Sites_List')</h3>
     <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white main">
         <div>
-            <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
-                <div>
-                    @if (session('user_det')['role'] == 'admin')
-                        <form id="filterForm">
+            <div class="flex cool justify-end sm:justify-between  items-center px-[20px] mb-3">
+                <form id="filterForm">
+                    <div class="flex gap-4 items-center">
+                        @if (session('user_det')['role'] == 'admin')
+                            <div>
+                                <label class="text-[14px] font-normal" for="filter">@lang('lang.Filter_by_User')</label>
+                                <select name="filter" id="filter">
+                                    <option disabled>@lang('lang.Select_User')</option>
+                                    <option {{ request('filter') == 'All' ? 'selected' : '' }} value="All">
+                                        @lang('lang.All')</option>
 
-                            <label class="text-[14px] font-normal" for="filter">@lang('lang.Filter_by_User')</label>
-                            <select name="filter" id="filter">
-                                <option disabled>@lang('lang.Select_User')</option>
-                                <option {{ request('filter') == 'All' ? 'selected' : '' }} value="All">
-                                    @lang('lang.All')</option>
+                                    @foreach ($users as $user)
+                                        <option {{ request('filter') == $user->id ? 'selected' : '' }}
+                                            value="{{ $user->id }}">{{ $user->name }}</option>
+                                    @endforeach
 
-                                @foreach ($users as $user)
-                                    <option {{ request('filter') == $user->id ? 'selected' : '' }}
-                                        value="{{ $user->id }}">{{ $user->name }}</option>
-                                @endforeach
+                                </select>
+                            </div>
+                        @endif
+                        <div class="mt-1">
+                            <label class="text-[14px] font-normal block" for="maxPrice">@lang('lang.Max_Price')</label>
+                            <input type="number"
+                                class="w-[150px] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="max-price" id="maxPrice" placeholder=" @lang('lang.Max_Price')"
+                                value="{{ request('max-price') }}">
 
-                            </select>
-                        </form>
-                    @endif
-                </div>
+                        </div>
+                        <div class="mt-1">
+                            <label class="text-[14px] font-normal block" for="minTraffic">@lang('lang.Min_Traffic')</label>
+                            <input type="number"
+                                class="w-[150px] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="min-traffic" id="minTraffic" placeholder=" @lang('lang.Min_Traffic')"
+                                value="{{ request('min-traffic') }}">
+
+                        </div>
+                        <div class="mt-1">
+                            <label class="text-[14px] font-normal block" for="maxTraffic">@lang('lang.Max_Traffic')</label>
+                            <input type="number"
+                                class="w-[150px] border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="max-traffic" id="maxTraffic" placeholder=" @lang('lang.Max_Traffic')"
+                                value="{{ request('max-traffic') }}">
+
+                        </div>
+                        <div>
+                            <button
+                                class="bg-primary cursor-pointer text-white h-[42px] px-5 rounded-[6px]  shadow-sm font-semibold mt-5 ">@lang('lang.Search')</button>
+                        </div>
+
+                    </div>
+                </form>
 
                 <div class="flex">
 
@@ -455,10 +485,10 @@
             });
         });
 
-        $('#filter').change(function() {
-            let userId = $(this).val();
-            $('#filterForm').submit();
-        })
+        // $('#filter').change(function() {
+        //     let userId = $(this).val();
+        //     $('#filterForm').submit();
+        // })
 
     });
 </script>

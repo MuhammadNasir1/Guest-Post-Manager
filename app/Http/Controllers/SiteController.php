@@ -64,18 +64,33 @@ class SiteController extends Controller
 
         $userId = session('user_det')['user_id'];
         $userRole = session('user_det')['role'];
-        $users =  User::wherenot('role', 'admin')->get();
+        $users =  User::whereNot('role', 'admin')->get();
+        $query = Site::query();
         if ($userRole == "admin" || $userRole == "manager") {
-            if ($request->has('filter') & $request['filter'] !== "All") {
-                $data = Site::where('user_id', $request['filter'])->get();
-            } else {
-
-                $data = Site::all();
-            }
+            $data = Site::all();
         } else {
 
-            $data = Site::where('user_id', $userId)->get();
+            $query->where('user_id', $userId)->get();
         }
+
+
+        if ($request->filled('filter') && $request->input('filter') !== 'All') {
+            $query->where('user_id', $request->input('filter'));
+        }
+        if ($request->filled('max-price')) {
+            $query->where('guest_post_price', '<=', $request->input('max-price'));
+        }
+
+        if ($request->filled('min-traffic')) {
+            $query->where('traffic', '>=', $request->input('min-traffic'));
+        }
+
+        if ($request->filled('max-traffic')) {
+            $query->where('traffic', '<=', $request->input('max-traffic'));
+        }
+
+        $data = $query->get();
+
         return view("addsites", compact('data', 'users'));
     }
 

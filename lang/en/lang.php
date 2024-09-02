@@ -364,4 +364,8 @@ return [
     "Local_Bank" => "Local Bank",
     "Live_Link" => "Live Link",
     "Transaction_id" => "Transaction id",
+    "Max_Price" => "Max Price",
+    "Min_Traffic" => "Min Traffic",
+    "Max_Traffic" => "Max Traffic",
+    "Search" => "Search",
 ];
