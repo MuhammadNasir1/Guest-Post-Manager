@@ -576,9 +576,9 @@
             </div>
             <div class="grid md:grid-cols-4 gap-6 mx-6 my-6">
                 <div>
-                    <label class="text-[14px] font-normal" for="clientSelect">@lang('lang.Customers')</label>
+                    <label class="text-[14px] font-normal" for="clientSelect">@lang('lang.Client')</label>
                     <select name="client" id="clientSelect">
-                        <option selected disabled>@lang('lang.Select_Customer')</option>
+                        <option selected disabled>@lang('lang.Select_Client')</option>
                         @lang('lang.All')</option>
 
                         @foreach ($clients as $client)
@@ -588,26 +588,26 @@
                     </select>
                 </div>
                 <div>
-                    <label class="text-[14px] font-normal" for="cust_name">@lang('lang.Customer_Name')</label>
+                    <label class="text-[14px] font-normal" for="cust_name">@lang('lang.Client_Name')</label>
                     <input type="text"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="cust_name" id="cust_name" placeholder=" @lang('lang.Customer_Name_Here')"
+                        name="cust_name" id="cust_name" placeholder=" @lang('lang.Client_Name_Here')"
                         value="{{ $Invoicedata->cust_name ?? '' }}">
 
                 </div>
                 <div>
-                    <label class="text-[14px] font-normal" for="customer_email">@lang('lang.Customer_Email')</label>
+                    <label class="text-[14px] font-normal" for="customer_email">@lang('lang.Client_Email')</label>
                     <input type="email" min="1"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="cust_email" id="customer_email" placeholder=" @lang('lang.Customer_Email_Here')"
+                        name="cust_email" id="customer_email" placeholder=" @lang('lang.Client_Email_Here')"
                         value=" {{ $Invoicedata->cust_email ?? '' }}">
 
                 </div>
                 <div>
-                    <label class="text-[14px] font-normal" for="customer_phone_no">@lang('lang.Customer_Phone_No')</label>
+                    <label class="text-[14px] font-normal" for="customer_phone_no">@lang('lang.Client_Phone_No')</label>
                     <input type="number" min="1"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="cust_phone_no" id="customer_phone_no" placeholder=" @lang('lang.Customer_Phone_No')"
+                        name="cust_phone_no" id="customer_phone_no" placeholder=" @lang('lang.Client_Phone_No_Here')"
                         value="{{ $Invoicedata->cust_phone_no ?? '' }}">
 
                 </div>

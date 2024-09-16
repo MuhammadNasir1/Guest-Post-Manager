@@ -368,4 +368,11 @@ return [
     "Min_Traffic" => "Min Traffic",
     "Max_Traffic" => "Max Traffic",
     "Search" => "Search",
+    "Select_Client" => "Select Client",
+    "Client_Name" => "Client Name",
+    "Client_Name_Here" => "Client Name Here",
+    "Client_Email" => "Client Email",
+    "Client_Email_Here" => "Client Email Here",
+    "Client_Phone_No" => "Client Phone No",
+    "Client_Phone_No_Here" => "Client Phone No Here",
 ];

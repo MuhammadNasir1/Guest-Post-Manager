@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('semrush_traffic');
             $table->string('ahref_traffic')->nullable();
             $table->string('traffic_from')->nullable();
-            $table->string('guest_post_price');
-            $table->string('link_insertion_price');
+            $table->string('guest_post_price')->nullable();
+            $table->string('link_insertion_price')->nullable();
             $table->string('exchange')->nullable();
             $table->string('contact_no')->nullable();
             $table->string('admin_gmail')->nullable();

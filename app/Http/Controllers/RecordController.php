@@ -66,9 +66,19 @@ class RecordController extends Controller
 
     public function getForUpdate(string $id)
     {
+        $userId = session('user_det')['user_id'];
+        $userRole = session('user_det')['role'];
+
         $updateData = Record::find($id);
-        $data = Record::all();
         $users =  User::wherenot('role', 'admin')->get();
+
+        if ($userRole == "admin" || $userRole == "manager") {
+
+            $data = Record::all();
+        } else {
+            $data = Record::where('user_id', $userId)->get();
+        }
+
         return view("records", compact('updateData', 'data', 'users'));
     }
 
