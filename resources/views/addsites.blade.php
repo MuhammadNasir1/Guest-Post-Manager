@@ -98,8 +98,14 @@
                             <tr>
                                 <td class="text-sm">{{ $loop->iteration }}</td>
                                 <td class="text-sm">{{ \App\Models\User::find($data->user_id)->name }}</td>
+                                @php
+                                    $url = $data->web_url;
+                                    if (!preg_match('~^(?:f|ht)tps?://~i', $url)) {
+                                        $url = 'http://' . $url;
+                                    }
+                                @endphp
 
-                                <td class="text-sm"><a href="{{ $data->web_url }}" target="_blank"
+                                <td class="text-sm"><a href="{{ $url }}" target="_blank"
                                         class="text-blue-500">{{ $data->web_url }}</a></td>
                                 <td class="text-sm">{{ $data->traffic }}</td>
                                 <td class="text-sm">{{ $data->semrush_traffic }} / {{ $data->ahref_traffic }}</td>
