@@ -60,10 +60,21 @@ class InvoiceController extends Controller
         $userId = session('user_det')['user_id'];
         $users =  User::wherenot('role', 'admin')->get();
         if (session('user_det')['role'] == "admin") {
-            $sendInvoice = SendingInvoice::all();
+            if ($request['type'] == "sending") {
+                if ($request->has('filter') && $request['filter'] !== "All") {
+                    $sendInvoice = SendingInvoice::where("user_id", $request['filter'])->get();
+                } else {
+
+                    $sendInvoice = SendingInvoice::all();
+                }
+            } else {
+                $sendInvoice = SendingInvoice::all();
+            }
+
+
             $clients = Record::all();
             $data = Invoice::query()
-                ->when($request->has('filter') && $request['filter'] !== "All", function ($query) use ($request) {
+                ->when(function ($query) use ($request) {
                     return $query->where('user_id', $request['filter']);
                 })
                 ->when($request->has('status') && $request['status'] !== "All", function ($query) use ($request) {

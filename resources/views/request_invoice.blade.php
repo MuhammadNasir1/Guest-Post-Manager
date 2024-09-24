@@ -8,6 +8,7 @@
             <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
                 <div>
                     <form id="filterForm">
+                        <input type="hidden" value="{{ @$_GET['type'] }}" name="type">
                         <div class="flex gap-2">
 
                             <div>
