@@ -59,6 +59,18 @@ class SiteController extends Controller
         }
     }
 
+
+    protected function convertToNumeric($value)
+    {
+        if (strpos($value, 'k') !== false) {
+            return (float) str_replace('k', '', $value) * 1000;
+        }
+        return (float) $value;
+    }
+    protected function convertToNumericPrice($value)
+    {
+        return (float) str_replace('$', '', $value);
+    }
     public function getSite(Request $request)
     {
 
@@ -77,18 +89,30 @@ class SiteController extends Controller
         if ($request->filled('filter') && $request->input('filter') !== 'All') {
             $query->where('user_id', $request->input('filter'));
         }
-        if ($request->filled('max-price')) {
-            $query->where('guest_post_price', '<=', $request->input('max-price'));
-        }
+        // if ($request->filled('max-price')) {
+        //     $query->where('guest_post_price', '<=', $request->input('max-price'));
+        // }
 
+        // if ($request->filled('min-traffic')) {
+        //     $query->where('traffic', '>=', $request->input('min-traffic'));
+        // }
+
+        // if ($request->filled('max-traffic')) {
+        //     $query->where('traffic', '<=', $request->input('max-traffic'));
+        // }
+        if ($request->filled('max-price')) {
+            $maxPrice = $this->convertToNumericPrice($request->input('max-price'));
+            $query->whereRaw('CAST(REPLACE(guest_post_price, "$", "") AS DECIMAL(10,2)) <= ?', [$maxPrice]);
+        }
         if ($request->filled('min-traffic')) {
-            $query->where('traffic', '>=', $request->input('min-traffic'));
+            $minTraffic = $this->convertToNumeric($request->input('min-traffic'));
+            $query->whereRaw('CAST(REPLACE(traffic, "k", "") AS UNSIGNED) * 1000 >= ?', [$minTraffic]);
         }
 
         if ($request->filled('max-traffic')) {
-            $query->where('traffic', '<=', $request->input('max-traffic'));
+            $maxTraffic = $this->convertToNumeric($request->input('max-traffic'));
+            $query->whereRaw('CAST(REPLACE(traffic, "k", "") AS UNSIGNED) * 1000 <= ?', [$maxTraffic]);
         }
-
         $data = $query->get();
 
         return view("addsites", compact('data', 'users'));
