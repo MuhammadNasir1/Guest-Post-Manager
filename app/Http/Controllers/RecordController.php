@@ -32,7 +32,7 @@ class RecordController extends Controller
 
             return redirect('../customer');
         } catch (\Exception $error) {
-            return response()->json(['success' => false, 'message' => $error->getMessage()]);
+            return response()->json(['success' => false, 'message' => $error->getMessage()], 404);
         }
     }
 
@@ -106,7 +106,7 @@ class RecordController extends Controller
 
             return redirect('../customer');
         } catch (\Exception $error) {
-            return response()->json(['success' => false, 'message' => $error->getMessage()]);
+            return response()->json(['success' => false, 'message' => $error->getMessage()], 400);
         }
     }
 
