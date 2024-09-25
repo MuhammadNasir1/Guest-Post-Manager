@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('amount');
             $table->string('payment_method');
             $table->string('website');
-            $table->string('invoice_url');
+            $table->string('invoice_url')->nullable();
             $table->string('pkr_amount')->nullable();
             $table->string('bank_name')->nullable();
             $table->string('Transaction_id')->nullable();

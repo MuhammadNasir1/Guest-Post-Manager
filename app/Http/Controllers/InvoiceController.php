@@ -279,7 +279,7 @@ class InvoiceController extends Controller
                 "amount" => 'required',
                 "payment_method" => 'required',
                 "website" => 'required',
-                "invoice_url" => 'required',
+                "invoice_url" => 'nullable',
                 "pkr_amount" => 'nullable',
                 "bank_name" => 'nullable',
                 "Transaction_id" => 'nullable',
