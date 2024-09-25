@@ -286,6 +286,9 @@
                         <option value="both" {{ isset($site) && $site->exchange == 'both' ? 'selected' : '' }}>
                             @lang('lang.Both')
                         </option>
+                        <option value="no" {{ isset($site) && $site->exchange == 'no' ? 'selected' : '' }}>
+                            @lang('lang.No')
+                        </option>
                     </select>
                 </div>
                 <div>

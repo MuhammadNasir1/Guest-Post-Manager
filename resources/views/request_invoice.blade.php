@@ -587,11 +587,12 @@
 
                 </div>
                 <div>
-                    <label class="text-[14px] font-normal" for="invoiceUrl">@lang('lang.Live_Link')</label>
+                    <label class="text-[14px] font-normal" for="invoiceUrl">@lang('lang.Live_Link')<span
+                            class="text-red-700 text-xl">*</span></label>
                     <input type="text"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="req_invoice_url" id="invoiceUrl" placeholder="@lang('lang.Live_Link')"
-                        value="{{ $Invoicedata->invoice_url ?? '' }}">
+                        value="{{ $Invoicedata->invoice_url ?? '' }}" required>
 
                 </div>
             </div>
@@ -609,27 +610,30 @@
                     </select>
                 </div>
                 <div>
-                    <label class="text-[14px] font-normal" for="cust_name">@lang('lang.Client_Name')</label>
+                    <label class="text-[14px] font-normal" for="cust_name">@lang('lang.Client_Name') <span
+                            class="text-red-700 text-[12px]">(readonly)</span></label>
                     <input type="text"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="cust_name" id="cust_name" placeholder=" @lang('lang.Client_Name_Here')"
-                        value="{{ $Invoicedata->cust_name ?? '' }}">
+                        value="{{ $Invoicedata->cust_name ?? '' }}" readonly>
 
                 </div>
                 <div>
-                    <label class="text-[14px] font-normal" for="customer_email">@lang('lang.Client_Email')</label>
+                    <label class="text-[14px] font-normal" for="customer_email">@lang('lang.Client_Email') <span
+                            class="text-red-700 text-[12px]">(readonly)</span></label>
                     <input type="email" min="1"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="cust_email" id="customer_email" placeholder=" @lang('lang.Client_Email_Here')"
-                        value=" {{ $Invoicedata->cust_email ?? '' }}">
+                        value=" {{ $Invoicedata->cust_email ?? '' }}" readonly>
 
                 </div>
                 <div>
-                    <label class="text-[14px] font-normal" for="customer_phone_no">@lang('lang.Client_Phone_No')</label>
+                    <label class="text-[14px] font-normal" for="customer_phone_no">@lang('lang.Client_Phone_No') <span
+                            class="text-red-700 text-[12px]">(readonly)</span></label>
                     <input type="number" min="1"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="cust_phone_no" id="customer_phone_no" placeholder=" @lang('lang.Client_Phone_No_Here')"
-                        value="{{ $Invoicedata->cust_phone_no ?? '' }}">
+                        value="{{ $Invoicedata->cust_phone_no ?? '' }}" readonly>
 
                 </div>
 
