@@ -241,7 +241,7 @@
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="guest_post_price" id="guest_post_price" placeholder="$0"
                         value="{{ $site->guest_post_price ?? '' }}"
-                        pattern="^([$€£][0-9]+(\.[0-9]{2})?|[0-9]+(\.[0-9]{2})?[$€£])$">
+                       >
 
                 </div>
                 <div>
@@ -250,7 +250,7 @@
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="link_insertion_price" id="link_insertion_price" placeholder="$0"
                         value="{{ $site->link_insertion_price ?? '' }}"
-                        pattern="^([$€£][0-9]+(\.[0-9]{2})?|[0-9]+(\.[0-9]{2})?[$€£])$">
+                       >
                 </div>
                 <div class="flex gap-4">
                     <div>

@@ -611,11 +611,12 @@
                 </div>
                 <div>
                     <label class="text-[14px] font-normal" for="cust_name">@lang('lang.Client_Name') <span
-                            class="text-red-700 text-[12px]">(readonly)</span></label>
+                            class="text-red-700 text-[12px]">(readonly)</span><span
+                            class="text-red-700 text-xl">*</span></label>
                     <input type="text"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="cust_name" id="cust_name" placeholder=" @lang('lang.Client_Name_Here')"
-                        value="{{ $Invoicedata->cust_name ?? '' }}" readonly>
+                        value="{{ $Invoicedata->cust_name ?? '' }}" readonly required>
 
                 </div>
                 <div>

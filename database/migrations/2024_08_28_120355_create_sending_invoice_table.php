@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('pkr_amount')->nullable();
             $table->string('bank_name')->nullable();
             $table->string('Transaction_id')->nullable();
+            $table->string('status')->default("pending");
             $table->timestamps();
         });
     }

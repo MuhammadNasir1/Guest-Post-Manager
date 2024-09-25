@@ -21,6 +21,7 @@ class SendingInvoice extends Model
         'pkr_amount',
         'bank_name',
         'Transaction_id',
+        'status',
     ];
     protected $timestamp = true;
 }
