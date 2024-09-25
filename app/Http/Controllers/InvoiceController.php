@@ -60,33 +60,48 @@ class InvoiceController extends Controller
         $userId = session('user_det')['user_id'];
         $users =  User::wherenot('role', 'admin')->get();
         if (session('user_det')['role'] == "admin") {
-            if ($request['type'] == "sending") {
-                if ($request->has('filter') && $request['filter'] !== "All") {
-                    $sendInvoice = SendingInvoice::where("user_id", $request['filter'])->get();
-                }
-                if ($request->has('status') &&  $request['status'] !== "All") {
-                    $sendInvoice = SendingInvoice::where('status', $request['status'])->get();
-                } else {
 
-                    $sendInvoice = SendingInvoice::all();
-                }
+
+
+            if ($request['type'] == "sending") {
+                // if ($request->has('filter') && $request['filter'] !== "All") {
+                //     $sendInvoice = SendingInvoice::where("user_id", $request['filter'])->get();
+                // }
+                // if ($request->has('status') &&  $request['status'] !== "All") {
+                //     $sendInvoice = SendingInvoice::where('status', $request['status'])->get();
+                // }
+                $sendInvoice = SendingInvoice::when(
+                    $request->has('filter') && $request['filter'] !== "All",
+                    function ($query) use ($request) {
+                        return $query->where("user_id", $request['filter']);
+                    }
+                )->when(
+                    $request->has('status') && $request['status'] !== "All",
+                    function ($query) use ($request) {
+                        return $query->where('status', $request['status']);
+                    }
+                )->get();
             } else {
 
                 $sendInvoice = SendingInvoice::all();
             }
-
-            if ($request->has('filter') && $request['filter'] !== "All") {
-                $data = Invoice::when($request->has('filter'), function ($query) use ($request) {
+            $data = Invoice::when(
+                $request->has('filter') && $request->input('filter') !== "All",
+                function ($query) use ($request) {
                     return $query->where('user_id', $request->input('filter'));
-                })
-                    ->when($request->has('status'), function ($query) use ($request) {
-                        return $query->where('status', $request->input('status'));
-                    })
-                    ->get();
-            } else {
+                }
+            )->when(
+                $request->has('status') && $request->input('status') !== "All",
+                function ($query) use ($request) {
+                    return $query->where('status', $request->input('status'));
+                }
+            )->get();
 
-                $data = Invoice::all();
-            }
+
+
+
+
+
             $clients = Record::all();
         } else {
             if ($request->has('status') & $request['status'] !== "All") {
