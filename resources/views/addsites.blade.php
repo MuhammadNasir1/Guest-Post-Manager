@@ -184,11 +184,21 @@
                 <button type="button"
                     class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
                     data-modal-hide="addsitemodal">
-                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                    </svg>
+                    @if (isset($site))
+                        <a href="../addSite">
+                            <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
+                        </a>
+                    @else
+                        <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                    @endif
                 </button>
             </div>
 
@@ -240,8 +250,7 @@
                     <input type="text" min="1"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="guest_post_price" id="guest_post_price" placeholder="$0"
-                        value="{{ $site->guest_post_price ?? '' }}"
-                       >
+                        value="{{ $site->guest_post_price ?? '' }}">
 
                 </div>
                 <div>
@@ -249,8 +258,7 @@
                     <input type="text" min="1"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="link_insertion_price" id="link_insertion_price" placeholder="$0"
-                        value="{{ $site->link_insertion_price ?? '' }}"
-                       >
+                        value="{{ $site->link_insertion_price ?? '' }}">
                 </div>
                 <div class="flex gap-4">
                     <div>

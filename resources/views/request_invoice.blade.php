@@ -1159,12 +1159,7 @@
             })
         }
         viewDatafun()
-        var table = $('#datatable').DataTable();
-        table.on('draw', function() {
-            changeSts()
-            viewDatafun()
 
-        });
         $('#clientSelect').on('change select', function() {
             var clientId = $(this).val();
             $.ajax({
@@ -1185,58 +1180,68 @@
 
 
 
-        $('.ChangeStatusBtn').click(function() {
-            var invoiceId = $(this).attr('invoiceId');
-            var transId = $(this).attr('transactionId');
-            var transactionUrl = "../getInvoiceTransData/" + transId;
-            var url = "../getInvoiceStatus/" + invoiceId;
-            $.ajax({
-                type: "GET",
-                url: url,
-                success: function(response) {
-                    if (response.status == "approved" || response.status ==
-                        "processing") {
-                        let status = response.status;
-                        $.ajax({
-                            type: "GET",
-                            url: transactionUrl,
-                            success: function(response) {
-                                console.log(response.data);
+        function changeStsFun() {
 
-                                $('#verification').val(status)
-                                    .trigger(
-                                        'change');
-                                $('#total_amount').val(response
-                                    .invouceAmout
-                                    .total_amount)
-                                $('#payable_amount').val(response
-                                    .data.credit);
-                                $('#Invoice_Url').val(response
-                                    .invouceAmout
-                                    .invoice_url);
-                                $('#paypal_no').val(response
-                                    .invouceAmout
-                                    .paypal_no);
-                                $('#Received_Amount').val(response
-                                    .invouceAmout
-                                    .received_Amount);
-                                $('#note').val(response.data
-                                    .transaction_remarks)
-                                var updateUrl =
-                                    "../updateTransStatus/" +
-                                    transId
-                                $('#postId').attr('action',
-                                    updateUrl);
-                            }
-                        });
+            $('.ChangeStatusBtn').click(function() {
+                var invoiceId = $(this).attr('invoiceId');
+                var transId = $(this).attr('transactionId');
+                var transactionUrl = "../getInvoiceTransData/" + transId;
+                var url = "../getInvoiceStatus/" + invoiceId;
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    success: function(response) {
+                        if (response.status == "approved" || response.status ==
+                            "processing") {
+                            let status = response.status;
+                            $.ajax({
+                                type: "GET",
+                                url: transactionUrl,
+                                success: function(response) {
+                                    console.log(response.data);
+
+                                    $('#verification').val(status)
+                                        .trigger(
+                                            'change');
+                                    $('#total_amount').val(response
+                                        .invouceAmout
+                                        .total_amount)
+                                    $('#payable_amount').val(response
+                                        .data.credit);
+                                    $('#Invoice_Url').val(response
+                                        .invouceAmout
+                                        .invoice_url);
+                                    $('#paypal_no').val(response
+                                        .invouceAmout
+                                        .paypal_no);
+                                    $('#Received_Amount').val(response
+                                        .invouceAmout
+                                        .received_Amount);
+                                    $('#note').val(response.data
+                                        .transaction_remarks)
+                                    var updateUrl =
+                                        "../updateTransStatus/" +
+                                        transId
+                                    $('#postId').attr('action',
+                                        updateUrl);
+                                }
+                            });
+                        }
                     }
-                }
 
 
-            });
+                });
 
-        })
+            })
+        }
+        changeStsFun()
+        var table = $('#datatable').DataTable();
+        table.on('draw', function() {
+            changeStsFun()
+            changeSts()
+            viewDatafun()
 
+        });
 
         $('#filter, #filterStatus').change(function() {
             $('#filterForm').submit();
