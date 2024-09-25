@@ -111,11 +111,11 @@
                                     <td>{{ $Invoice->pkr_amount }}</td>
                                     <td>{{ $Invoice->bank_name }}</td>
                                     <td>{{ $Invoice->Transaction_id }}</td>
-                                    <td>  <button
-                                            class="p-1 rounded-md  capitalize  {{ $Invoice->status == "pending" ? "bg-red-600" : "bg-green-600" }} text-white font-bold text-md">
+                                    <td> <button
+                                            class="p-1 rounded-md  capitalize  {{ $Invoice->status == 'pending' ? 'bg-red-600' : 'bg-green-600' }} text-white font-bold text-md">
                                             {{ $Invoice->status }}</button></td>
                                     <td>
-                                        <div class="flex gap-5 items-center justify-center">
+                                        <div class="flex gap-3 items-center justify-center">
 
                                             <button data-modal-target="Updateproductmodal"
                                                 data-modal-toggle="Updateproductmodal"
@@ -141,6 +141,18 @@
                                                 </svg>
                                             </a>
 
+                                            <button data-modal-target="changeSendingStatus"
+                                                data-modal-toggle="changeSendingStatus" class="ChangeStatusBtn"
+                                                sendingId="{{ $Invoice->id }}">
+                                                <div
+                                                    class="bg-primary w-9 text-white p-1.5 rounded-full flex items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                                        fill="white">
+                                                        <path
+                                                            d="M105.1 202.6c7.7-21.8 20.2-42.3 37.8-59.8c62.5-62.5 163.8-62.5 226.3 0L386.3 160H352c-17.7 0-32 14.3-32 32s14.3 32 32 32H463.5c0 0 0 0 0 0h.4c17.7 0 32-14.3 32-32V80c0-17.7-14.3-32-32-32s-32 14.3-32 32v35.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0C73.2 122 55.6 150.7 44.8 181.4c-5.9 16.7 2.9 34.9 19.5 40.8s34.9-2.9 40.8-19.5zM39 289.3c-5 1.5-9.8 4.2-13.7 8.2c-4 4-6.7 8.8-8.1 14c-.3 1.2-.6 2.5-.8 3.8c-.3 1.7-.4 3.4-.4 5.1V432c0 17.7 14.3 32 32 32s32-14.3 32-32V396.9l17.6 17.5 0 0c87.5 87.4 229.3 87.4 316.7 0c24.4-24.4 42.1-53.1 52.9-83.7c5.9-16.7-2.9-34.9-19.5-40.8s-34.9 2.9-40.8 19.5c-7.7 21.8-20.2 42.3-37.8 59.8c-62.5 62.5-163.8 62.5-226.3 0l-.1-.1L125.6 352H160c17.7 0 32-14.3 32-32s-14.3-32-32-32H48.4c-1.6 0-3.2 .1-4.8 .3s-3.1 .5-4.6 1z" />
+                                                    </svg>
+                                                </div>
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -209,6 +221,9 @@
 
                                                 case 'confirmed':
                                                     $bgColorClass = 'bg-green-500';
+                                                    break;
+                                                case 'processing':
+                                                    $bgColorClass = 'bg-purple-900';
                                                     break;
 
                                                 default:
@@ -323,7 +338,74 @@
         </div>
     </div>
 </div>
+{{-- ============ modal  =========== --}}
+<div id="changeSendingStatus" data-modal-backdrop="static"
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0  left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
+    <div class="fixed inset-0 transition-opacity">
+        <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
+    </div>
+    <div class="relative p-4 w-full   max-w-2xl max-h-full ">
+        <form id="SendingStatusForm" method="post" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" id="statusUpdateId">
+            <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
+                <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
+                    <h3 class="text-xl font-semibold text-white ">
+                        @lang('lang.Update_Status')
+                    </h3>
+                    <button type="button"
+                        class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
+                        data-modal-hide="changeSendingStatus">
+                        <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                    </button>
+                </div>
+                <div class=" mx-6 my-6">
+                    <div class="">
+                        <label class="text-[14px] font-normal" for="Status">@lang('lang.Status')</label>
+                        <select
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="status" id="Status">
+                            <option selected disabled>@lang('lang.Select_Status')</option>
+                            <option value="pending">@lang('lang.Pending')</option>
+                            <option value="approved">@lang('lang.Approved')</option>
+                        </select>
 
+                    </div>
+
+                </div>
+                <div class="flex justify-end ">
+                    <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold "
+                        id="saddBtn">
+                        <div class=" text-center hidden" id="sspinner">
+                            <svg aria-hidden="true"
+                                class="w-5 h-5 mx-auto text-center text-gray-200 animate-spin fill-primary"
+                                viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                    fill="currentColor" />
+                                <path
+                                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                    fill="currentFill" />
+                            </svg>
+                        </div>
+                        <div id="stext">
+                            @lang('lang.Update')
+                        </div>
+
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div>
+
+        </div>
+
+    </div>
+</div>
 
 
 
@@ -964,6 +1046,66 @@
     }
     dropdownrun();
     $(document).ready(function() {
+
+        function changeSts() {
+            $('.ChangeStatusBtn').click(function() {
+                let id = $('#statusUpdateId').val($(this).attr('sendingId'));
+
+            })
+        }
+
+        changeSts()
+
+        $('#SendingStatusForm').submit(function() {
+            let id = $('#statusUpdateId').val();
+            event.preventDefault();
+            var formData = $(this).serialize();
+            $.ajax({
+                type: "POST",
+                url: "/changeSendingStatus/" + id,
+                data: formData,
+                dataType: "json",
+                beforeSend: function() {
+                    $('#sspinner').removeClass('hidden');
+                    $('#stext').addClass('hidden');
+                    $('#saddBtn').attr('disabled', true);
+                },
+                success: function(response) {
+                    // Handle the success response here
+                    if (response.success == true) {
+                        $('#text').removeClass('hidden');
+                        $('#spinner').addClass('hidden');
+
+                        window.location.href = 'requestInvoice?type=sending';
+
+                    } else if (response.success == false) {
+                        Swal.fire(
+                            'Warning!',
+                            response.message,
+                            'warning'
+                        )
+                    }
+                },
+                error: function(jqXHR) {
+
+                    let response = JSON.parse(jqXHR.responseText);
+
+                    Swal.fire(
+                        'Warning!',
+                        response.message,
+                        'warning'
+                    )
+                    $('#stext').removeClass('hidden');
+                    $('#sspinner').addClass('hidden');
+                    $('#saddBtn').attr('disabled', false);
+                }
+            });
+
+        })
+        var table = $('#datatable').DataTable();
+        table.on('draw', function() {
+            changeSts()
+        });
         $('#sending').change(function() {
             if ($(this).is(':checked')) {
                 // Redirect to the desired page

@@ -304,4 +304,17 @@ class InvoiceController extends Controller
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
+
+
+    public function changeSendingStatus(Request $request,  $id)
+    {
+        try {
+            $send_invoice = SendingInvoice::find($id);
+            $send_invoice->status = $request['status'];
+            $send_invoice->update();
+            return response()->json(['success' => true, 'message' => "Status update successfully"], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
 }
