@@ -142,7 +142,7 @@
                                             </a>
 
                                             <button data-modal-target="changeSendingStatus"
-                                                data-modal-toggle="changeSendingStatus" class="ChangeStatusBtn"
+                                                data-modal-toggle="changeSendingStatus" class="ChangeStatusButton"
                                                 sendingId="{{ $Invoice->id }}">
                                                 <div
                                                     class="bg-primary w-9 text-white p-1.5 rounded-full flex items-center">
@@ -1048,8 +1048,9 @@
     $(document).ready(function() {
 
         function changeSts() {
-            $('.ChangeStatusBtn').click(function() {
+            $('.ChangeStatusButton').click(function() {
                 let id = $('#statusUpdateId').val($(this).attr('sendingId'));
+                $('#changeSendingStatus').addClass('flex').removeClass('hidden');
 
             })
         }
@@ -1102,10 +1103,7 @@
             });
 
         })
-        var table = $('#datatable').DataTable();
-        table.on('draw', function() {
-            changeSts()
-        });
+
         $('#sending').change(function() {
             if ($(this).is(':checked')) {
                 // Redirect to the desired page
@@ -1119,41 +1117,54 @@
             }
         });
 
-        $('.viewBtn').click(function() {
-            let invoiceId = $(this).attr('invoiceId');
-            let url = "../viewInvoiceData/" + invoiceId;
-            console.log(url);
+        function viewDatafun() {
 
-            $.ajax({
 
-                type: "GET",
-                url: url,
-                success: function(response) {
-                    $('#InvoiceShowModal').removeClass("hidden");
-                    $('#InvoiceShowModal').addClass("flex");
-                    console.log(response);
-                    let data = response.data;
-                    $('#paypalNo').text(data.paypal_no);
-                    $('#InvoiceUrl').text(data.invoice_url);
-                    $('#Amount').text(data.amount);
-                    $('#recPayAmount').text(data.received_amount + "/" + data
-                        .payable_amount);
-                    $('#Currency').text(data.currency);
-                    $('#Website').text(data.website);
-                    $('#customerName').text(data.cust_name);
-                    $('#emailPhone').html(`<a href="tel:${data.cust_phone_no}"
-                    class="text-blue-600">${data.cust_phone_no}</a> <br>
+            $('.viewBtn').click(function() {
+                $('#InvoiceShowModal').addClass('flex').removeClass('hidden');
+                let invoiceId = $(this).attr('invoiceId');
+                let url = "../viewInvoiceData/" + invoiceId;
+                console.log(url);
+
+                $.ajax({
+
+                    type: "GET",
+                    url: url,
+                    success: function(response) {
+                        $('#InvoiceShowModal').removeClass("hidden");
+                        $('#InvoiceShowModal').addClass("flex");
+                        console.log(response);
+                        let data = response.data;
+                        $('#paypalNo').text(data.paypal_no);
+                        $('#InvoiceUrl').text(data.invoice_url);
+                        $('#Amount').text(data.amount);
+                        $('#recPayAmount').text(
+                            (data.received_amount ? data.received_amount : 0) + "/" +
+                            (data.payable_amount ? data.payable_amount : 0)
+                        );
+
+                        $('#Currency').text(data.currency);
+                        $('#Website').text(data.website);
+                        $('#customerName').text(data.cust_name);
+                        $('#emailPhone').html(`<a href="tel:${data.cust_phone_no}"
+                    class="text-blue-600">${data.cust_phone_no ? data.cust_phone_no : ''}</a> <br>
                     <a href="mailto:${data.cust_email}"
-                    class="text-blue-500 mt-1">${data.cust_email}</a>`);
-                    $('#addFrom').text(data.user_id);
-                    $('#invoiceStatus').text(data.status)
+                    class="text-blue-500 mt-1">${data.cust_email ? data.cust_email : ''}</a>`);
+                        $('#addFrom').text(data.user_id);
+                        $('#invoiceStatus').text(data.status)
 
 
-                }
+                    }
+                })
             })
-        })
+        }
+        viewDatafun()
+        var table = $('#datatable').DataTable();
+        table.on('draw', function() {
+            changeSts()
+            viewDatafun()
 
-
+        });
         $('#clientSelect').on('change select', function() {
             var clientId = $(this).val();
             $.ajax({
