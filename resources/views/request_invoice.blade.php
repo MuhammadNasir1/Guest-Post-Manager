@@ -1183,6 +1183,7 @@
         function changeStsFun() {
 
             $('.ChangeStatusBtn').click(function() {
+                $('#changeStatus').addClass('flex').removeClass('hidden');
                 var invoiceId = $(this).attr('invoiceId');
                 var transId = $(this).attr('transactionId');
                 var transactionUrl = "../getInvoiceTransData/" + transId;
