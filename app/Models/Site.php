@@ -27,6 +27,7 @@ class Site extends Model
         'site_done_from',
         'admin_gmail',
         'guideline',
+        'guest_post_crrency',
 
     ];
 }

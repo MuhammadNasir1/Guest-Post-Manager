@@ -30,6 +30,8 @@ class SiteController extends Controller
                 "casino" => "nullable",
                 "category" => "required",
                 "guideline" => "nullable",
+                "guest_post_crrency" => "nullable",
+                "insertion_currency" => "nullable",
             ]);
 
             $site = new Site;
@@ -50,7 +52,8 @@ class SiteController extends Controller
             $site->casino = $validatedData['casino'];
             $site->category = $validatedData['category'];
             $site->guideline = $validatedData['guideline'];
-            $site->insertion_currency = 0;
+            $site->insertion_currency =  $validatedData['insertion_currency'];
+            $site->guest_post_crrency =  $validatedData['guest_post_crrency'];
 
             $site->save();
             return redirect("../addSite");
@@ -154,6 +157,8 @@ class SiteController extends Controller
                 "casino" => "nullable",
                 "category" => "required",
                 "guideline" => "nullable",
+                "guest_post_crrency" => "nullable",
+                "insertion_currency" => "nullable",
             ]);
 
             $site = Site::find($id);
@@ -174,7 +179,8 @@ class SiteController extends Controller
             $site->casino = $validatedData['casino'];
             $site->category = $validatedData['category'];
             $site->guideline = $validatedData['guideline'];
-            $site->insertion_currency = 0;
+            $site->insertion_currency =  $validatedData['insertion_currency'];
+            $site->guest_post_crrency =  $validatedData['guest_post_crrency'];
             $site->update();
             return redirect("../addSite");
         } catch (\Exception $error) {

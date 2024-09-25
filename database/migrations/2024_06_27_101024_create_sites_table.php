@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('category');
             $table->text('guideline')->nullable();
             $table->string('insertion_currency')->nullable();
+            $table->string('guest_post_crrency')->nullable();
             $table->timestamps();
         });
     }

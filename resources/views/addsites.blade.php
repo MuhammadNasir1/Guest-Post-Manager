@@ -109,8 +109,8 @@
                                         class="text-blue-500">{{ $data->web_url }}</a></td>
                                 <td class="text-sm">{{ $data->traffic }}</td>
                                 <td class="text-sm">{{ $data->semrush_traffic }} / {{ $data->ahref_traffic }}</td>
-                                <td class="text-sm">{{ $data->guest_post_price }}</td>
-                                <td class="text-sm">{{ $data->link_insertion_price }}</td>
+                                <td class="text-sm">{{ $data->guest_post_price . $data->guest_post_crrency }}</td>
+                                <td class="text-sm">{{ $data->link_insertion_price . $data->insertion_currency }}</td>
                                 <td class="text-sm">{{ $data->exchange }}</td>
                                 <td class="text-sm">{{ $data->da }}</td>
                                 <td class="text-sm">{{ $data->dr }}</td>
@@ -245,20 +245,39 @@
                         name="traffic_major_from" id="traffic_major_from" placeholder=" @lang('lang.Traffic_Major_From')"
                         value="{{ $site->traffic_from ?? '' }}">
                 </div>
-                <div>
-                    <label class="text-[14px] font-normal" for="guest_post_price">@lang('lang.Guest_Post_Price')</label>
-                    <input type="text" min="1"
-                        class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="guest_post_price" id="guest_post_price" placeholder="$0"
-                        value="{{ $site->guest_post_price ?? '' }}">
+                <div class="flex gap-3">
+                    <div>
+                        <label class="text-[14px] font-normal" for="guest_post_price">@lang('lang.Guest_Post_Price')</label>
+                        <input type="number" min="1"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="guest_post_price" id="guest_post_price" placeholder="@lang('lang.Guest_Post_Price')"
+                            value="{{ $site->guest_post_price ?? '' }}">
 
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="gpCurrency">@lang('lang.Currency')</label>
+                        <input type="text" min="1"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="guest_post_crrency" id="gpCurrency" placeholder="@lang('lang.Currency')"
+                            value="{{ $site->guest_post_crrency ?? '' }}">
+                    </div>
                 </div>
-                <div>
-                    <label class="text-[14px] font-normal" for="link_insertion_price">@lang('lang.Insertion_Price')</label>
-                    <input type="text" min="1"
-                        class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                        name="link_insertion_price" id="link_insertion_price" placeholder="$0"
-                        value="{{ $site->link_insertion_price ?? '' }}">
+                <div class="flex gap-3">
+                    <div>
+                        <label class="text-[14px] font-normal" for="link_insertion_price">@lang('lang.Insertion_Price')</label>
+                        <input type="number" min="1"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="link_insertion_price" id="link_insertion_price" placeholder="@lang('lang.Link_Insertion_Price')"
+                            value="{{ $site->link_insertion_price ?? '' }}">
+                    </div>
+
+                    <div>
+                        <label class="text-[14px] font-normal" for="liCurrency">@lang('lang.Currency')</label>
+                        <input type="text" min="1"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="insertion_currency" id="liCurrency" placeholder="@lang('lang.Currency')"
+                            value="{{ $site->insertion_currency ?? '' }}">
+                    </div>
                 </div>
                 <div class="flex gap-4">
                     <div>
