@@ -90,6 +90,7 @@
                                 <th class="whitespace-nowrap text-sm"> @lang('lang.Pkr_Amount')</th>
                                 <th class="whitespace-nowrap text-sm">@lang('lang.Bank_Name')</th>
                                 <th class="whitespace-nowrap text-sm">@lang('lang.Transaction_id')</th>
+                                <th class="whitespace-nowrap text-sm">@lang('lang.Status')</th>
                                 <th class="flex  justify-center text-sm">@lang('lang.Action')</th>
                             </tr>
                         </thead>
@@ -110,6 +111,9 @@
                                     <td>{{ $Invoice->pkr_amount }}</td>
                                     <td>{{ $Invoice->bank_name }}</td>
                                     <td>{{ $Invoice->Transaction_id }}</td>
+                                    <td>  <button
+                                            class="p-1 rounded-md  capitalize  {{ $Invoice->status == "pending" ? "bg-red-600" : "bg-green-600" }} text-white font-bold text-md">
+                                            {{ $Invoice->status }}</button></td>
                                     <td>
                                         <div class="flex gap-5 items-center justify-center">
 
@@ -598,8 +602,9 @@
             </div>
             <div class="grid md:grid-cols-4 gap-6 mx-6 my-6">
                 <div>
-                    <label class="text-[14px] font-normal" for="clientSelect">@lang('lang.Client')</label>
-                    <select name="client" id="clientSelect">
+                    <label class="text-[14px] font-normal" for="clientSelect">@lang('lang.Client')<span
+                            class="text-red-700 text-xl">*</span></label>
+                    <select name="client" id="clientSelect" required>
                         <option selected disabled>@lang('lang.Select_Client')</option>
                         @lang('lang.All')</option>
 
@@ -621,7 +626,8 @@
                 </div>
                 <div>
                     <label class="text-[14px] font-normal" for="customer_email">@lang('lang.Client_Email') <span
-                            class="text-red-700 text-[12px]">(readonly)</span></label>
+                            class="text-red-700 text-[12px]">(readonly)</span><span
+                            class="text-red-700 text-xl">*</span></label>
                     <input type="email" min="1"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="cust_email" id="customer_email" placeholder=" @lang('lang.Client_Email_Here')"

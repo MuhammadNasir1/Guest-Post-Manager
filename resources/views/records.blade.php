@@ -175,11 +175,12 @@
             <div class="grid  md:grid-cols-3 gap-6 mx-6 my-6">
 
                 <div>
-                    <label class="text-[14px] font-normal" for="client_email">@lang('lang.Client_Email')</label>
+                    <label class="text-[14px] font-normal" for="client_email">@lang('lang.Client_Email')<span
+                            class="text-red-700 text-xl">*</span></label>
                     <input type="email"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="client_email" id="client_email" placeholder=" @lang('lang.Client_Email')"
-                        value="{{ $updateData->client_email ?? '' }}">
+                        value="{{ $updateData->client_email ?? '' }}" required>
                 </div>
                 <div>
                     <label class="text-[14px] font-normal" for="client_profile">@lang('lang.Client_Profile')</label>

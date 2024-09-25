@@ -63,27 +63,36 @@ class InvoiceController extends Controller
             if ($request['type'] == "sending") {
                 if ($request->has('filter') && $request['filter'] !== "All") {
                     $sendInvoice = SendingInvoice::where("user_id", $request['filter'])->get();
+                }
+                if ($request->has('status') &&  $request['status'] !== "All") {
+                    $sendInvoice = SendingInvoice::where('status', $request['status'])->get();
                 } else {
 
                     $sendInvoice = SendingInvoice::all();
                 }
             } else {
+
                 $sendInvoice = SendingInvoice::all();
             }
 
+            if ($request->has('filter') && $request['filter'] !== "All") {
+                $data = Invoice::when($request->has('filter'), function ($query) use ($request) {
+                    return $query->where('user_id', $request->input('filter'));
+                })
+                    ->when($request->has('status'), function ($query) use ($request) {
+                        return $query->where('status', $request->input('status'));
+                    })
+                    ->get();
+            } else {
 
+                $data = Invoice::all();
+            }
             $clients = Record::all();
-            $data = Invoice::query()
-                ->when(function ($query) use ($request) {
-                    return $query->where('user_id', $request['filter']);
-                })
-                ->when($request->has('status') && $request['status'] !== "All", function ($query) use ($request) {
-                    return $query->where('status', $request['status']);
-                })
-                ->get();
         } else {
             if ($request->has('status') & $request['status'] !== "All") {
+                $clients = Record::where('user_id', $userId)->get();
                 $data = Invoice::where('status', $request['status'])->Where('user_id', $userId)->get();
+                $sendInvoice = SendingInvoice::where('status', $request['status'])->Where('user_id', $userId)->get();
             } else {
                 $clients = Record::where('user_id', $userId)->get();
                 $data = Invoice::where('user_id', $userId)->get();
@@ -97,7 +106,7 @@ class InvoiceController extends Controller
             $userData = User::where('id', $user)->first();
             $datas->user = $userData;
         }
-
+        // return response()->json($data);
         return view("request_invoice", compact('data', 'users', 'clients', 'sendInvoice'));
     }
 
@@ -275,7 +284,7 @@ class InvoiceController extends Controller
 
 
             ]);
-            return redirect('../requestInvoice');
+            return redirect('../requestInvoice?type=sending');
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
