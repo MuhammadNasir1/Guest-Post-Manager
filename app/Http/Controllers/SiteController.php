@@ -56,9 +56,13 @@ class SiteController extends Controller
             $site->guest_post_crrency =  $validatedData['guest_post_crrency'];
 
             $site->save();
-            return redirect("../addSite");
-        } catch (\Exception $error) {
-            return response()->json(['error' => $error->getMessage()]);
+            // return redirect("../addSite");
+            return response()->json(['success' => true, 'message' => "Site add successfully"], 200);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'errors' => $e->validator->errors()->toArray(),  // Send all validation errors with field names
+            ], 422);
         }
     }
 

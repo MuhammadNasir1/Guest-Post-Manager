@@ -173,7 +173,7 @@
         @if (isset($site))
             <form action="{{ route('updateSiteData', $site->id) }}" method="post" enctype="multipart/form-data">
             @else
-                <form id="recordData" method="post" enctype="multipart/form-data" action="../addSites">
+                <form id="siteForm" method="post" enctype="multipart/form-data" url="../addSites">
         @endif
         @csrf
         <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
@@ -206,7 +206,7 @@
                 <div>
                     <label class="text-[14px] font-normal" for="website_url">@lang('lang.Website_URL')<span
                             class="text-red-700 text-xl">*</span></label>
-                    <input type="text" required
+                    <input type="text"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="website_url" id="website_url" placeholder=" @lang('lang.Website_URL')"
                         value="{{ $site->web_url ?? '' }}">
@@ -214,7 +214,7 @@
                 <div>
                     <label class="text-[14px] font-normal" for="traffic">@lang('lang.Traffic')<span
                             class="text-red-700 text-xl">*</span></label>
-                    <input type="text" required
+                    <input type="text"
                         class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                         name="traffic" id="traffic" placeholder=" @lang('lang.Traffic_Here')"
                         value="{{ $site->traffic ?? '' }}">
@@ -486,8 +486,8 @@
 <script>
     $(document).ready(function() {
         // insert data
-        $("#customerData").submit(function(event) {
-            var url = "../addCustomer";
+        $("#siteForm").submit(function(event) {
+            var url = $(this).attr('url');
             event.preventDefault();
             var formData = new FormData(this);
             $.ajax({
@@ -503,18 +503,30 @@
                     $('#addBtn').attr('disabled', true);
                 },
                 success: function(response) {
-                    window.location.href = '../customers';
+                    // window.location.href = '../customers';
+                    console.log(response);
+
 
                 },
                 error: function(jqXHR) {
                     let response = JSON.parse(jqXHR.responseText);
+                    console.warn(response);
+
                     console.log("error");
                     Swal.fire(
                         'Warning!',
-                        response.message,
+                        response.errors[0],
                         'warning'
                     );
+                    $.each(response.errors, function(field, messages) {
+                        // Find the input field by its name attribute and add a red border
+                        console.log(field);
 
+                        $(`[name="${field}"]`).addClass('border-red-500');
+
+                        // Display the error message below the input field
+                        // $(`#${field}Error`).text(messages[0]).show();
+                    });
                     $('#text').removeClass('hidden');
                     $('#spinner').addClass('hidden');
                     $('#addBtn').attr('disabled', false);
