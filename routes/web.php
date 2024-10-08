@@ -79,6 +79,7 @@ Route::middleware('custom')->group(function () {
         Route::post('/request_invoice', 'addSite')->name('requestInvoice');
         Route::get('/requestInvoice', 'siteData')->name('siteData');
         Route::post('/addSendInvoice', 'addSendInvoiceData');
+        Route::get('/delSendIvoice/{id}', 'delSendIvoice');
 
 
         Route::post('/changeSendingStatus/{id}', 'changeSendingStatus');

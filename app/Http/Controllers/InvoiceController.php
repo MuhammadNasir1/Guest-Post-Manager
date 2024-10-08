@@ -317,4 +317,11 @@ class InvoiceController extends Controller
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
+
+    public function delSendIvoice($id)
+    {
+        $send_invoice = SendingInvoice::find($id);
+        $send_invoice->delete();
+        return redirect('requestInvoice?type=sending');
+    }
 }

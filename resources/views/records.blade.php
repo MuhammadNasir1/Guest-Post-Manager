@@ -53,7 +53,9 @@
                         @foreach ($data as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ \App\Models\User::find($data->user_id)->name }}</td>
+                                <td>{!! optional(\App\Models\User::find($data->user_id))->name ?? '<span class="text-red-600">Deleted User</span>' !!}</td>
+
+
                                 <td>{{ $data->client_from }}</td>
                                 <td>{{ $data->client_name }}</td>
                                 <td>{{ $data->client_email }}</td>
