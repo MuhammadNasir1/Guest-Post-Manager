@@ -84,7 +84,7 @@ class SiteController extends Controller
         $userId = session('user_det')['user_id'];
         $userRole = session('user_det')['role'];
         $users =  User::whereNot('role', 'admin')->get();
-        $categories = Site::Select('category')->get();
+        $categories = Site::Select('category')->distinct()->get();
         $query = Site::query();
         if ($userRole == "admin" || $userRole == "manager") {
             $data = Site::all();
