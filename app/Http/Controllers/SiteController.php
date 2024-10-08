@@ -84,6 +84,7 @@ class SiteController extends Controller
         $userId = session('user_det')['user_id'];
         $userRole = session('user_det')['role'];
         $users =  User::whereNot('role', 'admin')->get();
+        $categories = Site::Select('category')->get();
         $query = Site::query();
         if ($userRole == "admin" || $userRole == "manager") {
             $data = Site::all();
@@ -96,6 +97,13 @@ class SiteController extends Controller
         if ($request->filled('filter') && $request->input('filter') !== 'All') {
             $query->where('user_id', $request->input('filter'));
         }
+
+        if ($request->filled('category') && $request->input('category') !== 'All') {
+            $query->where('category', $request->input('category'));
+        }
+
+
+
         // if ($request->filled('max-price')) {
         //     $query->where('guest_post_price', '<=', $request->input('max-price'));
         // }
@@ -122,7 +130,7 @@ class SiteController extends Controller
         }
         $data = $query->get();
 
-        return view("addsites", compact('data', 'users'));
+        return view("addsites", compact('data', 'users', 'categories'));
     }
 
     public function updateData(string $id)

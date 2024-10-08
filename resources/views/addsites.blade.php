@@ -24,6 +24,20 @@
                                 </select>
                             </div>
                         @endif
+                        <div>
+                            <label class="text-[14px] font-normal" for="category">@lang('lang.Categories')</label>
+                            <select name="category" id="category">
+                                <option disabled>@lang('lang.Select_User')</option>
+                                <option {{ request('category') == 'All' ? 'selected' : '' }} value="All">
+                                    @lang('lang.All')</option>
+
+                                @foreach ($categories as $category)
+                                    <option {{ request('category') == $category->category ? 'selected' : '' }}
+                                        value="{{ $category->category }}">{{ $category->category }}</option>
+                                @endforeach
+
+                            </select>
+                        </div>
                         <div class="mt-1">
                             <label class="text-[14px] font-normal block" for="maxPrice">@lang('lang.Max_Price')</label>
                             <input type="number"
@@ -503,8 +517,8 @@
                     $('#addBtn').attr('disabled', true);
                 },
                 success: function(response) {
-                    // window.location.href = '../customers';
-                    console.log(response);
+                    window.location.href = '../addSite';
+                    // console.log(response);
 
 
                 },
